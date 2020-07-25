@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GMaps.js &mdash; Routes</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
+  <script type="text/javascript" src="../gmaps.js"></script>
+  <link rel="stylesheet" href="https://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="examples.css" />
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDCwLWIGojivSacAnPFESEPhuAxJwrDFw&callback=initMap" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    var map;
+    $(document).ready(function(){
+      map = new GMaps({
+        el: '#map',
+        zoom: 11,
+        lat: 30.4448351,
+        lng: 49.0687602
+      });
+      map.renderRoute({
+        origin: [30.4448351, 49.0687602],
+        destination: [30.719140, 50.113045],
+        travelMode: 'driving',
+        strokeColor: '#131540',
+        strokeOpacity: 0.6,
+        strokeWeight: 6
+      }, {
+        panel: '#directions',
+        draggable: true
+      });
+    
+        
+        
+          map.getElevations({
+        locations : [[30.4374029, 49.0776873]],
+          callback : function (result, status){
+          if (status == google.maps.ElevationStatus.OK) {
+            for (var i in result){
+             map.addMarker({
+              lat: result[i].location.lat(),
+              lng: result[i].location.lng(),
+              title: 'Marker with InfoWindow',
+              infoWindow: {
+                content: '<p><br>Seq. No.: 420-201 <br><br>Shipment Description: Solvent Contactor <br> <br> Project Name: A <br> <br> Vendor: vendorname <br> <br> Forwarder: forwarder <br> <br> Tag No.: T-420-201 <br> <br> GW(kg): 502,398.00 <br> <br> Current  Location (UTM): loc <br><br> Received At Site(Date): 31/May/2017 <br></p>'
+              }
+            });
+           }
+          }
+        }
+      });    
+        
+        
+
+        
+    });
+  </script>
+</head>
+<body>
+  <div class="row">
+    <div class="span11">
+      <div style="height:800px" id="map"></div>
+    </div>
+  </div>
+</body>
+</html>
