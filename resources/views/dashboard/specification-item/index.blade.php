@@ -294,8 +294,11 @@
                                     <td>{{ $specificationItem->name }}</td>
                                     <td>{{ number_format($specificationItem->price) }}</td>
                                     <td>
+                                        {{-- <a href="{{ route('specification-item-assignment.edit', $specificationItem->id) }}" id="assignment" title="تخصیص"><i class="fa fa-check mr-1 text-success" aria-hidden="true"></i>
+                                        </a> --}}
                                         <a href="{{ route('specification-item.edit', $specificationItem->id, ['specificationId' => $specificationItem->specification_id]) }}" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
                                         <a href="" id="remove" title="حذف" data-name="{{ $specificationItem->name }}" data-id="{{ $specificationItem->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
+
                                     </td>
                                 </tr>
                             @endforeach

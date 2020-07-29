@@ -123,13 +123,13 @@
 
                                 </div>
                             </div>
-                            <div class="input-group mt-3">
+                            {{-- <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                     موجودی در انبار :</span>
                                 </div>
                                 <input value="{{ old('amount') }}" type="text" class="form-control inputfield" name="amount" placeholder="مثال: 3">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
-                            </div>
+                            </div> --}}
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                     حداقل موجودی انبار:</span>
@@ -148,32 +148,47 @@
                                 <input value="{{ old('weight') }}" type="text" class="form-control inputfield" name="weight" placeholder="مثال: 30">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
                             </div>
-                            {{--<div class="input-group color-dot mt-3">--}}
-                                {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ ها :</span></div>--}}
-                                {{--<select class="selectpicker selectpicker-color"  multiple data-live-search="true" name="color[]" title="موردی انتخاب نشده">--}}
-                                    {{--@foreach($colors as $color)--}}
-                                        {{--<option class="" style="background:linear-gradient(#{{ $color->code }} , #{{ $color->code }})bottom right/ 15% 2px;background-repeat:no-repeat;" value="{{ $color->id }}">{{ $color->name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                                {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                    {{--<input type="checkbox" class="custom-control-input" id="color_amount" name="color_amount">--}}
-                                    {{--<label class="custom-control-label iranyekan font-15" for="color_amount">اختصاص موجودی به رنگ ها</label>--}}
-                                    {{--<h6 class="text-danger my-1">با اختصاص موجودی به رنگ ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            <div class="input-group mt-3 specification-dot">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
-                                <select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="specifications[]" title="موردی انتخاب نشده">
+                            <div class="section p-3">
+                                <div class="items">
+                                    <h4 class="text-center">شماره 1</h4>
+                                <div class="input-group mt-3 specification-dot">
+                                    <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
+                                <select class="selectpicker1 selectpicker-specification" multiple data-live-search="true" name="group[1][items][]" title="موردی انتخاب نشده">
                                     @foreach($specifications as $specification)
-                                        <option class="" value="{{ $specification->id }}">{{ $specification->name }}</option>
-                                    @endforeach
+                                    <optgroup label="{{ $specification->name }}">
+                                        @foreach($specification->items as $item)
+                                        <option class="" value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                </optgroup>
+                                @endforeach
+
                                 </select>
-                                {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                    {{--<input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount">--}}
-                                    {{--<label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>--}}
-                                    {{--<h6 class="text-danger my-1">با اختصاص موجودی به خصوصیت ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
-                                {{--</div>--}}
+
+
                             </div>
+
+                            <div class="mt-3 specification-dot input-group">
+                                <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                    شناسه محصول:</span>
+                                 </div>
+                                  <input value="{{ old('group[1][p_id]') }}" type="text" class="form-control inputfield min-width-140" name="group[1][p_id]" placeholder="مثال : 30">
+
+                            </div>
+                            <div class="mt-3 specification-dot input-group  ">
+                                <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                  موجودی:</span>
+                                 </div>
+                                  <input value="{{ old('group[1][amount]') }}" type="text" class="form-control inputfield" name="group[1][amount]" placeholder="مثال : 1000">
+
+                            </div>
+
+                    </div>
+                </div>
+                        <div class="input-group-append mt-3">
+                            <a href="#" class="addSection"><span class="h-50px input-group-text bg-light text-danger font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
+                                    افزودن مورد جدید
+                                </span></a>
+                        </div>
                             <div style="display: none" class="facility">
                                 <div class="input-group mt-3">
                                     <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات :</span></div>
@@ -206,7 +221,7 @@
                                 </div>
                                 <div class="custom-control custom-switch switch-blue mr-5 py-3">
                                     <input type="checkbox" class="custom-control-input" id="secure_paymentProduct" name="secure_payment">
-                                    <label class="custom-control-label iranyekan font-15" for="secure_paymentProduct">پرداخت امن}}</label>
+                                    <label class="custom-control-label iranyekan font-15" for="secure_paymentProduct">پرداخت امن</label>
                                 </div>
                                 <div class="custom-control custom-switch switch-blue mr-5 py-3">
                                     <input type="checkbox" class="custom-control-input" id="discount_statusProduct" name="discount_status" checked>
@@ -621,6 +636,24 @@
 
 
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var counter = 1;
+            $('.selectpicker1').select2({
+                width: '50%',
+                closeOnSelect: false
+            });
+            $(".addSection").click(function() {
+                counter += 1;
+                $("div.section").append('<div class="items mt-4"><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group['+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group['+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group['+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
+                $('.selectpicker').select2({
+                    width: '50%',
+                    closeOnSelect: false
+                });
+
+            });
         });
     </script>
     <!--end::Page Scripts -->

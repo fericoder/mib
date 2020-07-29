@@ -60,23 +60,6 @@ if (! function_exists('blank')) {
     }
 }
 
-if (! function_exists('str_limit')) {
-    /**
-     * Limit the number of characters in a string.
-     *
-     * @param  string  $value
-     * @param  int     $limit
-     * @param  string  $end
-     * @return string
-     *
-     * @deprecated Str::limit() should be used directly instead. Will be removed in Laravel 6.0.
-     */
-    function str_limit($value, $limit = 100, $end = '...')
-    {
-        return Str::limit($value, $limit, $end);
-    }
-}
-
 if (! function_exists('class_basename')) {
     /**
      * Get the class "basename" of the given object / class.

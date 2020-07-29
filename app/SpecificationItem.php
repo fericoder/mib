@@ -21,4 +21,14 @@ class SpecificationItem extends Model
         return $this->hasMany('App\ProductSpecificationitem');
     }
 
+    public function assignmentItems()
+    {
+        return $this->belongsToMany(SpecificationItem::class, 'specification_item_specification_item', 'specification_item_id', 'specification_item_id2');
+
+    }
+
+    public function assignmentParents() {
+        return $this->belongsToMany('App\SpecificationItem');
+    }
+
 }

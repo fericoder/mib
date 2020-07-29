@@ -33,10 +33,8 @@
                     <div class="c-product__params">
                         <ul data-title="توضیحات محصول">
                             <div style="margin-top: 20px;width: 600px" class="quantity mt-3">
-                                <p>{{ str_limit($product->description, 300) }}</p>
+                                <p>{{ \Illuminate\Support\Str::limit($product->description, 300) }}</p>
                             </div>
-
-
                         </ul>
                     </div>
 
@@ -55,13 +53,13 @@
                             <div class="mb-1">
                                 @foreach($product->specifications as $specification)
                                     @if($specification->items->count() > 0)
-                                        <div class="row">
+                                        <div class="row py-1">
                                             <label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">
                                                 {{ $specification->name }} :
                                             </label>
                                         </div>
                                         <div class="row">
-                                            <select s class="js-example-basic-single selectpicker" {{ $specification->type == 'checkbox' ? 'multiple' : '' }}  name="specification[]" title="موردی انتخاب نشده است">
+                                            <select s class="js-example-basic-single selectpicker selectItem" {{ $specification->type == 'checkbox' ? 'multiple' : '' }}  name="specification[]" title="موردی انتخاب نشده است">
                                                 @foreach($specification->items->where('status', 'enable') as $item)
                                                     @if($product->specification_amount_status == 'enable')
                                                         @if($item->productSpecificationItems->where('product_id', $product->id)->first()->amount > 0)
@@ -379,5 +377,38 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+
+        $(document).on('change', '.selectItem', function(e) {
+              e.preventDefault();
+              var id = $(this).find(':selected').data('id');
+              var name = $(this).data('name');
+              $.ajax({
+                  type: "post",
+                  url: window.location.origin +'/admin-panel/shop/product-list/getFeatures',
+                  data: {
+                      id: id,
+                      name: name,
+                      "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+                  },
+                  success: function(data) {
+                    $(".physicalFeatures").html("");
+                    data.forEach(mysw);
+                    function mysw(key, value) {
+                      key.forEach(myFunction);
+                        $(".physicalFeatures").removeClass('d-none');
+                      function myFunction(item, index) {
+                          var a = '<div class="form-group mb-0 col-12">' +
+                              '<div class="input-group mt-3">' +
+                              '<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">'+item.name+':</span></div>' +
+                              '<input type="text" class="form-control inputfield" name="value['+item.id+']">' +
+                              '</div>' +
+                              '</div>';
+                          $(".physicalFeatures").append(a);
+                      }
+                  }
+                }
+              });
+          });
+
     });
 </script>

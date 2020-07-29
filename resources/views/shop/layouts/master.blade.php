@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/slicknav/slicknav.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mediaq.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="/assets/plugins/global/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
 
     <style>

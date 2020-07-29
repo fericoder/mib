@@ -33,9 +33,9 @@ class ProductRequest extends FormRequest
             'color_amount_number.*' => 'required_with:color_amount,on',
             'specification_amount' => 'sometimes',
             'specification_amount_number.*' => 'required_with:specification_amount,on',
-            'amount' => ['required',
-                'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:999999','min:0'
-            ],
+            // 'amount' => ['required',
+            //     'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:999999','min:0'
+            // ],
             'min_amount' => ['required',
                 'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:999999','min:0'
             ],

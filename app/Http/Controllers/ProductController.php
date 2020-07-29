@@ -22,6 +22,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\SpecificationItem;
+use App\SpecificationItemGroup;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -162,7 +164,7 @@ class ProductController extends Controller
                     'type' => $request->type,
                     'category_id' => $request->productCat_id,
                     'brand_id' => $request->brand_id,
-                    'amount' => $request->amount,
+                    // 'amount' => $request->amount,
                     'min_amount' => $request->min_amount,
                     'measure' => $request->measure,
                     'weight' => $request->weight,
@@ -183,113 +185,125 @@ class ProductController extends Controller
                     'file_size' => $file_size,
                 ]);
 
-                //add facilities
-//                if($request->facility[0] != null){
-//                    foreach(array_slice($request->facility, 0, 50) as $facility){
-//                        DB::table('facilities')->insert(['name' => $facility, 'product_id' => $product->id]);
-//                    }
-//                }
-
-
-                if($request->specification_amount == 'on' and $request->get('specification_amount_number')){
-                    foreach($request->specification_amount_number as $specification_amount_number_id => $specification_amount_number){
-                        DB::table('product_specificationItem')->insertOrIgnore([
-                            ['product_id' => $product->id, 'specification_item_id' => $specification_amount_number_id, 'amount' => $specification_amount_number]
-                        ]);
+                    foreach($request->group as $group)
+                    {
+                        
+                        $groupItem = new SpecificationItemGroup;
+                        $groupItem->specification_items = $group['items'];
+                        $groupItem->product_id = $product->id;
+                        $groupItem->amount = $group['amount'];
+                        $groupItem->p_id = $group['p_id'];
+                        $groupItem->save();
                     }
-                    $product->update([
-                        'specification_amount_status' => 'enable'
-                    ]);
-                }
+
+
+                //add facilities
+            //    if($request->facility[0] != null){
+            //        foreach(array_slice($request->facility, 0, 50) as $facility){
+            //            DB::table('facilities')->insert(['name' => $facility, 'product_id' => $product->id]);
+            //        }
+            //    }
+
+
+                // if($request->specification_amount == 'on' and $request->get('specification_amount_number')){
+                //     foreach($request->specification_amount_number as $specification_amount_number_id => $specification_amount_number){
+                //         DB::table('product_specificationItem')->insertOrIgnore([
+                //             ['product_id' => $product->id, 'specification_item_id' => $specification_amount_number_id, 'amount' => $specification_amount_number]
+                //         ]);
+                //     }
+                //     $product->update([
+                //         'specification_amount_status' => 'enable'
+                //     ]);
+                // }
 
 
                 //add tags and colors and features and specifications to the product
-                if($product)
-                {
-                    DB::transaction(function () use ($request, $product) {
+//                 if($product)
+//                 {
+//                     DB::transaction(function () use ($request, $product) {
 
-                        $tagIds = [];
-                        $colorIds = [];
-                        $featureIds = [];
-                        $sepecificationIds = [];
+//                         $tagIds = [];
+//                         $colorIds = [];
+//                         $featureIds = [];
+//                         $sepecificationIds = [];
 
-                        //get all tags of product
-                        $tagNames = explode(',',$request->get('tags'));
-                        foreach($tagNames as $tagName)
-                        {
-                            $tag = Tag::firstOrCreate(['name'=>$tagName]);
-//                            $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
-                            if($tag)
-                            {
-                                $tagIds[] = $tag->id;
-                            }
-                        }
-                        $product->tags()->sync($tagIds);
+//                         //get all tags of product
+//                         $tagNames = explode(',',$request->get('tags'));
+//                         foreach($tagNames as $tagName)
+//                         {
+//                             $tag = Tag::firstOrCreate(['name'=>$tagName]);
+// //                            $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
+//                             if($tag)
+//                             {
+//                                 $tagIds[] = $tag->id;
+//                             }
+//                         }
+//                         $product->tags()->sync($tagIds);
 
-                        // get all colors of product
-                        if($request->get('color') and !$request->get('color_amount_number')){
+//                         // get all colors of product
+//                         if($request->get('color') and !$request->get('color_amount_number')){
 
-                            foreach($request->get('color') as $colorName)
-                            {
-                                $color = Color::firstOrCreate(['id'=>$colorName]);
-                                if($color)
-                                {
-                                    $colorIds[] = $color->id;
-                                }
-                            }
-                            $product->colors()->sync($colorIds);
-                        }
-
-
-                        //get all color and color Amount of product
-                        if($request->get('color') and $request->get('color_amount_number')){
-
-                            foreach($request->get('color_amount_number') as $colorId=>$colorAmount)
-                            {
-                                $color = Color::find($colorId);
-                                if($color){
-                                    $colorIds[$color->id] = ['amount'=>$colorAmount];
-                                }
-                            }
-
-                            $product->colors()->sync($colorIds);
-                            $product->update([
-                                'color_amount_status' => 'enable'
-                            ]);
-                        }
+//                             foreach($request->get('color') as $colorName)
+//                             {
+//                                 $color = Color::firstOrCreate(['id'=>$colorName]);
+//                                 if($color)
+//                                 {
+//                                     $colorIds[] = $color->id;
+//                                 }
+//                             }
+//                             $product->colors()->sync($colorIds);
+//                         }
 
 
+//                         //get all color and color Amount of product
+//                         if($request->get('color') and $request->get('color_amount_number')){
+
+//                             foreach($request->get('color_amount_number') as $colorId=>$colorAmount)
+//                             {
+//                                 $color = Color::find($colorId);
+//                                 if($color){
+//                                     $colorIds[$color->id] = ['amount'=>$colorAmount];
+//                                 }
+//                             }
+
+//                             $product->colors()->sync($colorIds);
+//                             $product->update([
+//                                 'color_amount_status' => 'enable'
+//                             ]);
+//                         }
 
 
-                        if($request->get('specifications')){
-                            foreach($request->get('specifications') as $specificationName)
-                            {
-                                $specification = Specification::firstOrCreate(['id'=>$specificationName]);
-                                if($specification)
-                                {
-                                    $sepecificationIds[] = $specification->id;
-                                }
-                            }
-                            $product->specifications()->sync($sepecificationIds);
-                        }
+
+
+                        // if($request->get('specifications')){
+                        //     foreach($request->get('specifications') as $specificationName)
+                        //     {
+                        //         $specification = Specification::firstOrCreate(['id'=>$specificationName]);
+                        //         if($specification)
+                        //         {
+                        //             $sepecificationIds[] = $specification->id;
+                        //         }
+                        //     }
+                        //     $product->specifications()->sync($sepecificationIds);
+                        // }
 
 
                         //get all features of product
-                        if($request->get('value')){
-                            foreach($request->get('value') as $featureId=>$featureValue)
-                            {
-                                $feature = Feature::find($featureId);
-                                if($feature){
-                                    $featureIds[$feature->id] = ['value'=>$featureValue];
-                                }
-                            }
+                        // if($request->get('value')){
+                        //     foreach($request->get('value') as $featureId=>$featureValue)
+                        //     {
+                        //         $feature = Feature::find($featureId);
+                        //         if($feature){
+                        //             $featureIds[$feature->id] = ['value'=>$featureValue];
+                        //         }
+                        //     }
 
-                            $product->features()->sync($featureIds);
-                        }
+                        //     $product->features()->sync($featureIds);
+                        // }
 
 
-                    });
-                }
+                //     });
+                // }
 
 
                 alert()->success('محصول جدید شما باموفقیت اضافه شد.', 'ثبت شد');

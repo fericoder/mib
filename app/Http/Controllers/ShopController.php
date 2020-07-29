@@ -27,6 +27,23 @@ class ShopController extends Controller
 
 
 
+    public function getRelatedItems(Request $request){
+        dd($request->all());
+        $request->validate([
+          'id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
+    ]);
+        $features = collect();
+        if($this->getAllParentCategories($request->id)->count() == 0){
+          $features[] = ProductCategory::find($request->id)->features;
+        }
+        else{
+          $features[] = ProductCategory::find($request->id)->features;
+          foreach($this->getAllParentCategories($request->id) as $category){
+            $features[] = ProductCategory::find($category->id)->features;
+        }
+        }
+    return response()->json($features);
+      }
 
 
 
