@@ -40,7 +40,7 @@ class ProductController extends Controller
         $brands = Brand::all();
         $colors = Color::all();
         $products = Product::all();
-        $specifications = Specification::all();
+        $specifications = Specification::whereHas('items')->orderBy('order', 'DESC')->get();
         return view('dashboard.product.index', compact('categories','products', 'brands', 'colors', 'specifications'));
 
     }
@@ -187,7 +187,7 @@ class ProductController extends Controller
 
                     foreach($request->group as $group)
                     {
-                        
+
                         $groupItem = new SpecificationItemGroup;
                         $groupItem->specification_items = $group['items'];
                         $groupItem->product_id = $product->id;

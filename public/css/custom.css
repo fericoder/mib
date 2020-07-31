@@ -6,3 +6,7 @@
     border: 1px solid #e2e5ec;
     padding: 30px;
 }
+
+.text-bold {
+    font-weight: 900;
+}

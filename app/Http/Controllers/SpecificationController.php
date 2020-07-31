@@ -43,6 +43,7 @@ class SpecificationController extends Controller
         $specification = new Specification;
         $specification->name = $request->name;
         $specification->type = $request->type;
+        $specification->order = $request->order;
         $specification->shop_id = \Auth::user()->shop()->first()->id;
         $specification->save();
         alert()->success('خصوصیت جدید شما باموفقیت اضافه شد.', 'ثبت شد');
