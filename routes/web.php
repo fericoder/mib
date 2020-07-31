@@ -11,8 +11,19 @@ Route::get('/brand/{id}', 'ShopController@brand')->name('shop.brand');
 Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('shop.search');
 
 
+// Profile
+Route::get('/profile', 'ProfileController@index')->name('profile.index');
+Route::get('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
+Route::post('/profile/addressesStore', 'ProfileController@addressesStore')->name('profile.addressesStore');
+Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');
+Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
+Route::get('/profile/orders', 'ProfileController@orders')->name('profile.orders');
+Route::get('/profile/passwordShow', 'ProfileController@passwordShow')->name('profile.passwordShow');
+Route::post('/profile/passwordUpdate', 'ProfileController@passwordShow')->name('profile.passwordUpdate');
 
-//Cart
+
+
+// Cart
 Route::get('/{shop}/user-cart', 'CartController@show')->name('user-cart')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);
 Route::post('/{shop}/user-cart/{userID}/add', 'CartController@addToCart')->name('user-cart.add')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}', 'userID' => '[0-9]+']);
 Route::post('/{shop}/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);

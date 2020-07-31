@@ -137,6 +137,7 @@
                                 <th title="Field #2" data-field="2">نام خانوادگی</th>
                                 <th title="Field #5" data-field="5">ایمیل</th>
                                 <th title="Field #5" data-field="5">شماره موبایل</th>
+                                <th title="Field #5" data-field="5">شماره نظام پزشکی</th>
                                 <th title="Field #5" data-field="5"> تاریخ عضویت</th>
                                 {{--<th title="Field #6" data-field="6">تغییرات</th>--}}
                             </tr>
@@ -150,6 +151,7 @@
                                     <td style="font-family: BYekan" >{{ $user->lName }}</td>
                                     <td style="font-family: BYekan" >{{ $user->email }}</td>
                                     <td style="font-family: BYekan" >{{ $user->mobile }}</td>
+                                    <td style="font-family: BYekan" >{{ $user->pezeshkiNo }}</td>
                                     <td style="font-family: BYekan" >{{ jdate($user->created_at) }}</td>
                                     {{--<td>--}}
                                         {{--<a style="margin: 5px;" href="{{ route('users.edit', $user->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>--}}

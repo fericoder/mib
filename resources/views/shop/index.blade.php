@@ -24,11 +24,32 @@
 
 
 
-    <section class="image-row container">
+    <section style="display: none" class="image-row container">
         <a href="#"><img src="assets/images/slider/slide11.jpg" alt=""></a>
         <a href="#"><img src="assets/images/slider/slide22.jpg" alt=""></a>
         <a href="#"><img src="assets/images/slider/slide33.jpg" alt=""></a>
         <a href="#"><img src="assets/images/slider/slide44.jpg" alt=""></a>
+    </section>
+
+
+    <section class="product-wrapper container">
+        <div class="headline">
+            <h3>محصولات شگفت انگیز </h3></div>
+        <div id="vpslider" class="swiper-container">
+            <div class="product-box swiper-wrapper">
+
+                @foreach (\App\Product::orderBy('viewCount', 'desc')->limit(15)->get() as $product)
+                    <div class="product-item swiper-slide">
+                        <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
+                        <span class="price">{{ $product->price }} تومان</span>
+                    </div>
+                @endforeach
+
+            </div>
+            <div id="vpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+            <div id="vpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
+        </div>
     </section>
 
 
