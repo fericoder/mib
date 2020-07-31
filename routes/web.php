@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ShopController@index')->name('shop.index');
 Route::get('/category/{id}', 'ShopController@category')->name('shop.category');
-Route::get('/product/{id}', 'ShopController@product')->name('shop.product');
+Route::get('/product/get-features', 'ShopController@getFeatures')->name('product.getFeatures');
 Route::get('/product/{id}', 'ShopController@product')->name('shop.product');
 Route::get('/brand/{id}', 'ShopController@brand')->name('shop.brand');
 Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('shop.search');
@@ -77,7 +77,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
 
-    // Delets
+    // Deletes
     Route::post('products/delete', 'ProductController@destroy');
     Route::post('categories/delete', 'CategoryController@destroy');
     Route::post('brands/delete', 'BrandController@destroy');
