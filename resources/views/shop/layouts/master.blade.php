@@ -56,7 +56,7 @@
             <div class="login-box">
                 <div class="log-reg" id="logreg">
                     <i class="fa fa-user"></i>
-                    <a href="{{ \Auth::user()->type == 'admin' ? '/dashboard/index' : '' }}">{{ \Auth::user()->fName . ' ' . \Auth::user()->lName }} |  مشاهده پنل کاربری</a>
+                    <a href="{{ \Auth::user()->type == 'admin' ? '/dashboard/index' : '/profile' }}">{{ \Auth::user()->fName . ' ' . \Auth::user()->lName }} |  مشاهده پنل کاربری</a>
                 </div>
             </div>
             <div class="devider"></div>

@@ -12,8 +12,8 @@ Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('sh
 
 
 // Profile
-Route::get('/profile/index', 'ProfileController@index')->name('profile.index');
-Route::post('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
+Route::get('/profile', 'ProfileController@index')->name('profile.index');
+Route::get('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
 Route::post('/profile/addressesStore', 'ProfileController@addressesStore')->name('profile.addressesStore');
 Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');
 Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
