@@ -19,7 +19,7 @@ Route::get('/profile/informationShow', 'ProfileController@informationShow')->nam
 Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
 Route::get('/profile/orders', 'ProfileController@orders')->name('profile.orders');
 Route::get('/profile/passwordShow', 'ProfileController@passwordShow')->name('profile.passwordShow');
-Route::post('/profile/passwordUpdate', 'ProfileController@passwordShow')->name('profile.passwordUpdate');
+Route::post('/profile/passwordUpdate', 'ProfileController@passwordStore')->name('profile.passwordUpdate');
 
 
 
