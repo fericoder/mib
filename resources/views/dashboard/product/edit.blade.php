@@ -585,17 +585,60 @@
                                                             </div>
                                                         @endforeach
                                                     @endif
-                                                    <div class="input-group specification-dot mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> خصوصیات انتخابی :</span></div>
+                                                    <div class="section p-3">
+                                                        @foreach($product->groups as $groupItem)
 
-                                                        <select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="specifications[]" title="موردی انتخاب نشده است">
-                                                            @foreach($shop->specifications as $specification)
-                                                                <option @if($product->specifications->count() != 0) @foreach($product->specifications as $selectedSpecification) {{ $specification->id == $selectedSpecification->id ? 'selected' : ''}}
-                                                                        @endforeach
-                                                                        @endif value="{{ $specification->id }}">{{ $specification->name }}</option>
-                                                            @endforeach
+                                                        <div class="items">
+                                                            <h4 class="text-center">شماره {{ $loop->index + 1 }}
+                                                            </h4>
+                                                        <div class="input-group mt-3 specification-dot">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
+                                                        <select class="selectpicker1 selectpicker-specification" multiple data-live-search="true" name="group[{{ $groupItem->id }}][items][]" title="موردی انتخاب نشده">
+                                                            @foreach($specifications as $specification)
+                                                            <optgroup label="{{ $specification->name }}">
+                                                                @foreach($specification->items as $item)
+                                                                <option @if($product->groups->count() != 0)
+                                                                    @foreach ($groupItem->specification_items as $selectedItem)
+                                                                     {{ $item->id == $selectedItem ? 'selected' : ''}}
+                                                                    @endforeach
+                                                                     value="{{ $item->id }}">{{ $item->name }}</option>
+
+                                                                    @endif
+
+                                                                @endforeach
+                                                        </optgroup>
+                                                        @endforeach
+
                                                         </select>
+
+
                                                     </div>
+
+                                                    <div class="mt-3 specification-dot input-group">
+                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                            شناسه محصول:</span>
+                                                         </div>
+                                                          <input value="{{ $groupItem->p_id }}" type="text" class="form-control inputfield min-width-140" name="group[{{ $groupItem->id }}][p_id]" placeholder="مثال : 30">
+
+                                                    </div>
+                                                    <div class="mt-3 specification-dot input-group  ">
+                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                          موجودی:</span>
+                                                         </div>
+                                                          <input value="{{ $groupItem->amount }}" type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
+
+                                                    </div>
+
+                                            </div>
+                                            @endforeach
+
+
+                                        </div>
+                                        <div class="input-group-append mt-3 ">
+                                            <button type="button" class="addSection border-0 bg-white"><span class="h-50px input-group-text bg-light text-danger font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
+                                                    افزودن مورد جدید
+                                                </span></button>
+                                        </div>
                                                     {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
                                                         {{--<input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount" {{ $product->specification_amount_status == "enable" ? 'checked' : '' }}>--}}
                                                         {{--<label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>--}}
@@ -816,6 +859,24 @@
 
 
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var counter = {{ $product->groups->count() }};
+            $('.selectpicker1').select2({
+                width: '50%',
+                closeOnSelect: false
+            });
+            $(".addSection").click(function() {
+                counter += 1;
+                $("div.section").append('<div class="items mt-4"><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group['+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group['+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group['+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
+                $('.selectpicker').select2({
+                    width: '50%',
+                    closeOnSelect: false
+                });
+
+            });
         });
     </script>
     <!--end::Page Scripts -->

@@ -50,8 +50,9 @@
                     @auth
                         <form action="{{ route('user-cart.add', ['shop'=> 'keyvan', 'userID'=> \Auth::user()->id]) }}" method="post">
                             @csrf
+
                             <div class="mb-1">
-                                @foreach($product->specifications as $specification)
+                                @foreach($sepcifications->sortByDesc('order') as $specification)
                                     @if($specification->items->count() > 0)
                                         <div class="row py-1">
                                             <label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">
@@ -60,7 +61,7 @@
                                         </div>
                                         <div class="row">
                                             <select s class="js-example-basic-single selectpicker selectItem" {{ $specification->type == 'checkbox' ? 'multiple' : '' }}  name="specification[]" title="موردی انتخاب نشده است">
-                                                @foreach($specification->items->where('status', 'enable') as $item)
+                                                @foreach($specification->items->where('status', 'enable')->intersect($items) as $item)
                                                     @if($product->specification_amount_status == 'enable')
                                                         @if($item->productSpecificationItems->where('product_id', $product->id)->first()->amount > 0)
                                                             @if($specification->type == 'checkbox')
@@ -82,24 +83,14 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            {{--@foreach($product->colors as $color)--}}
-                            {{--@if($product->color_amount_status == 'enable' and $product->color_amount_status == 'enable')--}}
-                            {{--@if($color->pivot->amount !== null and $color->pivot->amount <= 0)--}}
-                            {{--@php--}}
-                            {{--$check = 1;--}}
-                            {{--@endphp--}}
-                            {{--@endif--}}
-                            {{--@endif--}}
-                            {{--@endforeach--}}
 
+
+
+
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
-                                @if(! $product->amount >= 1)
-                                    <button style="text-align: center"  data-col="true" class="text-white btn bg-danger comming-soon iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> محصول موجود نمیباشد </button>
-                                @else
                                     <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
                                     <button style="margin:20px;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
-                                @endif
                             </div>
                         </form>
                     @endauth
@@ -115,7 +106,7 @@
             <aside style=";" class="c-product__feature">
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i1.svg') }}" alt=""> <span>امکان تحویل اکسپرس</span> </a>
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i2.svg') }}" alt=""> <span>پشتیبانی ۲۴ ساعته</span> </a>
-                <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i3.svg') }}" alt=""> <span>امکان پرداخت در محل</span> </a>
+                {{-- <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i3.svg') }}" alt=""> <span>امکان پرداخت در محل</span> </a> --}}
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i4.svg') }}" alt=""> <span>۷ روز ضمانت بازگشت کالا</span> </a>
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i5.svg') }}" alt=""> <span>ضمانت اصل بودن کالا</span> </a>
             </aside>
@@ -147,9 +138,9 @@
         <div class="headline">
             <h3>محصولات مرتبط</h3></div>
         <div id="pslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
-            <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;">
+            <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $product)
-                    <div class="product-item swiper-slide swiper-slide-prev" style="width: 267.6px; margin-left: 10px;">
+                    <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
                         <a href="#"><img src="{{ asset($product->image['original']) }}" alt=""></a>
                         <a class="title" href="#">{{ $product->title }}</a>
                         <span class="price">{{ number_format($product->price) }} تومان</span>

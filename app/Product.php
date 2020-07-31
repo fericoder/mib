@@ -87,4 +87,10 @@ class Product extends Model
     }
 
 
+    public function groups()
+    {
+        return $this->hasMany('App\SpecificationItemGroup');
+    }
+
+
 }

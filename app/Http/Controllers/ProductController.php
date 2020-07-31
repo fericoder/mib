@@ -335,7 +335,7 @@ class ProductController extends Controller
         foreach($product->tags as $tag){
             $tags[] = $tag->name;
         }
-        $specifications = Specification::all();
+        $specifications = Specification::whereHas('items')->orderBy('order', 'DESC')->get();
         $tags = implode(',', $tags);
         $categories = \Auth::user()->shop()->first()->categories()->doesntHave('children')->get();
         $brands = \Auth::user()->shop()->first()->brands()->get();
@@ -353,6 +353,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
+
         //off price timing
         if($request->off_price == null){
             $request->merge(['off_price_started_at' => null]);
@@ -500,6 +501,15 @@ class ProductController extends Controller
             'description' => $request->description,
             'file_size' => $file_size,
         ]);
+
+        foreach($request->group as $groupId=>$group)
+        {
+
+            SpecificationItemGroup::updateOrCreate(['id' => $groupId],
+            ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $group['amount'], 'p_id' => $group['p_id']]);
+        }
+
+
 
         //add facilities
 //        foreach(array_slice($request->facility, 0, 50, true) as $facility_id => $facility){

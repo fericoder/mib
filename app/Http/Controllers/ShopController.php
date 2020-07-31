@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\Brand;
+use App\Specification;
+use App\SpecificationItem;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -19,10 +21,27 @@ class ShopController extends Controller
 
     public function product(Request $request)
     {
-//        $shop = \Auth::user()->shop;
         $categories = Category::all();
         $product = Product::where('id', $request->id)->first();
-        return view('shop.product', compact('product', 'categories'));
+        $items = collect();
+        $itemIds = collect();
+        foreach($product->groups as $group){
+           foreach($group->specification_items as $item){
+                    $specificationItem = SpecificationItem::where('id', $item)->get()->first();
+                    if(!$items->contains($specificationItem))
+                    $items[] = $specificationItem;
+                    if(!$itemIds->contains($item))
+                    $itemIds[] = $item;
+                   }
+        }
+        $sepcifications = collect();
+        foreach($items as $item){
+            $specification = $item->specification;
+            if(!$sepcifications->contains($specification))
+            $sepcifications[] = $specification;
+        }
+
+        return view('shop.product', compact('product', 'categories','items', 'sepcifications','itemIds'));
     }
 
 
