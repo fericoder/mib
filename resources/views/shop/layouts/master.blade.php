@@ -17,6 +17,24 @@
         .sweet-alert{
             font-family: IRANSans!important;
         }
+        .float{
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#25d366;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            font-size:30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index:100;
+        }
+
+        .my-float{
+            margin-top:16px;
+        }
     </style>
 </head>
 
@@ -108,6 +126,8 @@
                     @endforeach
                 </ul>
             </li>
+            <li><a href="/register">عضویت</a></li>
+            <li><a href="/register">ورود</a></li>
             <li><a href="#">شرایط و قوانین</a></li>
             <li><a href="#">درباره ما</a></li>
             <li><a href="#">تماس باما</a></li>
@@ -122,9 +142,6 @@
         <div class="icon">
             <div class="icon-item">
                 <a href="#"> <img src="{{ asset('assets/images/icon/1.svg') }}" alt=""> <span>7 روز ضمانت بازگشت</span> </a>
-            </div>
-            <div class="icon-item">
-                <a href="#"> <img src="{{ asset('assets/images/icon/2.svg') }}" alt=""> <span>پرداخت در محل</span> </a>
             </div>
             <div class="icon-item">
                 <a href="#"> <img src="{{ asset('assets/images/icon/4.svg') }}" alt=""> <span>تحویل اکسپرس</span> </a>
@@ -166,6 +183,14 @@
             <p>استفاده از مطالب فروشگاه اینترنتی  فقط برای مقاصد غیرتجاری و با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به شرکت ایده برتر کیوان می‌باشد.</p>
         </div>
     </section>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="whatsapp://send?phone=989127259562" class="float" target="_blank">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
+
+
 </footer>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/swiper/js/swiper.min.js') }}"></script>
