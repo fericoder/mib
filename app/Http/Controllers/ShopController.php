@@ -34,36 +34,35 @@ class ShopController extends Controller
                     $itemIds[] = $item;
                    }
         }
-        $sepcifications = collect();
+        $specifications = collect();
         foreach($items as $item){
             $specification = $item->specification;
-            if(!$sepcifications->contains($specification))
-            $sepcifications[] = $specification;
+            if(!$specifications->contains($specification))
+            $specifications[] = $specification;
         }
 
-        return view('shop.product', compact('product', 'categories','items', 'sepcifications','itemIds'));
+        return view('shop.product', compact('product', 'categories','items', 'specifications','itemIds'));
     }
 
 
 
-    public function getRelatedItems(Request $request){
-        dd($request->all());
-        $request->validate([
-          'id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
-    ]);
-        $features = collect();
-        if($this->getAllParentCategories($request->id)->count() == 0){
-          $features[] = ProductCategory::find($request->id)->features;
-        }
-        else{
-          $features[] = ProductCategory::find($request->id)->features;
-          foreach($this->getAllParentCategories($request->id) as $category){
-            $features[] = ProductCategory::find($category->id)->features;
-        }
-        }
-    return response()->json($features);
-      }
-
+    // public function getRelatedItems(Request $request){
+    //     dd($request->all());
+    //     $request->validate([
+    //       'id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
+    // ]);
+    //     $features = collect();
+    //     if($this->getAllParentCategories($request->id)->count() == 0){
+    //       $features[] = ProductCategory::find($request->id)->features;
+    //     }
+    //     else{
+    //       $features[] = ProductCategory::find($request->id)->features;
+    //       foreach($this->getAllParentCategories($request->id) as $category){
+    //         $features[] = ProductCategory::find($category->id)->features;
+    //     }
+    //     }
+    // return response()->json($features);
+    //   }
 
 
 
@@ -109,22 +108,46 @@ class ShopController extends Controller
 
 
 
-    public function getFeatures(Request $request){
-        dd('hi');
+    public function getRelatedItems(Request $request){
+
+
         $request->validate([
-          'id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
-    ]);
-        $features = collect();
-        if($this->getAllParentCategories($request->id)->count() == 0){
-          $features[] = ProductCategory::find($request->id)->features;
+            'item_id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
+      ]);
+
+
+        $product = Product::where('id', $request->product_id)->first();
+        $userSelectedId = $request->item_id;
+        $productGroups = $product->groups;
+        $items = collect();
+        $itemIds = collect();
+
+        foreach($productGroups as $group){
+            //check if selected item is in items
+          if((!empty(array_intersect($group->specification_items, [$userSelectedId])))){
+            foreach($group->specification_items as $item){
+                $specificationItem = SpecificationItem::where('id', $item)->get()->first();
+                if(!$items->contains($specificationItem))
+                $items[] = $specificationItem;
+                if(!$itemIds->contains($item))
+                $itemIds[] = $item;
+               }
+          }
         }
-        else{
-          $features[] = ProductCategory::find($request->id)->features;
-          foreach($this->getAllParentCategories($request->id) as $category){
-            $features[] = ProductCategory::find($category->id)->features;
+
+
+        $specifications = collect();
+        foreach($items as $item){
+            $specification = $item->specification;
+            if(!$specifications->contains($specification)){
+            $specifications[] = $specification->load('items');
+            }
         }
-        }
-    return response()->json($features);
+        $arrayJson = array('items'=>$items->toArray(),'itemIds'=>$itemIds->toArray(),'specifications'=>$specifications->sortByDesc('order')->unique('id')->values());
+
+    return response()->json($arrayJson);
+
+
       }
 
 

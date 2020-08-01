@@ -24,4 +24,6 @@ class Specification extends Model
     {
         return $this->hasMany('App\SpecificationItem');
     }
+
+
 }

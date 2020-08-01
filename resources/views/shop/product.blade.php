@@ -1,5 +1,6 @@
 @extends('shop.layouts.master', ['title' => $product->title ])
 <style>
+
     .select2-container{
         width: 300px!important;
         direction: rtl;
@@ -51,8 +52,10 @@
                         <form action="{{ route('user-cart.add', ['shop'=> 'keyvan', 'userID'=> \Auth::user()->id]) }}" method="post">
                             @csrf
 
+                            <div class="all">
+                            <div class="all-items">
                             <div class="mb-1">
-                                @foreach($sepcifications->sortByDesc('order') as $specification)
+                                @foreach($specifications->sortByDesc('order') as $specification)
                                     @if($specification->items->count() > 0)
                                         <div class="row py-1">
                                             <label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">
@@ -60,23 +63,10 @@
                                             </label>
                                         </div>
                                         <div class="row">
-                                            <select s class="js-example-basic-single selectpicker selectItem" {{ $specification->type == 'checkbox' ? 'multiple' : '' }}  name="specification[]" title="موردی انتخاب نشده است">
+                                            <select class="js-example-basic-single select-{{ $loop->index }} item selectpicker selectItem" name="specification[]">
                                                 @foreach($specification->items->where('status', 'enable')->intersect($items) as $item)
-                                                    @if($product->specification_amount_status == 'enable')
-                                                        @if($item->productSpecificationItems->where('product_id', $product->id)->first()->amount > 0)
-                                                            @if($specification->type == 'checkbox')
-                                                                <option style="font-size: 10px" value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
-                                                            @else
-                                                                <option style="font-size: 10px" @if($loop->last or $loop->first)  selected @endif value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
-                                                            @endif
-                                                        @endif
-                                                    @else
-                                                        @if($specification->type == 'checkbox')
-                                                            <option style="font-size: 10px" value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
-                                                        @else
-                                                            <option style="font-size: 10px" @if($loop->last or $loop->first)  selected @endif value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
-                                                        @endif
-                                                    @endif
+                                                            <option style="font-size: 10px" data-id="{{ $item->id }}" data-product="{{ $product->id }}" value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
+
                                                 @endforeach
                                             </select>
                                         </div>
@@ -85,8 +75,8 @@
                             </div>
 
 
-
-
+                        </div>
+                    </div>
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
                                     <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
@@ -364,42 +354,58 @@
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script>
+    $(document).ready(function() {
+
+        $(".js-example-basic-single").val(null).trigger("change");
+        $('.js-example-basic-single').select2({
+            placeholder: {
+                text: 'لطفا یک مورد انتخاب کنید'
+              },
+              allowClear: true
+            });
+    });
+</script>
 
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
 
-        $(document).on('change', '.selectItem', function(e) {
-              e.preventDefault();
-              var id = $(this).find(':selected').data('id');
-              var name = $(this).data('name');
-              $.ajax({
-                  type: "post",
-                  url: window.location.origin +'/admin-panel/shop/product-list/getFeatures',
-                  data: {
-                      id: id,
-                      name: name,
-                      "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
-                  },
-                  success: function(data) {
-                    $(".physicalFeatures").html("");
-                    data.forEach(mysw);
-                    function mysw(key, value) {
-                      key.forEach(myFunction);
-                        $(".physicalFeatures").removeClass('d-none');
-                      function myFunction(item, index) {
-                          var a = '<div class="form-group mb-0 col-12">' +
-                              '<div class="input-group mt-3">' +
-                              '<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">'+item.name+':</span></div>' +
-                              '<input type="text" class="form-control inputfield" name="value['+item.id+']">' +
-                              '</div>' +
-                              '</div>';
-                          $(".physicalFeatures").append(a);
-                      }
-                  }
+        {{-- $(".all-items").delegate(".selectpicker", "change", function(e) { --}}
+        $("select").on("select2:select", function(e) {
+            console.log($("option:selected").data('id'));
+            e.preventDefault();
+            var item_id = $("option:selected").data('id');
+          var product_id = $("option:selected").data('product');
+          $.ajax({
+              type: "post",
+              url: window.location.origin +'/product/get-items',
+              data: {
+                item_id: item_id,
+                product_id: product_id,
+                  "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+              },
+              success: function(data) {
+                $( ".all-items" ).empty();
+                data.specifications.forEach(myFunction);
+                  function myFunction(specification, index) {
+                      var a = '<div class="mb-1"><div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                      $(".all-items").append(a);
+
+                      specification.items.forEach(test);
+                      function test(value, inx) {
+                        if(data.itemIds.includes(value.id.toString())){
+                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}}}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
+                        $(".test"+index).append(a);
+                        $('.test'+index).select2();
+                    }
                 }
-              });
+                  }
+              }
           });
+      });
+
 
     });
+
+
 </script>

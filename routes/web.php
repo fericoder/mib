@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ShopController@index')->name('shop.index');
 Route::get('/category/{id}', 'ShopController@category')->name('shop.category');
-Route::get('/product/get-features', 'ShopController@getFeatures')->name('product.getFeatures');
+Route::post('/product/get-items', 'ShopController@getRelatedItems')->name('product.getRelatedItems');
 Route::get('/product/{id}', 'ShopController@product')->name('shop.product');
 Route::get('/brand/{id}', 'ShopController@brand')->name('shop.brand');
 Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('shop.search');
@@ -40,8 +40,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('features', 'CategoryController');
     Route::resource('brands', 'BrandController');
     Route::resource('comments', 'CommentController');
-    Route::get('specifications-assignment/{specificationItem}', 'specificationItemAssignmentController@edit')->name('specification-item-assignment.edit');
-    Route::put('specifications-assignment/{specificationItem}/update', 'specificationItemAssignmentController@update')->name('specification-item-assignment.update');
+    // // Route::get('specifications-assignment/{specificationItem}', 'specificationItemAssignmentController@edit')->name('specification-item-assignment.edit');
+    // Route::put('specifications-assignment/{specificationItem}/update', 'specificationItemAssignmentController@update')->name('specification-item-assignment.update');
     Route::resource('specifications', 'SpecificationController');
     Route::resource('SpecificationItems', 'SpecificationItemController');
     Route::resource('users', 'UserController');

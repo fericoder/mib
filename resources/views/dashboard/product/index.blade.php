@@ -588,56 +588,6 @@
         });
 
     </script>
-
-    <script type="text/javascript">
-        $(document).on('change', '.selectpicker-specification', function(e) {
-            $('.specification-amount-values').remove();
-            $('#specification_amount').prop('checked', false); // Unchecks it
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).on('change', '#specification_amount', function(e) {
-            if (!$('#specification_amount').is(':checked')) {
-                $('.specification-amount-values').remove();
-            }
-            else{
-                e.preventDefault();
-                selected_specificationIds = $('.selectpicker-specification option:selected').toArray().map(item => item.value);
-                $.ajax({
-                    type: "post",
-                    url: window.location.origin +'/dashboard/product-list/getSpecificationItems',
-                    data: {
-                        selected_specificationIds: selected_specificationIds,
-                        "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
-                    },
-                    success: function(data) {
-                        data.forEach(myFunction);
-                        function myFunction(key, value) {
-                            key.forEach(mysw);
-                            function mysw(key, value) {
-                                var a = '<div class="form-group mb-0 col-12 specification-amount-values">' +
-                                    '<div class="input-group mt-3">' +
-                                    '<div class="input-group-prepend min-width-180">'+
-                                    '<span class="input-group-text bg-light min-width-140" id="basic-addon7">'+
-                                    '<i class="fas fa-star required-star mr-1">'+
-                                    '</i>'+
-                                    key.name+':'+
-                                    '</span>'+
-                                    '</div>' +
-                                    '<input type="number" class="form-control inputfield" name="specification_amount_number['+key.id+']">' +
-                                    '</div>' +
-                                    '</div>';
-                                $(".specification-dot").append(a);
-                            }
-                        }
-                    }
-                });
-
-
-            }
-        });
-    </script>
     <script>
         $(document).ready(function() {
             var counter = 1;

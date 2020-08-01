@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mediaq.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="/assets/plugins/global/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
+
 
     <style>
         .sweet-alert{
