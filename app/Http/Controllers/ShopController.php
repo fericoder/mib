@@ -22,7 +22,7 @@ class ShopController extends Controller
     public function product(Request $request)
     {
         $categories = Category::all();
-        $product = Product::where('id', $request->id)->first();
+        $product = Product::where('id', $request->id)->firstOrFail();
         $items = collect();
         $itemIds = collect();
         foreach($product->groups as $group){

@@ -36,6 +36,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         $categories = Category::all();
         $brands = Brand::all();
         $colors = Color::all();
