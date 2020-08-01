@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="custom-control custom-switch switch-blue mr-5 py-3">
                                     <input type="checkbox" class="custom-control-input" id="secure_paymentProduct" name="secure_payment">
-                                    <label class="custom-control-label iranyekan font-15" for="secure_paymentProduct">پرداخت امن}}</label>
+                                    <label class="custom-control-label iranyekan font-15" for="secure_paymentProduct">پرداخت امن</label>
                                 </div>
                                 <div class="custom-control custom-switch switch-blue mr-5 py-3">
                                     <input type="checkbox" class="custom-control-input" id="discount_statusProduct" name="discount_status" checked>
@@ -864,13 +864,15 @@
     <script>
         $(document).ready(function() {
             var counter = {{ $product->groups->count() }};
+            var newGpId = {{ $lastGroupId }};
             $('.selectpicker1').select2({
                 width: '50%',
                 closeOnSelect: false
             });
             $(".addSection").click(function() {
                 counter += 1;
-                $("div.section").append('<div class="items mt-4"><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group['+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group['+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group['+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
+                newGpId += 5;
+                $("div.section").append('<div class="items mt-4"><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group['+newGpId+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[newGpId][p_id]') }}" type="text" class="form-control inputfield" name="group['+newGpId+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[newGpId][amount]') }}" type="text" class="form-control inputfield" name="group['+newGpId+'][amount]" placeholder="مثال : 1000"></div></div>');
                 $('.selectpicker').select2({
                     width: '50%',
                     closeOnSelect: false

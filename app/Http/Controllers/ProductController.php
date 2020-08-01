@@ -341,7 +341,8 @@ class ProductController extends Controller
         $categories = \Auth::user()->shop()->first()->categories()->doesntHave('children')->get();
         $brands = \Auth::user()->shop()->first()->brands()->get();
         $colors = Color::all();
-        return view('dashboard.product.edit', compact('product','categories','brands','colors','tags', 'shop', 'specifications'));
+        $lastGroupId = SpecificationItemGroup::latest('id')->first()->id;
+        return view('dashboard.product.edit', compact('product','categories','brands','colors','tags', 'shop', 'specifications','lastGroupId'));
 
     }
 
@@ -502,6 +503,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'file_size' => $file_size,
         ]);
+
         foreach($request->group as $groupId=>$group)
         {
 
