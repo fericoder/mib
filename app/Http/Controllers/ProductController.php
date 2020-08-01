@@ -502,7 +502,6 @@ class ProductController extends Controller
             'description' => $request->description,
             'file_size' => $file_size,
         ]);
-
         foreach($request->group as $groupId=>$group)
         {
 
