@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
+use App\Http\Requests\AddressesRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Http\Request;
 use App\Category;
@@ -18,8 +20,44 @@ class ProfileController extends Controller
     public function addressesShow()
     {
         $categories = Category::all();
+        $addresses = Address::where('user_id', \Auth::user()->id)->get();
         $user = \Auth::user();
-        return view('shop.profile.addresses', compact('categories', 'user'));
+        return view('shop.profile.addresses', compact('categories', 'user', 'addresses'));
+    }
+
+    public function addressesStore(AddressesRequest $request)
+    {
+        $address = Address::create([
+            'address' => $request->address,
+            'city' => $request->city,
+            'province' => $request->province,
+            'tel' => $request->tel,
+            'zip_code' => $request->zip_code,
+            'fullName' => $request->fullName,
+            'user_id' => \Auth::user()->id,
+        ]);
+
+        alert()->success('آدرس جدید باموفقیت اضافه شد.', 'ثبت شد');
+        return redirect()->back();
+
+    }
+
+    public function addressesDelete(Request $request)
+    {
+        $address = Address::where('id', $request->id)->first();
+        if ($address->user_id == \Auth::user()->id){
+            $address->delete();
+        }
+        alert()->success('آدرس باموفقیت حذف شد.', 'حذف شد');
+        return redirect()->back();
+
+    }
+
+    public function informationShow()
+    {
+        $user = \Auth::user();
+        $categories = Category::all();
+        return view('shop.profile.information', compact('user', 'categories'));
     }
 
     public function passwordShow()
@@ -55,6 +93,7 @@ class ProfileController extends Controller
         $user = \Auth::user();
         return view('shop.profile.orders', compact('categories', 'user'));
     }
+
 
 
 }

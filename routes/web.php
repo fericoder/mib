@@ -11,15 +11,6 @@ Route::get('/brand/{id}', 'ShopController@brand')->name('shop.brand');
 Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('shop.search');
 
 
-// Profile
-Route::get('/profile', 'ProfileController@index')->name('profile.index');
-Route::get('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
-Route::post('/profile/addressesStore', 'ProfileController@addressesStore')->name('profile.addressesStore');
-Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');
-Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
-Route::get('/profile/orders', 'ProfileController@orders')->name('profile.orders');
-Route::get('/profile/passwordShow', 'ProfileController@passwordShow')->name('profile.passwordShow');
-Route::post('/profile/passwordUpdate', 'ProfileController@passwordStore')->name('profile.passwordUpdate');
 
 
 
@@ -83,6 +74,22 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('brands/delete', 'BrandController@destroy');
     Route::post('specifications/delete', 'SpecificationController@destroy');
     Route::post('SpecificationItems/delete', 'SpecificationItemController@destroy');
+
+});
+
+
+
+Route::middleware('auth')->group(function () {
+    // Profile
+    Route::get('/profile', 'ProfileController@index')->name('profile.index');
+    Route::get('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
+    Route::post('/profile/addressesStore', 'ProfileController@addressesStore')->name('profile.addressesStore');
+    Route::get('/profile/addressesDelete', 'ProfileController@addressesDelete')->name('profile.addressesDelete');
+    Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');
+    Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
+    Route::get('/profile/orders', 'ProfileController@orders')->name('profile.orders');
+    Route::get('/profile/passwordShow', 'ProfileController@passwordShow')->name('profile.passwordShow');
+    Route::post('/profile/passwordUpdate', 'ProfileController@passwordStore')->name('profile.passwordUpdate');
 
 });
 

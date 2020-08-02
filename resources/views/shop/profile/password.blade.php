@@ -3,31 +3,6 @@
 @section('content')
 
     <style>
-        .account-box + footer{
-            top: 600px!important;
-        }
-
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-
-        .alert-danger {
-            background-color: #f2dede;
-            border-color: #ebccd1;
-            color: #a94442;
-        }
-
-        .alert-danger hr {
-            border-top-color: #e4b9c0;
-        }
-
-        .alert-danger .alert-link {
-            color: #843534;
-        }
 
 
 
