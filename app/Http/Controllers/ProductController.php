@@ -504,11 +504,24 @@ class ProductController extends Controller
             'file_size' => $file_size,
         ]);
 
-        foreach($request->group as $groupId=>$group)
-        {
 
-            SpecificationItemGroup::updateOrCreate(['id' => $groupId],
-            ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $group['amount'], 'p_id' => $group['p_id']]);
+
+
+        foreach($request->group as $groupId => $group)
+        {
+            if(strpos($groupId, 'new') !== false){
+                $groupItem = new SpecificationItemGroup;
+                $groupItem->specification_items = $group['items'];
+                $groupItem->product_id = $product->id;
+                $groupItem->amount = $group['amount'];
+                $groupItem->p_id = $group['p_id'];
+                $groupItem->save();
+            }
+            else{
+                SpecificationItemGroup::updateOrCreate(['id' => $groupId],
+                ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $group['amount'], 'p_id' => $group['p_id']]);
+            }
+
         }
 
 
