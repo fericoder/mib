@@ -33,211 +33,6 @@
 
 
 
-    <div class="modal fade bd-example-modal-xl " id="AddProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">افزودن محصول جدید </h5>
-                    <button type="button" class="close rounded" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body modal-scroll" style="background-color:#fbfcfd">
-                    <form action="{{ route('products.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group mb-0">
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
-                                                class="fas fa-star required-star mr-1"></i>عنوان محصول :</span></div>
-                                <input type="text" class="form-control inputfield rounded" name="title" value="{{ old('title') }}" placeholder="">
-                                <input name="type" type="hidden" value="product">
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    توضیحات محصول :</span>
-                                </div>
-                                <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                   دسته بندی محصول :</span>
-                                </div>
-                                <select class="form-control inputfield selectPhysical" name="productCat_id">
-                                    <option style="font-family: iranyekan!important;" value="">انتخاب دسته بندی
-                                    </option>
-                                    @foreach($categories as $category)
-                                        <option style="font-family: iranyekan!important;" data-id="{{ $category->id }}" value="{{ $category->id }}">
-                                            @if($category->parent()->exists()) {{ $category->parent()->get()->first()->name }} >
-                                            @endif {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="border border-info input-group mt-3 pb-3 rounded d-none physicalFeatures">
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7">برند محصول :</span>
-                                </div>
-                                <select class="form-control inputfield" name="brand_id" id="">
-                                    <option style="font-family: iranyekan!important;" value="null">فاقد برند
-                                    </option>
-                                    @foreach($brands as $brand)
-                                        <option style="font-family: iranyekan!important;" value="{{ $brand->id }}">
-                                            {{ $brand->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
-                                                class="fas fa-star required-star mr-1"></i>قیمت محصول:</span></div>
-                                <input value="{{ old('price') }}" type="text" class="form-control inputfield" name="price" placeholder="مثال: 30000" Lang="en">
-                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"> تومان</span>
-                                </div>
-                            </div>
-                            <div style="display: none" class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">قیمت بعد از تخفیف :</span></div>
-                                <input value="{{ old('off_price') }}" type="text" class="form-control inputfield" name="off_price" placeholder="مثال: 30000" Lang="en">
-                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"> تومان</span>
-                                </div>
-                            </div>
-                            <div style="display: none" class="form-group row">
-                                <label style="text-align: center" for="example-email-input" class="col-sm-2 col-form-label text-center">
-                                    <button type="button" class="btn btn-outline-pink btn-sm mt-2" data-toggle="collapse" data-target="#timing-product">اختصاص بازه زمانی</button>
-                                </label>
-                                <div class="col-sm-10">
-                                    <div id="timing-product" class="collapse mt-2">
-                                        <div class="input-group mt-3">
-                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تاریخ شروع:</span></div>
-                                            <input type="hidden" class="start-alt-field-product col h-50px" name="off_price_started_at" />
-                                            <input class="start-field-example-product col h-50px" name="" />
-
-                                        </div>
-                                        <div class="input-group mt-3">
-                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تاریخ انقضا:</span></div>
-                                            <input type="hidden" class="expire-alt-field-product col h-50px" name="off_price_expired_at" />
-                                            <input class="expire-field-example-product col h-50px" name="" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    موجودی در انبار :</span>
-                                </div>
-                                <input value="{{ old('amount') }}" type="text" class="form-control inputfield" name="amount" placeholder="مثال: 3">
-                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    حداقل موجودی انبار:</span>
-                                </div>
-                                <input value="{{ old('min_amount') }}" type="text" class="form-control inputfield" name="min_amount" placeholder="مثال: 3">
-                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    واحد شمارش کالا:</span>
-                                </div>
-                                <input value="{{ old('measure') }}" type="text" class="form-control inputfield" name="measure" placeholder="مثال : عدد">
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">وزن محصول:</span></div>
-                                <input value="{{ old('weight') }}" type="text" class="form-control inputfield" name="weight" placeholder="مثال: 30">
-                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
-                            </div>
-                            {{--<div class="input-group color-dot mt-3">--}}
-                                {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ ها :</span></div>--}}
-                                {{--<select class="selectpicker selectpicker-color"  multiple data-live-search="true" name="color[]" title="موردی انتخاب نشده">--}}
-                                    {{--@foreach($colors as $color)--}}
-                                        {{--<option class="" style="background:linear-gradient(#{{ $color->code }} , #{{ $color->code }})bottom right/ 15% 2px;background-repeat:no-repeat;" value="{{ $color->id }}">{{ $color->name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                                {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                    {{--<input type="checkbox" class="custom-control-input" id="color_amount" name="color_amount">--}}
-                                    {{--<label class="custom-control-label iranyekan font-15" for="color_amount">اختصاص موجودی به رنگ ها</label>--}}
-                                    {{--<h6 class="text-danger my-1">با اختصاص موجودی به رنگ ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
-
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            <div class="input-group mt-3 specification-dot">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
-                                <select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="specifications[]" title="موردی انتخاب نشده">
-                                    @foreach($specifications as $specification)
-                                        <option class="" value="{{ $specification->id }}">{{ $specification->name }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount">
-                                    <label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>
-                                    <h6 class="text-danger my-1">با اختصاص موجودی به خصوصیت ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>
-                                </div>
-                            </div>
-                            <div style="display: none" class="facility">
-                                <div class="input-group mt-3">
-                                    <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات :</span></div>
-                                    <input value="{{ old('facility[]') }}" type="text" class="form-control inputfield" name="facility[]" placeholder="مثال: ضد آب ">
-                                    <div class="input-group-append">
-                                        <a href="#" class="addFacility"><span class="h-50px input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
-                                                           افزودن امکانات
-                                                        </span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: none" class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب های محصول :</span></div>
-                                <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
-                                <label class="text-muted m-2">برای ثبت هر برچسب از Enter استفاده نمایید</label>
-                            </div>
-                            <div style="display: none;" class="input-group mt-3 bg-white col-lg-12">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">امکانات ویژه محصول :</span></div>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="supportProduct" name="support">
-                                    <label class="custom-control-label iranyekan font-15" for="supportProduct">پشتیبانی</label>
-                                </div>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="money_backProduct" name="money_back">
-                                    <label class="custom-control-label iranyekan font-15" for="money_backProduct">بازگشت وجه</label>
-                                </div>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="fast_sendingProduct" name="fast_sending">
-                                    <label class="custom-control-label iranyekan font-15" for="fast_sendingProduct">ارسال سریع</label>
-                                </div>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="secure_paymentProduct" name="secure_payment">
-                                    <label class="custom-control-label iranyekan font-15" for="secure_paymentProduct">پرداخت امن</label>
-                                </div>
-                                <div class="custom-control custom-switch switch-blue mr-5 py-3">
-                                    <input type="checkbox" class="custom-control-input" id="discount_statusProduct" name="discount_status" checked>
-                                    <label class="custom-control-label iranyekan font-15" for="discount_statusProduct">قابلیت اعمال شدن کد تخفیف</label>
-                                </div>
-                            </div>
-                            <div class="card mt-3">
-                                <div class="card-body">
-                                    <h4 class="mt-0 header-title"><i class="fas fa-star required-star mr-1"></i>تصویر اصلی محصول</h4>
-                                    <p class="text-danger my-1">حداقل ابعاد : 300px × 300px</p>
-                                    <p class="text-danger">حداکثر ابعاد : 1000px × 1000px</p>
-                                    <input type="file" id="input-file-now" name="image" class="dropify">
-                                </div>
-                            </div>
-                        </div>
-                        <!--end form-group-->
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger rounded" data-dismiss="modal">انصراف
-                    </button>
-                    <div class="group">
-                        <button type="submit" name="action" value="justSave" class="btn btn-primary rounded">ثبت درخواست
-                        </button>
-                    </div>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
 
 
@@ -389,7 +184,6 @@
                                 ویرایش محصول
                             </h3>
 
-                            <button data-toggle="modal" data-target="#AddProductModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن محصول جدید</button>
                         </div>
 
                         <div style="" class="kt-portlet__head-toolbar">
@@ -560,6 +354,14 @@
                                                         <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
 
                                                     </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
+                                                        <input value="{{ old('aparat') }}" value="{{ old('weight', $product->aparat) }}" type="text" class="form-control inputfield" name="aparat" >
+                                                    </div>
+
+
+
                                                     {{--<div class="input-group color-dot mt-3">--}}
                                                         {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ محصول :</span></div>--}}
 

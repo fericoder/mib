@@ -148,6 +148,13 @@
                                 <input value="{{ old('weight') }}" type="text" class="form-control inputfield" name="weight" placeholder="مثال: 30">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
                             </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
+                                <input value="{{ old('aparat') }}" type="text" class="form-control inputfield" name="aparat" >
+                            </div>
+
+
                             <div class="section p-3">
                                 <div class="items">
                                     <h4 class="text-center">شماره 1</h4>

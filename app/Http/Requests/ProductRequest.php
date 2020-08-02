@@ -49,6 +49,7 @@ class ProductRequest extends FormRequest
             'weight' => ['nullable',
                 'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:99999999','min:0'
             ],
+            'aparat' => 'nullable',
             'fast_sending' => 'in:on',
             'money_back' => 'in:on',
             'support' => 'in:on',

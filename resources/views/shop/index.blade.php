@@ -5,7 +5,7 @@
         <!--<div class="main-slider">
             <a class="slide-item" href="#" target="_blank" style="background-image: url(assets/images/slider/slide9.jpg)"> </a>
         </div>-->
-        <div id="mainslider" class="main-slider swiper-container">
+        <div style="max-height: 450px!important;" id="mainslider" class="main-slider swiper-container">
             <div class="swiper-wrapper">
                 <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide6.jpg)"> </a>
                 <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide7.jpg)"> </a>

@@ -23,10 +23,26 @@
                 <div class="c-product__right">
                     <div class="c-product__directory">
                         <ul>
-                            <li> <span>دسته بندی : </span> <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a></li>
+                            <li>
+                                <span>دسته بندی : </span>
+                                @if ($product->category->parent->parent)
+                                    <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
+                                    <span style="font-size: 14px;">></span>
+                                @endif
+
+                            @if ($product->category->parent)
+                                    <a href="{{ route('shop.category', $product->category->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->name }}</a>
+                                    <span style="font-size: 14px;">></span>
+                                @endif
+                                <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a>
+                            </li>
+
+
                             @if ($product->brand)
-                                <li> <span>برند : </span> <a href="#" class="btn-link-spoiler">{{ $product->brand ?  $product->brand->name : '' }}</a></li>
+                                <li> <span>برند : </span> <a href="{{ route('shop.brand', $product->brand->id) }}" class="btn-link-spoiler">{{ $product->brand ?  $product->brand->name : '' }}</a></li>
                             @endif
+
+
                         </ul>
                     </div>
 
