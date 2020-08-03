@@ -96,7 +96,7 @@
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
                                     <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
-                                    <button style="margin:20px;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
+                                    <button style="margin: 65px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
                             </div>
                         </form>
                     @endauth
