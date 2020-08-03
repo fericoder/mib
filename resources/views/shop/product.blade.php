@@ -70,7 +70,7 @@
 
                             <div class="all">
                             <div class="all-items">
-                            <div class="mb-1">
+                            <div class="mb-1 all-selects">
                                 @foreach($specifications->sortByDesc('order') as $specification)
                                     @if($specification->items->count() > 0)
                                         <div class="row py-1">
@@ -386,11 +386,10 @@
 <script>
     $(document).ready(function() {
 
-        {{-- $(".all-items").delegate(".selectpicker", "change", function(e) { --}}
-        $("select").on("select2:select", function(e) {
-            console.log($("option:selected").data('id'));
+
+            $(document).on("select2:select", 'select', function(e) {
             e.preventDefault();
-            var item_id = $("option:selected").data('id');
+            var item_id = e.params.data.id;
           var product_id = $("option:selected").data('product');
           $.ajax({
               type: "post",
@@ -401,22 +400,29 @@
                   "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
               },
               success: function(data) {
-                $( ".all-items" ).empty();
+                $( ".all-selects" ).empty();
                 data.specifications.forEach(myFunction);
                   function myFunction(specification, index) {
-                      var a = '<div class="mb-1"><div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
-                      $(".all-items").append(a);
+                      var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                      $(".all-selects").append(a);
 
                       specification.items.forEach(test);
                       function test(value, inx) {
                         if(data.itemIds.includes(value.id.toString())){
-                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}}}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
-                        $(".test"+index).append(a);
-                        $('.test'+index).select2();
+                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
+                        $(".test"+index).append(a).select2();
+                        $('.js-example-basic-single').select2({
+                            placeholder: {
+                                text: 'لطفا یک مورد انتخاب کنید'
+                              },
+                              allowClear: true
+                            });
                     }
                 }
                   }
+
               }
+
           });
       });
 
@@ -424,4 +430,52 @@
     });
 
 
+</script>
+<script>
+    $(document).ready(function() {
+
+        $(document).on("select2:unselecting", 'select', function(e) {
+            e.preventDefault();
+            var product_id = {{ $product->id }};
+          $.ajax({
+              type: "post",
+              url: window.location.origin +'/product/get-items',
+              data: {
+                item_id: null,
+                product_id: product_id,
+                  "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+              },
+              success: function(data) {
+                $( ".all-selects" ).empty();
+                data.specifications.forEach(specificationArray);
+                  function specificationArray(specification, index) {
+
+                      var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                      $(".all-selects").append(a);
+
+                      specification.items.forEach(wsw);
+                      function wsw(value, inx) {
+                        if(data.itemIds.includes(value.id.toString())){
+                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
+                        $(".test"+index).append(a).select2({
+                            placeholder: {
+                                text: 'لطفا یک مورد انتخاب کنید'
+                              }
+                            });
+                        $('.js-example-basic-single').select2({
+                            placeholder: {
+                                text: 'لطفا یک مورد انتخاب کنید'
+                              }
+                            });
+                            $(".js-example-basic-single").val(null).trigger("change");
+
+                    }
+                }
+                  }
+
+              }
+
+          });
+     });
+     });
 </script>

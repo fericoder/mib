@@ -110,45 +110,68 @@ class ShopController extends Controller
 
     public function getRelatedItems(Request $request){
 
+        $product = Product::where('id', $request->product_id)->first();
 
-        $request->validate([
+        if ($request->item_id == null) {
+        $items = collect();
+        $itemIds = collect();
+        foreach($product->groups as $group){
+           foreach($group->specification_items as $item){
+                    $specificationItem = SpecificationItem::where('id', $item)->get()->first();
+                    if(!$items->contains($specificationItem))
+                    $items[] = $specificationItem;
+                    if(!$itemIds->contains($item))
+                    $itemIds[] = $item;
+                   }
+        }
+        $specifications = collect();
+        foreach($items as $item){
+            $specification = $item->specification;
+            if(!$specifications->contains($specification))
+            $specifications[] = $specification->load('items');
+        }
+        $arrayJson = array('items'=>$items->toArray(),'itemIds'=>$itemIds->toArray(),'specifications'=>$specifications->sortByDesc('order')->unique('id')->values());
+
+        return response()->json($arrayJson);
+        } else {
+            $request->validate([
             'item_id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
       ]);
 
 
-        $product = Product::where('id', $request->product_id)->first();
-        $userSelectedId = $request->item_id;
-        $productGroups = $product->groups;
-        $items = collect();
-        $itemIds = collect();
+            $userSelectedId = $request->item_id;
+            $productGroups = $product->groups;
+            $items = collect();
+            $itemIds = collect();
 
-        foreach($productGroups as $group){
-            //check if selected item is in items
-          if((!empty(array_intersect($group->specification_items, [$userSelectedId])))){
-            foreach($group->specification_items as $item){
-                $specificationItem = SpecificationItem::where('id', $item)->get()->first();
-                if(!$items->contains($specificationItem))
-                $items[] = $specificationItem;
-                if(!$itemIds->contains($item))
-                $itemIds[] = $item;
-               }
-          }
-        }
-
-
-        $specifications = collect();
-        foreach($items as $item){
-            $specification = $item->specification;
-            if(!$specifications->contains($specification)){
-            $specifications[] = $specification->load('items');
+            foreach ($productGroups as $group) {
+                //check if selected item is in items
+                if ((!empty(array_intersect($group->specification_items, [$userSelectedId])))) {
+                    foreach ($group->specification_items as $item) {
+                        $specificationItem = SpecificationItem::where('id', $item)->get()->first();
+                        if (!$items->contains($specificationItem)) {
+                            $items[] = $specificationItem;
+                        }
+                        if (!$itemIds->contains($item)) {
+                            $itemIds[] = $item;
+                        }
+                    }
+                }
             }
+
+
+            $specifications = collect();
+            foreach ($items as $item) {
+                $specification = $item->specification;
+                if (!$specifications->contains($specification)) {
+                    $specifications[] = $specification->load('items');
+                }
+            }
+            $arrayJson = array('items'=>$items->toArray(),'itemIds'=>$itemIds->toArray(),'specifications'=>$specifications->sortByDesc('order')->unique('id')->values());
+
+            return response()->json($arrayJson);
         }
-        $arrayJson = array('items'=>$items->toArray(),'itemIds'=>$itemIds->toArray(),'specifications'=>$specifications->sortByDesc('order')->unique('id')->values());
-
-    return response()->json($arrayJson);
-
-
-      }
+    }
 
 
 }
