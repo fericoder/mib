@@ -19,6 +19,7 @@ Route::get('/{shop}/user-cart', 'CartController@show')->name('user-cart')->where
 Route::post('/{shop}/user-cart/{userID}/add', 'CartController@addToCart')->name('user-cart.add')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}', 'userID' => '[0-9]+']);
 Route::post('/{shop}/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);
 
+Route::get('/checkout/', 'CheckoutController@index');
 
 
 
@@ -65,6 +66,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('purchases/{purchaseID}/delete/{id}', 'PurchaseController@destroy')->name('purchases.delete')->where(['purchaseID' => '[0-9]+', 'id' => '[0-9]+']);
     Route::post('purchases/{purchaseID}/restore/{id}', 'PurchaseController@restore')->name('purchases.restore')->where(['purchaseID' => '[0-9]+', 'id' => '[0-9]+']);
     Route::put('purchases/change-status/{id}', 'PurchaseController@changeStatus')->name('purchases.change-status')->where(['id' => '[0-9]+']);
+
+
+
+    //Gallery
+    Route::post('image/delete','GalleryController@fileDestroy');
+    Route::get('galleries/{product}', 'GalleryController@index')->name('galleries.index')->where(['product' => '[0-9]+']);
+    Route::get('image/upload','GalleryController@fileCreate');
+    Route::post('image/upload/store/{product}','GalleryController@fileStore')->where(['product' => '[0-9]+']);
+
 
 
 

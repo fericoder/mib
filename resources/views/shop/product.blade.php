@@ -1,6 +1,9 @@
 @extends('shop.layouts.master', ['title' => $product->title ])
-<style>
 
+<link href='/assets/css/simplelightbox.min.css' rel='stylesheet' type='text/css'>
+
+
+<style>
     .select2-container{
         width: 300px!important;
         direction: rtl;
@@ -12,6 +15,18 @@
     .select2-results__option{
         font-size: 14px;
     }
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+
 </style>
 @section('content')
     <article class="c-product">
@@ -50,7 +65,7 @@
                     <div class="c-product__params">
                         <ul data-title="توضیحات محصول">
                             <div style="margin-top: 20px;width: 600px" class="quantity mt-3">
-                                <p>{{ \Illuminate\Support\Str::limit($product->description, 300) }}</p>
+                                <p style="max-width: 450px;"> {{ $product->shortDescription }}</p>
                             </div>
                         </ul>
                     </div>
@@ -127,11 +142,10 @@
 
                     <div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}" class="xzoom" alt=""></div>
                 </div>
-                <ul style="display: none" class="c-gallery__items">
-                    <li><img src="{{ asset('assets/images/119350700.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('assets/images/119350696.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('assets/images/119350706.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('assets/images/119350704.jpg') }}" alt=""></li>
+                <ul style="" class="c-gallery__items">
+                    @foreach ($galleries as $gallery)
+                        <li><img src="{{ asset( $gallery->filename) }}" alt=""></li>
+                    @endforeach
                 </ul>
             </div>
         </section>
@@ -145,11 +159,11 @@
             <h3>محصولات مرتبط</h3></div>
         <div id="pslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
             <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
-                @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $product)
+                @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
-                        <a href="#"><img src="{{ asset($product->image['original']) }}" alt=""></a>
-                        <a class="title" href="#">{{ $product->title }}</a>
-                        <span class="price">{{ number_format($product->price) }} تومان</span>
+                        <a href="#"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
+                        <a class="title" href="#">{{ $Relatedproduct->title }}</a>
+                        <span class="price">{{ number_format($Relatedproduct->price) }} تومان</span>
                     </div>
                 @endforeach
             </div>
@@ -181,6 +195,18 @@
                                 <p>
                                     {{ $product->description }}
                                 </p>
+
+                                <div style="margin-top: 100px; margin-right: 250px">
+                                    @if ($product->catalog)
+                                        <a target="_blank" href="{{ asset($product->catalog) }}"><button class="button">دریافت کاتالوگ</button></a>
+                                    @endif
+                                    @if ($product->aparat)
+                                        <a target="_blank" href="{{ $product->aparat  }}"><button class="button">مشاهده ویدیو</button></a>
+                                    @endif
+
+
+                                </div>
+
                             </div>
                         </div>
                     </section>
@@ -370,6 +396,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
 <script>
     $(document).ready(function() {
 

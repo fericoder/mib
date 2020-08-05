@@ -56,7 +56,7 @@
     <section class="product-wrapper container">
         <div class="headline">
             <h3>محصولات پربازدید </h3></div>
-        <div id="vpslider" class="swiper-container">
+        <div id="viewCount" class="swiper-container">
             <div class="product-box swiper-wrapper">
 
                 @foreach (\App\Product::orderBy('viewCount', 'desc')->limit(15)->get() as $product)
@@ -68,8 +68,8 @@
                 @endforeach
 
             </div>
-            <div id="vpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="vpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
+            <div id="viewCount-nbtn" class="slider-nbtn swiper-button-next"></div>
+            <div id="viewCount-pbtn" class="slider-pbtn swiper-button-prev"></div>
         </div>
     </section>
 

@@ -115,6 +115,29 @@ $(document).ready(function() {
                 }
             }
         }
+
+    var viewCount= {
+        slidesPerView:5, spaceBetween:10, autoplay: {
+            delay: 2500, disableOnInteraction: !1,
+        }
+        , navigation: {
+            nextEl: '#viewCount-nbtn', prevEl: '#viewCount-pbtn',
+        }
+        , breakpoints: {
+            1024: {
+                slidesPerView: 4, spaceBetween: 10,
+            }
+            , 768: {
+                slidesPerView: 3, spaceBetween: 10,
+            }
+            , 640: {
+                slidesPerView: 2, spaceBetween: 10,
+            }
+            , 320: {
+                slidesPerView: 1, spaceBetween: 10,
+            }
+        }
+    }
         var mvpslider= {
             slidesPerView:5, spaceBetween:10, autoplay: {
                 delay: 2500, disableOnInteraction: !1,
@@ -208,6 +231,7 @@ $(document).ready(function() {
         var swiper=new Swiper('#sp-slider', spslider);
         var swiper=new Swiper('#pslider', pslider);
         var swiper=new Swiper('#vpslider', vpslider);
+        var swiper=new Swiper('#viewCount', viewCount);
         var swiper=new Swiper('#newpslider', newpslider);
         var swiper=new Swiper('#mostpslider', mostpslider);
         var swiper=new Swiper('#brandslider', brandslider);

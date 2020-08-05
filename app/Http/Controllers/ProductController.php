@@ -101,6 +101,15 @@ class ProductController extends Controller
             $file_size = null;
         }
 
+        if($request->file('catalog') == null){
+            $catalog = '';
+        }
+        else{
+            $request->validate(['catalog' => 'mimes:pdf']);
+            $catalog = $this->uploadFile($request->file('catalog'), false, false);
+        }
+
+
         $image = $this->uploadFile($request->file('image'), false, true);
         //check if product is file to save attachment file
         if($request->type == 'file')
@@ -172,6 +181,7 @@ class ProductController extends Controller
                     'price' => $this->fa_num_to_en($request->price),
                     'off_price' => $request->off_price,
                     'fast_sending' => $request->fast_sending,
+                    'shortDescription' => $request->shortDescription,
                     'money_back' => $request->money_back,
                     'support' => $request->support,
                     'secure_payment' => $request->secure_payment,
@@ -179,6 +189,7 @@ class ProductController extends Controller
                     'description' => $request->description,
                     'aparat' => $request->aparat,
                     'image' => $image,
+                    'catalog' => $catalog,
                     'shop_id' => \Auth::user()->shop_id,
                     'attachment' => $attachment,
                     'off_price_started_at' => $request->off_price_started_at,
@@ -431,6 +442,13 @@ class ProductController extends Controller
             $request->validate(['image' => 'mimes:jpeg,png,jpg,gif|max:2048']);
             $image = $this->uploadFile($request->file('image'), false, true);
         }
+        if($request->file('catalog') == null){
+            $catalog = $product->catalog;
+        }
+        else{
+            $request->validate(['catalog' => 'mimes:pdf']);
+            $catalog = $this->uploadFile($request->file('catalog'), false, false);
+        }
 
         if($request->brand_id == "null"){
             $request->merge(['brand_id' => null]);
@@ -492,12 +510,14 @@ class ProductController extends Controller
             'price' => $this->fa_num_to_en($request->price),
             'off_price' => $request->off_price,
             'fast_sending' => $request->fast_sending,
+            'shortDescription' => $request->shortDescription,
             'money_back' => $request->money_back,
             'support' => $request->support,
             'secure_payment' => $request->secure_payment,
             'discount_status' => $request->discount_status,
             'description' => $request->description,
             'image' => $image,
+            'catalog' => $catalog,
             'attachment' => $attachment,
             'specification_amount_status' => $specification_amount_status,
             'color_amount_status' => $color_amount_status,
