@@ -186,11 +186,11 @@
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کاتالوگ:</span></div>
                                 <input value="{{ old('catalog') }}" type="file" class="form-control inputfield" name="catalog" >
                             </div>
-                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
-                            <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
-                        </div>
-                        <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
-
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
+                                <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
+                            </div>
+                            <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
 
 
                             <div class="section p-3">

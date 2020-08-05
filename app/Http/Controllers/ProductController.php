@@ -179,13 +179,13 @@ class ProductController extends Controller
                     'measure' => $request->measure,
                     'weight' => $request->weight,
                     'price' => $this->fa_num_to_en($request->price),
-                    'off_price' => $request->off_price,
-                    'fast_sending' => $request->fast_sending,
+                    // 'off_price' => $request->off_price,
+                    // 'fast_sending' => $request->fast_sending,
                     'shortDescription' => $request->shortDescription,
-                    'money_back' => $request->money_back,
-                    'support' => $request->support,
-                    'secure_payment' => $request->secure_payment,
-                    'discount_status' => $request->discount_status,
+                    // 'money_back' => $request->money_back,
+                    // 'support' => $request->support,
+                    // 'secure_payment' => $request->secure_payment,
+                    // 'discount_status' => $request->discount_status,
                     'description' => $request->description,
                     'aparat' => $request->aparat,
                     'image' => $image,
@@ -198,19 +198,18 @@ class ProductController extends Controller
                     // 'file_size' => $file_size,
                 ]);
 
-                if (isset($request->group)){
-
-                    foreach($request->group as $group)
-                    {
-
-                        $groupItem = new SpecificationItemGroup;
-                        $groupItem->specification_items = $group['items'];
-                        $groupItem->product_id = $product->id;
-                        $groupItem->amount = $group['amount'];
-                        $groupItem->p_id = $group['p_id'];
-                        $groupItem->save();
+                if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group['item'])) {
+                    if (isset($request->group)) {
+                        foreach ($request->group as $group) {
+                            $groupItem = new SpecificationItemGroup;
+                            $groupItem->specification_items = $group['items'];
+                            $groupItem->product_id = $product->id;
+                            $groupItem->amount = $group['amount'];
+                            $groupItem->p_id = $group['p_id'];
+                            $groupItem->save();
+                        }
                     }
-                    }
+                }
 
                 //add facilities
             //    if($request->facility[0] != null){
@@ -508,23 +507,23 @@ class ProductController extends Controller
             'weight' => $request->weight,
             'aparat' => $request->aparat,
             'price' => $this->fa_num_to_en($request->price),
-            'off_price' => $request->off_price,
-            'fast_sending' => $request->fast_sending,
+            // 'off_price' => $request->off_price,
+            // 'fast_sending' => $request->fast_sending,
             'shortDescription' => $request->shortDescription,
-            'money_back' => $request->money_back,
-            'support' => $request->support,
-            'secure_payment' => $request->secure_payment,
-            'discount_status' => $request->discount_status,
+            // 'money_back' => $request->money_back,
+            // 'support' => $request->support,
+            // 'secure_payment' => $request->secure_payment,
+            // 'discount_status' => $request->discount_status,
             'description' => $request->description,
             'image' => $image,
             'catalog' => $catalog,
-            'attachment' => $attachment,
-            'specification_amount_status' => $specification_amount_status,
-            'color_amount_status' => $color_amount_status,
-            'attachment' => $attachment,
-            'off_price_started_at' => $request->off_price_started_at,
-            'off_price_expired_at' => $request->off_price_expired_at,
-            'description' => $request->description,
+            // 'attachment' => $attachment,
+            // 'specification_amount_status' => $specification_amount_status,
+            // 'color_amount_status' => $color_amount_status,
+            // 'attachment' => $attachment,
+            // 'off_price_started_at' => $request->off_price_started_at,
+            // 'off_price_expired_at' => $request->off_price_expired_at,
+            // 'description' => $request->description,
             // 'file_size' => $file_size,
         ]);
 
