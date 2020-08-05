@@ -255,7 +255,12 @@
                                                     </div>
 
                                                     <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">توضیحات محصول :</span></div>
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خلاصه توضیحات محصول :</span></div>
+                                                        <textarea class="form-control" id="shortDescription" name="shortDescription">{{ old('shortDescription', $product->shortDescription) }}</textarea>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">توضیحات کامل محصول :</span></div>
                                                         <textarea class="form-control" id="description" name="description">{{ old('description', $product->description) }}</textarea>
                                                     </div>
 
@@ -358,6 +363,11 @@
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
                                                         <input value="{{ old('aparat') }}" value="{{ old('weight', $product->aparat) }}" type="text" class="form-control inputfield" name="aparat" >
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کاتالوگ:</span></div>
+                                                        <input value="{{ old('catalog', $product->catalog) }}" type="file" class="form-control inputfield" name="catalog" >
                                                     </div>
 
 

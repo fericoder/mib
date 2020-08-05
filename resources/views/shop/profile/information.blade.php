@@ -58,7 +58,7 @@
                 <div style="background-color: #e47474" class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li style="color: black;font-size: 13px;">{{ $error }}</li>
+                            <li style="color: black;font-size: 13px;padding: 10px">{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -73,27 +73,32 @@
             <div class="user-main">
                 <div class="modal-content register login account-box">
                     <div class="content">
-                        <form style="width: 30%!important;" method="POST" action="{{ route('profile.addressesStore') }}">
+                        <form style="width: 30%!important;" enctype="multipart/form-data" method="POST" action="{{ route('profile.informationUpdate') }}">
                             @csrf
 
-                            <label for="pwd">نام دریافت کننده  <span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="fullName" type="text" placeholder="نام دریافت کننده را وارد کنید">
+                            <label for="pwd">نام  <span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="fName" disabled type="text" value="{{ $user->fName }}">
 
-                            <label style="margin-top: 10px" for="pwd">کد پستی <span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="zip_code" type="text" placeholder="کد پستی را وارد کنید">
+                            <label style="margin-top: 10px" for="pwd">نام خانوادگی <span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="lName" disabled type="text" value="{{ $user->lName }}">
 
-                            <label style="margin-top: 10px" for="pwd">  استان<span style="color: red;    font-size: 15px;">*</span> </label>
-                            <input name="province" type="text" placeholder="استان را وارد کنید">
+                            <label style="margin-top: 10px" for="pwd">  شماره موبایل<span style="color: red;    font-size: 15px;">*</span> </label>
+                            <input name="province" disabled type="text" value="{{ $user->mobile }}">
 
-                            <label style="margin-top: 10px" for="pwd">شهر<span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="city" type="text" placeholder="شهر را وارد کنید">
+                            <label style="margin-top: 10px" for="pwd">ایمیل<span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="province" disabled type="text" value="{{ $user->email }}">
 
+                            <label style="margin-top: 10px" for="pwd">شغل<span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="job" required type="text" value="{{ $user->job }}" placeholder="مثال: دندانپزشک/ مراکز درمانی ">
 
-                            <label style="margin-top: 10px" for="pwd">آدرس<span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="address" type="text" placeholder="آدرس را وارد کنید">
+                            <label style="margin-top: 10px" for="pwd">تصویر کارت ملی<span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="meliPic" type="file" >
 
-                            <label style="margin-top: 10px" for="pwd">شماره تماس<span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="tel" type="text" placeholder="شماره تماس را وارد کنید">
+                            <label style="margin-top: 10px" for="pwd">کارت نظام پزشکی <span style="color: red;    font-size: 15px;">*</span></label>
+                            <input name="nezamPic" type="file" >
+
+                            <label style="margin-top: 10px" for="pwd">عکس جواز کسب  </label>
+                            <input name="javazPic" type="file" >
 
 
                             <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>بروزرسانی اطلاعات</button>

@@ -103,6 +103,14 @@
                 </span>
                 @enderror
 
+                <label for="mobtel">کد معرف (درصورت وجود)</label>
+                <input id="moarref" type="text" class="form-control @error('moarref') is-invalid @enderror" name="moarref" placeholder="کد معرف خودرا درصورت وجود وارد نمایید" value="{{ old('moarref') }}" autocomplete="moarref">
+                @error('moarred')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
                 <label for="pwd">کلمه عبور</label>
                 <input id="password" type="password" placeholder="رمز عبور خودرا وارد نمایید" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 

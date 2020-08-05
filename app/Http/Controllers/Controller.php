@@ -31,7 +31,7 @@ class Controller extends BaseController
 
     }
 
-    protected function uploadFile($file, $watermark = true, $resize = true)
+    protected function uploadFile($file, $watermark = false, $resize = false)
     {
 
         $local = array(

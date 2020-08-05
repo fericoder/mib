@@ -52,7 +52,7 @@
                                 <div class="c-product-box c-promotion-box ">
                                     <a href="{{ route('shop.product', $product->id) }}" class="c-product-box__img c-promotion-box__image"><img src="{{ asset($product->image['original']) }}" alt=""></a>
                                     <div class="c-product-box__content">
-                                        <a href="#" class="title">{{ $product->title }}</a>
+                                        <a href="{{ route('shop.product', $product->id) }}" class="title">{{ $product->title }}</a>
                                         <span class="price">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</span>
                                     </div>
                                     <div style="display: none" class="c-product-box__tags">

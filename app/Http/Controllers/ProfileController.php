@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Http\Requests\AddressesRequest;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\InformationRequest;
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -59,6 +60,24 @@ class ProfileController extends Controller
         $categories = Category::all();
         return view('shop.profile.information', compact('user', 'categories'));
     }
+
+    public function informationUpdate(InformationRequest $request)
+    {
+        $meliPic = $this->uploadFile($request->file('meliPic'), false, true);
+        $nezamPic = $this->uploadFile($request->file('nezamPic'), false, true);
+        $user = \Auth::user();
+
+        if ($request->file('javazPic')){
+            $javazPic = $this->uploadFile($request->file('javazPic'), false, true);
+            $user->update(['job' => $request->job, 'meliPic' => $meliPic, 'nezamPic' => $nezamPic, 'javazPic' => $javazPic]);
+        }else{
+            $user->update(['job' => $request->job, 'meliPic' => $meliPic, 'nezamPic' => $nezamPic]);
+        }
+
+        alert()->success('اطلاعات کاربری بروز شد');
+        return redirect()->back();
+    }
+
 
     public function passwordShow()
     {

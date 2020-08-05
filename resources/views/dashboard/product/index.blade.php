@@ -72,12 +72,20 @@
                                 <input type="text" class="form-control inputfield rounded" name="title" value="{{ old('title') }}" placeholder="">
                                 <input name="type" type="hidden" value="product">
                             </div>
+
+
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    توضیحات  :</span>
-                                </div>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>خلاصه توضیحات محصول :</span></div>
+                                <textarea class="form-control" id="shortDescription" name="shortDescription">{{ old('shortDescription') }}</textarea>
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> توضیحات کامل محصول : </span></div>
                                 <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                             </div>
+
+
+
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                    دسته بندی  :</span>
@@ -175,10 +183,15 @@
                             </div>
 
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
-                                <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کاتالوگ:</span></div>
+                                <input value="{{ old('catalog') }}" type="file" class="form-control inputfield" name="catalog" >
                             </div>
-                            <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
+                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
+                            <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
+                        </div>
+                        <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
+
+
 
                             <div class="section p-3">
                                 <div class="items">
@@ -516,6 +529,7 @@
                                         <a style="margin: 5px;" href="{{ route('products.edit', $product->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
                                         <a style="margin: 5px;" href="" id="remove" title="حذف" data-name="{{ $product->name }}" data-id="{{ $product->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
                                         <a style="margin: 5px;" href="{{ route('shop.product', $product->id ) }}" target="_blank"><i class="fa fa-eye text-success mr-1 button font-15"></i></a>
+                                        <a href="{{ route('galleries.index', $product->id ) }}" title="گالری"><i class="fa fa-image mr-1 button font-15 text-warning"></i></a>
                                     </td>
 
                                 </tr>

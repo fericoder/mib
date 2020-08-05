@@ -23,6 +23,8 @@ class ShopController extends Controller
     {
         $categories = Category::all();
         $product = Product::where('id', $request->id)->firstOrFail();
+        $product->increment('viewCount');
+        $galleries = $product->galleries;
         $items = collect();
         $itemIds = collect();
         foreach($product->groups as $group){
@@ -41,7 +43,7 @@ class ShopController extends Controller
             $specifications[] = $specification;
         }
 
-        return view('shop.product', compact('product', 'categories','items', 'specifications','itemIds'));
+        return view('shop.product', compact('product', 'categories','items', 'specifications','itemIds', 'galleries'));
     }
 
 
@@ -75,7 +77,10 @@ class ShopController extends Controller
     {
         $categories = Category::all();
         $category = Category::where('id', $request->id)->first();
-        $products = Product::where('category_id', $category->id)->paginate(20);
+        $categoryChildren = $category->children;
+        $categoryChildrenChildren = $category->categoryChildren;
+        $subCategories = $this->getAllSubCategories($category->id)->where('parent_id', $category->id);
+        $products = $this->getAllCategoriesProducts((int)$category->id);
         return view('shop.category', compact('category', 'categories', 'products'));
     }
 
@@ -171,6 +176,66 @@ class ShopController extends Controller
 
             return response()->json($arrayJson);
         }
+    }
+
+    public static function getAllSubCategories($cat_id) {
+        $allSubCategories = collect();
+        if (Category::find($cat_id)->children()->exists()) {
+            foreach (Category::find($cat_id)->children()->get() as $subCategory) {
+                $allSubCategories[] = $subCategory;
+                if ($subCategory->children()->exists()) {
+                    foreach ($subCategory->children()->get() as $subSubCategory) {
+                        $allSubCategories[] = $subSubCategory;
+
+                        if ($subSubCategory->children()->exists()) {
+                            foreach ($subSubCategory->children()->get() as $subSubSubCategory) {
+                                $allSubCategories[] = $subSubSubCategory;
+                                if ($subSubSubCategory->children()->exists()) {
+                                    foreach ($subSubSubCategory->children()->get() as $subSubSubSubCategory) {
+                                        $allSubCategories[] = $subSubSubSubCategory;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $allSubCategories;
+    }
+
+    public function getAllCategoriesProducts($cat_id) {
+        $allProducts = collect();
+        foreach (Category::find($cat_id)->products()->get() as $product) {
+            $allProducts[] = $product;
+        }
+        foreach (Category::find($cat_id)->children()->get() as $subCategory) {
+            foreach ($subCategory->products()->get() as $product) {
+                $allProducts[] = $product;
+            }
+            if ($subCategory->children()->exists()) {
+                foreach ($subCategory->children()->get() as $subSubCategory) {
+                    foreach ($subSubCategory->products()->get() as $product) {
+                        $allProducts[] = $product;
+                    }
+                }
+                if ($subSubCategory->children()->exists()) {
+                    foreach ($subSubCategory->children()->get() as $subSubSubCategory) {
+                        foreach ($subSubSubCategory->products()->get() as $product) {
+                            $allProducts[] = $product;
+                        }
+                        if ($subSubSubCategory->children()->exists()) {
+                            foreach ($subSubSubCategory->children()->get() as $subSubSubSubCategory) {
+                                foreach ($subSubSubSubCategory->products()->get() as $product) {
+                                    $allProducts[] = $product;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $allProducts;
     }
 
 
