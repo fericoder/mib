@@ -86,6 +86,7 @@ class SpecificationController extends Controller
         $specification = \Auth::user()->shop()->first()->specifications()->where('id',$specification->id)->get()->first()->update([
             'name' => $request->name,
             'type' => $request->type,
+            'order' => $request->order,
         ]);
 
 

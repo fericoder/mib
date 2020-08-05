@@ -25,6 +25,7 @@
                         <ul>
                             <li>
                                 <span>دسته بندی : </span>
+                             @if($product->category->parent != null)
                                 @if ($product->category->parent->parent)
                                     <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
                                     <span style="font-size: 14px;">></span>
@@ -36,7 +37,7 @@
                                 @endif
                                 <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a>
                             </li>
-
+                            @endif
 
                             @if ($product->brand)
                                 <li> <span>برند : </span> <a href="{{ route('shop.brand', $product->brand->id) }}" class="btn-link-spoiler">{{ $product->brand ?  $product->brand->name : '' }}</a></li>
@@ -81,7 +82,7 @@
                                         <div class="row">
                                             <select class="js-example-basic-single select-{{ $loop->index }} item selectpicker selectItem" name="specification[]">
                                                 @foreach($specification->items->where('status', 'enable')->intersect($items) as $item)
-                                                            <option style="font-size: 10px" data-id="{{ $item->id }}" data-product="{{ $product->id }}" value="{{ $item->id }}">{{ $item->name }} <span>+ ( {{ $item->price }} تومان )</span></option>
+                                                            <option style="font-size: 10px" data-id="{{ $item->id }}" data-product="{{ $product->id }}" value="{{ $item->id }}">{{ $item->name }}</option>
 
                                                 @endforeach
                                             </select>
@@ -386,8 +387,9 @@
 <script>
     $(document).ready(function() {
 
-
+        var previous = [];
             $(document).on("select2:select", 'select', function(e) {
+                previous.push(this.value);
             e.preventDefault();
             var item_id = e.params.data.id;
           var product_id = $("option:selected").data('product');
@@ -410,23 +412,25 @@
                       function test(value, inx) {
                         if(data.itemIds.includes(value.id.toString())){
                         var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
-                        $(".test"+index).append(a).select2();
+                        $(".test"+index).append(a).select2().val(previous);
                         $('.js-example-basic-single').select2({
                             placeholder: {
                                 text: 'لطفا یک مورد انتخاب کنید'
                               },
                               allowClear: true
                             });
+
                     }
+
                 }
+
                   }
 
               }
-
           });
+
       });
-
-
+      previous = [];
     });
 
 
@@ -435,6 +439,7 @@
     $(document).ready(function() {
 
         $(document).on("select2:unselecting", 'select', function(e) {
+
             e.preventDefault();
             var product_id = {{ $product->id }};
           $.ajax({

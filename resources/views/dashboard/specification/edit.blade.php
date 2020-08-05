@@ -104,6 +104,15 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
+                                                    class="fas fa-star required-star mr-1"></i>اولویت نمایش:</span></div>
+                                    <input value="{{ $specification->order == null ? 0 : $specification->order }}" type="text" class="form-control inputfield" name="order"  Lang="en">
+                                    <div class="input-group-append">
+
+                                    </div>
+                                </div>
+                                <p class="text-danger mb-2 mt-2 text-bold">عدد بزرگتر به معنای اولویت بالاتر میباشد</p>
                             </div>
                             <!--end form-group-->
                     </div>

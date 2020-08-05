@@ -2,6 +2,7 @@
 
 @section('headerScripts')
     <link href="/assets/plugins/custom/datatables/datatables.bundle.rtl.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/jquery.tagsinput.min.css') }}" rel="stylesheet">
 
     <style>
         a, span {
@@ -24,6 +25,25 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--multiple .select2-selection__arrow{
             font-family: "LineAwesome"!important;
         }
+        #input-tags_tagsinput {
+            width: 82.9% !important;
+            height: 37px !important;
+            min-height: 37px !important;
+            font-size: 13px;
+            border: 1px solid #374afb57!important;
+            border-radius: 3px;
+            height: calc(2.3rem + 2px);
+            color: #2f5275;
+        }
+
+        #input-tags_addTag {
+            float: right !important;
+        }
+        #input-tags_tag{
+            border: none;
+            width: 200px!important;
+        }
+
     </style>
 @stop
 
@@ -48,19 +68,19 @@
                         <div class="form-group mb-0">
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
-                                                class="fas fa-star required-star mr-1"></i>عنوان محصول :</span></div>
+                                                class="fas fa-star required-star mr-1"></i>عنوان  :</span></div>
                                 <input type="text" class="form-control inputfield rounded" name="title" value="{{ old('title') }}" placeholder="">
                                 <input name="type" type="hidden" value="product">
                             </div>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                    توضیحات محصول :</span>
+                                                    توضیحات  :</span>
                                 </div>
                                 <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                             </div>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                                   دسته بندی محصول :</span>
+                                                   دسته بندی  :</span>
                                 </div>
                                 <select class="form-control inputfield selectPhysical" name="productCat_id">
                                     <option style="font-family: iranyekan!important;" value="">انتخاب دسته بندی
@@ -76,7 +96,7 @@
                             <div class="border border-info input-group mt-3 pb-3 rounded d-none physicalFeatures">
                             </div>
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7">برند محصول :</span>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7">برند  :</span>
                                 </div>
                                 <select class="form-control inputfield" name="brand_id" id="">
                                     <option style="font-family: iranyekan!important;" value="null">فاقد برند
@@ -90,7 +110,7 @@
                             </div>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
-                                                class="fas fa-star required-star mr-1"></i>قیمت محصول:</span></div>
+                                                class="fas fa-star required-star mr-1"></i>قیمت :</span></div>
                                 <input value="{{ old('price') }}" type="text" class="form-control inputfield" name="price" placeholder="مثال: 30000" Lang="en">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"> تومان</span>
                                 </div>
@@ -130,13 +150,13 @@
                                 <input value="{{ old('amount') }}" type="text" class="form-control inputfield" name="amount" placeholder="مثال: 3">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
                             </div> --}}
-                            <div class="input-group mt-3">
+                            {{-- <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                     حداقل موجودی انبار:</span>
                                 </div>
                                 <input value="{{ old('min_amount') }}" type="text" class="form-control inputfield" name="min_amount" placeholder="مثال: 3">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
-                            </div>
+                            </div> --}}
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                     واحد شمارش کالا:</span>
@@ -144,7 +164,7 @@
                                 <input value="{{ old('measure') }}" type="text" class="form-control inputfield" name="measure" placeholder="مثال : عدد">
                             </div>
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">وزن محصول:</span></div>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">وزن :</span></div>
                                 <input value="{{ old('weight') }}" type="text" class="form-control inputfield" name="weight" placeholder="مثال: 30">
                                 <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
                             </div>
@@ -154,6 +174,11 @@
                                 <input value="{{ old('aparat') }}" type="text" class="form-control inputfield" name="aparat" >
                             </div>
 
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
+                                <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
+                            </div>
+                            <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
 
                             <div class="section p-3">
                                 <div class="items">
@@ -176,7 +201,7 @@
 
                             <div class="mt-3 specification-dot input-group">
                                 <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
-                                    شناسه محصول:</span>
+                                    شناسه :</span>
                                  </div>
                                   <input value="{{ old('group[1][p_id]') }}" type="text" class="form-control inputfield min-width-140" name="group[1][p_id]" placeholder="مثال : 30">
 
@@ -207,13 +232,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="display: none" class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب های محصول :</span></div>
-                                <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
-                                <label class="text-muted m-2">برای ثبت هر برچسب از Enter استفاده نمایید</label>
-                            </div>
+
                             <div style="display: none;" class="input-group mt-3 bg-white col-lg-12">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">امکانات ویژه محصول :</span></div>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">امکانات ویژه  :</span></div>
                                 <div class="custom-control custom-switch switch-blue mr-5 py-3">
                                     <input type="checkbox" class="custom-control-input" id="supportProduct" name="support">
                                     <label class="custom-control-label iranyekan font-15" for="supportProduct">پشتیبانی</label>
@@ -237,7 +258,7 @@
                             </div>
                             <div class="card mt-3">
                                 <div class="card-body">
-                                    <h4 class="mt-0 header-title"><i class="fas fa-star required-star mr-1"></i>تصویر اصلی محصول</h4>
+                                    <h4 class="mt-0 header-title"><i class="fas fa-star required-star mr-1"></i>تصویر اصلی </h4>
                                     <p class="text-danger my-1">حداقل ابعاد : 300px × 300px</p>
                                     <p class="text-danger">حداکثر ابعاد : 1000px × 1000px</p>
                                     <input type="file" id="input-file-now" name="image" class="dropify">
@@ -475,7 +496,7 @@
                                 {{--<th title="Field #5" data-field="5">وضعیت</th>--}}
                                 <th title="Field #5" data-field="5"> قیمت</th>
                                 {{--<th title="Field #5" data-field="5"> پس از تخفیف</th>--}}
-                                <th title="Field #6" data-field="6">موجودی</th>
+                                {{-- <th title="Field #6" data-field="6">موجودی</th> --}}
                                 <th title="Field #6" data-field="6">تغییرات</th>
                             </tr>
                             </thead>
@@ -489,7 +510,8 @@
                                     <td style="font-family: BYekan" >{{ $product->category ? $product->category->name : '' }}</td>
                                     <td style="font-family: BYekan">{{ number_format($product->price) }}</td>
 {{--                                    <td style="font-family: BYekan">{{ $product->off_price != null ?  number_format($product->off_price) : '-' }}</td>--}}
-                                    <td @if($product->amount <= $product->min_amount and $product->type == 'product' and $product->amount != null) class="text-danger amount-warning" @endif >{{ $product->amount != null ? $product->amount : '-' }}
+                                    {{-- <td @if($product->amount <= $product->min_amount and $product->type == 'product' and $product->amount != null) class="text-danger amount-warning" @endif >{{ $product->amount != null ? $product->amount : '-' }}
+                                    </td> --}}
                                     <td>
                                         <a style="margin: 5px;" href="{{ route('products.edit', $product->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
                                         <a style="margin: 5px;" href="" id="remove" title="حذف" data-name="{{ $product->name }}" data-id="{{ $product->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
@@ -515,6 +537,24 @@
 
 
 @section('footerScripts')
+<script>
+    $(document).ready(function() {
+             $('#input-tags').tagsInput();
+            $('#input-tags_tag').val("");
+            $(".dropify-clear").remove();
+            $("#tagsinput").tagsInput();
+        });
+
+</script>
+<script>
+    $(window).ready(function(){
+        setInterval(function(){
+          $('.tagsinput').addClass("tags-modify")
+        }, 1000);
+
+      });
+</script>
+    <script src="{{ asset('/js/jquery.tagsinput.min.js') }}"></script>
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
 
 

@@ -330,18 +330,18 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="input-group mt-3">
+                                                    {{-- <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موجودی در انبار :</span></div>
                                                         <input type="text" class="form-control inputfield" name="amount"  value="{{ old('amount', $product->amount) }}">
                                                         <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
 
-                                                    </div>
-                                                    <div class="input-group mt-3">
+                                                    </div> --}}
+                                                    {{-- <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">حداقل موجودی در انبار :</span></div>
                                                         <input type="text" class="form-control inputfield" name="min_amount" value="{{ old('min_amount', $product->min_amount) }}">
                                                         <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
 
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">واحد شمارش:</span></div>
                                                         <input type="text" class="form-control inputfield" name="measure"  value="{{ old('measure', $product->measure) }}">
