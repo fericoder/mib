@@ -133,6 +133,7 @@
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i5.svg') }}" alt=""> <span>ضمانت اصل بودن کالا</span> </a>
             </aside>
         </section>
+
         <section class="c-product__gallery">
             <div class="c-product__special-deal hidden">
                 <div class="c-counter--special-deal"></div>
@@ -141,7 +142,7 @@
             <div class="c-gallery">
                 <div class="c-gallery__item">
 
-                    <div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}" class="xzoom" alt=""></div>
+                    <div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>
                 </div>
                 <ul style="" class="c-gallery__items">
                     @foreach ($galleries as $gallery)

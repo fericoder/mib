@@ -106,7 +106,7 @@
     </style>
 </head>
 
-<body>
+<body style="padding: 50px">
 <header>
     <section class="top-head container">
         <div class="right-head">
