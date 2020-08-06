@@ -233,27 +233,27 @@ class ProductController extends Controller
 
 
                 //add tags and colors and features and specifications to the product
-//                 if($product)
-//                 {
-//                     DB::transaction(function () use ($request, $product) {
+                if($product)
+                {
+                    DB::transaction(function () use ($request, $product) {
 
-//                         $tagIds = [];
+                        $tagIds = [];
 //                         $colorIds = [];
 //                         $featureIds = [];
-//                         $sepecificationIds = [];
+                        $sepecificationIds = [];
 
-//                         //get all tags of product
-//                         $tagNames = explode(',',$request->get('tags'));
-//                         foreach($tagNames as $tagName)
-//                         {
-//                             $tag = Tag::firstOrCreate(['name'=>$tagName]);
-// //                            $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
-//                             if($tag)
-//                             {
-//                                 $tagIds[] = $tag->id;
-//                             }
-//                         }
-//                         $product->tags()->sync($tagIds);
+                        //get all tags of product
+                        $tagNames = explode(',',$request->get('tags'));
+                        foreach($tagNames as $tagName)
+                        {
+                            $tag = Tag::firstOrCreate(['name'=>$tagName]);
+                            // $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
+                            if($tag)
+                            {
+                                $tagIds[] = $tag->id;
+                            }
+                        }
+                        $product->tags()->sync($tagIds);
 
 //                         // get all colors of product
 //                         if($request->get('color') and !$request->get('color_amount_number')){
@@ -317,8 +317,8 @@ class ProductController extends Controller
                         // }
 
 
-                //     });
-                // }
+                    });
+                }
 
 
                 alert()->success('محصول جدید شما باموفقیت اضافه شد.', 'ثبت شد');
@@ -371,26 +371,26 @@ class ProductController extends Controller
     {
 
         //off price timing
-        if($request->off_price == null){
-            $request->merge(['off_price_started_at' => null]);
-            $request->merge(['off_price_expired_at' => null]);
-        }
-        else{
-            $request->validate([
-                'off_price_started_at' => 'required_with:off_price',
-                'off_price_expired_at' => 'required_with:off_price|gt:off_price_started_at',
-            ]);
+        // if($request->off_price == null){
+        //     $request->merge(['off_price_started_at' => null]);
+        //     $request->merge(['off_price_expired_at' => null]);
+        // }
+        // else{
+        //     $request->validate([
+        //         'off_price_started_at' => 'required_with:off_price',
+        //         'off_price_expired_at' => 'required_with:off_price|gt:off_price_started_at',
+        //     ]);
 
             //check for started and and expired for off_price
-            if($request->off_price_started_at != null){
-                $realTimestampStart = substr($request->off_price_started_at,0,10);
-                $request->off_price_started_at = date('Y-m-d H:i:s', (int)$realTimestampStart);
-            }
-            if($request->off_price_expired_at != null){
-                $realTimestampExpire = substr($request->off_price_expired_at,0,10);
-                $request->off_price_expired_at = date('Y-m-d H:i:s', (int)$realTimestampExpire);
-            }
-        }
+            // if($request->off_price_started_at != null){
+            //     $realTimestampStart = substr($request->off_price_started_at,0,10);
+            //     $request->off_price_started_at = date('Y-m-d H:i:s', (int)$realTimestampStart);
+            // }
+            // if($request->off_price_expired_at != null){
+            //     $realTimestampExpire = substr($request->off_price_expired_at,0,10);
+            //     $request->off_price_expired_at = date('Y-m-d H:i:s', (int)$realTimestampExpire);
+            // }
+        // }
 
         // if ($request->type == 'product') {
         //     if($request->specification_amount != 'on' and $request->color_amount != 'on'){
@@ -422,19 +422,19 @@ class ProductController extends Controller
 
         // }
 
-        if($request->type == 'file' and $request->file('attachment') == null){
-            $attachment = $product->attachment;
-            $file_size = $product->file_size;
-        }
-        elseif($request->type == 'file'){
-            $request->validate(['attachment' => 'required|mimes:doc,docx,pdf,zip,mp4,avi,webm,3gp,rar|max:50000']);
-            $file_size = $request->file('attachment')->getSize();
-            $attachment = Storage::putFileAs('attachment', $request->file('attachment'), \Auth::user()->id."_".time()."_".$request->file('attachment')->getClientOriginalName());
-        }
-        else{
-            $attachment = null;
-            $file_size = null;
-        }
+        // if($request->type == 'file' and $request->file('attachment') == null){
+        //     $attachment = $product->attachment;
+        //     $file_size = $product->file_size;
+        // }
+        // elseif($request->type == 'file'){
+        //     $request->validate(['attachment' => 'required|mimes:doc,docx,pdf,zip,mp4,avi,webm,3gp,rar|max:50000']);
+        //     $file_size = $request->file('attachment')->getSize();
+        //     $attachment = Storage::putFileAs('attachment', $request->file('attachment'), \Auth::user()->id."_".time()."_".$request->file('attachment')->getClientOriginalName());
+        // }
+        // else{
+        //     $attachment = null;
+        //     $file_size = null;
+        // }
         if($request->file('image') == null){
             $image = $product->image;
         }
@@ -461,22 +461,22 @@ class ProductController extends Controller
 
 
         //check options of products
-        if (!isset($request->fast_sending))
-            $request->fast_sending = 'off';
+        // if (!isset($request->fast_sending))
+        //     $request->fast_sending = 'off';
 
-        if (!isset($request->money_back))
-            $request->money_back = 'off';
+        // if (!isset($request->money_back))
+        //     $request->money_back = 'off';
 
-        if (!isset($request->support))
-            $request->support = 'off';
+        // if (!isset($request->support))
+        //     $request->support = 'off';
 
-        if (!isset($request->secure_payment))
-            $request->secure_payment = 'off';
+        // if (!isset($request->secure_payment))
+        //     $request->secure_payment = 'off';
 
-        if (!isset($request->discount_status))
-            $request->discount_status = 'disable';
-        else
-            $request->discount_status = 'enable';
+        // if (!isset($request->discount_status))
+        //     $request->discount_status = 'disable';
+        // else
+        //     $request->discount_status = 'enable';
 
         //check amount of product and change fa number to en
         // if($request->color_amount == 'on' and $request->get('color_amount_number') or ($request->specification_amount == 'on' and $request->get('specification_amount_number'))){
@@ -494,9 +494,9 @@ class ProductController extends Controller
         if($request->weight != null){
             $request->weight = $this->fa_num_to_en($request->weight);
         }
-        if($request->off_price != null){
-            $request->off_price = $this->fa_num_to_en($request->off_price);
-        }
+        // if($request->off_price != null){
+        //     $request->off_price = $this->fa_num_to_en($request->off_price);
+        // }
         $updatedProduct = $product->update([
             'title' => $request->title,
             'type' => $request->type,
@@ -584,14 +584,16 @@ class ProductController extends Controller
         if($updatedProduct)
         {
             $tagIds = [];
-            $colorIds = [];
-            $featureIds = [];
+            // $colorIds = [];
+            // $featureIds = [];
             $sepecificationIds = [];
+
+
             //get all tags of product
             $tagNames = explode(',',$request->get('tags'));
             foreach($tagNames as $tagName)
             {
-                $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
+                $tag = Tag::firstOrCreate(['name'=>$tagName]);
                 if($tag)
                 {
                     $tagIds[] = $tag->id;

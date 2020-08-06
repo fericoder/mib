@@ -2,6 +2,7 @@
 
 @section('headerScripts')
     <link href="/assets/plugins/custom/datatables/datatables.bundle.rtl.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/jquery.tagsinput.min.css') }}" rel="stylesheet">
 
     <style>
         a, span {
@@ -24,6 +25,25 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--multiple .select2-selection__arrow{
             font-family: "LineAwesome"!important;
         }
+        #input-tags_tagsinput {
+            width: 82.9% !important;
+            height: 37px !important;
+            min-height: 37px !important;
+            font-size: 13px;
+            border: 1px solid #374afb57!important;
+            border-radius: 3px;
+            height: calc(2.3rem + 2px);
+            color: #2f5275;
+        }
+
+        #input-tags_addTag {
+            float: right !important;
+        }
+        #input-tags_tag{
+            border: none;
+            width: 200px!important;
+        }
+
     </style>
 @stop
 
@@ -479,9 +499,11 @@
                                                     {{--@endif--}}
 
                                                     <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">برچسب های محصول :</span></div>
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
                                                         <input value="{{ $tags }}" type="text" id="input-tags" name="tags" class="form-control" />
                                                     </div>
+                                                    <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
+
 
                                                     {{--@forelse( $product->facilities as $facility)--}}
                                                         {{--<div  class="input-group mt-3">--}}
@@ -577,14 +599,25 @@
 
 @section('footerScripts')
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
+    <script src="{{ asset('/js/jquery.tagsinput.min.js') }}"></script>
 
-    <script>
+        <script>
+            $(document).ready(function() {
+                     $('#input-tags').tagsInput();
+                    $('#input-tags_tag').val("");
+                    $(".dropify-clear").remove();
+                    $("#tagsinput").tagsInput();
+                });
 
+        </script>
+        <script>
+            $(window).ready(function(){
+                setInterval(function(){
+                  $('.tagsinput').addClass("tags-modify")
+                }, 1000);
 
-        //datatables
-
-
-    </script>
+              });
+        </script>
 
     <!--begin::Page Scripts -->
     <script>
