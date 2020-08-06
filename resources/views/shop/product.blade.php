@@ -55,7 +55,7 @@
                                 @if ($product->category->parent->parent)
                                     <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
                                     <span style="font-size: 14px;">></span>
-                                @endif
+                             @endif
 
                             @if ($product->category->parent)
                                     <a href="{{ route('shop.category', $product->category->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->name }}</a>
@@ -91,8 +91,10 @@
                         <div class="delivery-warehouse"> <i class="fa fa-truck"></i><span class="c-product__delivery-warehouse--no-lead-time">آماده ارسال</span></div>
                     </div>
 
+
                     @auth
                         <form action="{{ route('user-cart.add', ['shop'=> 'keyvan', 'userID'=> \Auth::user()->id]) }}" method="post">
+                            @endauth
                             @csrf
 
                             <div class="all">
@@ -120,6 +122,7 @@
 
                         </div>
                     </div>
+                            @auth
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
                                     <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
@@ -131,7 +134,7 @@
 
                 @guest
                         <a href="{{ route('register') }}">
-                            <button type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> برای خرید ابتدا ثبت نام کنید </button>
+                            <button style="margin: 30px" type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> برای خرید ابتدا ثبت نام کنید </button>
                         </a>
                     @endguest
                 </div>
@@ -181,8 +184,8 @@
             <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
-                        <a href="#"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
-                        <a class="title" href="#">{{ $Relatedproduct->title }}</a>
+                        <a href="{{ route('shop.product', $product->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.product', $product->id) }}">{{ $Relatedproduct->title }}</a>
                         <span class="price">{{ number_format($Relatedproduct->price) }} تومان</span>
                     </div>
                 @endforeach

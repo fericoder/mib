@@ -9,7 +9,7 @@ Contact: cyber.injector@yahoo.com
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
     <meta charset="utf-8"/>
-    <script src="https://omidshop.net/dashboard/assets/js/jquery.min.js" type="text/javascript"></script>
+    {{--<script src="https://omidshop.net/dashboard/assets/js/jquery.min.js" type="text/javascript"></script>--}}
 
     <title> ایده برتر کیوان  | {{ $title }}</title>
     <meta name="description" content="Latest updates and statistic charts">
