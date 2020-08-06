@@ -1,34 +1,45 @@
 @extends('shop.layouts.master', ['title' => $product->title ])
 
-<link href='/assets/css/simplelightbox.min.css' rel='stylesheet' type='text/css'>
+@section('headerScripts')
+    <link href='/assets/css/simplelightbox.min.css' rel='stylesheet' type='text/css'>
 
 
-<style>
-    .select2-container{
-        width: 300px!important;
-        direction: rtl;
-        text-align: right;
-    }
-    .select2-selection__rendered{
-        font-size: 14px;
-    }
-    .select2-results__option{
-        font-size: 14px;
-    }
-    .button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
+    <style>
+        .select2-container{
+            width: 300px!important;
+            direction: rtl;
+            text-align: right;
+        }
+        .select2-selection__rendered{
+            font-size: 14px;
+        }
+        .select2-results__option{
+            font-size: 14px;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .sl-next{
+            direction: ltr!important;
+        }
+        .sl-prev{
+            direction: ltr!important;
+        }
+    </style>
 
-</style>
+@stop
 @section('content')
+
+
     <article class="c-product">
         <section class="c-product__info">
             <div class="c-product__headline">
@@ -134,23 +145,30 @@
             </aside>
         </section>
 
-        <section class="c-product__gallery">
-            <div class="c-product__special-deal hidden">
-                <div class="c-counter--special-deal"></div>
+        <div class="col-lg-6"><img src="{{ asset($product->image['400,400'] ? $product->image['400,400'] : '/images/no-image.png') }}" alt="" class="col-8 d-block img-thumbnail" style="max-height: 40em;">
+            <div class="gallery mt-4 mr-4">
+                @foreach ($galleries as $gallery)
+                    <a href="/{{ $gallery->filename }}"><img width="100px" class="img-thumbnail" src="/{{ $gallery->filename }}" alt="" title="" /></a>
+                @endforeach
             </div>
-            <div class="c-product__status-bar c-product__status-bar--out-of-stock hidden">ناموجود</div>
-            <div class="c-gallery">
-                <div class="c-gallery__item">
+        </div>
 
-                    <div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>
-                </div>
-                <ul style="" class="c-gallery__items">
-                    @foreach ($galleries as $gallery)
-                        <li><img src="{{ asset( $gallery->filename) }}" alt=""></li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>
+        {{--<section class="c-product__gallery">--}}
+            {{--<div class="c-product__special-deal hidden">--}}
+                {{--<div class="c-counter--special-deal"></div>--}}
+            {{--</div>--}}
+            {{--<div class="c-product__status-bar c-product__status-bar--out-of-stock hidden">ناموجود</div>--}}
+            {{--<div class="c-gallery">--}}
+                {{--<div class="c-gallery__item">--}}
+                    {{--<div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>--}}
+                {{--</div>--}}
+                {{--<ul style="" class="c-gallery__items">--}}
+                    {{--@foreach ($galleries as $gallery)--}}
+                        {{--<li><img src="{{ asset( $gallery->filename) }}" alt=""></li>--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--</section>--}}
     </article>
 
 
@@ -392,123 +410,135 @@
 
     <div class="jump-to-up"> <i class="fa fa-chevron-up"></i> <span> بازگشت به بالا </span></div>
 
+
 @stop
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@section('footerScripts')
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-<script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
-<script>
-    $(document).ready(function() {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        $(".js-example-basic-single").val(null).trigger("change");
-        $('.js-example-basic-single').select2({
-            placeholder: {
-                text: 'لطفا یک مورد انتخاب کنید'
-              },
-              allowClear: true
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+    <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-basic-single").val(null).trigger("change");
+            $('.js-example-basic-single').select2({
+                placeholder: {
+                    text: 'لطفا یک مورد انتخاب کنید'
+                },
+                allowClear: true
             });
-    });
-</script>
+        });
+    </script>
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
+            var $gallery = $('.gallery a').simpleLightbox();
+        });
 
-        var previous = [];
+        $(document).ready(function() {
+
+            var previous = [];
             $(document).on("select2:select", 'select', function(e) {
                 previous.push(this.value);
-            e.preventDefault();
-            var item_id = e.params.data.id;
-          var product_id = $("option:selected").data('product');
-          $.ajax({
-              type: "post",
-              url: window.location.origin +'/product/get-items',
-              data: {
-                item_id: item_id,
-                product_id: product_id,
-                  "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
-              },
-              success: function(data) {
-                $( ".all-selects" ).empty();
-                data.specifications.forEach(myFunction);
-                  function myFunction(specification, index) {
-                      var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
-                      $(".all-selects").append(a);
+                e.preventDefault();
+                var item_id = e.params.data.id;
+                var product_id = $("option:selected").data('product');
+                $.ajax({
+                    type: "post",
+                    url: window.location.origin +'/product/get-items',
+                    data: {
+                        item_id: item_id,
+                        product_id: product_id,
+                        "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+                    },
+                    success: function(data) {
+                        $( ".all-selects" ).empty();
+                        data.specifications.forEach(myFunction);
+                        function myFunction(specification, index) {
+                            var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                            $(".all-selects").append(a);
 
-                      specification.items.forEach(test);
-                      function test(value, inx) {
-                        if(data.itemIds.includes(value.id.toString())){
-                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
-                        $(".test"+index).append(a).select2().val(previous);
-                        $('.js-example-basic-single').select2({
-                            placeholder: {
-                                text: 'لطفا یک مورد انتخاب کنید'
-                              },
-                              allowClear: true
-                            });
+                            specification.items.forEach(test);
+                            function test(value, inx) {
+                                if(data.itemIds.includes(value.id.toString())){
+                                    var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
+                                    $(".test"+index).append(a).select2().val(previous);
+                                    $('.js-example-basic-single').select2({
+                                        placeholder: {
+                                            text: 'لطفا یک مورد انتخاب کنید'
+                                        },
+                                        allowClear: true
+                                    });
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                });
+
+            });
+            previous = [];
+        });
+
+
+    </script>
+    <script>
+        $(document).ready(function() {
+
+
+            $(document).on("select2:unselecting", 'select', function(e) {
+
+                e.preventDefault();
+                var product_id = {{ $product->id }};
+                $.ajax({
+                    type: "post",
+                    url: window.location.origin +'/product/get-items',
+                    data: {
+                        item_id: null,
+                        product_id: product_id,
+                        "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+                    },
+                    success: function(data) {
+                        $( ".all-selects" ).empty();
+                        data.specifications.forEach(specificationArray);
+                        function specificationArray(specification, index) {
+
+                            var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                            $(".all-selects").append(a);
+
+                            specification.items.forEach(wsw);
+                            function wsw(value, inx) {
+                                if(data.itemIds.includes(value.id.toString())){
+                                    var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
+                                    $(".test"+index).append(a).select2({
+                                        placeholder: {
+                                            text: 'لطفا یک مورد انتخاب کنید'
+                                        }
+                                    });
+                                    $('.js-example-basic-single').select2({
+                                        placeholder: {
+                                            text: 'لطفا یک مورد انتخاب کنید'
+                                        }
+                                    });
+                                    $(".js-example-basic-single").val(null).trigger("change");
+
+                                }
+                            }
+                        }
 
                     }
 
-                }
-
-                  }
-
-              }
-          });
-
-      });
-      previous = [];
-    });
+                });
+            });
+        });
 
 
-</script>
-<script>
-    $(document).ready(function() {
 
-        $(document).on("select2:unselecting", 'select', function(e) {
-
-            e.preventDefault();
-            var product_id = {{ $product->id }};
-          $.ajax({
-              type: "post",
-              url: window.location.origin +'/product/get-items',
-              data: {
-                item_id: null,
-                product_id: product_id,
-                  "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
-              },
-              success: function(data) {
-                $( ".all-selects" ).empty();
-                data.specifications.forEach(specificationArray);
-                  function specificationArray(specification, index) {
-
-                      var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
-                      $(".all-selects").append(a);
-
-                      specification.items.forEach(wsw);
-                      function wsw(value, inx) {
-                        if(data.itemIds.includes(value.id.toString())){
-                        var a = '<option style="font-size: 10px" data-id="'+value.id+'" data-product="{{  $product->id  }}" value="'+value.id+'">'+value.name+'<span></span></option></select>';
-                        $(".test"+index).append(a).select2({
-                            placeholder: {
-                                text: 'لطفا یک مورد انتخاب کنید'
-                              }
-                            });
-                        $('.js-example-basic-single').select2({
-                            placeholder: {
-                                text: 'لطفا یک مورد انتخاب کنید'
-                              }
-                            });
-                            $(".js-example-basic-single").val(null).trigger("change");
-
-                    }
-                }
-                  }
-
-              }
-
-          });
-     });
-     });
-</script>
+    </script>
+@stop

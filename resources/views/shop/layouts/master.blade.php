@@ -104,6 +104,7 @@
 
 
     </style>
+    @yield('headerScripts')
 </head>
 
 <body style="padding: 50px">
@@ -299,6 +300,8 @@
     }
 
 </script>
+@yield('footerScripts')
+
 </body>
 
 </html>

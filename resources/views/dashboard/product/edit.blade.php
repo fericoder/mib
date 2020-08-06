@@ -265,6 +265,16 @@
                                                     </div>
 
                                                     <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> کشور سازنده : </span></div>
+                                                        <select class="selectpicker1 selectpicker-specification" data-live-search="true" name="country_id" title="موردی انتخاب نشده">
+                                                            <option disabled selected value> -- کلیک نمایید -- </option>
+                                                            @foreach (\App\Country::all() as $country)
+                                                                <option {{ old('country_id', $product->country_id) == $country->id  ? 'selected': '' }} value="{{ $country->id }}">{{ $country->nicename }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7">دسته بندی محصول :</span></div>
                                                         <select class="form-control inputfield selectPhysical" name="productCat_id" data-productid="{{ $product->id }}">
                                                             <option style="font-family: BYekan!important;" value="{{ $product->category->id }}">{{ $product->category->name }}

@@ -51,6 +51,7 @@ class ProductRequest extends FormRequest
             ],
             'aparat' => 'nullable',
             'shortDescription' => 'required',
+            'country_id' => 'nullable',
             'fast_sending' => 'in:on',
             // 'money_back' => 'in:on',
             // 'support' => 'in:on',
