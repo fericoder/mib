@@ -177,7 +177,7 @@ class ProductController extends Controller
                     // 'amount' => $request->amount,
                     // 'min_amount' => $request->min_amount,
                     'measure' => $request->measure,
-                    'weight' => $this->fa_num_to_en($request->weight),
+                    'weight' => $request->weight,
                     'price' => $this->fa_num_to_en($request->price),
                     // 'off_price' => $request->off_price,
                     // 'fast_sending' => $request->fast_sending,
@@ -201,7 +201,7 @@ class ProductController extends Controller
                     // 'file_size' => $file_size,
                 ]);
 
-                if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group['item'])) {
+                if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group[1]['items'])) {
                     if (isset($request->group)) {
                         foreach ($request->group as $group) {
                             $groupItem = new SpecificationItemGroup;
@@ -507,7 +507,7 @@ class ProductController extends Controller
             // 'amount' => $request->amount,
             // 'min_amount' => $request->min_amount,
             'measure' => $request->measure,
-            'weight' => $this->fa_num_to_en($request->weight),
+            'weight' => $request->weight,
             'aparat' => $request->aparat,
             'price' => $this->fa_num_to_en($request->price),
             'shegeftangiz' => $request->shegeftangiz,
