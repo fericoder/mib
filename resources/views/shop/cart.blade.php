@@ -45,7 +45,7 @@
                     </li><!--cart-item-->
                 </ul>
                 <div class="c-checkout__to-shipping-sticky">
-                    <a href="shipping.html" class="c-checkout__to-shipping-link">ادامه فرایند خرید</a>
+                    <a href="{{ route('checkout.index') }}" class="c-checkout__to-shipping-link">ادامه فرایند خرید</a>
                     <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
                         <div class="c-checkout__to-shipping-price-report--price">{{ number_format($products->sum('price')) }} <span>تومان</span></div>

@@ -6,6 +6,9 @@ use App\Checkout;
 use App\Category;
 use App\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Cart;
+use App\UserPurchase;
 
 class CheckoutController extends Controller
 {
@@ -17,9 +20,10 @@ class CheckoutController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $cart = \Auth::user()->cart()->get()->first();
         $user = \Auth::user();
         $shop = Shop::where('english_name', 'keyvan')->first();
-        return view('shop.checkout', compact('categories', 'user', 'shop'));
+        return view('shop.checkout', compact('categories', 'user', 'shop', 'cart'));
     }
 
     /**
@@ -40,7 +44,23 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $cart = \Auth::user()->cart()->get()->first();
+      $total_price = \Auth::user()->cart()->get()->first()->total_price;
+      $purchase = new UserPurchase;
+      $purchase->cart_id = $cart->id;
+      $purchase->user_id = \Auth::user()->id;
+      $purchase->date = \Morilog\Jalali\Jalalian::forge('today')->format('%Y/%m/%d');
+      $purchase->address_id = $request->payment_method;
+      $purchase->shipping = 'post';
+      $purchase->payment_method = 'online_payment';
+      $purchase->shipping_price = 0;
+      $purchase->total_price = $total_price;
+      $purchase->save();
+      DB::table('carts')->where('id', '=', \Auth::user()->cart()->get()->first()->id)->update(['status' => 1]);
+      Cart::where('id', \Auth::user()->cart()->get()->first()->id)->get()->first()->delete();
+      alert()->success('خرید شما با موفقیت ثبت شد.', '');
+       return redirect()->route('profile.orders');
+
     }
 
     /**

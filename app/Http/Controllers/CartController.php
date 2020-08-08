@@ -17,11 +17,9 @@ use App\SpecificationItem;
 
 class CartController extends \App\Http\Controllers\Controller {
 
-    public function show($shopName) {
+    public function show() {
         try
         {
-
-            $shop = Shop::where('english_name', $shopName)->first();
             $cart = \Auth::user()->cart()->get()->first();
             $categories = Category::all();
 
@@ -70,7 +68,7 @@ class CartController extends \App\Http\Controllers\Controller {
                 $specificationItem = $specificationItems->unique('id');
 
                 $products = \Auth::user()->cart()->get()->first()->products;
-                return view("shop.cart", compact('shop', 'products','cart','specificationItems', 'categories'));
+                return view("shop.cart", compact('products','cart','specificationItems', 'categories'));
             } else {
                 alert()->warning('سبد خرید شما خالی است.');
                 return redirect()->back();
@@ -80,6 +78,7 @@ class CartController extends \App\Http\Controllers\Controller {
 
         catch(\Exception $e)
         {
+
             Cart::where('id', \Auth::user()->cart()->get()->first()->id)->get()->first()->delete();
             return redirect()->back()->withErrors(['با عرض پوزش محصولات سبد خرید شما به دلیل مشکلات محصول حذف شد. لطفا دوباره تلاش نمایید.']);
         }
@@ -90,7 +89,7 @@ class CartController extends \App\Http\Controllers\Controller {
 
 
 
-    public function addToCart($shopName, $userID, CartRequest $request) {
+    public function addToCart($userID, CartRequest $request) {
 
         $product = Product::where('id', $request->product_id)->get()->first();
         if($product->type == 'product' && $product->amount != null and $product->amount < 0){
@@ -128,7 +127,6 @@ class CartController extends \App\Http\Controllers\Controller {
         if (\Auth::user()->cart()->count() == 0) {
             $cart = new Cart;
             $cart->user_id = \Auth::user()->id;
-            $cart->shop_id = Shop::where('english_name', $shopName)->first()->id;
             $cart->status = 0;
             $cart->save();
         }
@@ -139,7 +137,6 @@ class CartController extends \App\Http\Controllers\Controller {
         }
         $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('color_id', '=', $request->color)->where('specification', '=', $specificationOrg)->where('deleted_at', null)->first();
         $userCartShopID = \Auth::user()->cart()->get()->first()->shop_id;
-        $currentshopID = Shop::where('english_name' , $shopName)->get()->first()->id;
         if($product->off_price != null and $product->off_price_started_at < now() and $product->off_price_expired_at > now()){
 
             $productPrice = $product->off_price;
@@ -162,7 +159,7 @@ class CartController extends \App\Http\Controllers\Controller {
                 $specificationPrice += $specificationItem->price;
             }
         }
-        if (is_null($cartProduct) and $userCartShopID == $currentshopID) {
+        if (is_null($cartProduct)) {
             if (\Auth::user()->cart()->count() != 0) {
                 foreach(\Auth::user()->cart()->get()->first()->products()->get() as $singleCartProduct){
                     if($singleCartProduct->type != $product->type ){

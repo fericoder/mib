@@ -6,23 +6,33 @@
         <div class="o-page__content">
             <div id="shipping-data">
                 <div class="o-headline o-headline--checkout"><span>انتخاب آدرس تحویل سفارش</span></div>
-                <div id="address-section">
+                @foreach (auth()->user()->addresses as $address)
+                  <div class="d-flex" style="align-items: center;">
+                    <input type="radio" class="option-input radio m-2" name="address" {{  $loop->first == true ? 'checked' : '' }} />
+                <div id="address-section" class="w-100">
                     <div id="user-default-address-container" class="c-checkout-contact is-completed">
                         <div class="c-checkout-contact__content">
                             <ul class="c-checkout-contact__items">
-                                <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : حسن شفیعی</span>
-                                    <button class="c-checkout-contact__btn-edit">اصلاح این آدرس</button>
+                                <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : {{ auth()->user()->fName .' '. auth()->user()->lName }}</span>
+                                    {{-- <button class="c-checkout-contact__btn-edit">اصلاح این آدرس</button> --}}
                                 </li>
                                 <li class="c-checkout-contact__item c-checkout-contact__item--location">
-                                    <div class="c-checkout-contact__item c-checkout-contact__item--mobile"> <span>شماره تماس : ۰۹۱۲۶۲۶۲۶۲۶</span></div>
-                                    <div class="c-checkout-contact__item--message"><span>کد پستی : ۹۱۹۹۶۰</span></div>
-                                    <br> <span class="full-address">تهران - ورودی اول - ترمینال - پارک - پلاک</span></li>
+                                    <div class="c-checkout-contact__item c-checkout-contact__item--mobile"> <span>شماره تماس : {{ $address->tel }}</span></div>
+                                    <div class="c-checkout-contact__item--message"><span>کد پستی : {{ $address->zip_code }}</span></div>
+                                    <br> <span class="full-address">{{ $address->province }}</span>
+                                    <br> <span class="full-address">{{ $address->city }}</span>
+                                    <br> <span class="full-address">{{ $address->address }}</span>
+                                  </li>
                             </ul>
-                            <div class="c-checkout-contact__badge"></div>
+                            {{-- <div class="c-checkout-contact__badge"></div> --}}
                         </div>
-                        <button id="change-sh-address" class="c-checkout-contact__location">تغییر آدرس ارسال</button>
+                        {{-- <button id="change-sh-address" class="c-checkout-contact__location">تغییر آدرس ارسال</button> --}}
                     </div>
                 </div>
+              </div>
+
+              @endforeach
+
 
 
 
@@ -69,14 +79,12 @@
                         <div class="o-headline o-headline--checkout"> <span>مرسوله </span></div>
                         <div class="c-checkout-pack">
                             <div class="c-checkout-pack__row">
+                              @foreach ($cart->cartProduct as $cartProduct)
                                 <div class="c-product-box c-product-box--compact">
-                                    <a href="#" class="c-product-box__img"><img src="assets/images/119350700s.jpg" alt=""></a>
-                                    <div class="c-product-box__title">تبلت سامسونگ مدل GALAXY TAB S6 ظرفیت 128 گیگابایت</div>
+                                    <a href="#" class="c-product-box__img"><img src="{{ $cartProduct->product->image['250,250'] }}" alt="" style="width:150px;height:100px"></a>
+                                    <div class="c-product-box__title">{{ $cartProduct->product->title }}</div>
                                 </div>
-                                <div class="c-product-box c-product-box--compact">
-                                    <a href="#" class="c-product-box__img"><img src="assets/images/112309225s.jpg" alt=""></a>
-                                    <div class="c-product-box__title"> دسته بازی بی سیم یوکام کد 8008 </div>
-                                </div>
+                              @endforeach
                             </div>
                             {{--<div class="c-checkout-pack__row">--}}
                                 {{--<div class="c-checkout-time-table">--}}
@@ -98,7 +106,7 @@
                     @endif
                 </div>
                 <div class="c-checkout__to-shipping-sticky">
-                    <a href="payment.html" class="c-checkout__to-shipping-link">ادامه فرایند خرید</a>
+                    <a href="{{ route('checkout.store') }}" class="c-checkout__to-shipping-link">ثبت نهایی سفارش</a>
                     <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
                         <div class="c-checkout__to-shipping-price-report--price">۱۹۶,۷۰۰ <span>تومان</span></div>
@@ -114,18 +122,18 @@
                 <div class="c-checkout-summary">
                     <ul class="c-checkout-summary__summary">
                         <li>
-                            <span>قیمت کالاها (۱)</span>
-                            <span> ۱۹۸,۲۰۰ تومان </span>
+                            <span>قیمت کالاها ({{ $cart->cartProduct->count() }})</span>
+                            <span> {{ $cart->total_price }} تومان </span>
                         </li>
                         <!--incredible-->
                         <li class="c-checkout-summary__discount">
                             <span> تخفیف کالاها </span>
-                            <span class="discount-price">۱,۵۰۰ تومان</span>
+                            <span class="discount-price">0 تومان</span>
                         </li>
                         <!--incredible-->
                         <li class="has-devider">
                             <span>جمع</span>
-                            <span> ۱۹۶,۷۰۰ تومان </span>
+                            <span> {{ $cart->total_price }}تومان </span>
                         </li>
                         <li>
                             <span>هزینه ارسال</span>
@@ -137,7 +145,7 @@
                         </li>
                         <li class="has-devider">
                             <span> مبلغ قابل پرداخت </span>
-                            <span> ۱۹۶,۷۰۰ تومان </span>
+                            <span> {{ $cart->total_price }} تومان </span>
                         </li>
 
                     </ul>

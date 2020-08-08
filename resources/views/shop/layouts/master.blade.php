@@ -161,7 +161,7 @@
                 @endguest
 
 
-            <a href="{{ route('user-cart' , ['shop' => 'keyvan']) }}" class="cart">
+            <a href="{{ route('user-cart') }}" class="cart">
                 <i class="fa fa-shopping-cart"></i>
             </a>
         </div>
@@ -205,6 +205,8 @@
     </nav>
 
 </header>
+@include('dashboard.layouts.errors')
+
 @yield('content')
 <footer>
     <section class="footer container">

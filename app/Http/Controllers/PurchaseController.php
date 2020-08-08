@@ -69,9 +69,6 @@ class PurchaseController extends Controller
                 }
             }
         }
-        SEOTools::setTitle($shop->name . ' | سفارش شماره ' . $purchase->id);
-        SEOTools::setDescription($shop->name);
-        SEOTools::opengraph()->addProperty('type', 'website');
         return view('dashboard.shop.purchase.show', compact('purchase', 'shop', 'specificationItems'));
     }
 

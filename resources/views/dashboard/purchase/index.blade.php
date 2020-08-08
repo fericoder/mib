@@ -179,10 +179,10 @@
                                     </td>
                                     <td>{{ jdate($purchase->created_at) }}</td>
                                     <td>
-                                        <a href="{{ route('purchases.show', ['id' => $purchase->id]) }}">
+                                        {{-- <a href="{{ route('purchases.show', ['purchase' => $purchase->id]) }}">
                                             <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('purchases.show', ['id' => $purchase->id]) }}" data-toggle="modal" data-target="#ShowAddressModal{{ $purchase->id }}">
+                                        </a> --}}
+                                        {{-- <a href="{{ route('purchases.show', ['purchase' => $purchase->id]) }}" data-toggle="modal" data-target="#ShowAddressModal{{ $purchase->id }}"> --}}
                                             <i class="dripicons-user-id"></i>
                                         </a>
                                     </td>
