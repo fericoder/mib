@@ -65,7 +65,7 @@
 
                     </ul>
                     <div class="c-pager">
-                        {{--{{ $products->links() }}--}}
+{{--                        {{ $products->links() }}--}}
                     </div>
                 </div>
             </article>

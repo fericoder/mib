@@ -92,5 +92,11 @@ class Product extends Model
         return $this->hasMany('App\SpecificationItemGroup');
     }
 
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
+
 
 }

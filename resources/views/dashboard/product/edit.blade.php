@@ -401,6 +401,16 @@
                                                     </div>
 
 
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نمایش قیمت فقط برای کاربران:</span></div>
+                                                        <label style="margin: 10px;" class="kt-checkbox"><input {{ $product->userPrice == 'on' ? 'checked' : '' }} name="userPrice" type="checkbox"> <span></span></label>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شگفت انگیز:</span></div>
+                                                        <label style="margin: 10px;" class="kt-checkbox"><input {{ $product->shegeftangiz == 'on' ? 'checked' : '' }} name="shegeftangiz" type="checkbox"> <span></span></label>
+                                                    </div>
+
 
                                                     {{--<div class="input-group color-dot mt-3">--}}
                                                         {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ محصول :</span></div>--}}

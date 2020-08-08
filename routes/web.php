@@ -38,6 +38,14 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('SpecificationItems', 'SpecificationItemController');
     Route::resource('users', 'UserController');
 
+    //Shop-Setting
+    Route::resource('settings', 'ShopSettingController');
+    Route::post('settings/update', 'ShopSettingController@update')->name('settings.updatee');
+//    Route::put('shop-setting/setting-update/{id}', 'ShopSettingController@updateSetting')->name('shop-setting.setting-update')->where(['id' => '[0-9]+']);
+//    Route::put('shop-setting/update-contact/{id}', 'ShopSettingController@updateContact')->name('shop.setting.update-contact')->where(['id' => '[0-9]+']);
+//    Route::put('shop-setting/update-template/{id}', 'ShopSettingController@updateTemplate')->name('shop.setting.update-template')->where(['id' => '[0-9]+']);
+//    Route::post('shop-setting/image/delete', 'ShopSettingController@destroyImage')->name('shop-setting.image.delete');
+
 
 
     // Comment Actions

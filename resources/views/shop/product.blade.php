@@ -69,6 +69,10 @@
                                 <li> <span>برند : </span> <a href="{{ route('shop.brand', $product->brand->id) }}" class="btn-link-spoiler">{{ $product->brand ?  $product->brand->name : '' }}</a></li>
                             @endif
 
+                            @if ($product->country_id)
+                                <li style="margin-top: 10px"> <span>کشور سازنده : </span> <a href="" class="btn-link-spoiler">{{ $product->country->nicename }}</a></li>
+                            @endif
+
 
                         </ul>
                     </div>
@@ -94,7 +98,7 @@
 
                     @auth
                         <form action="{{ route('user-cart.add', ['shop'=> 'keyvan', 'userID'=> \Auth::user()->id]) }}" method="post">
-                            @endauth
+                    @endauth
                             @csrf
 
                             <div class="all">
@@ -122,14 +126,21 @@
 
                         </div>
                     </div>
-                            @auth
+
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
-                                    <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
+                                    @if ($product->userPrice === 'on')
+                                        @auth()
+                                         <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
+                                    @endauth
+                                    @else
+                                           <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
+                                    @endif
+                                @auth()
                                     <button style="margin: 65px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
+                                @endauth
                             </div>
                         </form>
-                    @endauth
 
 
                 @guest

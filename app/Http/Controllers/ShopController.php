@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\Brand;
+use App\Shop;
 use App\Specification;
 use App\SpecificationItem;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('shop.index', compact('categories'));
+        $shop = Shop::where('english_name', 'keyvan')->first();
+        return view('shop.index', compact('categories', 'shop'));
     }
 
 

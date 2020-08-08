@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Checkout;
 use App\Category;
+use App\Shop;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -17,7 +18,8 @@ class CheckoutController extends Controller
     {
         $categories = Category::all();
         $user = \Auth::user();
-        return view('shop.checkout', compact('categories', 'user'));
+        $shop = Shop::where('english_name', 'keyvan')->first();
+        return view('shop.checkout', compact('categories', 'user', 'shop'));
     }
 
     /**

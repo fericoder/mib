@@ -197,6 +197,19 @@
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کاتالوگ:</span></div>
                                 <input value="{{ old('catalog') }}" type="file" class="form-control inputfield" name="catalog" >
                             </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نمایش قیمت فقط برای کاربران:</span></div>
+                                <label style="margin: 10px;" class="kt-checkbox"><input checked name="userPrice" type="checkbox"> <span></span></label>
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شگفت انگیز:</span></div>
+                                <label style="margin: 10px;" class="kt-checkbox"><input  name="shegeftangiz" type="checkbox"> <span></span></label>
+                            </div>
+
+
+
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
                                 <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />

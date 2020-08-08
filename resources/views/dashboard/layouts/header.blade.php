@@ -220,9 +220,9 @@
                                     </li>
 
 
-                                    <li class="kt-menu__item {{ request()->is('*administration*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                    <li class="kt-menu__item {{ request()->is('*settings*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="" class="kt-menu__link">
+                                        <a href="{{ route('settings.index') }}" class="kt-menu__link">
                                             <span class="kt-menu__link-text"> مدیریت سیستم</span>
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>

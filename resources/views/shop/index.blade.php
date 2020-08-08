@@ -38,7 +38,7 @@
         <div id="vpslider" class="swiper-container">
             <div class="product-box swiper-wrapper">
 
-                @foreach (\App\Product::orderBy('viewCount', 'desc')->limit(15)->get() as $product)
+                @foreach (\App\Product::where('shegeftangiz', 'on')->limit(15)->get() as $product)
                     <div class="product-item swiper-slide">
                         <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
                         <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
@@ -53,80 +53,94 @@
     </section>
 
 
-    <section class="product-wrapper container">
-        <div class="headline">
-            <h3>محصولات پربازدید </h3></div>
-        <div id="viewCount" class="swiper-container">
-            <div class="product-box swiper-wrapper">
+    @if ($shop->porbazdid)
+        <section class="product-wrapper container">
+            <div class="headline">
+                <h3>محصولات پربازدید </h3></div>
+            <div id="viewCount" class="swiper-container">
+                <div class="product-box swiper-wrapper">
 
-                @foreach (\App\Product::orderBy('viewCount', 'desc')->limit(15)->get() as $product)
-                    <div class="product-item swiper-slide">
-                        <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                        <span class="price">{{ $product->price }} تومان</span>
-                    </div>
-                @endforeach
+                    @foreach (\App\Product::orderBy('viewCount', 'desc')->limit(15)->get() as $product)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
+                            <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
+                            <span class="price">{{ $product->price }} تومان</span>
+                        </div>
+                    @endforeach
 
+                </div>
+                <div id="viewCount-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="viewCount-pbtn" class="slider-pbtn swiper-button-prev"></div>
             </div>
-            <div id="viewCount-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="viewCount-pbtn" class="slider-pbtn swiper-button-prev"></div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <section class="product-wrapper container">
-        <div class="headline two-headline">
-            <h3> جدیدترین کالاها</h3> </div>
-        <div id="newpslider" class="swiper-container">
-            <div class="product-box swiper-wrapper">
-                @foreach (\App\Product::orderBy('id', 'desc')->limit(15)->get() as $product)
-                    <div class="product-item swiper-slide">
-                        <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                        <span class="price">{{ $product->price }} تومان</span>
-                    </div>
-                @endforeach
+
+    @if ($shop->jadidtarin)
+        <section class="product-wrapper container">
+            <div class="headline two-headline">
+                <h3> جدیدترین کالاها</h3> </div>
+            <div id="newpslider" class="swiper-container">
+                <div class="product-box swiper-wrapper">
+                    @foreach (\App\Product::orderBy('id', 'desc')->limit(15)->get() as $product)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
+                            <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
+                            <span class="price">{{ $product->price }} تومان</span>
+                        </div>
+                    @endforeach
+                </div>
+                <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="newpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
             </div>
-            <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="newpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
-        </div>
-    </section>
-    <section class="product-wrapper container">
-        <div class="headline">
-            <h3>محصولات پرفروش</h3></div>
-        <div id="mostpslider" class="swiper-container">
-            <div class="product-box swiper-wrapper">
-                @foreach (\App\Product::orderBy('buyCount', 'desc')->limit(15)->get() as $product)
-                    <div class="product-item swiper-slide">
-                        <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                        <span class="price">{{ $product->price }} تومان</span>
-                    </div>
-                @endforeach
+        </section>
+    @endif
 
+    @if ($shop->porforoosh)
+        <section class="product-wrapper container">
+            <div class="headline">
+                <h3>محصولات پرفروش</h3></div>
+            <div id="mostpslider" class="swiper-container">
+                <div class="product-box swiper-wrapper">
+                    @foreach (\App\Product::orderBy('buyCount', 'desc')->limit(15)->get() as $product)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
+                            <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
+                            <span class="price">{{ $product->price }} تومان</span>
+                        </div>
+                    @endforeach
+
+                </div>
+                <div id="mostpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="mostpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
             </div>
-            <div id="mostpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="mostpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <section class="product-wrapper container">
-        <div class="headline">
-            <h3>برندها</h3></div>
-        <div id="brandslider" class="swiper-container">
-            <div class="product-box swiper-wrapper">
+    @if ($shop->brands)
+        <section class="product-wrapper container">
+            <div class="headline">
+                <h3>برندها</h3></div>
+            <div id="brandslider" class="swiper-container">
+                <div class="product-box swiper-wrapper">
 
-            @foreach (\App\Brand::take(10)->get() as $brand)
-                    <div class="product-item swiper-slide">
-                        <a href="{{ route('shop.brand', $brand->id) }}"><img src="{{ asset($brand->icon['original']) }}" alt=""></a>
-                    </div>
+                    @foreach (\App\Brand::take(10)->get() as $brand)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.brand', $brand->id) }}"><img src="{{ asset($brand->icon['original']) }}" alt=""></a>
+                        </div>
 
-                @endforeach
+                    @endforeach
 
 
+                </div>
+                <div id="brandslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="brandslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
             </div>
-            <div id="brandslider-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="brandslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
-        </div>
-    </section>
+        </section>
+    @endif
+
+
+
+
     <div class="jump-to-up"> <i class="fa fa-chevron-up"></i> <span> بازگشت به بالا </span></div>
 @stop

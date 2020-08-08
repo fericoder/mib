@@ -23,6 +23,47 @@
                         <button id="change-sh-address" class="c-checkout-contact__location">تغییر آدرس ارسال</button>
                     </div>
                 </div>
+
+
+
+
+                <div class="o-headline o-headline--checkout"><span>انتخاب روش پرداخت</span></div>
+                <div id="address-section">
+                    <div id="user-default-address-container" class="c-checkout-contact is-completed">
+                        <div class="c-checkout-contact__content">
+                            <ul class="c-checkout-contact__items">
+
+                                @if ($shop->pardakhtBaDargah)
+                                    <div style="margin-bottom: 20px" class="form-check">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <label style="font-size: 18px;" class="form-check-label" for="exampleRadios1">
+                                            درگاه بانک پاسارگاد
+                                        </label>
+                                    </div>
+                                @endif
+
+                                    @if ($shop->pardakhtDarMahal)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                            <label style="font-size: 18px" class="form-check-label" for="exampleRadios2">
+                                                پرداخت در محل
+                                            </label>
+                                        </div>
+                                    @endif
+
+
+
+                            </ul>
+                            <div class="c-checkout-contact__badge"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
                 <form action="#">
                     <div>
                         <div class="o-headline o-headline--checkout"> <span>مرسوله </span></div>
@@ -37,20 +78,24 @@
                                     <div class="c-product-box__title"> دسته بازی بی سیم یوکام کد 8008 </div>
                                 </div>
                             </div>
-                            <div class="c-checkout-pack__row">
-                                <div class="c-checkout-time-table">
-                                    <div class="c-checkout-time-table__title-bar"> بازه تحویل سفارش: ۲ روز کاری</div>
-                                    <ul class="c-checkout-time-table__subtitle-bar">
-                                        <li>شیوه ارسال: پست پیشتاز (بین ۱ تا ۴ روز کاری)</li>
-                                        <li>هزینه ارسال به عهده سفارش دهنده میباشد. </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            {{--<div class="c-checkout-pack__row">--}}
+                                {{--<div class="c-checkout-time-table">--}}
+                                    {{--<div class="c-checkout-time-table__title-bar"> بازه تحویل سفارش: ۲ روز کاری</div>--}}
+                                    {{--<ul class="c-checkout-time-table__subtitle-bar">--}}
+                                        {{--<li>شیوه ارسال: پست پیشتاز (بین ۱ تا ۴ روز کاری)</li>--}}
+                                        {{--<li>هزینه ارسال به عهده سفارش دهنده میباشد. </li>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </form>
                 <div class="c-checkout-shipment__invoice-type">
-                    <p class="c-checkout-shipment__invoice-type-info">شما می‌توانید فاکتور خرید را پس از تحویل سفارش از بخش جزییات سفارش در حساب کاربری خود دریافت کنید.</p>
+                    @if ($shop->checkOutDescription)
+                        <p class="c-checkout-shipment__invoice-type-info">
+                            {!! $shop->checkOutDescription !!}
+                        </p>
+                    @endif
                 </div>
                 <div class="c-checkout__to-shipping-sticky">
                     <a href="payment.html" class="c-checkout__to-shipping-link">ادامه فرایند خرید</a>
