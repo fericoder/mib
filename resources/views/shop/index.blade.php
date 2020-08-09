@@ -32,25 +32,27 @@
     </section>
 
 
-    <section class="product-wrapper container">
-        <div class="headline">
-            <h3>محصولات شگفت انگیز </h3></div>
-        <div id="vpslider" class="swiper-container">
-            <div class="product-box swiper-wrapper">
+    @if ($shop->shegeft)
+        <section class="product-wrapper container">
+            <div class="headline">
+                <h3>محصولات شگفت انگیز </h3></div>
+            <div id="vpslider" class="swiper-container">
+                <div class="product-box swiper-wrapper">
 
-                @foreach (\App\Product::where('shegeftangiz', 'on')->limit(15)->get() as $product)
-                    <div class="product-item swiper-slide">
-                        <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                        <span class="price">{{ $product->price }} تومان</span>
-                    </div>
-                @endforeach
+                    @foreach (\App\Product::where('shegeftangiz', 'on')->limit(15)->get() as $product)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
+                            <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
+                            <span class="price">{{ $product->price }} تومان</span>
+                        </div>
+                    @endforeach
 
+                </div>
+                <div id="vpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="vpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
             </div>
-            <div id="vpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
-            <div id="vpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
-        </div>
-    </section>
+        </section>
+    @endif
 
 
     @if ($shop->porbazdid)

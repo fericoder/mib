@@ -392,7 +392,7 @@
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
-                                                        <input value="{{ old('aparat') }}" value="{{ old('weight', $product->aparat) }}" type="text" class="form-control inputfield" name="aparat" >
+                                                        <input value="{{ old('aparat', $product->aparat) }}" type="text" class="form-control inputfield" name="aparat" >
                                                     </div>
 
                                                     <div class="input-group mt-3">
