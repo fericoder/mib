@@ -434,6 +434,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
+    
     <script>
         $(document).ready(function() {
 

@@ -1,10 +1,14 @@
 @extends('shop.layouts.master', ['title' => 'سبد خرید' ])
 
 @section('content')
-
+<style>
+    .flex-1{
+        flex: 1!important;
+    }
+</style>
 
     <section class="main-cart container">
-        <div class="o-page__content">
+        <div class="o-page__content {{ $cart == null ? 'flex-1' : '' }}">
             <div class="o-headline">
                 <div id="main-cart"><span class="c-checkout-text c-checkout__tab--active">سبد خرید</span></div>
             </div>
@@ -12,14 +16,15 @@
 
                 <ul class="c-checkout__items">
                     <li class="c-checkout__item">
+                        @if($cart)
 
-                        @foreach ($products as $product)
-                            <div class="c-checkout__row">
+                        @foreach ($cart->cartProduct as $cartProduct)
+                        <div class="c-checkout__row">
                                 <div class="c-checkout__col--thumb">
-                                    <a href="{{ route('shop.product', $product->id ) }}"><img src="{{ asset($product->image['original']) }}" alt=""></a>
+                                    <a href="{{ route('shop.product', $cartProduct->product->id ) }}"><img src="{{ asset($cartProduct->product->image['original']) }}" alt=""></a>
                                 </div>
                                 <div class="c-checkout__col--desc">
-                                    <a href="{{ route('shop.product', $product->id ) }}">{{ $product->title }}</a>
+                                    <a href="{{ route('shop.product', $cartProduct->product->id ) }}">{{ $cartProduct->product->title }}</a>
                                     <div class="c-checkout__variant c-checkout__variant--color"></div>
                                     <div class="c-checkout__col--information">
                                         <div class="c-checkout__col c-checkout__col--counter">
@@ -27,33 +32,58 @@
                                                 <div class="c-quantity-selector">
                                                     <button type="button" class="c-quantity-selector__add"><i class="fa fa-plus"></i></button>
                                                     <div class="c-quantity-selector__number">۱</div>
-                                                    <button type="button" class="c-quantity-selector__remove"><i class="fa fa-trash"></i></button>
+                                                    <button id="removeProduct" data-cart="{{ \Auth::user()->cart()->get()->first()->id }}" data-id="{{ $cartProduct->product->id }}" data-cartp="{{ $cartProduct->id }}" type="button" class="c-quantity-selector__remove"><i class="fa fa-trash"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="c-checkout__col c-checkout__col--price">
-                                            <div class="c-checkout__price"> {{ number_format($product->price) }} تومان</div>
+                                            <div class="c-checkout__price"> {{ number_format($cartProduct->product->price) }} تومان</div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         @endforeach
+                        @else
+                        <div class="c-checkout__row" style="font-size: 30px;
+                        display: flex;
+                        justify-content: center;
+                        padding: 100px;
+                        color: #EF394E;">
+                            محصولی در سبد خرید شما وجود ندارد
+
+                            <div class="c-checkout__col--desc">
+
+                            </div>
+
+                        </div>
+                        @endif
 
 
 
                     </li><!--cart-item-->
                 </ul>
                 <div class="c-checkout__to-shipping-sticky">
+                    @if($cart)
                     <a href="{{ route('checkout.index') }}" class="c-checkout__to-shipping-link">ادامه فرایند خرید</a>
+                    @else
+                    <a href="{{ route('shop.index') }}" class="c-checkout__to-shipping-link btn-cart">صفحه اصلی</a>
+                    @endif
+
                     <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
-                        <div class="c-checkout__to-shipping-price-report--price">{{ number_format($products->sum('price')) }} <span>تومان</span></div>
+                        @if($cart)
+                        <div class="c-checkout__to-shipping-price-report--price">{{ number_format($cartProduct->total_price) }} <span>تومان</span></div>
+                       @else
+                        <div class="c-checkout__to-shipping-price-report--price"> 0 <span>تومان</span></div>
+                        @endif
 
                     </div>
                 </div>
             </div>
         </div>
+        @if($cart)
+
         <aside class="o-page__aside">
             <div class="c-checkout-aside">
                 <div class="c-checkout-summary">
@@ -62,7 +92,8 @@
                         <!--incredible-->
                         <li class="has-devider">
                             <span>قیمت کالاها</span>
-                            <span> {{ number_format($products->sum('price')) }} تومان </span>
+                            <span> {{ number_format($cartProduct->total_price) }} تومان </span>
+
                         </li>
                         <li>
                             <span>هزینه ارسال</span>
@@ -74,8 +105,8 @@
                         </li>
                         <li class="has-devider">
                             <span> مبلغ قابل پرداخت </span>
-                            <span> {{ number_format($products->sum('price')) }} تومان </span>
-                        </li>
+                            <span> {{ number_format($cartProduct->total_price) }} تومان </span>
+                                </li>
 
                     </ul>
                     <div class="c-checkout-summary__main">
@@ -87,7 +118,47 @@
 
             </div>
         </aside>
+        @endif
+
     </section>
+    @stop
+
+    @section('footerScripts')
+    <script>
+        $(document).on('click', '#removeProduct', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var cart = $(this).data('cart');
+            var cartProductId = $(this).data('cartp');
+              swal({
+                    title: "آیا مطمئن هستید؟",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "بله",
+                    cancelButtonText: "خیر",
+                    showCancelButton: true,
+                },
+                    function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "user-cart/remove",
+                            data: {
+                                id: id,
+                                cart: cart,
+                                cartProductId: cartProductId,
+                                "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
+                            },
+                            success: function (data) {
+                                var url = document.location.origin + "/user-cart";
+                                location.href = url;
+                            }
+                        });
+                    });
+            });
+
+    </script>
+    @endsection
 
 
-@stop
+
+

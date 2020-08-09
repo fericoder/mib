@@ -271,6 +271,7 @@
 <script src="{{ asset('assets/vendor/elevatezoom.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script src="/assets/plugins/global/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+
 @include('sweet::alert')
 
 

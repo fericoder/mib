@@ -16,8 +16,8 @@ Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('sh
 
 // Cart
 Route::get('/user-cart', 'CartController@show')->name('user-cart')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);
-Route::post('/user-cart/{userID}/add', 'CartController@addToCart')->name('user-cart.add')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}', 'userID' => '[0-9]+']);
-Route::post('/{shop}/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);
+Route::post('/user-cart/{userID}/add', 'CartController@addToCart')->name('user-cart.add')->where(['userID' => '[0-9]+']);
+Route::post('/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove');
 
 Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
