@@ -459,12 +459,17 @@
                 previous.push(this.value);
                 e.preventDefault();
                 var item_id = e.params.data.id;
+                var select = $("select");
+                var valArray = [];
+                select.each(function(index){
+                  valArray.push($(this).val());
+                });
                 var product_id = $("option:selected").data('product');
                 $.ajax({
                     type: "post",
                     url: window.location.origin +'/product/get-items',
                     data: {
-                        item_id: item_id,
+                        item_id: valArray,
                         product_id: product_id,
                         "_token": $('#csrf-token')[0].content //pass the CSRF_TOKEN()
                     },

@@ -117,9 +117,18 @@ class ShopController extends Controller
 
     public function getRelatedItems(Request $request){
 
-        $product = Product::where('id', $request->product_id)->first();
+        $item_ids = [];
+        if($request->item_id != null){
+            foreach($request->item_id as $item_id){
+                if($item_id != null){
+                    $item_ids[] = $item_id;
+                }
+            }
+        }
 
-        if ($request->item_id == null) {
+        $product = Product::where('id', $request->product_id)->first();
+        if ($item_ids == null) {
+
         $items = collect();
         $itemIds = collect();
         foreach($product->groups as $group){
@@ -142,18 +151,17 @@ class ShopController extends Controller
         return response()->json($arrayJson);
         } else {
             $request->validate([
-            'item_id' => 'required|numeric|min:1|max:10000000000|regex:/^[0-9]+$/u',
+            'item_id' => 'required',
       ]);
 
-
-            $userSelectedId = $request->item_id;
+            $userSelectedId =  $item_ids;
             $productGroups = $product->groups;
             $items = collect();
             $itemIds = collect();
 
             foreach ($productGroups as $group) {
                 //check if selected item is in items
-                if ((!empty(array_intersect($group->specification_items, [$userSelectedId])))) {
+                if(count(array_intersect($userSelectedId, $group->specification_items)) == count($userSelectedId)){
                     foreach ($group->specification_items as $item) {
                         $specificationItem = SpecificationItem::where('id', $item)->get()->first();
                         if (!$items->contains($specificationItem)) {
