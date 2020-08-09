@@ -131,13 +131,13 @@
                             <div style="margin-top: 20px;">
                                     @if ($product->userPrice === 'on')
                                         @auth()
-                                         <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
+                                         <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
                                     @endauth
                                     @else
-                                           <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}</div>
+                                           <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
                                     @endif
                                 @auth()
-                                    <button style="margin: 65px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
+                                    <button style="margin: 65px;    width: 180px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
                                 @endauth
                             </div>
                         </form>
@@ -145,7 +145,7 @@
 
                 @guest
                         <a href="{{ route('register') }}">
-                            <button style="margin: 30px" type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> برای خرید ابتدا ثبت نام کنید </button>
+                            <button style="margin: 65px; width: 189px" type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> ابتدا ثبت نام کنید </button>
                         </a>
                     @endguest
                 </div>
@@ -159,7 +159,7 @@
             </aside>
         </section>
 
-        <div class="col-lg-6"><img src="{{ asset($product->image['400,400'] ? $product->image['400,400'] : '/images/no-image.png') }}" alt="" class="col-8 d-block img-thumbnail" style="max-height: 40em;">
+        <div class="col-lg-6"><img src="{{ asset($product->image['400,400'] ? $product->image['400,400'] : '/images/no-image.png') }}" alt="" class="col-8 d-block img-thumbnail" style="max-height: 37em;">
             <div class="gallery mt-4 mr-4">
                 @foreach ($galleries as $gallery)
                     <a href="/{{ $gallery->filename }}"><img width="100px" class="img-thumbnail" src="/{{ $gallery->filename }}" alt="" title="" /></a>
