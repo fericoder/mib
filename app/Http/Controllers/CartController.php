@@ -14,6 +14,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Session;
 use Request as RequestFacade;
 use App\SpecificationItem;
+use App\SpecificationItemGroup;
 
 class CartController extends \App\Http\Controllers\Controller {
 
@@ -92,6 +93,10 @@ class CartController extends \App\Http\Controllers\Controller {
     public function addToCart($userID, CartRequest $request) {
 
         $product = Product::where('id', $request->product_id)->get()->first();
+        $group = SpecificationItemGroup::where('product_id', $product->id)->where('specification_items', json_encode($request->specification))->get()->first();
+        if($group == null){
+            return redirect()->back()->withErrors(['محصولی با این خصوصیات وجود ندارد']);
+        }
         if($product->type == 'product' && $product->amount != null and $product->amount < 0){
             return redirect()->back()->withErrors(['کالای مورد نظر موجود نمیباشد']);
         }
@@ -114,63 +119,38 @@ class CartController extends \App\Http\Controllers\Controller {
                 }
             }
         }
-        if($product->specification_amount_status == 'enable'){
-            foreach($product->specifications as $specificationSingleOrg){
-                foreach($request->specification as $specificationRequest){
-                    foreach($specificationSingleOrg->items->where('id', $specificationRequest) as $singleItem){
-                        if($singleItem->productSpecificationItems->where('product_id', $product->id)->first()->amount <= 0)
-                            return redirect()->back()->withErrors(['کالای مورد نظر با خصوصیت انتخابی موجود نمیباشد.']);
-                    }
-                }
-            }
-        }
+        // if($product->specification_amount_status == 'enable'){
+        //     foreach($product->specifications as $specificationSingleOrg){
+        //         foreach($request->specification as $specificationRequest){
+        //             foreach($specificationSingleOrg->items->where('id', $specificationRequest) as $singleItem){
+        //                 if($singleItem->productSpecificationItems->where('product_id', $product->id)->first()->amount <= 0)
+        //                     return redirect()->back()->withErrors(['کالای مورد نظر با خصوصیت انتخابی موجود نمیباشد.']);
+        //             }
+        //         }
+        //     }
+        // }
         if (\Auth::user()->cart()->count() == 0) {
             $cart = new Cart;
             $cart->user_id = \Auth::user()->id;
             $cart->status = 0;
             $cart->save();
         }
-        if($request->specification != null){
-            $specificationOrg = json_encode($request->specification);
-        }else{
-            $specificationOrg = null;
-        }
-        $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('color_id', '=', $request->color)->where('specification', '=', $specificationOrg)->where('deleted_at', null)->first();
+        // if($request->specification != null){
+        //     $specificationOrg = json_encode($request->specification);
+        // }else{
+        //     $specificationOrg = null;
+        // }
+        $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('group_id', '=', $group->id)->where('deleted_at', null)->first();
         $userCartShopID = \Auth::user()->cart()->get()->first()->shop_id;
-        if($product->off_price != null and $product->off_price_started_at < now() and $product->off_price_expired_at > now()){
-
-            $productPrice = $product->off_price;
-        }else{
             $productPrice = $product->price;
-        }
         if($request->quantity == null){
             $request->merge(['quantity' => 1]);
         }
-        if(!isset($request->specification)){
-            $specification = null;
-        }
-        else{
-            $specification = json_encode($request->specification);
-        }
-        $specificationPrice = 0;
-        if($request->specification != null){
-            foreach($request->specification as $specificationItem){
-                $specificationItem = SpecificationItem::find($specificationItem);
-                $specificationPrice += $specificationItem->price;
-            }
-        }
+
         if (is_null($cartProduct)) {
-            if (\Auth::user()->cart()->count() != 0) {
-                foreach(\Auth::user()->cart()->get()->first()->products()->get() as $singleCartProduct){
-                    if($singleCartProduct->type != $product->type ){
-                        toastr()->error('نوع کالا های سبد خرید باید یکسان باشند', '');
-                        return redirect()->back();
-                    }
-                }
-            }
-            DB::transaction(function () use ($request, $specification, $specificationPrice, $productPrice) {
+            DB::transaction(function () use ($request, $productPrice, $group) {
                 DB::table('cart_product')->insert([
-                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'color_id' => $request->color, 'total_price' => $productPrice, 'specification' => $specification, 'specification_price' => $specificationPrice]
+                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'group_id' => $group->id, 'total_price' => $productPrice]
                     , ]);
 
                 $total_price = 0;

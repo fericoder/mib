@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Checkout;
 use App\Category;
 use App\Shop;
+use App\Http\Requests\CheckOutRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Cart;
@@ -42,7 +43,7 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheckOutRequest $request)
     {
       $cart = \Auth::user()->cart()->get()->first();
       $total_price = \Auth::user()->cart()->get()->first()->total_price;
@@ -50,9 +51,9 @@ class CheckoutController extends Controller
       $purchase->cart_id = $cart->id;
       $purchase->user_id = \Auth::user()->id;
       $purchase->date = \Morilog\Jalali\Jalalian::forge('today')->format('%Y/%m/%d');
-      $purchase->address_id = $request->payment_method;
+      $purchase->address_id = $request->address;
       $purchase->shipping = 'post';
-      $purchase->payment_method = 'online_payment';
+      $purchase->payment_method = $request->payment_method;
       $purchase->shipping_price = 0;
       $purchase->total_price = $total_price;
       $purchase->save();

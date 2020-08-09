@@ -97,7 +97,7 @@
 
 
                     @auth
-                        <form action="{{ route('user-cart.add', ['shop'=> 'keyvan', 'userID'=> \Auth::user()->id]) }}" method="post">
+                        <form action="{{ route('user-cart.add', ['userID'=> \Auth::user()->id]) }}" method="post">
                     @endauth
                             @csrf
 

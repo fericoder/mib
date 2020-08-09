@@ -20,7 +20,7 @@ Route::post('/user-cart/{userID}/add', 'CartController@addToCart')->name('user-c
 Route::post('/{shop}/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove')->where(['shop' => '[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+){0,2}']);
 
 Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
-Route::get('checkout/store', 'CheckoutController@store')->name('checkout.store');
+Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
 
 
 

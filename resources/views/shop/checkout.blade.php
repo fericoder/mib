@@ -5,15 +5,17 @@
     <main class="main-cart container">
         <div class="o-page__content">
             <div id="shipping-data">
+                <form action="{{ route('checkout.store') }}" method="post" id="purchase">
+                    @csrf
                 <div class="o-headline o-headline--checkout"><span>انتخاب آدرس تحویل سفارش</span></div>
-                @foreach (auth()->user()->addresses as $address)
+                @forelse (auth()->user()->addresses as $address)
                   <div class="d-flex" style="align-items: center;">
-                    <input type="radio" class="option-input radio m-2" name="address" {{  $loop->first == true ? 'checked' : '' }} />
+                    <input type="radio" class="option-input radio m-2" value="{{ $address->id }}" name="address" {{  $loop->first == true ? 'checked' : '' }} />
                 <div id="address-section" class="w-100">
                     <div id="user-default-address-container" class="c-checkout-contact is-completed">
                         <div class="c-checkout-contact__content">
                             <ul class="c-checkout-contact__items">
-                                <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : {{ auth()->user()->fName .' '. auth()->user()->lName }}</span>
+                                <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : {{ $address->fullName }}</span>
                                     {{-- <button class="c-checkout-contact__btn-edit">اصلاح این آدرس</button> --}}
                                 </li>
                                 <li class="c-checkout-contact__item c-checkout-contact__item--location">
@@ -30,8 +32,11 @@
                     </div>
                 </div>
               </div>
-
-              @endforeach
+              @empty
+              <div class="c-checkout__actions">
+                <a href="{{ route('profile.addressesShow') }}"><button class="btn-link-spoiler" type="button">« افزودن آدرس </button></a>
+            </div>
+                @endforelse
 
 
 
@@ -45,7 +50,7 @@
 
                                 @if ($shop->pardakhtBaDargah)
                                     <div style="margin-bottom: 20px" class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                        <input class="form-check-input" type="radio" name="payment_method" id="exampleRadios1" value="online_payment" checked>
                                         <label style="font-size: 18px;" class="form-check-label" for="exampleRadios1">
                                             درگاه بانک پاسارگاد
                                         </label>
@@ -54,7 +59,7 @@
 
                                     @if ($shop->pardakhtDarMahal)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                            <input class="form-check-input" type="radio" name="payment_method" id="exampleRadios2" value="cash_payment">
                                             <label style="font-size: 18px" class="form-check-label" for="exampleRadios2">
                                                 پرداخت در محل
                                             </label>
@@ -74,7 +79,6 @@
 
 
 
-                <form action="#">
                     <div>
                         <div class="o-headline o-headline--checkout"> <span>مرسوله </span></div>
                         <div class="c-checkout-pack">
@@ -97,7 +101,6 @@
                             {{--</div>--}}
                         </div>
                     </div>
-                </form>
                 <div class="c-checkout-shipment__invoice-type">
                     @if ($shop->checkOutDescription)
                         <p class="c-checkout-shipment__invoice-type-info">
@@ -106,12 +109,13 @@
                     @endif
                 </div>
                 <div class="c-checkout__to-shipping-sticky">
-                    <a href="{{ route('checkout.store') }}" class="c-checkout__to-shipping-link">ثبت نهایی سفارش</a>
+                    <a href="javascript:$('#purchase').submit();" class="c-checkout__to-shipping-link">ثبت نهایی سفارش</a>
                     <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
                         <div class="c-checkout__to-shipping-price-report--price">۱۹۶,۷۰۰ <span>تومان</span></div>
                     </div>
                 </div>
+            </form>
             </div>
             <div class="c-checkout__actions">
                 <button class="btn-link-spoiler">« بازگشت به سبد خرید </button>
@@ -154,7 +158,7 @@
             </div>
         </aside>
     </main>
-    <div class="modal-checkout container" id="address-modal">
+    {{-- <div class="modal-checkout container" id="address-modal">
         <div class="container">
             <div class="c-form-checkout__headline">افزودن آدرس جدید</div>
             <form>
@@ -198,7 +202,7 @@
             </form>
         </div>
         <button class="close-modal"><i class="fa fa-plus"></i></button>
-    </div>
+    </div> --}}
 
 
 @stop

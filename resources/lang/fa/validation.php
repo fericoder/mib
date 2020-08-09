@@ -255,6 +255,7 @@ return array(
         'specification_amount' => 'محاسبه موجودی بر اساس خصوصیت',
         'on' => 'فعال',
         'color_amount' => 'موجودی رنگ',
+        'shortDescription' => 'خلاصه توضیحات',
 
           ),
 );
