@@ -195,8 +195,8 @@
             <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
-                        <a href="{{ route('shop.product', $product->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}">{{ $Relatedproduct->title }}</a>
+                        <a href="{{ route('shop.product', $Relatedproduct->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.product', $Relatedproduct->id) }}">{{ $Relatedproduct->title }}</a>
                         <span class="price">{{ number_format($Relatedproduct->price) }} تومان</span>
                     </div>
                 @endforeach
@@ -434,7 +434,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
-    
+
     <script>
         $(document).ready(function() {
 
