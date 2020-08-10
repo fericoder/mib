@@ -9,6 +9,7 @@ use App\Shop;
 use App\Specification;
 use App\SpecificationItem;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ShopController extends Controller
 {
@@ -83,7 +84,11 @@ class ShopController extends Controller
         $categoryChildrenChildren = $category->categoryChildren;
         $subCategories = $this->getAllSubCategories($category->id)->where('parent_id', $category->id);
         $products = $this->getAllCategoriesProducts((int)$category->id);
-        return view('shop.category', compact('category', 'categories', 'products'));
+        $total = $products->count();
+        $perPage = 16; // How many items do you want to display.
+        $currentPage = request()->page; // The index page.
+        $productsPaginate = new LengthAwarePaginator($products->forPage($currentPage, $perPage), $total, $perPage, $currentPage);
+        return view('shop.category', compact('category', 'categories', 'products', 'productsPaginate'));
     }
 
     public function brand(Request $request)
@@ -91,13 +96,16 @@ class ShopController extends Controller
         $categories = Category::all();
         $brand = Brand::where('id', $request->id)->first();
         $products = $brand->products->where('status', 'enable');
-        return view('shop.brand', compact('brand', 'categories', 'products'));
+        $total = $products->count();
+        $perPage = 16; // How many items do you want to display.
+        $currentPage = request()->page; // The index page.
+        $productsPaginate = new LengthAwarePaginator($products->forPage($currentPage, $perPage), $total, $perPage, $currentPage);
+        return view('shop.brand', compact('brand', 'categories', 'products', 'productsPaginate'));
     }
 
 
     public function search(Request $request)
     {
-
         $sortBy = 'id';
         $orderBy = 'desc';
         $perPage = 20;

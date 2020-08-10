@@ -47,7 +47,7 @@
                         </ul>
                     </div>
                     <ul class="c-listing__items">
-                        @foreach ($products as $product)
+                        @foreach ($productsPaginate as $product)
                             <li>
                                 <div class="c-product-box c-promotion-box ">
                                     <a href="{{ route('shop.product', $product->id) }}" class="c-product-box__img c-promotion-box__image"><img src="{{ asset($product->image['original']) }}" alt=""></a>
@@ -74,13 +74,8 @@
 
                     </ul>
                     <div class="c-pager">
-                        <ul class="c-pager__items">
-                            <li><a class="c-pager__item is-active" href="#">1</a></li>
-                            <li><a class="c-pager__item" href="#">2</a></li>
-                            <li><a class="c-pager__item" href="#">3</a></li>
-                            <li><a class="c-pager__item" href="#">4</a></li>
-                            <li><a class="c-pager__item" href="#">>></a></li>
-                        </ul>
+                        {!! $productsPaginate->render() !!}
+
                     </div>
                 </div>
             </article>

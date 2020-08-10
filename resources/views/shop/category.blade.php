@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                     <ul class="c-listing__items">
-                        @foreach ($products as $product)
+                        @foreach ($productsPaginate as $product)
                             <li>
                                 <div class="c-product-box c-promotion-box ">
                                     <a href="{{ route('shop.product', $product->id) }}" class="c-product-box__img c-promotion-box__image"><img src="{{ asset($product->image['original']) }}" alt=""></a>
@@ -71,7 +71,7 @@
 
                     </ul>
                     <div class="c-pager">
-{{--                        {{ $products->links() }}--}}
+                            {!! $productsPaginate->render() !!}
                     </div>
                 </div>
             </article>
