@@ -18,8 +18,16 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        foreach($request->all() as $cartProductId => $quantity){
+
+            $cartProductUpdate = \Auth::user()->cart()->get()->first()->cartProduct()->where('id', $cartProductId)->update([
+                'quantity' => $quantity,
+            ]);
+
+        }
         $categories = Category::all();
         $cart = \Auth::user()->cart()->get()->first();
         $user = \Auth::user();

@@ -589,6 +589,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'App\\Http\\Requests\\CartRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CartRequest.php',
         'App\\Http\\Requests\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryRequest.php',
         'App\\Http\\Requests\\ChangePasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ChangePasswordRequest.php',
+        'App\\Http\\Requests\\CheckOutRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CheckOutRequest.php',
         'App\\Http\\Requests\\InformationRequest' => __DIR__ . '/../..' . '/app/Http/Requests/InformationRequest.php',
         'App\\Http\\Requests\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductRequest.php',
         'App\\Http\\Requests\\ProductUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductUpdateRequest.php',

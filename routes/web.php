@@ -19,7 +19,7 @@ Route::get('/user-cart', 'CartController@show')->name('user-cart')->where(['shop
 Route::post('/user-cart/{userID}/add', 'CartController@addToCart')->name('user-cart.add')->where(['userID' => '[0-9]+']);
 Route::post('/user-cart/remove', 'CartController@removeFromCart')->name('user-cart.remove');
 
-Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
+Route::match(['GET','POST'],'checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
 
 

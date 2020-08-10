@@ -68,6 +68,7 @@ return array(
     'App\\Http\\Requests\\CartRequest' => $baseDir . '/app/Http/Requests/CartRequest.php',
     'App\\Http\\Requests\\CategoryRequest' => $baseDir . '/app/Http/Requests/CategoryRequest.php',
     'App\\Http\\Requests\\ChangePasswordRequest' => $baseDir . '/app/Http/Requests/ChangePasswordRequest.php',
+    'App\\Http\\Requests\\CheckOutRequest' => $baseDir . '/app/Http/Requests/CheckOutRequest.php',
     'App\\Http\\Requests\\InformationRequest' => $baseDir . '/app/Http/Requests/InformationRequest.php',
     'App\\Http\\Requests\\ProductRequest' => $baseDir . '/app/Http/Requests/ProductRequest.php',
     'App\\Http\\Requests\\ProductUpdateRequest' => $baseDir . '/app/Http/Requests/ProductUpdateRequest.php',
