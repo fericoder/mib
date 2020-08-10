@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\UserPurchase;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -28,13 +30,14 @@ class ApiController extends Controller
         if ($request->token !== 'cAxNzPS33wbX1pjbVEg1'){
             abort(403, 'Unauthorized Action');
         }
-        if (!is_numeric($request->$this->fa_num_to_en(user_id))){
+        if (!is_numeric($request->user_id)){
             abort(403, 'Invalid User');
         }
         if (!\DB::table('users')->where('crm_id', $this->fa_num_to_en($request->user_id))->first()){
             abort(403, 'Invalid User');
         }
-        $purchases = \DB::table('user_purchases')->where('user_id', \DB::table('users')->where('crm_id', $this->fa_num_to_en($request->user_id))->first()->id)->get();
+        $id = User::where('crm_id', $this->fa_num_to_en($request->user_id))->first()->id;
+        $purchases = UserPurchase::with('cart.products')->where('user_id', $id)->withTrashed()->get();
         return response()->json($purchases);
 
     }

@@ -27,7 +27,6 @@
             <div class="o-headline o-headline--profile"><span>آخرین سفارش‌ها </span></div>
             <div class="c-table-orders">
                 <div class="c-table-orders__head--highlighted">
-                    <div>#</div>
                     <div>شماره سفارش</div>
                     <div>تاریخ</div>
                     <div>مبلغ کل</div>
@@ -38,11 +37,10 @@
 
                     @foreach ($user->purchases as $order)
                         <div class="table-row">
-                            <div>{{ $loop->iteration }}</div>
-                            <div>{{ $order->id }}</div>
+                            <div>{{ 'MIB-' . $order->id }}</div>
                             <div>{{ jdate($order->created_at) }}</div>
-                            <div>{{ number_format($order->price) }} تومان</div>
-                            <div><span class="c-table-orders__payment-status--ok">پرداخت موفق</span></div>
+                            <div>{{ number_format($order->total_price) }} تومان</div>
+                            <div><span class="c-table-orders__payment-status--ok">{{ $order->status }}</span></div>
                             <div><a href="#"><i class="fa fa-chevron-left"></i></a></div>
                         </div>
                     @endforeach

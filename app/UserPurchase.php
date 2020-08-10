@@ -14,7 +14,7 @@ class UserPurchase extends Model
     protected $guarded = ['id'];
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Product')->withTrashed();
     }
     public function shop()
     {
@@ -22,7 +22,7 @@ class UserPurchase extends Model
     }
     public function cart()
     {
-        return $this->belongsTo('App\Cart');
+        return $this->belongsTo('App\Cart')->withTrashed();
     }
     public function user()
     {

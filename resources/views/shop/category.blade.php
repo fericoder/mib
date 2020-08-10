@@ -14,16 +14,16 @@
                         </form>
                     </div>
                 </div>
-                <div class="c-box">
-                    <div class="c-filter c-filter--switcher">
-                        <span>فقط کالاهای موجود</span>
-                        <div class="scroll">
-                            <span id="circle">
-                                <input id="circle_input" type="checkbox">
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                {{--<div class="c-box">--}}
+                    {{--<div class="c-filter c-filter--switcher">--}}
+                        {{--<span>فقط کالاهای موجود</span>--}}
+                        {{--<div class="scroll">--}}
+                            {{--<span id="circle">--}}
+                                {{--<input id="circle_input" type="checkbox">--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
             </div>
         </div>
@@ -54,7 +54,13 @@
                                     <a href="{{ route('shop.product', $product->id) }}" class="c-product-box__img c-promotion-box__image"><img src="{{ asset($product->image['original']) }}" alt=""></a>
                                     <div class="c-product-box__content">
                                         <a href="{{ route('shop.product', $product->id) }}" class="title">{{ $product->title }}</a>
-                                        <span class="price">{{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }} </span>
+                                        <span class="price">
+                                            @auth()
+                                                @if (\Auth::user()->status === 'enable')
+                                                    {{ $product->status == 'enable' ? number_format($product->price) . 'تومان' : 'ناموجود' }}
+                                                @endif
+                                            @endauth
+                                                </span>
                                     </div>
                                     <div style="display: none" class="c-product-box__tags">
                                         <span class="c-tag c-tag--rate">۳.۹</span>

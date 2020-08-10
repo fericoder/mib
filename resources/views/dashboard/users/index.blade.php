@@ -33,7 +33,111 @@
 
 
 
+    <div class="modal fade bd-example-modal-xl " id="AddCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">افزودن مشتری جدید </h5>
+                    <button type="button" class="close rounded" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-scroll" style="background-color:#fbfcfd">
+                    <form action="{{ route('users.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        @csrf
 
+                        <div class="form-group mb-0 col-12">
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نام :</span></div>
+                                <input type="text" class="form-control inputfield" name="fName" value="{{ old('fName') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نام خانوادگی :</span></div>
+                                <input type="text" class="form-control inputfield" name="lName" value="{{ old('lName') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موبایل :</span></div>
+                                <input type="text" class="form-control inputfield" name="mobile" value="{{ old('mobile') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">وضعیت :</span></div>
+                                <select class="form-control" name="status" id="">
+                                    <option value="enable">تایید شده</option>
+                                    <option value="disable">تایید نشده</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">ایمیل :</span></div>
+                                <input type="text" class="form-control inputfield" name="email" value="{{ old('email') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کد CRM :</span></div>
+                                <input type="text" class="form-control inputfield" name="crm_id" value="{{ old('crm_id') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شماره نظام پزشکی :</span></div>
+                                <input type="text" class="form-control inputfield" name="pezeshkiNo" value="{{ old('pezeshkiNo') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">معرف :</span></div>
+                                <input type="text" class="form-control inputfield" name="moarref" value="{{ old('moarref') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شغل :</span></div>
+                                <input type="text" class="form-control inputfield" name="job" value="{{ old('job') }}">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رمز عبور :</span></div>
+                                <input type="password" class="form-control inputfield" name="password" value="">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر کارت ملی :</span></div>
+                                <input type="file" id="input-file-now" name="meliPic" class="dropify form-control">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر گواهی نظام پزشکی :</span></div>
+                                <input type="file" id="input-file-now" name="nezamPic" class="dropify form-control">
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر جواز :</span></div>
+                                <input type="file" id="input-file-now" name="javazPic" class="dropify form-control">
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger rounded" data-dismiss="modal">انصراف
+                    </button>
+                    <div class="group">
+                        <button type="submit" name="action" value="justSave" class="btn btn-primary rounded">ثبت درخواست
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
 
 
     <!-- begin:: Content Head -->
@@ -76,6 +180,7 @@
                             <h3 class="kt-portlet__head-title">
                                 لیست مشتریان
                             </h3>
+                            <button data-toggle="modal" data-target="#AddCustomerModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن مشتری جدید</button>
 
                         </div>
 
@@ -135,11 +240,10 @@
                                 <th title="Field #1" data-field="1">شناسه</th>
                                 <th title="Field #1" data-field="1">نام</th>
                                 <th title="Field #2" data-field="2">نام خانوادگی</th>
-                                <th title="Field #5" data-field="5">ایمیل</th>
                                 <th title="Field #5" data-field="5">شماره موبایل</th>
-                                <th title="Field #5" data-field="5">شماره نظام پزشکی</th>
+                                <th title="Field #5" data-field="5">وضعیت</th>
                                 <th title="Field #5" data-field="5"> تاریخ عضویت</th>
-                                {{--<th title="Field #6" data-field="6">تغییرات</th>--}}
+                                <th title="Field #6" data-field="6">تغییرات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,14 +253,13 @@
                                     <td style="font-family: BYekan" >{{ $user->id }}</td>
                                     <td style="font-family: BYekan" >{{ $user->fName }}</td>
                                     <td style="font-family: BYekan" >{{ $user->lName }}</td>
-                                    <td style="font-family: BYekan" >{{ $user->email }}</td>
                                     <td style="font-family: BYekan" >{{ $user->mobile }}</td>
-                                    <td style="font-family: BYekan" >{{ $user->pezeshkiNo }}</td>
-                                    <td style="font-family: BYekan" >{{ jdate($user->created_at) }}</td>
-                                    {{--<td>--}}
-                                        {{--<a style="margin: 5px;" href="{{ route('users.edit', $user->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>--}}
+                                    <td style="font-family: BYekan" >{{ $user->status == 'enable' ? 'تایید شده' : 'تایید نشده' }}</td>
+                                    <td style="font-family: BYekan!important; direction: ltr" >{{ jdate($user->created_at) }}</td>
+                                    <td>
+                                        <a style="margin: 5px;" href="{{ route('users.edit', $user->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
                                         {{--<a style="margin: 5px;" href="" id="remove" title="حذف" data-name="{{ $user->name }}" data-id="{{ $user->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>--}}
-                                    {{--</td>--}}
+                                    </td>
 
                                 </tr>
                             @endforeach

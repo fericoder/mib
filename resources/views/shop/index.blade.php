@@ -5,7 +5,7 @@
         <!--<div class="main-slider">
             <a class="slide-item" href="#" target="_blank" style="background-image: url(assets/images/slider/slide9.jpg)"> </a>
         </div>-->
-        <div style="max-height: 450px!important;" id="mainslider" class="main-slider swiper-container">
+        <div style="max-height: 42em!important;" id="mainslider" class="main-slider swiper-container">
             <div class="swiper-wrapper">
                 <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide6.jpg)"> </a>
                 <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide7.jpg)"> </a>
@@ -43,7 +43,13 @@
                         <div class="product-item swiper-slide">
                             <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
                             <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                            <span class="price">{{ $product->price }} تومان</span>
+                            <span class="price">
+                                @auth()
+                                    @if (\Auth::user()->status === 'enable')
+                                        {{ $product->price }} تومان
+                                    @endif
+                                @endauth
+                            </span>
                         </div>
                     @endforeach
 
@@ -66,8 +72,13 @@
                         <div class="product-item swiper-slide">
                             <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
                             <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                            <span class="price">{{ $product->price }} تومان</span>
-                        </div>
+                            <span class="price">
+                                @auth()
+                                    @if (\Auth::user()->status === 'enable')
+                                        {{ $product->price }} تومان
+                                    @endif
+                                @endauth
+                            </span>                        </div>
                     @endforeach
 
                 </div>
@@ -88,8 +99,13 @@
                         <div class="product-item swiper-slide">
                             <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
                             <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                            <span class="price">{{ $product->price }} تومان</span>
-                        </div>
+                            <span class="price">
+                                @auth()
+                                    @if (\Auth::user()->status === 'enable')
+                                        {{ $product->price }} تومان
+                                    @endif
+                                @endauth
+                            </span>                        </div>
                     @endforeach
                 </div>
                 <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
@@ -108,7 +124,13 @@
                         <div class="product-item swiper-slide">
                             <a href="{{ route('shop.product', $product->id) }}"><img  src="{{ asset($product->image['original']) }}" alt=""></a>
                             <a class="title" href="{{ route('shop.product', $product->id) }}"> {{ $product->title }} </a>
-                            <span class="price">{{ $product->price }} تومان</span>
+                            <span class="price">
+                                @auth()
+                                    @if (\Auth::user()->status === 'enable')
+                                        {{ $product->price }} تومان
+                                    @endif
+                                @endauth
+                            </span>
                         </div>
                     @endforeach
 

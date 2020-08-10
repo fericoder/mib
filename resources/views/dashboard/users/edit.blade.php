@@ -87,7 +87,7 @@
 
                     <div class="kt-portlet__body">
                         <!--begin: Datatable -->
-                        <form method="post" action="{{ route('categories.update', ['category' => $category, 'id' => $category->id, 'shop' => $shop->english_name]) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('users.update', $user) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -99,42 +99,72 @@
                                             <div class="row">
 
                                                 <div class="form-group mb-0 col-12">
+
                                                     <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
-                                                                        class="fas fa-star required-star mr-1"></i>{{ __('dashboard-shop-product-category.editCategoryItem1') }} :</span></div>
-                                                        <input type="text" class="form-control inputfield" name="name" value="{{ old('name', $category->name) }}">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نام :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="fName" value="{{ old('fName', $user->fName) }}">
                                                     </div>
+
                                                     <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">{{ __('dashboard-shop-product-category.editCategoryItem2') }}:</span></div>
-                                                        <select class="form-control inputfield" name="parent_id">
-                                                            @if($category->parent == null)
-                                                                <option value="null">{{ __('dashboard-shop-product-category.editCategoryItem2Main') }}</option>
-                                                            @endif
-                                                            @foreach($categories as $singleCategory)
-                                                                @unless($singleCategory->parent()->get()->first() != null and $singleCategory->parent()->get()->first()->parent()->get()->first() != null and
-                                                                    $singleCategory->parent()->get()->first()->parent()->get()->first()->parent()->get()->first() != null and
-                                                                    $singleCategory->parent()->get()->first()->parent()->get()->first()->parent()->get()->first()->parent()->exists() and
-                                                                    !$singleCategory->parent()->get()->first()->parent()->get()->first()->parent()->get()->first()->parent()->get()->first()->parent()->exists())
-                                                                    <option value="{{ $singleCategory->id }}" @if($category->parent != null) @if($singleCategory->id == $category->parent->id) selected
-                                                                            @endif
-                                                                            @endif >{{ $singleCategory->name }}</option>
-                                                                @endunless
-                                                            @endforeach
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نام خانوادگی :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="lName" value="{{ old('lName', $user->lName) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موبایل :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="mobile" value="{{ old('mobile', $user->mobile) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">وضعیت :</span></div>
+                                                        <select class="form-control" name="status" id="">
+                                                            <option {{ $user->status == 'enable' ? 'selected' : '' }} value="enable">تایید شده</option>
+                                                            <option {{ $user->status == 'disable' ? 'selected' : '' }} value="disable">تایید نشده</option>
                                                         </select>
                                                     </div>
+
                                                     <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">توضیحات مشتری :</span></div>
-                                                        <input type="text" class="form-control inputfield" name="description" value="{{ old('description', $category->description) }}">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">ایمیل :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="email" value="{{ old('email', $user->email) }}">
                                                     </div>
 
-                                                    <div class="card mt-3 border">
-                                                        <div class="card-body">
-                                                            <h4 class="mt-0 header-title">تصویر مشتری</h4>
-                                                            <a class="mr-2 font-15" href="" id="icon-delete" title="حذف آیکون" data-name="{{ $category->name }}" data-id="{{ $category->id }}"><i class="far fa-trash-alt text-danger font-18 pl-2"></i>حذف</a>
-
-                                                            <input type="file" id="input-file-now" name="icon" class="dropify" data-default-file="{{ $category->icon['original'] }}">
-                                                        </div>
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کد CRM :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="crm_id" value="{{ old('crm_id', $user->crm_id) }}">
                                                     </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شماره نظام پزشکی :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="pezeshkiNo" value="{{ old('pezeshkiNo', $user->pezeshkiNo) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">معرف :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="moarref" value="{{ old('moarref', $user->moarref) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شغل :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="job" value="{{ old('job', $user->job) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر کارت ملی :</span></div>
+                                                        <a target="_blank" href="{{ $user->meliPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر گواهی نظام پزشکی :</span></div>
+                                                        <a target="_blank" href="{{ $user->nezamPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">
+                                                                تصویر جواز :</span></div>
+                                                        <a target="_blank" href="{{ $user->javazPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                    </div>
+
+
                                                 </div>
 
 
