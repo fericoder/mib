@@ -51,17 +51,17 @@
                         <ul>
                             <li>
                                 <span>دسته بندی : </span>
-                             @if($product->category->parent != null)
-                                @if ($product->category->parent->parent)
-                                    <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
-                                    <span style="font-size: 14px;">></span>
-                             @endif
+                                @if($product->category->parent != null)
+                                    @if ($product->category->parent->parent)
+                                        <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
+                                        <span style="font-size: 14px;">></span>
+                                    @endif
 
-                            @if ($product->category->parent)
-                                    <a href="{{ route('shop.category', $product->category->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->name }}</a>
-                                    <span style="font-size: 14px;">></span>
-                                @endif
-                                <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a>
+                                    @if ($product->category->parent)
+                                        <a href="{{ route('shop.category', $product->category->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->name }}</a>
+                                        <span style="font-size: 14px;">></span>
+                                    @endif
+                                    <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a>
                             </li>
                             @endif
 
@@ -98,56 +98,62 @@
 
                     @auth
                         <form action="{{ route('user-cart.add', ['userID'=> \Auth::user()->id]) }}" method="post">
-                    @endauth
+                            @endauth
                             @csrf
 
                             <div class="all">
-                            <div class="all-items">
-                            <div class="mb-1 all-selects">
-                                @foreach($specifications->sortByDesc('order') as $specification)
-                                    @if($specification->items->count() > 0)
-                                        <div class="row py-1">
-                                            <label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">
-                                                {{ $specification->name }} :
-                                            </label>
-                                        </div>
-                                        <div class="row">
-                                            <select class="js-example-basic-single select-{{ $loop->index }} item selectpicker selectItem" name="specification[]">
-                                                @foreach($specification->items->where('status', 'enable')->intersect($items) as $item)
+                                <div class="all-items">
+                                    <div class="mb-1 all-selects">
+                                        @foreach($specifications->sortByDesc('order') as $specification)
+                                            @if($specification->items->count() > 0)
+                                                <div class="row py-1">
+                                                    <label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">
+                                                        {{ $specification->name }} :
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <select class="js-example-basic-single select-{{ $loop->index }} item selectpicker selectItem" name="specification[]">
+                                                        @foreach($specification->items->where('status', 'enable')->intersect($items) as $item)
                                                             <option style="font-size: 10px" data-id="{{ $item->id }}" data-product="{{ $product->id }}" value="{{ $item->id }}">{{ $item->name }}</option>
 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+
+
+                                </div>
                             </div>
-
-
-                        </div>
-                    </div>
 
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">
-                                    @if ($product->userPrice === 'on')
-                                        @auth()
-                                         <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
+                                @if ($product->userPrice === 'on')
+                                    @auth()
+                                        @if (\Auth::user()->status === 'enable')
+                                            <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
+                                        @else
+                                            <div style="text-align: center;margin-top: 30px;font-size: 15px; margin-bottom: 30px;" class="c-price original">حساب کاربری شما تایید نشده است</div>
+                                        @endif
                                     @endauth
-                                    @else
-                                           <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
-                                    @endif
+                                @else
+                                    <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
+                                @endif
                                 @auth()
-                                    <button style="margin: 65px;    width: 180px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
+                                    @if (\Auth::user()->status === 'enable')
+                                        <button style="margin: 65px;    width: 180px;;  text-align: center" data-col="true" class="text-white btn bg-blue-omid iranyekan mt-5 rounded btn-add-to-cart"><i class="mdi mdi-cart mr-1"></i> اضافه به سبد خرید</button>
+                                    @endif
                                 @endauth
                             </div>
                         </form>
 
 
-                @guest
-                        <a href="{{ route('register') }}">
-                            <button style="margin: 65px; width: 189px" type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> ابتدا ثبت نام کنید </button>
-                        </a>
-                    @endguest
+                        @guest
+                            <a href="{{ route('register') }}">
+                                <button style="margin: 65px; width: 189px" type="button" class="btn btn-primary iranyekan rounded"><i class="mdi mdi-cart mr-1"></i> ابتدا ثبت نام کنید </button>
+                            </a>
+                        @endguest
                 </div>
             </div>
             <aside style=";" class="c-product__feature">
@@ -159,7 +165,7 @@
             </aside>
         </section>
 
-        <div class="col-lg-6"><img src="{{ asset($product->image['400,400'] ? $product->image['400,400'] : '/images/no-image.png') }}" alt="" class="col-8 d-block img-thumbnail" style="max-height: 37em;">
+        <div class="col-lg-6"><img src="{{ asset($product->image['400,400'] ? $product->image['400,400'] : '/images/no-image.png') }}" alt="" class="col-8 d-block img-thumbnail" style="max-height: 37em;    max-width: 33em;    margin: 10px;    margin-top: 60px;">
             <div class="gallery mt-4 mr-4">
                 @foreach ($galleries as $gallery)
                     <a href="/{{ $gallery->filename }}"><img width="100px" class="img-thumbnail" src="/{{ $gallery->filename }}" alt="" title="" /></a>
@@ -168,20 +174,20 @@
         </div>
 
         {{--<section class="c-product__gallery">--}}
-            {{--<div class="c-product__special-deal hidden">--}}
-                {{--<div class="c-counter--special-deal"></div>--}}
-            {{--</div>--}}
-            {{--<div class="c-product__status-bar c-product__status-bar--out-of-stock hidden">ناموجود</div>--}}
-            {{--<div class="c-gallery">--}}
-                {{--<div class="c-gallery__item">--}}
-                    {{--<div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>--}}
-                {{--</div>--}}
-                {{--<ul style="" class="c-gallery__items">--}}
-                    {{--@foreach ($galleries as $gallery)--}}
-                        {{--<li><img src="{{ asset( $gallery->filename) }}" alt=""></li>--}}
-                    {{--@endforeach--}}
-                {{--</ul>--}}
-            {{--</div>--}}
+        {{--<div class="c-product__special-deal hidden">--}}
+        {{--<div class="c-counter--special-deal"></div>--}}
+        {{--</div>--}}
+        {{--<div class="c-product__status-bar c-product__status-bar--out-of-stock hidden">ناموجود</div>--}}
+        {{--<div class="c-gallery">--}}
+        {{--<div class="c-gallery__item">--}}
+        {{--<div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>--}}
+        {{--</div>--}}
+        {{--<ul style="" class="c-gallery__items">--}}
+        {{--@foreach ($galleries as $gallery)--}}
+        {{--<li><img src="{{ asset( $gallery->filename) }}" alt=""></li>--}}
+        {{--@endforeach--}}
+        {{--</ul>--}}
+        {{--</div>--}}
         {{--</section>--}}
     </article>
 
@@ -195,9 +201,15 @@
             <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
-                        <a href="{{ route('shop.product', $Relatedproduct->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $Relatedproduct->id) }}">{{ $Relatedproduct->title }}</a>
-                        <span class="price">{{ number_format($Relatedproduct->price) }} تومان</span>
+                        <a href="{{ route('shop.product', $product->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.product', $product->id) }}">{{ $Relatedproduct->title }}</a>
+                        <span class="price">
+                            @auth()
+                                @if (\Auth::user()->status === 'enable')
+                                    {{ number_format($Relatedproduct->price) }} تومان
+                                @endif
+                            @endauth
+                        </span>
                     </div>
                 @endforeach
             </div>
@@ -255,8 +267,8 @@
                         <ul class="c-params__list">
 
                             {{--<li>--}}
-                                {{--<div class="c-params__list-key"> <span class="block">ابعاد</span></div>--}}
-                                {{--<div class="c-params__list-value"> <span class="block">9.5 × 75.5 × 153.9 میلی‌متر</span></div>--}}
+                            {{--<div class="c-params__list-key"> <span class="block">ابعاد</span></div>--}}
+                            {{--<div class="c-params__list-value"> <span class="block">9.5 × 75.5 × 153.9 میلی‌متر</span></div>--}}
                             {{--</li>--}}
 
                         </ul>
@@ -275,145 +287,145 @@
                 <div class="product-comment-list">
                     <ul class="c-comments__list">
 
-    {{--<li>--}}
-        {{--<section>--}}
-            {{--<div class="aside">--}}
-                {{--<div class="c-message-light c-message-light--purchased">خریدار این محصول</div>--}}
-                {{--<div class="c-comments__user-shopping">--}}
-    {{--<li>رنگ خریداری شده : قرمز</li>--}}
-    {{--<li>خریداری شده از: دیجی کالا</li>--}}
-    {{--</div>--}}
-    {{--<div class="c-message-light c-message-light--opinion-noidea"> در مورد خرید این محصول مطمئن نیستم</div>--}}
-    {{--</div>--}}
-    {{--<div class="article">--}}
-        {{--<div class="header"> <span>اصلاارزش نداردنخیر</span> <span>توسط جواد بیک پور در تاریخ ۱۱ آبان ۱۳۹۷</span></div>--}}
-        {{--<div class="c-comments__evaluation">--}}
-            {{--<div class="c-comments__evaluation-positive"> <span>نقاط قوت</span>--}}
-                {{--<ul>--}}
-                    {{--<li>رم و حافظه داخلی بالا</li>--}}
-                {{--</ul>--}}
-            {{--</div>--}}
-            {{--<div class="c-comments__evaluation-negative"> <span>نقاط ضعف</span>--}}
-                {{--<ul>--}}
-                    {{--<li>باطری ضعیف</li>--}}
-                    {{--<li>دوربین ضعیف در شب</li>--}}
-                    {{--<li>قیمت بالا</li>--}}
-                {{--</ul>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<p>نخریداصلاخوب نیست</p>--}}
-        {{--<div class="footer">--}}
-            {{--<div class="c-comments__likes"> <span>آیا این نظر برایتان مفید بود؟</span>--}}
-                {{--<button class="btn-like"> ۲۲ بله </button>--}}
-                {{--<button class="btn-like"> ۴ خیر </button>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--</section>--}}
-    {{--</li>--}}
-    </ul>
-    <div class="c-pager">
-        <ul class="c-pager__items">
-            <li><a class="c-pager__item is-active" href="#">1</a></li>
-            <li><a class="c-pager__item" href="#">2</a></li>
-            <li><a class="c-pager__item" href="#">3</a></li>
-            <li><a class="c-pager__item" href="#">4</a></li>
-            <li><a class="c-pager__item" href="#">&gt;&gt;</a></li>
-        </ul>
-    </div>
-    </div>
-    </div>
-    <div id="questions">
-        <div class="c-faq__headline">پرسش و پاسخ <span>پرسش خود را در مورد محصول مطرح نمایید</span></div>
-        <form action="#" class="c-form-faq">
-            <textarea name="qa[body]" title="متن سوال" class="c-ui-textarea__field disabled" disabled=""></textarea>
-            <div class="form-row">
-                <button class="btn-tertiary">ثبت پرسش</button>
-                <div class="agreement">
-                    <input id="agree" type="checkbox">
-                    <label for="agree"> اولین پاسخی که به پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.
-                        <br> با انتخاب دکمه “ثبت پرسش”، موافقت خود را با قوانین انتشار محتوا در دیجی کالا اعلام می کنم. </label>
+                        {{--<li>--}}
+                        {{--<section>--}}
+                        {{--<div class="aside">--}}
+                        {{--<div class="c-message-light c-message-light--purchased">خریدار این محصول</div>--}}
+                        {{--<div class="c-comments__user-shopping">--}}
+                        {{--<li>رنگ خریداری شده : قرمز</li>--}}
+                        {{--<li>خریداری شده از: دیجی کالا</li>--}}
+                        {{--</div>--}}
+                        {{--<div class="c-message-light c-message-light--opinion-noidea"> در مورد خرید این محصول مطمئن نیستم</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="article">--}}
+                        {{--<div class="header"> <span>اصلاارزش نداردنخیر</span> <span>توسط جواد بیک پور در تاریخ ۱۱ آبان ۱۳۹۷</span></div>--}}
+                        {{--<div class="c-comments__evaluation">--}}
+                        {{--<div class="c-comments__evaluation-positive"> <span>نقاط قوت</span>--}}
+                        {{--<ul>--}}
+                        {{--<li>رم و حافظه داخلی بالا</li>--}}
+                        {{--</ul>--}}
+                        {{--</div>--}}
+                        {{--<div class="c-comments__evaluation-negative"> <span>نقاط ضعف</span>--}}
+                        {{--<ul>--}}
+                        {{--<li>باطری ضعیف</li>--}}
+                        {{--<li>دوربین ضعیف در شب</li>--}}
+                        {{--<li>قیمت بالا</li>--}}
+                        {{--</ul>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<p>نخریداصلاخوب نیست</p>--}}
+                        {{--<div class="footer">--}}
+                        {{--<div class="c-comments__likes"> <span>آیا این نظر برایتان مفید بود؟</span>--}}
+                        {{--<button class="btn-like"> ۲۲ بله </button>--}}
+                        {{--<button class="btn-like"> ۴ خیر </button>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</section>--}}
+                        {{--</li>--}}
+                    </ul>
+                    <div class="c-pager">
+                        <ul class="c-pager__items">
+                            <li><a class="c-pager__item is-active" href="#">1</a></li>
+                            <li><a class="c-pager__item" href="#">2</a></li>
+                            <li><a class="c-pager__item" href="#">3</a></li>
+                            <li><a class="c-pager__item" href="#">4</a></li>
+                            <li><a class="c-pager__item" href="#">&gt;&gt;</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </form>
-        <div class="c-comments__filter">
-            <h4 class="c-faq__filter-title">نظرات کاربران</h4>
-            <ul class="c-faq__filter-items" data-title="مرتب‌سازی بر اساس:">
-                <li><a class="is-active" href="#">پرسش ها و پاسخ ها ( ۱ پرسش )</a></li>
-                <li><a href="#">بیشترین پاسخ به پرسش های شما</a></li>
-                <li><a href="#">جدیدترین پرسش ها</a></li>
-                <li><a href="#">پرسش های شما</a></li>
-            </ul>
-        </div>
-        <div id="product-questions-list">
-            <ul class="c-faq__list">
-                <li class="is-question">
-                    <div class="section">
-                        <div class="c-faq__header c-faq__header--question header">
-                            <p class="h5"> پرسش <span>محمدامین Kor</span></p>
+            <div id="questions">
+                <div class="c-faq__headline">پرسش و پاسخ <span>پرسش خود را در مورد محصول مطرح نمایید</span></div>
+                <form action="#" class="c-form-faq">
+                    <textarea name="qa[body]" title="متن سوال" class="c-ui-textarea__field disabled" disabled=""></textarea>
+                    <div class="form-row">
+                        <button class="btn-tertiary">ثبت پرسش</button>
+                        <div class="agreement">
+                            <input id="agree" type="checkbox">
+                            <label for="agree"> اولین پاسخی که به پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.
+                                <br> با انتخاب دکمه “ثبت پرسش”، موافقت خود را با قوانین انتشار محتوا در دیجی کالا اعلام می کنم. </label>
                         </div>
-                        <p>سلام این گوشی الفون مدلp8 دوسیم کارته ظرفیت64 ایا رجستری شدس؟اگه نه میشه خودمون رجستریش کنیم؟</p>
-                        <div class="footer"> <em>۸ شهریور ۱۳۹۷</em> <a href="#" class="btn-link-spoiler js-add-answer-btn">به این پرسش پاسخ دهید (۱ پاسخ) </a></div>
                     </div>
-                </li>
-                <li class="is-answer">
-                    <div class="section">
-                        <div class="header">
-                            <p class="h5">پاسخ</p>
-                        </div>
-                        <div class="c-faq__answer-row">
-                            <div class="c-faq__answer-col c-faq__answer-col--form"> <span class="h3">به این سوال پاسخ دهید</span>
-                                <form action="#">
-                                    <textarea></textarea>
-                                    <div class="form-row">
-                                        <button class="btn-default">ثبت پاسخ</button>
-                                        <div class="agreement">
-                                            <input id="agree" type="checkbox">
-                                            <label for="agree">با انتخاب دکمه "ثبت پاسخ"، موافقت خود را با قوانین انتشار محتوا در دیجی‌کالا اعلام می‌کنم.</label>
-                                        </div>
+                </form>
+                <div class="c-comments__filter">
+                    <h4 class="c-faq__filter-title">نظرات کاربران</h4>
+                    <ul class="c-faq__filter-items" data-title="مرتب‌سازی بر اساس:">
+                        <li><a class="is-active" href="#">پرسش ها و پاسخ ها ( ۱ پرسش )</a></li>
+                        <li><a href="#">بیشترین پاسخ به پرسش های شما</a></li>
+                        <li><a href="#">جدیدترین پرسش ها</a></li>
+                        <li><a href="#">پرسش های شما</a></li>
+                    </ul>
+                </div>
+                <div id="product-questions-list">
+                    <ul class="c-faq__list">
+                        <li class="is-question">
+                            <div class="section">
+                                <div class="c-faq__header c-faq__header--question header">
+                                    <p class="h5"> پرسش <span>محمدامین Kor</span></p>
+                                </div>
+                                <p>سلام این گوشی الفون مدلp8 دوسیم کارته ظرفیت64 ایا رجستری شدس؟اگه نه میشه خودمون رجستریش کنیم؟</p>
+                                <div class="footer"> <em>۸ شهریور ۱۳۹۷</em> <a href="#" class="btn-link-spoiler js-add-answer-btn">به این پرسش پاسخ دهید (۱ پاسخ) </a></div>
+                            </div>
+                        </li>
+                        <li class="is-answer">
+                            <div class="section">
+                                <div class="header">
+                                    <p class="h5">پاسخ</p>
+                                </div>
+                                <div class="c-faq__answer-row">
+                                    <div class="c-faq__answer-col c-faq__answer-col--form"> <span class="h3">به این سوال پاسخ دهید</span>
+                                        <form action="#">
+                                            <textarea></textarea>
+                                            <div class="form-row">
+                                                <button class="btn-default">ثبت پاسخ</button>
+                                                <div class="agreement">
+                                                    <input id="agree" type="checkbox">
+                                                    <label for="agree">با انتخاب دکمه "ثبت پاسخ"، موافقت خود را با قوانین انتشار محتوا در دیجی‌کالا اعلام می‌کنم.</label>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                    <div class="c-faq__answer-col c-faq__answer-col--rules"> <span class="h4">چگونه یک پاسخ مناسب بنویسیم ؟</span>
+                                        <ul class="c-faq__rules-list">
+                                            <li> <span class="h5">قبلا از این محصول استفاده کرده‌اید؟</span>
+                                                <p>همیشه بهتر است، به سوالاتی پاسخ بدهید که سوال شخصی شما پیش از این بوده و با تجربه یا تحقیق پاسخ آن را بدست آورده اید.</p>
+                                            </li>
+                                            <li> <span class="h5">خوانندگان خود را آموزش دهید</span>
+                                                <p>اگر سوال پرسیده شده مربوط به تخصص یا تجربه شماست، بدون تعصب، پاسخ مرتبط را به شیوه ای که خواننده بتواند از آن استفاده کند، ارائه دهید.</p>
+                                            </li>
+                                            <li> <span class="h5">خودتان باشید، آموزنده باشید</span>
+                                                <p>نظرات و انتقادات خودتان را بازگو کنید اما به یاد داشته باشید که نظراتتان باید منطقی باشد.</p>
+                                            </li>
+                                            <li> <span class="h5">مختصرگو باشید</span>
+                                                <p>خلاق باشید اما موضوع نقد را فراموش نکنید، یک عنوان جذاب همیشه خوانندگان را جذب می کند.</p>
+                                            </li>
+                                            <li> <span class="h5">خوانا بنویسید</span>
+                                                <p>یک ویرایش صحیح و کنترل املای صحیح کلمات اعتبار بیشتری به نقد و بررسی نوشته شده توسط شما می دهد. همچنین برای بالا رفتن خوانایی، فاصله بین پاراگراف ها و بالت گذاری را رعایت کنید.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="c-faq__answer-col c-faq__answer-col--rules"> <span class="h4">چگونه یک پاسخ مناسب بنویسیم ؟</span>
-                                <ul class="c-faq__rules-list">
-                                    <li> <span class="h5">قبلا از این محصول استفاده کرده‌اید؟</span>
-                                        <p>همیشه بهتر است، به سوالاتی پاسخ بدهید که سوال شخصی شما پیش از این بوده و با تجربه یا تحقیق پاسخ آن را بدست آورده اید.</p>
-                                    </li>
-                                    <li> <span class="h5">خوانندگان خود را آموزش دهید</span>
-                                        <p>اگر سوال پرسیده شده مربوط به تخصص یا تجربه شماست، بدون تعصب، پاسخ مرتبط را به شیوه ای که خواننده بتواند از آن استفاده کند، ارائه دهید.</p>
-                                    </li>
-                                    <li> <span class="h5">خودتان باشید، آموزنده باشید</span>
-                                        <p>نظرات و انتقادات خودتان را بازگو کنید اما به یاد داشته باشید که نظراتتان باید منطقی باشد.</p>
-                                    </li>
-                                    <li> <span class="h5">مختصرگو باشید</span>
-                                        <p>خلاق باشید اما موضوع نقد را فراموش نکنید، یک عنوان جذاب همیشه خوانندگان را جذب می کند.</p>
-                                    </li>
-                                    <li> <span class="h5">خوانا بنویسید</span>
-                                        <p>یک ویرایش صحیح و کنترل املای صحیح کلمات اعتبار بیشتری به نقد و بررسی نوشته شده توسط شما می دهد. همچنین برای بالا رفتن خوانایی، فاصله بین پاراگراف ها و بالت گذاری را رعایت کنید.</p>
-                                    </li>
-                                </ul>
+                        </li>
+                        <li class="is-answer">
+                            <div class="section">
+                                <div class="header">
+                                    <p class="h5">پاسخ <span>حسن شفیعی</span></p>
+                                </div>
+                                <p>سلام گوشی نو هستش برادر میتونی بعد خرید مالکیت بزنی هیچ مشکلی نداره.. دسته دوم نیس که بگی رجیستر هس یا نه. شما از یه فروشگاه معتبر دیجی کالا خرید میکنی.</p>
+                                <div class="footer"> <em>۲۱ مهر ۱۳۹۷</em>
+                                    <div class="c-faq__likes"> <span>آیا این پاسخ برایتان مفید بود ؟</span>
+                                        <button class="btn-like"> بله ۲۳ </button>
+                                        <button class="btn-like"> خیر ۵ </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="is-answer">
-                    <div class="section">
-                        <div class="header">
-                            <p class="h5">پاسخ <span>حسن شفیعی</span></p>
-                        </div>
-                        <p>سلام گوشی نو هستش برادر میتونی بعد خرید مالکیت بزنی هیچ مشکلی نداره.. دسته دوم نیس که بگی رجیستر هس یا نه. شما از یه فروشگاه معتبر دیجی کالا خرید میکنی.</p>
-                        <div class="footer"> <em>۲۱ مهر ۱۳۹۷</em>
-                            <div class="c-faq__likes"> <span>آیا این پاسخ برایتان مفید بود ؟</span>
-                                <button class="btn-like"> بله ۲۳ </button>
-                                <button class="btn-like"> خیر ۵ </button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </section>
 
 
@@ -463,7 +475,7 @@
                 var select = $("select");
                 var valArray = [];
                 select.each(function(index){
-                  valArray.push($(this).val());
+                    valArray.push($(this).val());
                 });
                 var product_id = $("option:selected").data('product');
                 $.ajax({
