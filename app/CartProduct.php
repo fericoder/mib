@@ -32,4 +32,8 @@ class CartProduct extends Model
     {
         return $this->belongsTo('App\Cart');
     }
+    public function group()
+    {
+        return $this->belongsTo('App\SpecificationItemGroup');
+    }
 }

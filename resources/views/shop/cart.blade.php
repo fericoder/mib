@@ -33,7 +33,7 @@
                                                 <div class="quantity buttons_added">
                                                     <form action="{{ route('checkout.index') }}" method="POST" id="checkout">
                                                         @csrf
-                                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="{{ $cartProduct->id }}" value="{{ $cartProduct->quantity }}" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="{{ $cartProduct->group_id != null ? $cartProduct->group->amount : '' }}" name="{{ $cartProduct->id }}" value="{{ $cartProduct->quantity }}" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
                                                 </div>
                                                 <div class="c-quantity-selector" style="border:0">
                                                     <button id="removeProduct" data-cart="{{ \Auth::user()->cart()->get()->first()->id }}" data-id="{{ $cartProduct->product->id }}" data-cartp="{{ $cartProduct->id }}" type="button" class="c-quantity-selector__remove"><i class="fa fa-trash"></i></button>
