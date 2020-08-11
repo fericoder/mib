@@ -145,6 +145,7 @@
                                 <th title="Field #5" data-field="5"> روش ارسال</th>
                                 <th title="Field #6" data-field="6">وضعیت</th>
                                 <th title="Field #6" data-field="6">عملیات</th>
+                                <th title="Field #6" data-field="6">مشاهده محصولات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -179,12 +180,7 @@
                                     </td>
                                     <td>{{ jdate($purchase->created_at) }}</td>
                                     <td>
-                                        {{-- <a href="{{ route('purchases.show', ['purchase' => $purchase->id]) }}">
-                                            <i class="fa fa-eye"></i>
-                                        </a> --}}
-                                        {{-- <a href="{{ route('purchases.show', ['purchase' => $purchase->id]) }}" data-toggle="modal" data-target="#ShowAddressModal{{ $purchase->id }}"> --}}
-                                            <i class="dripicons-user-id"></i>
-                                        </a>
+                                        <a style="margin: 5px;" href="{{ route('users.purchase.show', ['userID' => $purchase->user->id, 'id' => $purchase->id] ) }}"  title="ویرایش" ><i class="far fa-eye text-info mr-1 button font-15"></i></a>
                                     </td>
 
 

@@ -238,12 +238,13 @@
                             <thead style="font-family: BYekan">
                             <tr>
                                 <th title="Field #1" data-field="1">شناسه</th>
+                                <th title="Field #1" data-field="1">شناسه CRM</th>
                                 <th title="Field #1" data-field="1">نام</th>
                                 <th title="Field #2" data-field="2">نام خانوادگی</th>
                                 <th title="Field #5" data-field="5">شماره موبایل</th>
                                 <th title="Field #5" data-field="5">وضعیت</th>
                                 <th title="Field #5" data-field="5"> تاریخ عضویت</th>
-                                <th title="Field #6" data-field="6">تغییرات</th>
+                                <th title="Field #6" data-field="6">جزییات|سفارشات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -251,6 +252,7 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td style="font-family: BYekan" >{{ $user->id }}</td>
+                                    <td style="font-family: BYekan" >{{ $user->crm_id }}</td>
                                     <td style="font-family: BYekan" >{{ $user->fName }}</td>
                                     <td style="font-family: BYekan" >{{ $user->lName }}</td>
                                     <td style="font-family: BYekan" >{{ $user->mobile }}</td>
@@ -258,7 +260,7 @@
                                     <td style="font-family: BYekan!important; direction: ltr" >{{ jdate($user->created_at) }}</td>
                                     <td>
                                         <a style="margin: 5px;" href="{{ route('users.edit', $user->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
-                                        {{--<a style="margin: 5px;" href="" id="remove" title="حذف" data-name="{{ $user->name }}" data-id="{{ $user->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>--}}
+                                        <a style="margin: 5px;" href="{{ route('users.purchases', $user->id ) }}"  title="مشاهده" ><i class="far fa-eye text-info mr-1 button font-15"></i></a>
                                     </td>
 
                                 </tr>
