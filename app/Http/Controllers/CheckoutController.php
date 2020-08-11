@@ -21,7 +21,7 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
 
-        foreach($request->all() as $cartProductId => $quantity){
+        foreach($request->except('_token') as $cartProductId => $quantity){
 
             $cartProductUpdate = \Auth::user()->cart()->get()->first()->cartProduct()->where('id', $cartProductId)->update([
                 'quantity' => $quantity,
