@@ -201,8 +201,8 @@
             <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
-                        <a href="{{ route('shop.product', $product->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
-                        <a class="title" href="{{ route('shop.product', $product->id) }}">{{ $Relatedproduct->title }}</a>
+                        <a href="{{ route('shop.product', $Relatedproduct->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.product', $Relatedproduct->id) }}">{{ $Relatedproduct->title }}</a>
                         <span class="price">
                             @auth()
                                 @if (\Auth::user()->status === 'enable')

@@ -549,6 +549,7 @@ class ProductController extends Controller
             foreach($product->groups as $gp){
                 $gp_product[] = $gp->id;
             }
+
             if ((count(array_diff($gp_product, $gp_request))) != 0) {
                 foreach(array_diff($gp_product,$gp_request) as $gp_id){
                     $specificationGroup = SpecificationItemGroup::find($gp_id);
@@ -572,6 +573,9 @@ class ProductController extends Controller
                 }
             }
 
+        }
+        else{
+            $product->groups()->delete();
         }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductRequest extends FormRequest
 {
@@ -62,7 +63,7 @@ class ProductRequest extends FormRequest
             'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             // 'color.*' => 'nullable|max:1000|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
             'group.*.p_id' =>['required',
-                'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:9999999999999','min:0'
+                'regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u','max:9999999999999','min:0',Rule::unique('specification_item_groups'),
             ],
             'group.*.amount' =>['required',
                 'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:9999999999999','min:0'
