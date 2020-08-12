@@ -195,11 +195,12 @@
                     @endforeach
                 </ul>
             </li>
-            <li><a href="/register">عضویت</a></li>
-            <li><a href="/register">ورود</a></li>
-            <li><a href="#">شرایط و قوانین</a></li>
-            <li><a href="#">درباره ما</a></li>
-            <li><a href="#">تماس باما</a></li>
+
+            <li><a href="#">راهنمای خرید </a></li>
+            <li><a href="#">سوالات متداول </a></li>
+
+
+
         </ul>
 
     </nav>
@@ -226,11 +227,11 @@
         </div>
         <div class="footer-content">
             <div class="shop-help">
-                <h3 class="head">راهنمای خرید از فروشگاه</h3>
+                <h3 class="head">لینک های کاربردی</h3>
                 <ul>
-                    <li><a href="#">نحوه ثبت سفارش</a></li>
-                    <li><a href="#">رویه ارسال سفارش</a></li>
-                    <li><a href="#">شیوه های پرداخت</a></li>
+                    <li><a href="#">شرایط و قوانین</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس باما</a></li>
                 </ul>
             </div>
             <div class="customer-service">

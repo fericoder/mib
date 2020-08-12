@@ -40,6 +40,30 @@
 @section('content')
 
 
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div style="margin-top: 100px" class="modal-content register login account-box">
+            <span class="close">&times;</span>
+            <div class="content">
+                <form style="width: 30%!important;" method="POST" action="/comment">
+                    @csrf
+
+                    <label style="margin-top: 10px" for="pwd">متن نظر:<span style="color: red;    font-size: 15px;">*</span></label>
+                    <textarea style="margin: 10px; font-size: 15px" class="form-control" name="comment" id="" cols="50" rows="5"></textarea>
+                    <input type="hidden" name="parent_id" value="0">
+                    <input type="hidden" name="commentable_id" value="{{ $product->id }}">
+                    <input type="hidden" name="commentable_type" value="{{ get_class($product) }}">
+
+
+                    <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>ثبت نظر</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
     <article class="c-product">
         <section class="c-product__info">
             <div class="c-product__headline">
@@ -82,6 +106,11 @@
                         <ul data-title="توضیحات محصول">
                             <div style="margin-top: 20px;width: 600px" class="quantity mt-3">
                                 <p style="max-width: 450px;"> {{ $product->shortDescription }}</p>
+
+                                @if ($product->catalog)
+                                    <a target="_blank" href="{{ asset($product->catalog) }}"><img style="width: 200px; margin: 30px" src="/assets/images/catalog.png" alt=""></a>
+                                @endif
+
                             </div>
                         </ul>
                     </div>
@@ -228,8 +257,7 @@
     <section class="p-tabs">
         <ul class="c-box-tabs">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>توضیحات محصول</span></a></li>
-            {{--<li class="c-box-tabs__tab"><a id="params" href="#"><i class="fa fa-tasks"></i> <span>مشخصات</span></a></li>--}}
-            {{--<li class="c-box-tabs__tab"><a id="comments" href="#"><i class="fa fa-comments"></i> <span>نظرات کاربران</span></a></li>--}}
+            <li class="c-box-tabs__tab"><a id="comments" href="#"><i class="fa fa-comments"></i> <span>نظرات کاربران</span></a></li>
         </ul>
         <div class="c-box--tabs p-tabs__content">
             <div id="desc" class="c-content-expert is-active">
@@ -243,9 +271,6 @@
                                 </p>
 
                                 <div style="margin-top: 100px; margin-right: 250px">
-                                    @if ($product->catalog)
-                                        <a target="_blank" href="{{ asset($product->catalog) }}"><button class="button">دریافت کاتالوگ</button></a>
-                                    @endif
                                     @if ($product->aparat)
                                         <a target="_blank" href="{{ $product->aparat  }}"><button class="button">مشاهده ویدیو</button></a>
                                     @endif
@@ -259,174 +284,52 @@
 
                 </article>
             </div>
-            <div id="params">
-                <article>
-                    <h2 class="c-params__headline"> مشخصات فنی <span>{{ $product->title }}</span></h2>
-                    <section>
-                        <h3 class="c-params__title">مشخصات کلی</h3>
-                        <ul class="c-params__list">
 
-                            {{--<li>--}}
-                            {{--<div class="c-params__list-key"> <span class="block">ابعاد</span></div>--}}
-                            {{--<div class="c-params__list-value"> <span class="block">9.5 × 75.5 × 153.9 میلی‌متر</span></div>--}}
-                            {{--</li>--}}
-
-                        </ul>
-                    </section>
-                </article>
-            </div>
             <div id="comments">
                 <div class="c-comments__summary">
                     <div class="c-comments__summary-note"> <span>شما هم می‌توانید در مورد این کالا نظر بدهید.</span>
-                        <p>برای ثبت نظر، لازم است ابتدا وارد حساب کاربری خود شوید. اگر این محصول را قبلا از دیجی‌کالا خریده باشید، نظر شما به عنوان مالک محصول ثبت خواهد شد.</p> <a href="#" class="btn-add-comment is-disabled"><span>افزودن نظر جدید</span></a></div>
+                        @auth()
+                            <a id="myBtn" style="margin: 30px; top: 30px"  class="btn-add-comment is-disabled">
+                                <span>افزودن نظر جدید</span>
+                            </a>
+                        @endauth
+                    </div>
                 </div>
                 <div class="c-comments__filter">
                     <h4 class="c-faq__filter-title">نظرات کاربران</h4>
-
                 </div>
                 <div class="product-comment-list">
                     <ul class="c-comments__list">
 
-                        {{--<li>--}}
-                        {{--<section>--}}
-                        {{--<div class="aside">--}}
-                        {{--<div class="c-message-light c-message-light--purchased">خریدار این محصول</div>--}}
-                        {{--<div class="c-comments__user-shopping">--}}
-                        {{--<li>رنگ خریداری شده : قرمز</li>--}}
-                        {{--<li>خریداری شده از: دیجی کالا</li>--}}
-                        {{--</div>--}}
-                        {{--<div class="c-message-light c-message-light--opinion-noidea"> در مورد خرید این محصول مطمئن نیستم</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="article">--}}
-                        {{--<div class="header"> <span>اصلاارزش نداردنخیر</span> <span>توسط جواد بیک پور در تاریخ ۱۱ آبان ۱۳۹۷</span></div>--}}
-                        {{--<div class="c-comments__evaluation">--}}
-                        {{--<div class="c-comments__evaluation-positive"> <span>نقاط قوت</span>--}}
-                        {{--<ul>--}}
-                        {{--<li>رم و حافظه داخلی بالا</li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<div class="c-comments__evaluation-negative"> <span>نقاط ضعف</span>--}}
-                        {{--<ul>--}}
-                        {{--<li>باطری ضعیف</li>--}}
-                        {{--<li>دوربین ضعیف در شب</li>--}}
-                        {{--<li>قیمت بالا</li>--}}
-                        {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<p>نخریداصلاخوب نیست</p>--}}
-                        {{--<div class="footer">--}}
-                        {{--<div class="c-comments__likes"> <span>آیا این نظر برایتان مفید بود؟</span>--}}
-                        {{--<button class="btn-like"> ۲۲ بله </button>--}}
-                        {{--<button class="btn-like"> ۴ خیر </button>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</section>--}}
-                        {{--</li>--}}
+                        @foreach ($product->comments->where('approved', '1')->where('parent_id', '0') as $comment)
+                            <li>
+                                <section>
+                                    <div class="article">
+                                        <div class="header">
+                                            <span style="    font-size: 17px; font-family: BYekan; direction: ltr">توسط
+                                                {{ $comment->user->fName . ' ' . $comment->user->lName }}
+                                                در تاریخ
+                                                {{ jdate($comment->created_at)->format('Y/m/d h:i:s') }}
+                                            </span>
+                                        </div>
+
+                                        <p>
+                                            {{ $comment->comment }}
+                                        </p>
+                                    </div>
+                                </section>
+                            </li>
+                        @endforeach
+
+
                     </ul>
-                    <div class="c-pager">
-                        <ul class="c-pager__items">
-                            <li><a class="c-pager__item is-active" href="#">1</a></li>
-                            <li><a class="c-pager__item" href="#">2</a></li>
-                            <li><a class="c-pager__item" href="#">3</a></li>
-                            <li><a class="c-pager__item" href="#">4</a></li>
-                            <li><a class="c-pager__item" href="#">&gt;&gt;</a></li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
-            <div id="questions">
-                <div class="c-faq__headline">پرسش و پاسخ <span>پرسش خود را در مورد محصول مطرح نمایید</span></div>
-                <form action="#" class="c-form-faq">
-                    <textarea name="qa[body]" title="متن سوال" class="c-ui-textarea__field disabled" disabled=""></textarea>
-                    <div class="form-row">
-                        <button class="btn-tertiary">ثبت پرسش</button>
-                        <div class="agreement">
-                            <input id="agree" type="checkbox">
-                            <label for="agree"> اولین پاسخی که به پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.
-                                <br> با انتخاب دکمه “ثبت پرسش”، موافقت خود را با قوانین انتشار محتوا در دیجی کالا اعلام می کنم. </label>
-                        </div>
-                    </div>
-                </form>
-                <div class="c-comments__filter">
-                    <h4 class="c-faq__filter-title">نظرات کاربران</h4>
-                    <ul class="c-faq__filter-items" data-title="مرتب‌سازی بر اساس:">
-                        <li><a class="is-active" href="#">پرسش ها و پاسخ ها ( ۱ پرسش )</a></li>
-                        <li><a href="#">بیشترین پاسخ به پرسش های شما</a></li>
-                        <li><a href="#">جدیدترین پرسش ها</a></li>
-                        <li><a href="#">پرسش های شما</a></li>
-                    </ul>
-                </div>
-                <div id="product-questions-list">
-                    <ul class="c-faq__list">
-                        <li class="is-question">
-                            <div class="section">
-                                <div class="c-faq__header c-faq__header--question header">
-                                    <p class="h5"> پرسش <span>محمدامین Kor</span></p>
-                                </div>
-                                <p>سلام این گوشی الفون مدلp8 دوسیم کارته ظرفیت64 ایا رجستری شدس؟اگه نه میشه خودمون رجستریش کنیم؟</p>
-                                <div class="footer"> <em>۸ شهریور ۱۳۹۷</em> <a href="#" class="btn-link-spoiler js-add-answer-btn">به این پرسش پاسخ دهید (۱ پاسخ) </a></div>
-                            </div>
-                        </li>
-                        <li class="is-answer">
-                            <div class="section">
-                                <div class="header">
-                                    <p class="h5">پاسخ</p>
-                                </div>
-                                <div class="c-faq__answer-row">
-                                    <div class="c-faq__answer-col c-faq__answer-col--form"> <span class="h3">به این سوال پاسخ دهید</span>
-                                        <form action="#">
-                                            <textarea></textarea>
-                                            <div class="form-row">
-                                                <button class="btn-default">ثبت پاسخ</button>
-                                                <div class="agreement">
-                                                    <input id="agree" type="checkbox">
-                                                    <label for="agree">با انتخاب دکمه "ثبت پاسخ"، موافقت خود را با قوانین انتشار محتوا در دیجی‌کالا اعلام می‌کنم.</label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="c-faq__answer-col c-faq__answer-col--rules"> <span class="h4">چگونه یک پاسخ مناسب بنویسیم ؟</span>
-                                        <ul class="c-faq__rules-list">
-                                            <li> <span class="h5">قبلا از این محصول استفاده کرده‌اید؟</span>
-                                                <p>همیشه بهتر است، به سوالاتی پاسخ بدهید که سوال شخصی شما پیش از این بوده و با تجربه یا تحقیق پاسخ آن را بدست آورده اید.</p>
-                                            </li>
-                                            <li> <span class="h5">خوانندگان خود را آموزش دهید</span>
-                                                <p>اگر سوال پرسیده شده مربوط به تخصص یا تجربه شماست، بدون تعصب، پاسخ مرتبط را به شیوه ای که خواننده بتواند از آن استفاده کند، ارائه دهید.</p>
-                                            </li>
-                                            <li> <span class="h5">خودتان باشید، آموزنده باشید</span>
-                                                <p>نظرات و انتقادات خودتان را بازگو کنید اما به یاد داشته باشید که نظراتتان باید منطقی باشد.</p>
-                                            </li>
-                                            <li> <span class="h5">مختصرگو باشید</span>
-                                                <p>خلاق باشید اما موضوع نقد را فراموش نکنید، یک عنوان جذاب همیشه خوانندگان را جذب می کند.</p>
-                                            </li>
-                                            <li> <span class="h5">خوانا بنویسید</span>
-                                                <p>یک ویرایش صحیح و کنترل املای صحیح کلمات اعتبار بیشتری به نقد و بررسی نوشته شده توسط شما می دهد. همچنین برای بالا رفتن خوانایی، فاصله بین پاراگراف ها و بالت گذاری را رعایت کنید.</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="is-answer">
-                            <div class="section">
-                                <div class="header">
-                                    <p class="h5">پاسخ <span>حسن شفیعی</span></p>
-                                </div>
-                                <p>سلام گوشی نو هستش برادر میتونی بعد خرید مالکیت بزنی هیچ مشکلی نداره.. دسته دوم نیس که بگی رجیستر هس یا نه. شما از یه فروشگاه معتبر دیجی کالا خرید میکنی.</p>
-                                <div class="footer"> <em>۲۱ مهر ۱۳۹۷</em>
-                                    <div class="c-faq__likes"> <span>آیا این پاسخ برایتان مفید بود ؟</span>
-                                        <button class="btn-like"> بله ۲۳ </button>
-                                        <button class="btn-like"> خیر ۵ </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </div>
-    </section>
+
+
+                </div>
+            </section>
 
 
 
@@ -441,7 +344,7 @@
 
 @section('footerScripts')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>

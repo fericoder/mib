@@ -143,6 +143,7 @@
                                 <th title="Field #2" data-field="2">مشتری</th>
                                 <th title="Field #5" data-field="5">روش پرداخت</th>
                                 <th title="Field #5" data-field="5"> روش ارسال</th>
+                                <th title="Field #5" data-field="5"> آدرس</th>
                                 <th title="Field #6" data-field="6">وضعیت</th>
                                 <th title="Field #6" data-field="6">عملیات</th>
                                 <th title="Field #6" data-field="6">مشاهده محصولات</th>
@@ -166,6 +167,8 @@
                                             __
                                         @endif
                                     </td>
+                                    <td style="font-family: BYekan" >{{ $purchase->address->province . ' - ' . $purchase->address->city . ' - ' . $purchase->address->address . ' - ' . $purchase->address->tel . ' - ' . $purchase->address->fullName . ' - ' . $purchase->address->zip_code  }}</td>
+
                                     <td style="font-family: BYekan" ><form action="{{ route('purchases.change-status', ['id' => $purchase->id, 'shop' => $shop->english_name]) }}" method="post">
                                             @csrf
                                             {{ method_field('put') }}

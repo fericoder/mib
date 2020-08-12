@@ -40,7 +40,7 @@ class CommentController extends Controller
         Comment::create(array_merge([
             'user_id' => auth()->user()->id,
         ], $request->all() ));
-        alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
+        alert()->success('نظر شما پس از تایید برروی سایت قرار میگیرد.', 'انجام شد');
         return redirect()->back();
     }
 
