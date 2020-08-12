@@ -535,7 +535,27 @@ class ProductController extends Controller
 
 
 
+
         if (isset($request->group)){
+            $gp_request = [];
+            $gp_product = [];
+            foreach($request->group as $groupId => $group)
+            {
+                if(strpos($groupId, 'new') === false){
+                    $gp_request[] = $groupId;
+                }
+            }
+
+            foreach($product->groups as $gp){
+                $gp_product[] = $gp->id;
+            }
+            if ((count(array_diff($gp_product, $gp_request))) != 0) {
+                foreach(array_diff($gp_product,$gp_request) as $gp_id){
+                    $specificationGroup = SpecificationItemGroup::find($gp_id);
+                    $specificationGroup->delete();
+            }
+            }
+
             foreach($request->group as $groupId => $group)
             {
                 if(strpos($groupId, 'new') !== false){
@@ -550,7 +570,6 @@ class ProductController extends Controller
                     SpecificationItemGroup::updateOrCreate(['id' => $groupId],
                     ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $group['amount'], 'p_id' => $group['p_id']]);
                 }
-
             }
 
         }

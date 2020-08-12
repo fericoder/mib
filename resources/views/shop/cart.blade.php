@@ -79,7 +79,7 @@
                     <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
                         @if($cart)
-                        <div class="c-checkout__to-shipping-price-report--price">{{ number_format($cartProduct->total_price) }} <span>تومان</span></div>
+                        <div class="c-checkout__to-shipping-price-report--price">{{ number_format($cartProduct->cart->total_price) }} <span>تومان</span></div>
                        @else
                         <div class="c-checkout__to-shipping-price-report--price"> 0 <span>تومان</span></div>
                         @endif
@@ -98,7 +98,7 @@
                         <!--incredible-->
                         <li class="has-devider">
                             <span>قیمت کالاها</span>
-                            <span> {{ number_format($cartProduct->total_price) }} تومان </span>
+                            <span> {{ number_format($cartProduct->cart->total_price) }} تومان </span>
 
                         </li>
                         <li>
@@ -111,7 +111,7 @@
                         </li>
                         <li class="has-devider">
                             <span> مبلغ قابل پرداخت </span>
-                            <span> {{ number_format($cartProduct->total_price) }} تومان </span>
+                            <span> {{ number_format($cartProduct->cart->total_price) }} تومان </span>
                                 </li>
 
                     </ul>

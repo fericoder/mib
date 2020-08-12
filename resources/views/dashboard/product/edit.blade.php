@@ -43,7 +43,9 @@
             border: none;
             width: 200px!important;
         }
-
+        i.fa-trash-alt{
+            cursor: pointer;
+        }
     </style>
 @stop
 
@@ -441,6 +443,9 @@
                                                         @foreach($product->groups as $groupItem)
 
                                                         <div class="items">
+                                                            <a class="mr-2 item-delete font-15" style="font-size: 20px"  title="حذف آیکون" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a>
+
+
                                                             <h4 class="text-center">شماره {{ $loop->index + 1 }}
                                                             </h4>
                                                         <div class="input-group mt-3 specification-dot">
@@ -735,14 +740,19 @@
             });
             $(".addSection").click(function() {
                 counter += 1;
-                $("div.section").append('<div class="items mt-4"><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group[new-'+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
+                $("div.section").append('<div class="items mt-4"><a class="mr-2 item-delete font-15" style="font-size: 20px" title="حذف آیکون" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group[new-'+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
                 $('.selectpicker').select2({
                     width: '50%',
                     closeOnSelect: false
                 });
-
+                $(".item-delete").on('click', '.far', function() {
+                    $(this).closest('.items').remove();
+                  });
             });
         });
+        $(".item-delete").on('click', '.far', function() {
+            $(this).closest('.items').remove();
+          });
     </script>
     <!--end::Page Scripts -->
     <script src="/assets/js/pages/crud/forms/widgets/select2.js" type="text/javascript"></script>

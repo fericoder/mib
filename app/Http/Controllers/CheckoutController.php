@@ -9,6 +9,7 @@ use App\Http\Requests\CheckOutRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Cart;
+use App\CartProduct;
 use App\UserPurchase;
 
 class CheckoutController extends Controller
@@ -21,13 +22,21 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
 
-        foreach($request->except('_token') as $cartProductId => $quantity){
-
+        foreach ($request->except('_token') as $cartProductId => $quantity) {
+            $cartProduct = CartProduct::find($cartProductId);
             $cartProductUpdate = \Auth::user()->cart()->get()->first()->cartProduct()->where('id', $cartProductId)->update([
-                'quantity' => $quantity,
+                'quantity' => $quantity,'total_price' => $cartProduct->product->price * $quantity,
             ]);
-
         }
+            $cart = \Auth::user()->cart()->get()->first();
+            $total_price = 0;
+            foreach ($cart->cartProduct as $cartProduct) {
+                $total_price += $cartProduct->total_price;
+            }
+            $cartUpdate = $cart->update([
+                'total_price' => $total_price,
+                ]);
+
         $categories = Category::all();
         $cart = \Auth::user()->cart()->get()->first();
         $user = \Auth::user();

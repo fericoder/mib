@@ -111,8 +111,8 @@
                 <div class="c-checkout__to-shipping-sticky">
                     <a href="javascript:$('#purchase').submit();" class="c-checkout__to-shipping-link">ثبت نهایی سفارش</a>
                     <div class="c-checkout__to-shipping-price-report">
-                        <p>مبلغ قابل پرداخت</p>
-                        <div class="c-checkout__to-shipping-price-report--price">۱۹۶,۷۰۰ <span>تومان</span></div>
+                        {{-- <p>مبلغ قابل پرداخت</p> --}}
+                        {{-- <div class="c-checkout__to-shipping-price-report--price">۱۹۶,۷۰۰ <span>تومان</span></div> --}}
                     </div>
                 </div>
             </form>
