@@ -160,10 +160,12 @@
 
                 @endguest
 
+                @auth()
 
             <a href="{{ route('user-cart') }}" class="cart">
                 <i class="fa fa-shopping-cart"></i>
             </a>
+            @endauth
         </div>
 
 

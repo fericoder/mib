@@ -26,6 +26,12 @@
                                 </div>
                                 <div class="c-checkout__col--desc">
                                     <a href="{{ route('shop.product', $cartProduct->product->id ) }}">{{ $cartProduct->product->title }}</a>
+                                    @if($cartProduct->group)
+                                    @foreach(App\Http\Controllers\ShopController::getItemsGroup($cartProduct->group->specification_items) as $item)
+                                    <p style="margin-top:5px;color:gray">{{ $item }}</p>
+
+                                    @endforeach
+                                    @endif
                                     <div class="c-checkout__variant c-checkout__variant--color"></div>
                                     <div class="c-checkout__col--information">
                                         <div class="c-checkout__col c-checkout__col--counter">

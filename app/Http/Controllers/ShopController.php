@@ -257,4 +257,14 @@ class ShopController extends Controller
     }
 
 
+    public static function getItemsGroup($specificationItemsArray) {
+        $allItems = collect();
+        foreach($specificationItemsArray as $specificationItemArray){
+            $item = SpecificationItem::find($specificationItemArray);
+            $allItems[] = $item->name;
+        }
+        return $allItems;
+    }
+
+
 }
