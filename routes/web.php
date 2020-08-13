@@ -107,8 +107,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');
     Route::post('/profile/informationUpdate', 'ProfileController@informationUpdate')->name('profile.informationUpdate');
     Route::get('/profile/orders', 'ProfileController@orders')->name('profile.orders');
+    Route::get('profile/orders/show/{id}', 'ProfileController@ordersShow')->name('profile.orders.show')->where(['userID' => '[0-9]+', 'id' => '[0-9]+']);
     Route::get('/profile/passwordShow', 'ProfileController@passwordShow')->name('profile.passwordShow');
     Route::post('/profile/passwordUpdate', 'ProfileController@passwordStore')->name('profile.passwordUpdate');
+
+    //Comment
+    Route::post('comment', 'CommentController@comment')->middleware('auth');
+    Route::post('/comment/answer', 'CommentController@answer')->middleware('auth');
 
 });
 

@@ -54,7 +54,6 @@
                                             پاسخ:</label>
                                         <textarea class="form-control iranyekan" name="comment" id="comment"></textarea>
                                         <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                                        <input type="hidden" name="shop_id" value="{{ $shop->id }}">
                                         <input type="hidden" name="commentable_id" value="{{ $comment->commentable()->withTrashed()->get()->first()->id }}">
                                         <input type="hidden" name="approved" value="1">
                                         <input type="hidden" name="commentable_type" value="{{ get_class($comment->commentable()->withTrashed()->get()->first()) }}">
@@ -284,34 +283,24 @@
                             </thead>
                             <tbody>
 
-                            @foreach($comments->where('approved', '0' ) as $comment)
+                            @foreach($comments as $comment)
                                 <tr role="row" class="odd icon-hover hover-color">
-                                    <td style="width:5%"><a target="_blank" href="{{ route('product', ['shop' => $comment->shop->english_name, 'product' => $comment->commentable()->withTrashed()->get()->first()->id]) }}">{{ $comment->commentable()->withTrashed()->get()->first()->title }}</a>
-                                    </td>
-                                    <td>{{ $comment->user->firstName . ' ' . $comment->user->lastName }}</td>
-                                    <td>{{ jdate($comment->created_at) }}</td>
-                                    <td class="d-flex justify-content-between">
-                                        {{ $comment->comment }}
-                                        <div class="d-none icon-show">
-                                            @if($comment->approved == 0)
-                                                <a href="{{ route('comment.approve', [ $comment->id,  $comment->commentable()->withTrashed()->get()->first()]) }}"
-                                                   class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem5') }}"><i style="color: #03c9a9;" class="fa fa-check"></i>
-                                                </a>
-                                            @endif
-                                            <a data-toggle="modal" data-target="#m_modal_{{ $comment->id }}" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem6') }}">
-                                                <i style="color: #19b5fe" class="fa fa-reply">
-                                                </i>
+                                    <td ><a target="_blank" href="{{ route('shop.product', $comment->commentable()->withTrashed()->get()->first()->id) }}">{{ $comment->commentable()->withTrashed()->get()->first()->title }}</a></td>
+                                    <td>{{ $comment->user->fName . ' ' . $comment->user->lName }}</td>
+                                    <td style="direction: ltr; font-family: BYekan">{{ jdate($comment->created_at) }}</td>
+                                    <td>{{ $comment->comment }}</td>
+                                    <td>{{ $comment->approved == 0 ? 'تایید نشده' : 'تایید شده' }}</td>
+                                    <td>
+                                        @if($comment->approved == 0)
+                                            <a href="{{ route('comment.approve', [ $comment->id,  $comment->commentable()->withTrashed()->get()->first()]) }}"
+                                               class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem5') }}"><i style="color: #03c9a9;" class="fa fa-check"></i>
                                             </a>
-                                            @if($comment->deleted_at != null)
-                                                <a href="" data-id="{{$comment->id}}" data-commentable="{{ $comment->commentable()->withTrashed()->get()->first()->id }}"
-                                                   class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill button" title="بازگردانی" id="restoreComment"><i class="fas fa-undo p-1 text-warning"></i></a>
+                                            <a href="" data-id="{{$comment->id}}" data-commentable="{{ $comment->commentable()->withTrashed()->get()->first()->id }}"
+                                               class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill button" title="{{ __('dashboard-shop-product-comment.listNazaraatItem7') }} "> <i style="color: #db0a5b" class="fa fa-times"></i> </a>
 
-                                            @else
-                                                <a href="" data-id="{{$comment->id}}" data-commentable="{{ $comment->commentable()->withTrashed()->get()->first()->id }}"
-                                                   class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill button" title="{{ __('dashboard-shop-product-comment.listNazaraatItem7') }} "> <i style="color: #db0a5b" class="fa fa-times"></i> </a>
-                                            @endif
-                                        </div>
+                                        @endif
                                     </td>
+
                                 </tr>
                             @endforeach
 

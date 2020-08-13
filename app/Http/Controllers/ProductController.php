@@ -14,7 +14,6 @@ use App\Value;
 use App\Facility;
 use App\Dashboard;
 use App\ProductCategory;
-use App\Feature;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\DB;
@@ -39,10 +38,9 @@ class ProductController extends Controller
 
         $categories = Category::all();
         $brands = Brand::all();
-        $colors = Color::all();
         $products = Product::all();
         $specifications = Specification::whereHas('items')->orderBy('order', 'DESC')->get();
-        return view('dashboard.product.index', compact('categories','products', 'brands', 'colors', 'specifications'));
+        return view('dashboard.product.index', compact('categories','products', 'brands', 'specifications'));
 
     }
 
@@ -214,34 +212,11 @@ class ProductController extends Controller
                     }
                 }
 
-                //add facilities
-            //    if($request->facility[0] != null){
-            //        foreach(array_slice($request->facility, 0, 50) as $facility){
-            //            DB::table('facilities')->insert(['name' => $facility, 'product_id' => $product->id]);
-            //        }
-            //    }
-
-
-                // if($request->specification_amount == 'on' and $request->get('specification_amount_number')){
-                //     foreach($request->specification_amount_number as $specification_amount_number_id => $specification_amount_number){
-                //         DB::table('product_specificationItem')->insertOrIgnore([
-                //             ['product_id' => $product->id, 'specification_item_id' => $specification_amount_number_id, 'amount' => $specification_amount_number]
-                //         ]);
-                //     }
-                //     $product->update([
-                //         'specification_amount_status' => 'enable'
-                //     ]);
-                // }
-
-
-                //add tags and colors and features and specifications to the product
-                if($product)
+                          if($product)
                 {
                     DB::transaction(function () use ($request, $product) {
 
                         $tagIds = [];
-//                         $colorIds = [];
-//                         $featureIds = [];
                         $sepecificationIds = [];
 
                         //get all tags of product
@@ -256,67 +231,6 @@ class ProductController extends Controller
                             }
                         }
                         $product->tags()->sync($tagIds);
-
-//                         // get all colors of product
-//                         if($request->get('color') and !$request->get('color_amount_number')){
-
-//                             foreach($request->get('color') as $colorName)
-//                             {
-//                                 $color = Color::firstOrCreate(['id'=>$colorName]);
-//                                 if($color)
-//                                 {
-//                                     $colorIds[] = $color->id;
-//                                 }
-//                             }
-//                             $product->colors()->sync($colorIds);
-//                         }
-
-
-//                         //get all color and color Amount of product
-//                         if($request->get('color') and $request->get('color_amount_number')){
-
-//                             foreach($request->get('color_amount_number') as $colorId=>$colorAmount)
-//                             {
-//                                 $color = Color::find($colorId);
-//                                 if($color){
-//                                     $colorIds[$color->id] = ['amount'=>$colorAmount];
-//                                 }
-//                             }
-
-//                             $product->colors()->sync($colorIds);
-//                             $product->update([
-//                                 'color_amount_status' => 'enable'
-//                             ]);
-//                         }
-
-
-
-
-                        // if($request->get('specifications')){
-                        //     foreach($request->get('specifications') as $specificationName)
-                        //     {
-                        //         $specification = Specification::firstOrCreate(['id'=>$specificationName]);
-                        //         if($specification)
-                        //         {
-                        //             $sepecificationIds[] = $specification->id;
-                        //         }
-                        //     }
-                        //     $product->specifications()->sync($sepecificationIds);
-                        // }
-
-
-                        //get all features of product
-                        // if($request->get('value')){
-                        //     foreach($request->get('value') as $featureId=>$featureValue)
-                        //     {
-                        //         $feature = Feature::find($featureId);
-                        //         if($feature){
-                        //             $featureIds[$feature->id] = ['value'=>$featureValue];
-                        //         }
-                        //     }
-
-                        //     $product->features()->sync($featureIds);
-                        // }
 
 
                     });
@@ -356,9 +270,8 @@ class ProductController extends Controller
         $tags = implode(',', $tags);
         $categories = \Auth::user()->shop()->first()->categories()->doesntHave('children')->get();
         $brands = \Auth::user()->shop()->first()->brands()->get();
-        $colors = Color::all();
         $lastGroupId = SpecificationItemGroup::latest('id')->first()->id;
-        return view('dashboard.product.edit', compact('product','categories','brands','colors','tags', 'shop', 'specifications','lastGroupId'));
+        return view('dashboard.product.edit', compact('product','categories','brands','tags', 'shop', 'specifications','lastGroupId'));
 
     }
 
@@ -611,8 +524,6 @@ class ProductController extends Controller
         if($updatedProduct)
         {
             $tagIds = [];
-            // $colorIds = [];
-            // $featureIds = [];
             $sepecificationIds = [];
 
 
@@ -665,19 +576,6 @@ class ProductController extends Controller
                 $product->specifications()->sync($sepecificationIds);
             }
 
-            //get all features of product
-            // if($request->get('value')){
-            //     foreach($request->get('value') as $featureId=>$featureValue)
-            //     {
-
-            //         $feature = Feature::find($featureId);
-            //         if($feature){
-            //             $featureIds[$feature->id] = ['value'=>$featureValue];
-            //         }
-            //     }
-
-            //     $product->features()->sync($featureIds);
-            // }
 
 
             $product->tags()->sync($tagIds);

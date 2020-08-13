@@ -6,6 +6,8 @@ use App\Address;
 use App\Http\Requests\AddressesRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\InformationRequest;
+use App\Purchase;
+use App\UserPurchase;
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -111,6 +113,15 @@ class ProfileController extends Controller
         $categories = Category::all();
         $user = \Auth::user();
         return view('shop.profile.orders', compact('categories', 'user'));
+    }
+
+    public function ordersShow(Request $request)
+    {
+
+        $purchase = UserPurchase::where('id', $request->id)->get()->first();
+        $categories = Category::all();
+        $user = \Auth::user();
+        return view('shop.profile.order-products', compact('categories', 'user', 'purchase'));
     }
 
 

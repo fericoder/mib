@@ -244,7 +244,7 @@
                                 <th title="Field #5" data-field="5">شماره موبایل</th>
                                 <th title="Field #5" data-field="5">وضعیت</th>
                                 <th title="Field #5" data-field="5"> تاریخ عضویت</th>
-                                <th title="Field #6" data-field="6">جزییات|سفارشات</th>
+                                <th title="Field #6" data-field="6">ویرایش|سفارشات</th>
                             </tr>
                             </thead>
                             <tbody>

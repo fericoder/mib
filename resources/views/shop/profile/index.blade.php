@@ -61,7 +61,7 @@
                             <div>{{ jdate($order->created_at) }}</div>
                             <div>{{ number_format($order->price) }} تومان</div>
                             <div><span class="c-table-orders__payment-status--ok">پرداخت موفق</span></div>
-                            <div><a href="#"><i class="fa fa-chevron-left"></i></a></div>
+                            <div><a href="{{ route('profile.orders.show', $order->id) }}"><i class="fa fa-chevron-left"></i></a></div>
                         </div>
                     @endforeach
 

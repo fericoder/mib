@@ -24,24 +24,25 @@
             </div>
         </div>
         <div class="o-page__content">
-            <div class="o-headline o-headline--profile"><span>آخرین سفارش‌ها </span></div>
+            <div class="o-headline o-headline--profile"><span>مشاهده محصولات سفارش </span></div>
             <div class="c-table-orders">
                 <div class="c-table-orders__head--highlighted">
-                    <div>شماره سفارش</div>
-                    <div>تاریخ</div>
-                    <div>مبلغ کل</div>
-                    <div>عملیات پرداخت</div>
-                    <div>جزییات</div>
+                    <div>شناسه محصول</div>
+                    <div>نام</div>
+                    <div>قیمت</div>
+                    <div>تعداد</div>
+                    <div>کد CRM محصول</div>
+
                 </div>
                 <div class="c-table-orders__body">
 
-                    @foreach ($user->purchases as $order)
+                        @foreach ($purchase->cart()->withTrashed()->where('status' , 1)->get()->first()->cartProduct as $product)
                         <div class="table-row">
-                            <div>{{ 'MIB-' . $order->id }}</div>
-                            <div>{{ jdate($order->created_at) }}</div>
-                            <div>{{ number_format($order->total_price) }} تومان</div>
-                            <div><span class="c-table-orders__payment-status--ok">{{ $order->status }}</span></div>
-                            <div><a href="{{ route('profile.orders.show', $order->id) }}"><i class="fa fa-chevron-left"></i></a></div>
+                            <div><a target="_blank" href="{{ route('shop.product',$product->product->id ) }}">{{ $product->product->id }}</a></div>
+                            <div>{{ $product->product->title }}</div>
+                            <div>{{ number_format($product->total_price) }} تومان</div>
+                            <div><span class="c-table-orders__payment-status--ok">{{ $product->quantity }}</span></div>
+                            <div>-</div>
                         </div>
                     @endforeach
 

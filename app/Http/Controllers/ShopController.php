@@ -24,6 +24,7 @@ class ShopController extends Controller
 
     public function product(Request $request)
     {
+
         $categories = Category::all();
         $product = Product::where('id', $request->id)->firstOrFail();
         $product->increment('viewCount');
