@@ -2,21 +2,59 @@
 
 @section('content')
 
+@forelse (auth()->user()->addresses as $address)
+
+<div id="myModal{{ $address->id }}" class="modal">
+    <div class="modal-content register login account-box">
+        <span class="close close{{ $address->id }}">&times;</span>
+        <div class="content">
+            <form style="width: 30%!important;" method="POST" action="{{ route('profile.addressesUpdate', $address->id) }}">
+                @csrf
+                @method('PUT')
+                <label for="pwd">نام دریافت کننده  <span style="color: red;    font-size: 15px;">*</span></label>
+                <input name="fullName" type="text" value="{{ $address->fullName }}">
+
+                <label style="margin-top: 10px" for="pwd">کد پستی <span style="color: red;    font-size: 15px;">*</span></label>
+                <input name="zip_code" type="text" value="{{ $address->zip_code }}">
+
+                <label style="margin-top: 10px" for="pwd">  استان<span style="color: red;    font-size: 15px;">*</span> </label>
+                <input name="province" type="text" value="{{ $address->province }}">
+
+                <label style="margin-top: 10px" for="pwd">شهر<span style="color: red;    font-size: 15px;">*</span></label>
+                <input name="city" type="text" value="{{ $address->city }}">
+
+
+                <label style="margin-top: 10px" for="pwd">آدرس<span style="color: red;    font-size: 15px;">*</span></label>
+                <input name="address" type="text" value="{{ $address->address }}">
+
+                <label style="margin-top: 10px" for="pwd">شماره تماس<span style="color: red;    font-size: 15px;">*</span></label>
+                <input name="tel" type="text" value="{{ $address->tel }}">
+
+
+                <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>ثبت آدرس جدید</button>
+            </form>
+        </div>
+    </div>
+</div>
+@empty
+
+  @endforelse
     <main class="main-cart container">
         <div class="o-page__content">
             <div id="shipping-data">
-                <form action="{{ route('checkout.store') }}" method="post" id="purchase">
+                {{--  <form action="{{ route('checkout.store') }}" method="post" id="purchase">  --}}
                     @csrf
                 <div class="o-headline o-headline--checkout"><span>انتخاب آدرس تحویل سفارش</span></div>
                 @forelse (auth()->user()->addresses as $address)
                   <div class="d-flex" style="align-items: center;">
                     <input type="radio" class="option-input radio m-2" value="{{ $address->id }}" name="address" {{  $loop->first == true ? 'checked' : '' }} />
+
                 <div id="address-section" class="w-100">
                     <div id="user-default-address-container" class="c-checkout-contact is-completed">
                         <div class="c-checkout-contact__content">
                             <ul class="c-checkout-contact__items">
                                 <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : {{ $address->fullName }}</span>
-                                    {{-- <button class="c-checkout-contact__btn-edit">اصلاح این آدرس</button> --}}
+                                    <a id="myBtn{{ $address->id }}" style="margin: 5px;cursor: pointer;" title="ویرایش" ><i class="fa fa-edit text-info mr-1 button font-15"></i></a>
                                 </li>
                                 <li class="c-checkout-contact__item c-checkout-contact__item--location">
                                     <div class="c-checkout-contact__item c-checkout-contact__item--mobile"> <span>شماره تماس : {{ $address->tel }}</span></div>
@@ -205,4 +243,40 @@
     </div> --}}
 
 
+
 @stop
+@section('footerScripts')
+<script>
+    @forelse (auth()->user()->addresses as $address)
+
+    // Get the modal
+    var modal{{ $address->id }} = document.getElementById("myModal{{ $address->id }}");
+
+    // Get the button that opens the modal
+    var btn{{ $address->id }} = document.getElementById("myBtn{{ $address->id }}");
+
+    // Get the <span> element that closes the modal
+    var span{{ $address->id }} = document.getElementsByClassName("close{{ $address->id }}")[0];
+
+    // When the user clicks on the button, open the modal
+    btn{{ $address->id }}.onclick = function() {
+        modal{{ $address->id }}.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span{{ $address->id }}.onclick = function() {
+        modal{{ $address->id }}.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal{{ $address->id }}) {
+            modal{{ $address->id }}.style.display = "none";
+        }
+    }
+    @empty
+
+    @endforelse
+</script>
+
+@endsection

@@ -45,6 +45,23 @@ class ProfileController extends Controller
 
     }
 
+    public function addressesUpdate(AddressesRequest $request, $id)
+    {
+        $address = Address::where('id', $id)->update([
+            'address' => $request->address,
+            'city' => $request->city,
+            'province' => $request->province,
+            'tel' => $request->tel,
+            'zip_code' => $request->zip_code,
+            'fullName' => $request->fullName,
+            'user_id' => \Auth::user()->id,
+        ]);
+
+        alert()->success('آدرس با موفقیت ویرایش شد.', 'ثبت شد');
+        return redirect()->back();
+
+    }
+
     public function addressesDelete(Request $request)
     {
         $address = Address::where('id', $request->id)->first();

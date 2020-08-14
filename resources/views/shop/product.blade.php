@@ -64,7 +64,7 @@
     </div>
 
 
-    <article class="c-product">
+    <div class="c-product">
         <section class="c-product__info">
             <div class="c-product__headline">
                 <h1 class="c-product__title"> <span class="fa-title"> {{ $product->title }} </span> </h1>
@@ -104,7 +104,7 @@
 
                     <div class="c-product__params">
                         <ul data-title="توضیحات محصول">
-                            <div style="margin-top: 20px;width: 600px" class="quantity mt-3">
+                            <div style="margin-top: 20px;" class="quantity mt-3">
                                 <p style="max-width: 450px;"> {{ $product->shortDescription }}</p>
 
                                 @if ($product->catalog)
@@ -218,7 +218,7 @@
         {{--</ul>--}}
         {{--</div>--}}
         {{--</section>--}}
-    </article>
+    </div>
 
 
 

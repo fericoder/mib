@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mediaq.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="/assets/plugins/global/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
 
@@ -105,9 +107,31 @@
 
     </style>
     @yield('headerScripts')
+    <style>
+        #ex4 .p1[data-count]:after{
+            position:absolute;
+            top:5%;
+            content: attr(data-count);
+            padding:.3em;
+            font-size: 13px;
+            border-radius:50%;
+            line-height:1em;
+            color: white;
+            background:#ef394eed;
+            text-align:center;
+            min-width: 1em;
+            font-family: byekan;
+          }
+          .cart i {
+            position: absolute;
+            top: -9px;
+            font-size: .8em!important;
+            left: 10px;
+        }
+    </style>
 </head>
 
-<body style="padding: 50px">
+<body>
 <header>
     <section class="top-head container">
         <div class="right-head">
@@ -161,10 +185,14 @@
                 @endguest
 
                 @auth()
+                <a href="{{ route('user-cart') }}" class="cart">
+                <div id="ex4">
+                    <span class="p1 fa-stack fa-2x has-badge" data-count="{{ \Auth::user()->cart()->get()->count()  != 0 ?  \Auth::user()->cart()->get()->first()->cartProduct()->count() : 0 }}">
+                      <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
+                    </span>
+                  </div>
+                        </a>
 
-            <a href="{{ route('user-cart') }}" class="cart">
-                <i class="fa fa-shopping-cart"></i>
-            </a>
             @endauth
         </div>
 

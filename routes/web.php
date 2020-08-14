@@ -102,6 +102,7 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('/profile', 'ProfileController@index')->name('profile.index');
     Route::get('/profile/addressesShow', 'ProfileController@addressesShow')->name('profile.addressesShow');
+    Route::put('/profile/addressesUpdate/{id}', 'ProfileController@addressesUpdate')->name('profile.addressesUpdate');
     Route::post('/profile/addressesStore', 'ProfileController@addressesStore')->name('profile.addressesStore');
     Route::get('/profile/addressesDelete', 'ProfileController@addressesDelete')->name('profile.addressesDelete');
     Route::get('/profile/informationShow', 'ProfileController@informationShow')->name('profile.informationShow');

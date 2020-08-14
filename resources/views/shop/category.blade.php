@@ -70,7 +70,7 @@
                         @endforeach
 
                     </ul>
-                    <div class="c-pager">
+                    <div class="c-pager d-flex">
                             {!! $productsPaginate->render() !!}
                     </div>
                 </div>
@@ -112,3 +112,13 @@
 
     </script>
 @stop
+@section('footerScripts')
+    <script>
+        $(window).on("load", function() {
+            $('.pagination').addClass("d-flex");
+
+           });
+
+
+    </script>
+@endsection
