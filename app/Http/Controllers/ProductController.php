@@ -7,6 +7,7 @@ use App\Product;
 use App\Shop;
 use App\Tag;
 use App\Brand;
+use App\Cart;
 use App\ErrorLog;
 use App\Color;
 use App\Specification;
@@ -25,6 +26,8 @@ use App\SpecificationItem;
 use App\SpecificationItemGroup;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -375,6 +378,7 @@ class ProductController extends Controller
             $request->enable = 1;
 
 
+
         //check options of products
         // if (!isset($request->fast_sending))
         //     $request->fast_sending = 'off';
@@ -594,6 +598,15 @@ class ProductController extends Controller
      */
     public function destroy(Request $request)
     {
+        $carts = Cart::all();
+        foreach($carts as $cart){
+          foreach($cart->cartProduct as $cartProduct){
+            $deletedProduct = $cartProduct->product()->where('id', $request->id)->get()->first();
+            if($deletedProduct){
+              $cartProduct->where('product_id', $deletedProduct->id)->delete();
+            }
+          }
+        }
         $product = Product::where('id' , $request->id)->first()->delete();
         alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
         return redirect()->back();

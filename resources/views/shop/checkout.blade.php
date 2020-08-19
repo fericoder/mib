@@ -4,7 +4,7 @@
 
 @forelse (auth()->user()->addresses as $address)
 
-<div id="myModal{{ $address->id }}" class="modal">
+<div id="myModal{{ $address->id }}" class="modal" style="    z-index: 100000;">
     <div class="modal-content register login account-box">
         <span class="close close{{ $address->id }}">&times;</span>
         <div class="content">
@@ -31,7 +31,7 @@
                 <input name="tel" type="text" value="{{ $address->tel }}">
 
 
-                <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>ثبت آدرس جدید</button>
+                <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>ثبت</button>
             </form>
         </div>
     </div>

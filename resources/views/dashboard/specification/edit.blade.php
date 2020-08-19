@@ -93,6 +93,10 @@
                                     <input type="text" class="form-control inputfield" name="name" value="{{ old('name', $specification->name) }}">
                                 </div>
                                 <div class="input-group mt-3">
+                                    <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>نام خصوصیت:</span></div>
+                                    <input type="text" class="form-control inputfield" name="name_site" value="{{ old('name_site', $specification->name_site) }}">
+                                </div>
+                                <div class="input-group mt-3">
                                     <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>نحوه نمایش خصوصیت :</span>
                                     </div>
                                     <select class="form-control inputfield" name="type" id="">

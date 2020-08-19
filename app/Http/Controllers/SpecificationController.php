@@ -42,6 +42,7 @@ class SpecificationController extends Controller
     {
         $specification = new Specification;
         $specification->name = $request->name;
+        $specification->name_site = $request->name_site;
         $specification->type = $request->type;
         $specification->order = $request->order;
         $specification->shop_id = \Auth::user()->shop()->first()->id;
@@ -85,6 +86,7 @@ class SpecificationController extends Controller
     {
         $specification = \Auth::user()->shop()->first()->specifications()->where('id',$specification->id)->get()->first()->update([
             'name' => $request->name,
+            'name_site' => $request->name_site,
             'type' => $request->type,
             'order' => $request->order,
         ]);

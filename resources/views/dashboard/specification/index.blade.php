@@ -48,7 +48,11 @@
                         <div class="form-group mb-0">
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>نام خصوصیت :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('name') }}" name="name" placeholder="مثال: سایز">
+                                <input type="text" class="form-control inputfield" value="{{ old('name') }}" name="name" placeholder="مثال: سایز محصول شماره ۱">
+                            </div>
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i> نام خصوصیت ( نمایش در فروشگاه ):</span></div>
+                                <input type="text" class="form-control inputfield" value="{{ old('name_site') }}" name="name_site" placeholder="مثال: سایز">
                             </div>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>نحوه نمایش خصوصیت :</span>
@@ -296,6 +300,7 @@
                             <tr>
                                 <th title="Field #1" data-field="1">شناسه</th>
                                 <th title="Field #2" data-field="2">نام</th>
+                                <th title="Field #2" data-field="2">نام در فروشگاه</th>
                                 <th title="Field #5" data-field="5">نحوه نمایش</th>
                                 <th title="Field #5" data-field="5">تغییرات</th>
                             </tr>
@@ -306,6 +311,7 @@
                                 <tr role="row" class="odd icon-hover hover-color">
                                     <td>{{ $specification->id }}</td>
                                     <td>{{ $specification->name }}</td>
+                                    <td>{{ $specification->name_site }}</td>
                                     <td>{{ $specification->type == 'radio' ? 'تک انتخابی'  : 'چند انتخابی'}}</td>
                                     <td>
                                         <a href="{{ route('specification-item.main', ['id' => $specification->id]) }}" title="گزینه ها"><i class="fa fa-tasks text-success mr-1 button font-17"></i>
