@@ -8,6 +8,7 @@ use App\Shop;
 use App\Tag;
 use App\Brand;
 use App\Cart;
+use App\CartProduct;
 use App\ErrorLog;
 use App\Color;
 use App\Specification;
@@ -470,7 +471,9 @@ class ProductController extends Controller
             if ((count(array_diff($gp_product, $gp_request))) != 0) {
                 foreach(array_diff($gp_product,$gp_request) as $gp_id){
                     $specificationGroup = SpecificationItemGroup::find($gp_id);
+                    CartProduct::where('group_id', $gp_id)->delete();
                     $specificationGroup->delete();
+
             }
             }
 
@@ -492,7 +495,11 @@ class ProductController extends Controller
 
         }
         else{
+            foreach($product->groups as $singleGp){
+                CartProduct::where('group_id', $singleGp->id)->delete();
+            }
             $product->groups()->delete();
+
         }
 
 

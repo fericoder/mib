@@ -1,10 +1,14 @@
 @extends('shop.layouts.master', ['title' => 'سبد خرید' ])
+
 <link rel="stylesheet" href="{{ asset('css/style-quantity.css') }}">
 
 @section('content')
 <style>
     .flex-1{
         flex: 1!important;
+    }
+    .main-cart .o-page__content {
+        flex: 0 0 100%!important;
     }
 </style>
 
@@ -82,7 +86,7 @@
                     <a href="{{ route('shop.index') }}" class="c-checkout__to-shipping-link btn-cart">صفحه اصلی</a>
                     @endif
 
-                    <div class="c-checkout__to-shipping-price-report">
+                    {{-- <div class="c-checkout__to-shipping-price-report">
                         <p>مبلغ قابل پرداخت</p>
                         @if($cart)
                         <div class="c-checkout__to-shipping-price-report--price">{{ number_format($cartProduct->cart->total_price) }} <span>تومان</span></div>
@@ -90,13 +94,13 @@
                         <div class="c-checkout__to-shipping-price-report--price"> 0 <span>تومان</span></div>
                         @endif
 
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
         @if($cart)
 
-        <aside class="o-page__aside">
+        {{-- <aside class="o-page__aside">
             <div class="c-checkout-aside">
                 <div class="c-checkout-summary">
                     <ul class="c-checkout-summary__summary">
@@ -129,7 +133,7 @@
                 </div>
 
             </div>
-        </aside>
+        </aside> --}}
         @endif
 
     </section>

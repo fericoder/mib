@@ -7,7 +7,7 @@
                 <div class="c-box">
                     <div class="c-box__header">جستجو :</div>
                     <div class="c-box__content">
-                        <form action="{{ route('shop.search') }}">
+                        <form id="searchForm" action="{{ route('shop.search') }}">
                             <input type="text" name="keyword" value="{{ isset($keyword) ? $keyword : '' }}" placeholder="نام محصول مورد نظر را بنویسید…">
                             <input type="hidden" name="category"  value="{{ isset($category) ? $category->id : '' }}">
                         </form>
@@ -40,10 +40,9 @@
                         <ul class="c-listing__sort" data-label="مرتب‌سازی بر اساس :">
                             <li><span>مرتب سازی بر اساس :</span></li>
                             <li><a href="#" class="is-active">پربازدیدترین</a></li>
-                            <li><a href="#">جدیدترین</a></li>
-                            <li><a href="#">پرفروش ترین</a></li>
-                            <li><a href="#">ارزان ترین</a></li>
-                            <li><a href="#">گران ترین</a></li>
+                            <li><a {{ \Request::get('sortBy') == 'created_at' ? "class=is-active" : ''  }} onclick="newest()" >جدیدترین</a></li>
+                            <li><a {{ \Request::get('sortBy') == 'viewCount' ? "class=is-active" : ''  }} onclick="highestView()" >پربازدیدترین</a></li>
+                            <li><a {{ \Request::get('sortBy') == 'buyCount' ? "class=is-active" : ''  }} onclick="highestSell()" >پرفروش ترین</a></li>
                         </ul>
                     </div>
                     <ul class="c-listing__items">
@@ -82,4 +81,46 @@
         </div>
     </section>
     <div class="jump-to-up"> <i class="fa fa-chevron-up"></i> <span> بازگشت به بالا </span></div>
+
+    <script>
+
+        function highestView(){
+            $('#sortBy').val('viewCount');
+            document.getElementById('searchForm').submit();
+        }
+
+        function newest(){
+            $('#sortBy').val('created_at');
+            document.getElementById('searchForm').submit();
+        }
+
+        function highestSell(){
+            $('#sortBy').val('buyCount');
+            document.getElementById('searchForm').submit();
+        }
+
+        // function cheapest(){
+        //     $('#sortBy').val('price');
+        //     document.getElementById('searchForm').submit();
+        // }
+        //
+        // function expensive(){
+        //     $('#sortBy').val('expensive');
+        //     document.getElementById('searchForm').submit();
+        // }
+
+
+
+    </script>
 @stop
+@section('footerScripts')
+    <script>
+        $(window).on("load", function() {
+            $('.pagination').addClass("d-flex");
+
+           });
+
+
+    </script>
+@endsection
+

@@ -42,7 +42,7 @@
     <main class="main-cart container">
         <div class="o-page__content">
             <div id="shipping-data">
-                {{--  <form action="{{ route('checkout.store') }}" method="post" id="purchase">  --}}
+                 <form action="{{ route('checkout.store') }}" method="post" id="purchase">
                     @csrf
                 <div class="o-headline o-headline--checkout"><span>انتخاب آدرس تحویل سفارش</span></div>
                 @forelse (auth()->user()->addresses as $address)

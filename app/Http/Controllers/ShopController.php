@@ -119,7 +119,13 @@ class ShopController extends Controller
         $products = Product::where('title', 'like', '%' . $request->keyword . '%')->orderBy($sortBy, $orderBy)->paginate($perPage)->appends([request()->except('page', '_token') , 'sortBy' => $sortBy, 'orderBy' => $orderBy, 'perPage' => $perPage, 'keyword' => $keyword]);
         isset($category) ? $products = Product::where('title', 'like', '%' . $request->keyword . '%')->where('category_id', $request->category)->orderBy($sortBy, $orderBy)->paginate($perPage)->appends([request()->except('page', '_token') , 'sortBy' => $sortBy, 'orderBy' => $orderBy, 'perPage' => $perPage, 'keyword' => $keyword]) : '';
 
-        return view('shop.category', compact('category', 'categories', 'products', 'keyword', 'perPage'));
+        $total = $products->count();
+        $perPage = 16; // How many items do you want to display.
+        $currentPage = request()->page; // The index page.
+        $productsPaginate = new LengthAwarePaginator($products->forPage($currentPage, $perPage), $total, $perPage, $currentPage);
+
+
+        return view('shop.category', compact('category', 'categories', 'productsPaginate', 'keyword', 'perPage'));
     }
 
 
