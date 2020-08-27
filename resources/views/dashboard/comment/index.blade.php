@@ -292,13 +292,12 @@
                                     <td>{{ $comment->approved == 0 ? 'تایید نشده' : 'تایید شده' }}</td>
                                     <td>
                                         @if($comment->approved == 0)
-                                            <a href="{{ route('comment.approve', [ $comment->id,  $comment->commentable()->withTrashed()->get()->first()]) }}"
-                                               class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem5') }}"><i style="color: #03c9a9;" class="fa fa-check"></i>
-                                            </a>
-                                            <a href="" data-id="{{$comment->id}}" data-commentable="{{ $comment->commentable()->withTrashed()->get()->first()->id }}"
-                                               class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill button" title="{{ __('dashboard-shop-product-comment.listNazaraatItem7') }} "> <i style="color: #db0a5b" class="fa fa-times"></i> </a>
-
+                                            <a href="{{ route('comment.approve', [ $comment->id,  $comment->commentable()->withTrashed()->get()->first()]) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem5') }}"><i style="color: #03c9a9;" class="fa fa-check"></i></a>
+                                            <a href="{{ route('comment.delete', ['id' => $comment->id]) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem7') }} "> <i style="color: #db0a5b" class="fa fa-times"></i> </a>
                                         @endif
+                                            @if($comment->approved == 1)
+                                                <a href="{{ route('comment.delete', ['id' => $comment->id]) }}" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="{{ __('dashboard-shop-product-comment.listNazaraatItem7') }} "> <i style="color: #db0a5b" class="fa fa-times"></i> </a>
+                                            @endif
                                     </td>
 
                                 </tr>

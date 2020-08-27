@@ -81,8 +81,14 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Request $request)
     {
-        //
+        $comment = Comment::where('id', $request->id)->first();
+        $comment->delete();
+        if(Comment::where('parent_id', $request->id)->first() != null){
+            Comment::where('parent_id', $request->id)->first()->delete();
+        }
+        alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
+        return redirect()->back();
     }
 }

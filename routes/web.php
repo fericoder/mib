@@ -51,7 +51,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Comment Actions
     Route::get('comment/notApproved', 'CommentController@notApproved')->name('comment.notApproved');
-    Route::post('comment/delete', 'CommentController@destroy');
+    Route::get('comment/delete', 'CommentController@destroy')->name('comment.delete');
     Route::post('comment/restore', 'CommentController@restore');
     Route::get('comment/approve/{id}/{commentable}', 'CommentController@approve')->name('comment.approve')->where(['id' => '[0-9]+']);
 
