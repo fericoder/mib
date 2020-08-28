@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\Brand;
+use App\FAQ;
 use App\Shop;
 use App\Specification;
 use App\SpecificationItem;
@@ -73,10 +74,6 @@ class ShopController extends Controller
 
 
 
-
-
-
-
     public function category(Request $request)
     {
         $categories = Category::all();
@@ -126,6 +123,31 @@ class ShopController extends Controller
 
 
         return view('shop.category', compact('category', 'categories', 'productsPaginate', 'keyword', 'perPage'));
+    }
+
+
+    public function aboutUs(){
+
+        $categories = Category::all();
+        $shop = Shop::find(1);
+        return view('shop.about-us',compact('categories','shop'));
+
+    }
+
+    public function contactUs(){
+
+        $categories = Category::all();
+        $shop = Shop::find(1);
+        return view('shop.contact-us',compact('categories','shop'));
+
+    }
+
+    public function faq(){
+
+        $categories = Category::all();
+        $faqs = FAQ::all();
+        return view('shop.faq',compact('categories','faqs'));
+
     }
 
 

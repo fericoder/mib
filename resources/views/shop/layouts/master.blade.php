@@ -260,14 +260,14 @@
                 <h3 class="head">لینک های کاربردی</h3>
                 <ul>
                     <li><a href="#">شرایط و قوانین</a></li>
-                    <li><a href="#">درباره ما</a></li>
-                    <li><a href="#">تماس باما</a></li>
+                    <li><a href="{{ route('shop.aboutUs') }}">درباره ما</a></li>
+                    <li><a href="{{ route('shop.contactUs') }}">تماس باما</a></li>
                 </ul>
             </div>
             <div class="customer-service">
                 <h3 class="head">خدمات مشتریان</h3>
                 <ul>
-                    <li><a href="#">پاسخ به پرسش های متداول</a></li>
+                    <li><a href="{{ route('shop.faq') }}">پاسخ به پرسش های متداول</a></li>
                     <li><a href="#">رویه های بازگرداندن کالا</a></li>
                     <li><a href="#">حریم خصوصی</a></li>
                 </ul>

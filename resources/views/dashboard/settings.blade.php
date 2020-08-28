@@ -162,6 +162,94 @@
                                     </div>
                                     <!--end card-->
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mt-0 header-title">تنظیمات تماس با ما</h3>
+                                            <div class="row ">
+                                                <div class="col-lg-12 ">
+                                                    <div class="form-group mt-5 row">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شماره تماس :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="phone" value="{{ old('phone', $shop->phone) }}">
+
+                                                        </div>
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">ایمیل :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="email" value="{{ old('email', $shop->email) }}">                                                        </div>
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">آدرس :</span></div>
+                                                            <textarea class="form-control" name="address">{{ old('address', $shop->address) }}</textarea>
+                                                        </div>
+
+
+                                                    </div>
+
+
+
+
+
+                                                    {{--<div class="form-group row">--}}
+                                                    {{--<label style="text-align: center" for="example-email-input" class="col-sm-2 col-form-label text-center">نام خانوادگی</label>--}}
+                                                    {{--<div class="col-sm-10">--}}
+                                                    {{--<input class="form-control" type="text" name="lastName" disabled value="{{ old('lastName', \Auth::user()->lastName) }}">--}}
+                                                    {{--</div>--}}
+                                                    {{--</div>--}}
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mt-0 header-title">تنظیمات درباره ما</h3>
+                                            <div class="row ">
+                                                <div class="col-lg-12 ">
+                                                    <div class="form-group mt-5 row">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>عنوان :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="about_header" value="{{ old('about_header', $shop->about_header) }}">
+                                                           </div>
+                                                           <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>متن اصلی :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="about_main" value="{{ old('about_main', $shop->about_main) }}">
+                                                           </div>
+
+
+                                                    </div>
+
+
+
+
+
+                                                    {{--<div class="form-group row">--}}
+                                                    {{--<label style="text-align: center" for="example-email-input" class="col-sm-2 col-form-label text-center">نام خانوادگی</label>--}}
+                                                    {{--<div class="col-sm-10">--}}
+                                                    {{--<input class="form-control" type="text" name="lastName" disabled value="{{ old('lastName', \Auth::user()->lastName) }}">--}}
+                                                    {{--</div>--}}
+                                                    {{--</div>--}}
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
 
 
 

@@ -87,6 +87,11 @@ class ShopSettingController extends Controller
             'pardakhtDarMahal' => $request->pardakhtDarMahal,
             'pardakhtBaDargah' => $request->pardakhtBaDargah,
             'checkOutDescription' => $request->checkOutDescription,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'about_header' => $request->about_header,
+            'about_main' => $request->about_main,
         ]);
 
         alert()->success('اطلاعات فروشگاه بروز شد.', 'بروز شد');
