@@ -221,7 +221,7 @@
                                                            </div>
                                                            <div class="input-group mt-3">
                                                             <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>متن اصلی :</span></div>
-                                                            <input type="text" class="form-control inputfield" name="about_main" value="{{ old('about_main', $shop->about_main) }}">
+                                                               <textarea class="form-control" rows="10" name="about_main">{{ old('about_main', $shop->about_main) }}</textarea>
                                                            </div>
 
 
