@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link href="/assets/plugins/global/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
@@ -204,14 +205,14 @@
             <li class="main-category"><i class="fa fa-bars"></i><a href="#">دسته بندی کالاها</a>
                 <ul class="dropdown2">
 
-                    @foreach ($categories->where('parent_id', null) as $category)
+                    @foreach (\App\Category::all()->where('parent_id', null) as $category)
                         <li>
                             <a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
                             <ul class="megamenu">
-                                @foreach ($categories->where('parent_id', $category->id) as $subCategory)
+                                @foreach (\App\Category::all()->where('parent_id', $category->id) as $subCategory)
                                     <li style="margin-right: 20px">
                                         <a style="width: 150px" href="{{ route('shop.category', $subCategory->id) }}">{{ $subCategory->name }}</a>
-                                    @foreach ($categories->where('parent_id', $subCategory->id) as $subSubCategory)
+                                    @foreach (\App\Category::all()->where('parent_id', $subCategory->id) as $subSubCategory)
                                             <ul >
                                                 <li style="margin-right: 20px">
                                                     <a style="width: 150px" href="{{ route('shop.category', $subSubCategory->id) }}">{{ $subSubCategory->name }}</a>
@@ -239,7 +240,7 @@
 @include('dashboard.layouts.errors')
 
 @yield('content')
-<footer>
+<footer style="    position: inherit!important;">
     <section class="footer container">
         <div class="icon">
             <div class="icon-item">
@@ -301,7 +302,6 @@
 <script src="{{ asset('assets/vendor/persianumber.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/elevatezoom.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
-<script src="/assets/plugins/global/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 @include('sweet::alert')
 

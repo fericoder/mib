@@ -13,7 +13,7 @@
 
 @section('content')
     <div class="c-product">
-    <section class="p-tabs">
+    <section style="width: 100%" class="p-tabs">
         <ul class="c-box-tabs" style="display: flex">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>درباره ما</span></a></li>
         </ul>

@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ورود به فروشگاه</title>
-    <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/mediaq.css') }}">
-</head>
-<style>
-    .is-invalid{
-        border-color: red!important;
-    }
-    .invalid-feedback{
-        color: red!important;
-        display: block;
-    }
-</style>
-<body>
+@extends('shop.layouts.master', ['title' => 'ورود به فروشگاه' ])
+@section('headerScripts')
+    <style>
+        .is-invalid{
+            border-color: red!important;
+        }
+        .invalid-feedback{
+            color: red!important;
+            display: block;
+        }
+    </style>
+
+ @stop
+
+@section('content')
 
 <section class="account-box">
     <div class="register-logo">
-        <a href="index.html"><img src="assets/images/png.svg" alt=""></a>
+        <a href="/"><img src="/assets/images/logo.png" alt=""></a>
     </div>
     <div class="register login">
         <div class="headline">ورود به فروشگاه</div>
@@ -71,8 +66,10 @@
         </div>
     </div>
 </section>
+@stop
+@section('footerScripts')
 
-<footer>
+<footer style="">
     <section class="footer account-footer container">
         <div class="copyright"><p>استفاده از مطالب فروشگاه فقط برای مقاصد غیرتجاری و با ذکر منبع
                 بلامانع است. کلیه حقوق این سایت متعلق به شرکت ایده برتر کیوان می‌باشد.</p></div>
@@ -87,5 +84,5 @@
 <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 </html>
-
+@stop
 
