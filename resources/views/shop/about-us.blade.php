@@ -3,10 +3,17 @@
 
 <style>
     .p-tabs {
-        margin-top: 85px;
+        {{--  margin-top: 85px;  --}}
         position: relative;
         padding-top: 115px;
         line-height: 20px;
+    }
+    .p-tabs {
+        margin-top: 0px;
+        width: 100%;
+    }
+    .c-box-tabs {
+        border: 0;
     }
 </style>
 @stop
@@ -14,7 +21,9 @@
 @section('content')
     <div class="c-product">
     <section class="p-tabs">
-        <ul class="c-box-tabs" style="display: flex">
+        <ul class="c-box-tabs" style="display: block;
+        text-align: center;
+        font-size: 15px;">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>درباره ما</span></a></li>
         </ul>
         <div class="c-box--tabs p-tabs__content">

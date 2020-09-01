@@ -401,7 +401,6 @@
                             }
                             var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specificationName+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
                             $(".all-selects").append(a);
-
                             specification.items.forEach(test);
                             function test(value, inx) {
                                 if(data.itemIds.includes(value.id.toString())){
@@ -449,8 +448,13 @@
                         $( ".all-selects" ).empty();
                         data.specifications.forEach(specificationArray);
                         function specificationArray(specification, index) {
-
-                            var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specification.name+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
+                            if(specification.name_site == null){
+                                var specificationName = specification.name;
+                            }
+                            else{
+                                var specificationName = specification.name_site;
+                            }
+                            var a = '<div class="row py-1"><label style="font-size: 16px; margin: 10px; margin-bottom: 10px" class="py-1 mt-2">'+specificationName+' :</label></div><div class="row"><select class="js-example-basic-single select-'+index+' test'+index+' item selectpicker selectItem" name="specification[]"> </div></div>';
                             $(".all-selects").append(a);
 
                             specification.items.forEach(wsw);

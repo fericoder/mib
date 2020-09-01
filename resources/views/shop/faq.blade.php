@@ -83,13 +83,28 @@
     border: 1px solid #e4e4e4;
     color: #555
         }
+        .p-tabs {
+            {{--  margin-top: 85px;  --}}
+            position: relative;
+            padding-top: 115px;
+            line-height: 20px;
+        }
+        .p-tabs {
+            margin-top: 0px;
+            width: 100%;
+        }
+        .c-box-tabs {
+            border: 0;
+        }
 </style>
 @stop
 
 @section('content')
     <div class="c-product">
     <section class="p-tabs">
-        <ul class="c-box-tabs" style="display: flex">
+        <ul class="c-box-tabs"  style="display: block;
+        text-align: center;
+        font-size: 15px;">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>پرسش های متداول </span></a></li>
         </ul>
         <h2 class="c-params__headline" style="margin-right: 40px">سوالات متداول</h2>

@@ -39,13 +39,28 @@
     .font-20{
         font-size: 15px;
     }
+    .p-tabs {
+        {{--  margin-top: 85px;  --}}
+        position: relative;
+        padding-top: 115px;
+        line-height: 20px;
+    }
+    .p-tabs {
+        margin-top: 0px;
+        width: 100%;
+    }
+    .c-box-tabs {
+        border: 0;
+    }
 </style>
 @stop
 
 @section('content')
     <div class="c-product">
     <section class="p-tabs">
-        <ul class="c-box-tabs" style="display: flex">
+        <ul class="c-box-tabs"  style="display: block;
+        text-align: center;
+        font-size: 15px;">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>تماس با ما</span></a></li>
         </ul>
         <h2 class="c-params__headline" style="margin-right: 40px">راه های ارتباطی با شرکت ایده برتر کیوان</h2>
