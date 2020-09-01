@@ -1,54 +1,45 @@
+@extends('shop.layouts.master', ['title' => 'ورود به فروشگاه' ])
+@section('headerScripts')
+    <style>
+        .is-invalid{
+            border-color: red!important;
+        }
+        .invalid-feedback{
+            color: red!important;
+            display: block;
+        }
+        /* The Modal (background) */
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>عضویت در فروشگاه</title>
-    <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/mediaq.css') }}">
-
-</head>
-<body>
-<style>
-    .is-invalid{
-        border-color: red!important;
-    }
-    .invalid-feedback{
-        color: red!important;
-        display: block;
-    }
-    /* The Modal (background) */
-
-    .alert {
-        padding: 15px;
-        margin-bottom: 20px;
-        border: 1px solid transparent;
-        border-radius: 4px;
-    }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
 
 
-    .alert-danger {
-        background-color: #f2dede;
-        border-color: #ebccd1;
-        color: #a94442;
-    }
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
 
-    .alert-danger hr {
-        border-top-color: #e4b9c0;
-    }
+        .alert-danger hr {
+            border-top-color: #e4b9c0;
+        }
 
-    .alert-danger .alert-link {
-        color: #843534;
-    }
+        .alert-danger .alert-link {
+            color: #843534;
+        }
+    </style>
 
+@stop
 
-</style>
+@section('content')
 
 <section class="account-box">
     <div class="register-logo">
-        <a href="/"><img src="assets/images/png.svg" alt=""></a>
+        <a href="/"><img src="/assets/images/logo.png" alt=""></a>
     </div>
     <div class="register login">
         <div class="headline">عصویت در فروشگاه</div>
@@ -134,20 +125,4 @@
     </div>
 </section>
 
-<footer style="    position: inherit!important;">
-    <section class="footer account-footer container">
-        <div class="copyright"><p>استفاده از مطالب فروشگاه اینترنتی دیجی‌کالا فقط برای مقاصد غیرتجاری و با ذکر منبع
-                بلامانع است. کلیه حقوق این سایت متعلق به شرکت ایده برتر کیوان می‌باشد.</p></div>
-
-        <div class="copyright-en">
-            <p>Copyright © 2020</p>
-        </div>
-    </section>
-</footer>
-
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
-</body>
-</html>
-
-
+@stop

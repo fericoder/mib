@@ -219,7 +219,7 @@
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*users*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                    <li class="kt-menu__item {{ request()->is('*faqs*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
                                         <a href="{{ route('faqs.index') }}" class="kt-menu__link">
                                             <span class="kt-menu__link-text">سوالات متداول</span>

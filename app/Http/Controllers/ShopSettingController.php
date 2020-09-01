@@ -78,7 +78,7 @@ class ShopSettingController extends Controller
     {
         $shop = \Auth::user()->shop()->first();
 
-        $shop->update([
+            $shop->update([
             'shegeft' => $request->shegeft,
             'porbazdid' => $request->porbazdid,
             'jadidtarin' => $request->jadidtarin,

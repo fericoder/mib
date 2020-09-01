@@ -257,7 +257,11 @@
     <section class="p-tabs">
         <ul class="c-box-tabs">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>توضیحات محصول</span></a></li>
-            <li class="c-box-tabs__tab"><a id="comments" href="#"><i class="fa fa-comments"></i> <span>نظرات کاربران</span></a></li>
+            <li class="c-box-tabs__tab"><a id="comments" href="#"> <span>نظرات کاربران</span></a></li>
+            @if(isset($product->aparat))
+                <li class="c-box-tabs__tab"><a id="video" href="#"> <span>ویدیو محصول</span></a></li>
+
+             @endif
         </ul>
         <div class="c-box--tabs p-tabs__content">
             <div id="desc" class="c-content-expert is-active">
@@ -328,6 +332,18 @@
             </div>
 
 
+
+            @if(isset($product->aparat))
+                <div id="video">
+                    <div class="c-comments__summary">
+                        <div style=" margin: auto" class="c-comments__summary-note">
+                            {!! $product->aparat !!}
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+
                 </div>
             </section>
 
@@ -348,7 +364,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
 
     <script>
         $(document).ready(function() {
