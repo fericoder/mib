@@ -246,6 +246,7 @@ return array(
         'value.*' => 'ویژگی های دسته بندی',
         'color.*' => 'رنگ',
         'group.*.amount' => 'موجودی',
+        'group.*.min_amount' => 'حداقل موجودی',
         'group.*.p_id' => 'شناسه محصول',
         'group.*.items.*' => 'خصوصیات',
         'group.*.items' => 'خصوصیات',

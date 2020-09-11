@@ -68,6 +68,9 @@ class ProductRequest extends FormRequest
             'group.*.amount' =>['required',
                 'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:9999999999999','min:0'
             ],
+            'group.*.min_amount' =>['required',
+                'regex:/^([0-9]+$)|^([۰-۹]+$)/','max:9999999999999','min:0'
+            ],
             // 'group.*.items' => 'required',
             'group.*.items.*' => 'max:1000|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
             'tags' => 'nullable|max:500|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',

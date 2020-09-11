@@ -383,6 +383,24 @@
                                                         <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
 
                                                     </div>
+                                                    @if($product->no_specification_status == 'enable')
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شناسه محصول :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="p_id" value="{{ old('p_id', $product->p_id) }}">
+
+                                                    </div>
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> موجودی محصول :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="amount" value="{{ old('amount', $product->amount) }}">
+
+
+                                                    </div>
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">حداقل موجودی محصول :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="min_amount" value="{{ old('min_amount', $product->min_amount) }}">
+
+                                                    </div>
+                                                  @endif
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
@@ -435,9 +453,9 @@
                                                         @foreach($product->groups as $groupItem)
 
                                                         <div class="items">
-                                                            <a class="mr-2 item-delete font-15" style="font-size: 20px"  title="حذف آیکون" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a>
-
-
+                                                          @if(!$loop->first)
+                                                            <a class="mr-2 item-delete font-15" style="font-size: 20px"  title="حذف خصوصیت" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a>
+                                                          @endif
                                                             <h4 class="text-center">شماره {{ $loop->index + 1 }}
                                                             </h4>
                                                         <div class="input-group mt-3 specification-dot">
@@ -477,17 +495,26 @@
                                                           <input value="{{ $groupItem->amount }}" type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
 
                                                     </div>
+                                                    <div class="mt-3 specification-dot input-group">
+                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                          حداقل موجودی:</span>
+                                                         </div>
+                                                          <input value="{{ $groupItem->min_amount }}" type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][min_amount]" placeholder="مثال : 1000">
+
+                                                    </div>
 
                                             </div>
                                             @endforeach
 
 
                                         </div>
+                                        @if($product->no_specification_status == 'disable')
                                         <div class="input-group-append mt-3 ">
                                             <button type="button" class="addSection border-0 bg-white"><span class="h-50px input-group-text bg-light text-danger font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
                                                     افزودن مورد جدید
                                                 </span></button>
                                         </div>
+                                      @endif
                                                     {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
                                                         {{--<input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount" {{ $product->specification_amount_status == "enable" ? 'checked' : '' }}>--}}
                                                         {{--<label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>--}}
@@ -564,7 +591,7 @@
                                                             <h4 class="mt-0 header-title">تصویر محصول</h4>
                                                             <p class="text-danger my-1">حداقل ابعاد : 300px × 300px</p>
                                                             <p class="text-danger">حداکثر ابعاد : 1000px × 1000px</p>
-                                                            <a class="mr-2 font-15" href="" id="icon-delete" title="حذف آیکون" data-name="{{ $product->name }}" data-id="{{ $product->id }}"><i class="far fa-trash-alt text-danger font-18 pl-2"></i>حذف</a>
+                                                            <a class="mr-2 font-15" href="" id="icon-delete" title="حذف خصوصیت" data-name="{{ $product->name }}" data-id="{{ $product->id }}"><i class="far fa-trash-alt text-danger font-18 pl-2"></i>حذف</a>
                                                             <input type="file" id="input-file-now" name="image" class="dropify" data-default-file="{{ $product->image['original'] }}">
                                                         </div>
 
@@ -732,7 +759,7 @@
             });
             $(".addSection").click(function() {
                 counter += 1;
-                $("div.section").append('<div class="items mt-4"><a class="mr-2 item-delete font-15" style="font-size: 20px" title="حذف آیکون" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group[new-'+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][amount]" placeholder="مثال : 1000"></div></div>');
+                $("div.section").append('<div class="items mt-4"><a class="mr-2 item-delete font-15" style="font-size: 20px" title="حذف حصوصیت" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a><h4 class="text-center">شماره '+counter+'</h4><div class="input-group mt-3 specification-dot"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div><select class="selectpicker selectpicker-specification" multiple data-live-search="true" name="group[new-'+counter+'][items][]" title="موردی انتخاب نشده">@foreach($specifications as $specification)<optgroup label="{{ $specification->name }}">@foreach($specification->items as $item)<option class="" value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</optgroup>@endforeach</select></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> شناسه محصول:</span></div><input value="{{ old('group[counter][p_id]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][p_id]" placeholder="مثال : 30"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>موجودی:</span></div><input value="{{ old('group[counter][amount]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][amount]" placeholder="مثال : 1000"></div><div class="mt-3 specification-dot input-group"><div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>حداقل موجودی:</span></div><input value="{{ old('group[counter][min_amount]') }}" type="text" class="form-control inputfield" name="group[new-'+counter+'][min_amount]" placeholder="مثال : 1000"></div></div>');
                 $('.selectpicker').select2({
                     width: '50%',
                     closeOnSelect: false

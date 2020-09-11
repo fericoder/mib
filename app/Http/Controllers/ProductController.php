@@ -66,26 +66,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        // if($request->off_price == null){
-        //     $request->merge(['off_price_started_at' => null]);
-        //     $request->merge(['off_price_expired_at' => null]);
-        // }
-        // else{
-        //     $request->validate([
-        //         'off_price_started_at' => 'required_with:off_price',
-        //         'off_price_expired_at' => 'required_with:off_price|gt:off_price_started_at',
-        //     ]);
-            //check for started and and expired for off_price
-        //     if($request->off_price_started_at != null){
-        //         $realTimestampStart = substr($request->off_price_started_at,0,10);
-        //         $request->off_price_started_at = date('Y-m-d H:i:s', (int)$realTimestampStart);
-        //     }
-        //     if($request->off_price_expired_at != null){
-        //         $realTimestampExpire = substr($request->off_price_expired_at,0,10);
-        //         $request->off_price_expired_at = date('Y-m-d H:i:s', (int)$realTimestampExpire);
-        //     }
-        // }
-
         //check if product category is null
         if($request->productCat_id == "null"){
             $request->merge(['productCat_id' => null]);
@@ -95,14 +75,6 @@ class ProductController extends Controller
         }
         //validate product category if is null or not
         $request->validate(['productCat_id' => 'required']);
-        //check if product is file to calculate size of uploaded file
-        // if($request->type == 'file') {
-        //     $file_size = $request->file('attachment')->getSize();
-        // }
-        // else{
-        //     $file_size = null;
-        // }
-
         if($request->file('catalog') == null){
             $catalog = '';
         }
@@ -110,55 +82,17 @@ class ProductController extends Controller
             $request->validate(['catalog' => 'mimes:pdf']);
             $catalog = $this->uploadFile($request->file('catalog'), false, false);
         }
-
-
         $image = $this->uploadFile($request->file('image'), false, true);
-        //check if product is file to save attachment file
-        // if($request->type == 'file')
-        //     $attachment = Storage::putFileAs('attachment', $request->file('attachment'), \Auth::user()->id."_".time()."_".$request->file('attachment')->getClientOriginalName());
-        // else
-        //     $attachment = null;
-        //check if enable if off to change enable to 0
         if ($request->enable != "on")
             $request->enable = 0;
         else
             $request->enable = 1;
 
-        //check options of products
-        // if (!isset($request->fast_sending))
-        //     $request->fast_sending = 'off';
+        if ($request->no_specification_status != "on")
+              $request->merge(['no_specification_status' => 'disable']);
+        else
+        $request->merge(['no_specification_status' => 'enable']);
 
-        // if (!isset($request->money_back))
-        //     $request->money_back = 'off';
-
-        // if (!isset($request->support))
-        //     $request->support = 'off';
-
-        // if (!isset($request->secure_payment))
-        //     $request->secure_payment = 'off';
-
-        // if (!isset($request->discount_status))
-        //     $request->discount_status = 'disable';
-        // else
-        //     $request->discount_status = 'enable';
-
-        //check amount of product and change fa number to en
-        // if($request->color_amount == 'on' and $request->get('color_amount_number') or ($request->specification_amount == 'on' and $request->get('specification_amount_number'))){
-        //     $request->merge(['amount' => null]);
-        // }
-        // else{
-        //     if($request->amount != null){
-        //         $request->amount = $this->fa_num_to_en($request->amount);
-        //     }
-        // }
-        // if($request->color_amount == 'on' and $request->get('color_amount_number') or ($request->specification_amount == 'on' and $request->get('specification_amount_number'))){
-        //     $request->merge(['min_amount' => null]);
-        // }
-        // else{
-        //     if($request->min_amount != null){
-        //         $request->min_amount = $this->fa_num_to_en($request->min_amount);
-        //     }
-        // }
         if($request->measure != null){
             $request->measure = $this->fa_num_to_en($request->measure);
         }
@@ -166,60 +100,54 @@ class ProductController extends Controller
         if($request->weight != null){
             $request->weight = $this->fa_num_to_en($request->weight);
         }
-        //check off_price of product and change fa number to en
-        // if($request->off_price != null){
-        //     $request->off_price = $this->fa_num_to_en($request->off_price);
-        // }
 
                 $product = Product::create([
                     'title' => $request->title,
                     'type' => 'product',
                     'category_id' => $request->productCat_id,
                     'brand_id' => $request->brand_id,
-                    // 'amount' => $request->amount,
-                    // 'min_amount' => $request->min_amount,
                     'measure' => $request->measure,
                     'weight' => $request->weight,
                     'price' => $this->fa_num_to_en($request->price),
-                    // 'off_price' => $request->off_price,
-                    // 'fast_sending' => $request->fast_sending,
                     'shortDescription' => $request->shortDescription,
                     'country_id' => $request->country_id,
-                    // 'money_back' => $request->money_back,
-                    // 'support' => $request->support,
-                    // 'secure_payment' => $request->secure_payment,
-                    // 'discount_status' => $request->discount_status,
                     'description' => $request->description,
                     'aparat' => $request->aparat,
                     'shegeftangiz' => $request->shegeftangiz,
                     'userPrice' => $request->userPrice,
+                    'no_specification_status' => $request->no_specification_status,
                     'image' => $image,
                     'catalog' => $catalog,
                     'shop_id' => \Auth::user()->shop_id,
-                    // 'attachment' => $attachment,
-                    // 'off_price_started_at' => $request->off_price_started_at,
-                    // 'off_price_expired_at' => $request->off_price_expired_at,
                     'description' => $request->description,
-                    // 'file_size' => $file_size,
                 ]);
 
+                if($request->no_specification_status == 'disable'){
                 if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group[1]['items'])) {
                     if (isset($request->group)) {
                         foreach ($request->group as $group) {
                             $groupItem = new SpecificationItemGroup;
                             $groupItem->specification_items = $group['items'];
                             $groupItem->product_id = $product->id;
-                            $groupItem->amount = $group['amount'];
-                            $groupItem->p_id = $group['p_id'];
+                            $groupItem->amount = $this->fa_num_to_en($group['amount']);
+                            $groupItem->min_amount = $this->fa_num_to_en($group['min_amount']);
+                            $groupItem->p_id = $this->fa_num_to_en($group['p_id']);
                             $groupItem->save();
                         }
                     }
                 }
+              }
+              else{
+                  $product->update([
+                    'amount' => $this->fa_num_to_en($request->group[1]['amount']),
+                    'min_amount' => $this->fa_num_to_en($request->group[1]['min_amount']),
+                    'p_id' => $this->fa_num_to_en($request->group[1]['p_id'])
+                  ]);
+              }
 
-                          if($product)
+        if($product)
                 {
                     DB::transaction(function () use ($request, $product) {
-
                         $tagIds = [];
                         $sepecificationIds = [];
 
@@ -235,12 +163,8 @@ class ProductController extends Controller
                             }
                         }
                         $product->tags()->sync($tagIds);
-
-
                     });
                 }
-
-
                 alert()->success('محصول جدید شما باموفقیت اضافه شد.', 'ثبت شد');
                 return redirect()->back();
 
@@ -288,72 +212,12 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
+      if ($product->no_specification_status == 'disable') {
+        $request->merge(['p_id' => null]);
+        $request->merge(['amount' => null]);
+        $request->merge(['min_amount' => null]);
+      }
 
-        //off price timing
-        // if($request->off_price == null){
-        //     $request->merge(['off_price_started_at' => null]);
-        //     $request->merge(['off_price_expired_at' => null]);
-        // }
-        // else{
-        //     $request->validate([
-        //         'off_price_started_at' => 'required_with:off_price',
-        //         'off_price_expired_at' => 'required_with:off_price|gt:off_price_started_at',
-        //     ]);
-
-            //check for started and and expired for off_price
-            // if($request->off_price_started_at != null){
-            //     $realTimestampStart = substr($request->off_price_started_at,0,10);
-            //     $request->off_price_started_at = date('Y-m-d H:i:s', (int)$realTimestampStart);
-            // }
-            // if($request->off_price_expired_at != null){
-            //     $realTimestampExpire = substr($request->off_price_expired_at,0,10);
-            //     $request->off_price_expired_at = date('Y-m-d H:i:s', (int)$realTimestampExpire);
-            // }
-        // }
-
-        // if ($request->type == 'product') {
-        //     if($request->specification_amount != 'on' and $request->color_amount != 'on'){
-        //         $request->validate([
-        //             'amount' => 'required_unless:specification_amount,on|required_unless:color_amount,on|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u','max:999999','min:0',
-        //             'min_amount' => 'required_unless:specification_amount,on|required_unless:color_amount,on|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u','max:999999','min:0',
-        //         ]);
-        //     }
-        //     elseif($request->specification_amount == 'on' or $request->color_amount == 'on'){
-        //         $request->validate([
-        //             'amount' => 'nullable|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u','max:999999','min:0',
-        //             'min_amount' => 'nullable|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u','max:999999','min:0',
-        //         ]);
-        //     }
-        // }
-        // if($request->specification_amount != 'on'){
-        //     $request->merge(['specification_amount' => '']);
-        //     $specification_amount_status = 'disable';
-        // }
-        // else{
-        //     $specification_amount_status = 'enable';
-        // }
-        // if($request->color_amount != 'on'){
-        //     $request->merge(['color_amount' => '']);
-        //     $color_amount_status = 'disable';
-        // }
-        // else{
-        //     $color_amount_status = 'enable';
-
-        // }
-
-        // if($request->type == 'file' and $request->file('attachment') == null){
-        //     $attachment = $product->attachment;
-        //     $file_size = $product->file_size;
-        // }
-        // elseif($request->type == 'file'){
-        //     $request->validate(['attachment' => 'required|mimes:doc,docx,pdf,zip,mp4,avi,webm,3gp,rar|max:50000']);
-        //     $file_size = $request->file('attachment')->getSize();
-        //     $attachment = Storage::putFileAs('attachment', $request->file('attachment'), \Auth::user()->id."_".time()."_".$request->file('attachment')->getClientOriginalName());
-        // }
-        // else{
-        //     $attachment = null;
-        //     $file_size = null;
-        // }
         if($request->file('image') == null){
             $image = $product->image;
         }
@@ -378,81 +242,29 @@ class ProductController extends Controller
         else
             $request->enable = 1;
 
-
-
-        //check options of products
-        // if (!isset($request->fast_sending))
-        //     $request->fast_sending = 'off';
-
-        // if (!isset($request->money_back))
-        //     $request->money_back = 'off';
-
-        // if (!isset($request->support))
-        //     $request->support = 'off';
-
-        // if (!isset($request->secure_payment))
-        //     $request->secure_payment = 'off';
-
-        // if (!isset($request->discount_status))
-        //     $request->discount_status = 'disable';
-        // else
-        //     $request->discount_status = 'enable';
-
-        //check amount of product and change fa number to en
-        // if($request->color_amount == 'on' and $request->get('color_amount_number') or ($request->specification_amount == 'on' and $request->get('specification_amount_number'))){
-        //     $request->merge(['amount' => null]);
-        //     $request->merge(['min_amount' => null]);
-        // }
-        // else{
-        //     if($request->amount != null){
-        //         $request->amount = $this->fa_num_to_en($request->amount);
-        //     }
-        //     if($request->min_amount != null){
-        //         $request->min_amount = $this->fa_num_to_en($request->min_amount);
-        //     }
-        // }
         if($request->weight != null){
             $request->weight = $this->fa_num_to_en($request->weight);
         }
-        // if($request->off_price != null){
-        //     $request->off_price = $this->fa_num_to_en($request->off_price);
-        // }
         $updatedProduct = $product->update([
             'title' => $request->title,
             'type' => $request->type,
             'category_id' => $request->productCat_id,
             'brand_id' => $request->brand_id,
-            // 'amount' => $request->amount,
-            // 'min_amount' => $request->min_amount,
             'measure' => $request->measure,
             'weight' => $request->weight,
             'aparat' => $request->aparat,
             'price' => $this->fa_num_to_en($request->price),
             'shegeftangiz' => $request->shegeftangiz,
             'userPrice' => $request->userPrice,
-            // 'off_price' => $request->off_price,
-            // 'fast_sending' => $request->fast_sending,
+            'p_id' => $request->p_id,
+            'amount' => $request->amount,
+            'min_amount' => $request->min_amount,
             'shortDescription' => $request->shortDescription,
             'country_id' => $request->country_id,
-            // 'money_back' => $request->money_back,
-            // 'support' => $request->support,
-            // 'secure_payment' => $request->secure_payment,
-            // 'discount_status' => $request->discount_status,
             'description' => $request->description,
             'image' => $image,
             'catalog' => $catalog,
-            // 'attachment' => $attachment,
-            // 'specification_amount_status' => $specification_amount_status,
-            // 'color_amount_status' => $color_amount_status,
-            // 'attachment' => $attachment,
-            // 'off_price_started_at' => $request->off_price_started_at,
-            // 'off_price_expired_at' => $request->off_price_expired_at,
-            // 'description' => $request->description,
-            // 'file_size' => $file_size,
         ]);
-
-
-
 
         if (isset($request->group)){
             $gp_request = [];
@@ -473,7 +285,6 @@ class ProductController extends Controller
                     $specificationGroup = SpecificationItemGroup::find($gp_id);
                     CartProduct::where('group_id', $gp_id)->delete();
                     $specificationGroup->delete();
-
             }
             }
 
@@ -483,13 +294,14 @@ class ProductController extends Controller
                     $groupItem = new SpecificationItemGroup;
                     $groupItem->specification_items = $group['items'];
                     $groupItem->product_id = $product->id;
-                    $groupItem->amount = $group['amount'];
-                    $groupItem->p_id = $group['p_id'];
+                    $groupItem->amount = $this->fa_num_to_en($group['amount']);
+                    $groupItem->min_amount = $this->fa_num_to_en($group['min_amount']);
+                    $groupItem->p_id = $this->fa_num_to_en($group['p_id']);
                     $groupItem->save();
                 }
                 else{
                     SpecificationItemGroup::updateOrCreate(['id' => $groupId],
-                    ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $group['amount'], 'p_id' => $group['p_id']]);
+                    ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $this->fa_num_to_en($group['amount']), 'min_amount' => $this->fa_num_to_en($group['min_amount']), 'p_id' => $this->fa_num_to_en($group['p_id'])]);
                 }
             }
 
@@ -499,38 +311,7 @@ class ProductController extends Controller
                 CartProduct::where('group_id', $singleGp->id)->delete();
             }
             $product->groups()->delete();
-
         }
-
-
-
-
-        //add facilities
-//        foreach(array_slice($request->facility, 0, 50, true) as $facility_id => $facility){
-//            if($facility != null){
-//                if($product->facilities->count() != 0){
-//                    Facility::updateOrCreate(['id' => $facility_id],['name' => $facility, 'product_id' => $product->id]);
-//                }
-//                else{
-//                    Facility::create(['name' => $facility, 'product_id' => $product->id]);
-//                }
-//            }
-//            else{
-//                if(Facility::where('id', $facility_id)->get()->first() != null){
-//                    Facility::where('id', $facility_id)->get()->first()->delete();
-//                }
-//            }
-//        }
-
-        // if($request->specification_amount == 'on' and $request->get('specification_amount_number')){
-        //     foreach($request->specification_amount_number as $specification_amount_number_id => $specification_amount_number){
-        //         DB::table('product_specificationItem')->updateOrInsert(
-        //             ['product_id' => $product->id, 'specification_item_id' => $specification_amount_number_id],
-        //             ['amount' => $specification_amount_number],
-        // );
-        //     }
-        // }
-
 
         if($updatedProduct)
         {
@@ -548,32 +329,6 @@ class ProductController extends Controller
                     $tagIds[] = $tag->id;
                 }
             }
-            // get all color of product
-            // if($request->get('color') and !$request->get('color_amount_number')){
-            //     foreach($request->get('color') as $colorName)
-            //     {
-            //         $color = Color::firstOrCreate(['id'=>$colorName]);
-            //         if($color)
-            //         {
-            //             $colorIds[] = $color->id;
-            //         }
-            //     }
-            //     \Auth::user()->shop()->first()->products()->where('id',$id)->get()->first()->colors()->sync($colorIds);
-            // }
-
-
-            //get all color and color Amount of product
-            // if($request->get('color') and $request->color_amount == 'on' and $request->get('color_amount_number')){
-            //     foreach($request->get('color_amount_number') as $colorId=>$colorAmount)
-            //     {
-
-            //         $color = Color::find($colorId);
-            //         if($color){
-            //             $colorIds[$color->id] = ['amount'=>$colorAmount];
-            //         }
-            //     }
-            //     $product->colors()->sync($colorIds);
-            // }
 
             if($request->get('specifications')){
                 foreach($request->get('specifications') as $specificationName)
