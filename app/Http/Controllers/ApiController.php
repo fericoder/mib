@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\CartProduct;
+use App\SpecificationItemGroup;
 use App\User;
 use App\UserPurchase;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+
+    public function generate(Request $request)
+    {
+        if (\DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->first()){
+            abort(403, 'Token already exists.');
+        }else{
+            $token = md5(uniqid(rand(), true));
+            \DB::table('tokens')->insert(['token' => $token, 'created_at' => now()]);
+            return response()->json(['Token:' => "$token"]);
+        }
+    }
+
+
     public function inventory(Request $request)
     {
-        if ($request->token !== 'cAxNzPS33wbX1pjbVEg1'){
+        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         if (!is_numeric($this->fa_num_to_en($request->amount))){
@@ -25,9 +40,9 @@ class ApiController extends Controller
     }
 
 
-    public function purchases(Request $request)
+    public function userPurchases(Request $request)
     {
-        if ($request->token !== 'cAxNzPS33wbX1pjbVEg1'){
+        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         if (!is_numeric($request->user_id)){
@@ -41,6 +56,42 @@ class ApiController extends Controller
         return response()->json($purchases);
 
     }
+
+    public function purchases(Request $request)
+    {
+        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+            abort(403, 'Unauthorized Action');
+        }
+        if (!is_numeric($request->from)){
+            abort(403, 'Invalid Timestamp');
+        }
+        if (!is_numeric($request->to)){
+            abort(403, 'Invalid Timestamp');
+        }
+
+
+        $timestampFrom = substr($request->from, 0, 10);
+        $dateFrom = date('Y-m-d H:i:s', (int) $timestampFrom);
+
+        $timestampTo = substr($request->to, 0, 10);
+        $dateTo = date('Y-m-d H:i:s', (int) $timestampTo);
+
+        $purchases = CartProduct::whereBetween('created_at', [$dateFrom, $dateTo])->select('id', 'p_id', 'quantity', 'total_price')->get();
+        return response()->json($purchases);
+
+    }
+
+
+    public function amountReport(Request $request)
+    {
+        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+            abort(403, 'Unauthorized Action');
+        }
+        $amount = SpecificationItemGroup::with('product')->get();
+        return response()->json($amount);
+
+    }
+
 
 
 }

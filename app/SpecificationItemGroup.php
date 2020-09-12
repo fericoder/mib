@@ -14,4 +14,9 @@ class SpecificationItemGroup extends Model
     protected $casts = [
         'specification_items' => 'array',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product')->select(['title', 'id']);
+    }
 }

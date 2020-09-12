@@ -32,6 +32,9 @@ class UserController extends Controller
             'pezeshkiNo' => 'nullable',
             'moarref' => 'nullable',
             'job' => 'nullable',
+            'meliPic' => 'nullable',
+            'nezamPic' => 'nullable',
+            'javazPic' => 'nullable',
         ]);
 
 
@@ -45,7 +48,22 @@ class UserController extends Controller
             'pezeshkiNo' => $request->pezeshkiNo,
             'moarref' => $request->moarref,
             'job' => $request->job,
+
         ]);
+
+        if ($request->file('meliPic')){
+            $meliPic = $this->uploadFile($request->file('meliPic'), false, false);
+            $user->update(['meliPic' => $meliPic]);
+        }
+        if ($request->file('nezamPic')){
+            $nezamPic = $this->uploadFile($request->file('nezamPic'), false, false);
+            $user->update(['nezamPic' => $nezamPic]);
+        }
+
+        if ($request->file('javazPic')) {
+            $javazPic = $this->uploadFile($request->file('javazPic'), false, false);
+            $user->update(['javazPic' => $javazPic]);
+        }
 
         alert()->success('کاربر مورد نظر ویرایش شد', 'انجام شد');
         return redirect()->back();

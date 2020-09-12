@@ -13,6 +13,25 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected function folder_exist($folder)
+    {
+        // Get canonicalized absolute pathname
+        $path = realpath($folder);
+
+        // If it exist, check if it's a directory
+        if($path !== false AND is_dir($path))
+        {
+            // Return canonicalized absolute pathname
+            return $path;
+        }
+
+        // Path/folder does not exist
+        return false;
+    }
+
+
+
+
     protected function watermark($file)
     {
         $imageSource = \Auth::user()->shop->watermark;
@@ -40,7 +59,7 @@ class Controller extends BaseController
             '::1'
         );
 
-        if($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
+        if($this->folder_exist(public_path() . '_html')){
             $folder = public_path() . '_html';
         }else{
             $folder = public_path();
@@ -77,7 +96,7 @@ class Controller extends BaseController
             '::1'
         );
 
-        if($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
+        if($this->folder_exist(public_path() . '_html')){
             $folder = public_path() . '_html';
         }else{
             $folder = public_path();

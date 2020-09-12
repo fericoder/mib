@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/{token}/generate/', 'ApiController@generate');
 Route::get('/{token}/inventory/{id}/{amount}/', 'ApiController@inventory');
-Route::get('/{token}/purchases/{user_id}/', 'ApiController@purchases');
+Route::get('/{token}/purchases/{from}/{to}/', 'ApiController@purchases');
+Route::get('/{token}/userPurchases/{user_id}/', 'ApiController@purchases');
+Route::get('/{token}/amountReport/', 'ApiController@amountReport');
 

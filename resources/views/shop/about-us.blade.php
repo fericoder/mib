@@ -20,21 +20,20 @@
 
 @section('content')
     <div class="c-product">
-    <section class="p-tabs">
-        <ul class="c-box-tabs" style="display: block;
-        text-align: center;
-        font-size: 15px;">
-            <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>درباره ما</span></a></li>
+    <section style="padding-top: 0px;" class="p-tabs">
+        <ul class="c-box-tabs" style="display: block;  text-align: center;  font-size: 15px;">
+            <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span></span></a></li>
         </ul>
         <div class="c-box--tabs p-tabs__content">
             <div id="desc" class="c-content-expert is-active">
+
                 <article>
                     <h2 class="c-params__headline"> {{ $shop->about_header }}<span>  </span></h2>
                     <section class="c-content-expert__summary">
                         <div class="c-mask">
-                            <div class="c-mask__text c-mask__text--product-summary" style="max-height: 250px;height: unset;">
+                            <div class="c-mask__text c-mask__text--product-summary" style="height: unset;">
                                 <p>
-                                  {{ $shop->about_main }}
+                                  {!! $shop->about_main !!}
                                 </p>
                                 </div>
                             </div>

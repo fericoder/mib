@@ -21,7 +21,6 @@
          justify-content: space-between;
     }
     .c-content-expert{
-        display: flex;
     width: 100%;
     justify-content: space-around;
     padding: 10px;
@@ -101,12 +100,7 @@
 
 @section('content')
     <div class="c-product">
-    <section class="p-tabs">
-        <ul class="c-box-tabs"  style="display: block;
-        text-align: center;
-        font-size: 15px;">
-            <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>پرسش های متداول </span></a></li>
-        </ul>
+    <section style="padding-top: 30px;" class="p-tabs">
         <h2 class="c-params__headline" style="margin-right: 40px">سوالات متداول</h2>
         @foreach($faqs as $faq)
             <div id="desc" class="c-content-expert is-active">

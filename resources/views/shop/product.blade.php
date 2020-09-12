@@ -185,7 +185,7 @@
                         @endguest
                 </div>
             </div>
-            <aside style=";" class="c-product__feature">
+            <aside style="" class="c-product__feature">
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i1.svg') }}" alt=""> <span>امکان تحویل اکسپرس</span> </a>
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i2.svg') }}" alt=""> <span>پشتیبانی ۲۴ ساعته</span> </a>
                 {{-- <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i3.svg') }}" alt=""> <span>امکان پرداخت در محل</span> </a> --}}
@@ -364,7 +364,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
-    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -499,6 +499,15 @@
             });
         });
 
+        $('.c-box-tabs__tab').click(function(e) {
+                e.preventDefault();
+                $('.c-box-tabs__tab').removeClass('is-active');
+                $(this).addClass('is-active');
+                var id=$(this).children('a').attr('id');
+                $(".c-box--tabs > div").removeClass('is-active');
+                $(".c-box--tabs > div#"+id).addClass('is-active')
+            }
+        );
 
 
     </script>

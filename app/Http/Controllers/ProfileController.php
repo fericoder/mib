@@ -82,12 +82,12 @@ class ProfileController extends Controller
 
     public function informationUpdate(InformationRequest $request)
     {
-        $meliPic = $this->uploadFile($request->file('meliPic'), false, true);
-        $nezamPic = $this->uploadFile($request->file('nezamPic'), false, true);
+        $meliPic = $this->uploadFile($request->file('meliPic'), false, false);
+        $nezamPic = $this->uploadFile($request->file('nezamPic'), false, false);
         $user = \Auth::user();
 
         if ($request->file('javazPic')){
-            $javazPic = $this->uploadFile($request->file('javazPic'), false, true);
+            $javazPic = $this->uploadFile($request->file('javazPic'), false, false);
             $user->update(['job' => $request->job, 'meliPic' => $meliPic, 'nezamPic' => $nezamPic, 'javazPic' => $javazPic]);
         }else{
             $user->update(['job' => $request->job, 'meliPic' => $meliPic, 'nezamPic' => $nezamPic]);

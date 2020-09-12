@@ -150,18 +150,21 @@
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر کارت ملی :</span></div>
-                                                        <a target="_blank" href="{{ $user->meliPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <a target="_blank" href="{{ asset($user->meliPic) }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <input class="form-control " name="meliPic" type="file" >
                                                     </div>
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تصویر گواهی نظام پزشکی :</span></div>
-                                                        <a target="_blank" href="{{ $user->nezamPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <a target="_blank" href="{{ asset($user->nezamPic) }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <input class="form-control " name="nezamPic" type="file" >
                                                     </div>
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">
                                                                 تصویر جواز :</span></div>
-                                                        <a target="_blank" href="{{ $user->javazPic }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <a target="_blank" href="{{ asset($user->javazPic) }}"><input style="width: 400px" disabled type="text" class="form-control inputfield" name="name" value="جهت مشاهده کلیک نمایید"></a>
+                                                        <input class="form-control " name="javazPic" type="file" >
                                                     </div>
 
 
@@ -183,8 +186,9 @@
                             </div>
 
 
-                            <div class="text-right mb-3">
-                                <button data-toggle="modal" data-target="#AddWalletModal" type="submit" class="btn btn-success px-5 py-2  iranyekan rounded ">ثبت تغییرات</button><br>
+                            <div class="text-right mb-3 mt-3">
+                                <button  type="submit" class="btn btn-success px-5 py-2  iranyekan rounded ">ثبت تغییرات</button>
+                                <a href="{{ route('users.index') }}" class="btn btn-warning px-5 py-2  iranyekan rounded ">بازگشت</a>
                             </div>
                         </form>
                     </div>

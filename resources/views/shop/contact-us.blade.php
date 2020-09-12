@@ -24,7 +24,7 @@
         display: flex;
     width: 100%;
     justify-content: space-around;
-    padding: 180px;
+    padding: 80px;
     flex-wrap: wrap;
     }
     .border-bottom {
@@ -57,12 +57,7 @@
 
 @section('content')
     <div class="c-product">
-    <section class="p-tabs">
-        <ul class="c-box-tabs"  style="display: block;
-        text-align: center;
-        font-size: 15px;">
-            <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>تماس با ما</span></a></li>
-        </ul>
+    <section style="padding-top: 30px;" class="p-tabs">
         <h2 class="c-params__headline" style="margin-right: 40px">راه های ارتباطی با شرکت ایده برتر کیوان</h2>
 
             <div id="desc" class="c-content-expert is-active">
@@ -73,7 +68,8 @@
                       </div>
                 </div>
                 <div class="flex-rev">
-                    <div class="border-bottom"><i class="fa fa-address-card" style="font-size:48px; color:#03bfd6"></i></div>                    <div class="d-flex justify-content-center p-4 font-20" style="padding: 20px 0;">
+                    <div class="border-bottom"><i class="fa fa-address-card" style="font-size:48px; color:#03bfd6"></i></div>
+                    <div class="d-flex justify-content-center p-4 font-20" style="padding: 20px 0;">
                         {{ $shop->address }}
                       </div>
                 </div>
