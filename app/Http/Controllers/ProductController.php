@@ -138,11 +138,13 @@ class ProductController extends Controller
                 }
               }
               else{
-                  $product->update([
-                    'amount' => $this->fa_num_to_en($request->group[1]['amount']),
-                    'min_amount' => $this->fa_num_to_en($request->group[1]['min_amount']),
-                    'p_id' => $this->fa_num_to_en($request->group[1]['p_id'])
-                  ]);
+                $groupItem = new SpecificationItemGroup;
+                $groupItem->specification_items = $request->group[1]['items'];
+                $groupItem->product_id = $product->id;
+                $groupItem->amount = $this->fa_num_to_en($request->group[1]['amount']);
+                $groupItem->min_amount = $this->fa_num_to_en($request->group[1]['min_amount']);
+                $groupItem->p_id = $this->fa_num_to_en($request->group[1]['p_id']);
+                $groupItem->save();
               }
 
         if($product)
@@ -245,6 +247,12 @@ class ProductController extends Controller
         if($request->weight != null){
             $request->weight = $this->fa_num_to_en($request->weight);
         }
+
+        if ($request->no_specification_status != "on")
+        $request->merge(['no_specification_status' => 'disable']);
+        else
+        $request->merge(['no_specification_status' => 'enable']);
+
         $updatedProduct = $product->update([
             'title' => $request->title,
             'type' => $request->type,
@@ -258,6 +266,7 @@ class ProductController extends Controller
             'userPrice' => $request->userPrice,
             'p_id' => $request->p_id,
             'amount' => $request->amount,
+            'no_specification_status' => $request->no_specification_status,
             'min_amount' => $request->min_amount,
             'shortDescription' => $request->shortDescription,
             'country_id' => $request->country_id,

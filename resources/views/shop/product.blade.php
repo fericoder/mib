@@ -130,6 +130,7 @@
                             @endauth
                             @csrf
 
+                            @if($product->no_specification_status == 'disable')
                             <div class="all">
                                 <div class="all-items">
                                     <div class="mb-1 all-selects">
@@ -151,10 +152,9 @@
                                             @endif
                                         @endforeach
                                     </div>
-
-
                                 </div>
                             </div>
+                            @endif
 
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div style="margin-top: 20px;">

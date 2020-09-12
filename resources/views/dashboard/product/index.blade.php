@@ -211,17 +211,17 @@
                                 <label style="margin: 10px;" class="kt-checkbox"><input  name="shegeftangiz" type="checkbox"> <span></span></label>
                             </div>
 
-
-
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> برچسب ها :</span></div>
                                 <input value="{{ old('tags') }}" type="text" id="input-tags" name="tags" class="form-control" />
                             </div>
                             <p class="text-danger mb-2 mt-2 text-bold">برای ثبت برچسب از دکمه Enter استفاده نمایید</p>
+
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">عدم وجود خصوصیت:</span></div>
                                 <label style="margin: 10px;" class="kt-checkbox"><input  name="no_specification_status" id="nospec" type="checkbox"> <span></span></label>
                             </div>
+
                             <div class="section p-3 ">
                                 <div class="items">
                                     <a class="mr-2 item-delete  font-15" style="font-size: 20px"  title="حذف آیکون" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a>
@@ -697,12 +697,10 @@
     $("#nospec").change(function() {
       if(this.checked) {
         $( ".addSection" ).addClass('d-none');
-        $( ".spec" ).addClass('d-none');
         $( ".extra" ).remove();
     }
     else {
       $( ".addSection" ).removeClass('d-none');
-      $( ".spec" ).removeClass('d-none');
     }
 
         });

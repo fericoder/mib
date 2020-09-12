@@ -383,24 +383,6 @@
                                                         <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">گرم</span></div>
 
                                                     </div>
-                                                    @if($product->no_specification_status == 'enable')
-                                                    <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شناسه محصول :</span></div>
-                                                        <input type="text" class="form-control inputfield" name="p_id" value="{{ old('p_id', $product->p_id) }}">
-
-                                                    </div>
-                                                    <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> موجودی محصول :</span></div>
-                                                        <input type="text" class="form-control inputfield" name="amount" value="{{ old('amount', $product->amount) }}">
-
-
-                                                    </div>
-                                                    <div class="input-group mt-3">
-                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">حداقل موجودی محصول :</span></div>
-                                                        <input type="text" class="form-control inputfield" name="min_amount" value="{{ old('min_amount', $product->min_amount) }}">
-
-                                                    </div>
-                                                  @endif
 
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
@@ -421,6 +403,11 @@
                                                     <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">شگفت انگیز:</span></div>
                                                         <label style="margin: 10px;" class="kt-checkbox"><input {{ $product->shegeftangiz == 'on' ? 'checked' : '' }} name="shegeftangiz" type="checkbox"> <span></span></label>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">عدم وجود خصوصیت:</span></div>
+                                                        <label style="margin: 10px;" class="kt-checkbox"><input  name="no_specification_status" id="nospec" {{ $product->no_specification_status == 'enable' ? 'checked' : '' }} type="checkbox"> <span></span></label>
                                                     </div>
 
 

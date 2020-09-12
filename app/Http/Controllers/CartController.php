@@ -23,12 +23,6 @@ class CartController extends \App\Http\Controllers\Controller {
         {
             $cart = \Auth::user()->cart()->get()->first();
             $categories = Category::all();
-
-            // if (!$cart){
-            //     alert()->warning('سبد خرید شما خالی است.');
-            //     return redirect()->back();
-            // }
-
             if(isset($cart->products)){
                 foreach($cart->products as $product){
                     if($product->type == 'product' && $product->amount != null and $product->amount < 1){
@@ -90,63 +84,34 @@ class CartController extends \App\Http\Controllers\Controller {
 
 
 
-
-
     public function addToCart($userID, CartRequest $request) {
 
         $product = Product::where('id', $request->product_id)->get()->first();
-        if($product->groups->count() != 0){
+        if($product->no_specification_status == 'disable' and $product->groups->count() != 0){
             $group = SpecificationItemGroup::where('product_id', $product->id)->where('specification_items', json_encode($request->specification))->get()->first();
             if($group == null){
                 return redirect()->back()->withErrors(['محصولی با این خصوصیات وجود ندارد']);
             }
-        }else{
+        }
+        elseif($product->no_specification_status == 'enable'){
+            $group = $product->groups->first();
+        }
+        else{
             $group = new \stdClass();
             $group->id = null;
+            $group->p_id = null;
         }
         if($product->type == 'product' && $product->amount != null and $product->amount < 0){
             return redirect()->back()->withErrors(['کالای مورد نظر موجود نمیباشد']);
         }
-        // if($product->color_amount_status == 'enable'){
-        //     if($product->type == 'product' && $product->amount == null and $product->color_amount_status == 'enable'){
-        //         if($product->colors->where('id', $request->color)->first()->pivot->amount <= 0){
-        //             return redirect()->back()->withErrors(['کالای مورد نظر موجود نمیباشد']);
-        //         }
-        //     }
-        // }
-        // foreach($product->specifications()->where('type', 'radio')->get() as $radioSpecification){
-        //     if($radioSpecification->items->count() > 0){
-        //         foreach($request->specification as $specificationSingle){
-        //             if($specificationSingle == null){
-        //                 return redirect()->back()->withErrors(['کالای مورد نظر با خصوصیت انتخابی موجود نمیباشد.']);
-        //             }
-        //         }
-        //         if($product->specifications()->where('type', 'radio')->count() != 0 and !isset($request->specification)){
-        //             return redirect()->back()->withErrors(['باید خصوصیت تک انتخابی کالا انتخاب شود']);
-        //         }
-        //     }
-        // }
-        // if($product->specification_amount_status == 'enable'){
-        //     foreach($product->specifications as $specificationSingleOrg){
-        //         foreach($request->specification as $specificationRequest){
-        //             foreach($specificationSingleOrg->items->where('id', $specificationRequest) as $singleItem){
-        //                 if($singleItem->productSpecificationItems->where('product_id', $product->id)->first()->amount <= 0)
-        //                     return redirect()->back()->withErrors(['کالای مورد نظر با خصوصیت انتخابی موجود نمیباشد.']);
-        //             }
-        //         }
-        //     }
-        // }
+
         if (\Auth::user()->cart()->count() == 0) {
             $cart = new Cart;
             $cart->user_id = \Auth::user()->id;
             $cart->status = 0;
             $cart->save();
         }
-        // if($request->specification != null){
-        //     $specificationOrg = json_encode($request->specification);
-        // }else{
-        //     $specificationOrg = null;
-        // }
+
         $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('group_id', '=', $group->id)->where('deleted_at', null)->first();
         $userCartShopID = \Auth::user()->cart()->get()->first()->shop_id;
             $productPrice = $product->price;
@@ -157,7 +122,7 @@ class CartController extends \App\Http\Controllers\Controller {
         if (is_null($cartProduct)) {
             DB::transaction(function () use ($request, $productPrice, $group) {
                 DB::table('cart_product')->insert([
-                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'group_id' => $group->id, 'total_price' => $productPrice]
+                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'group_id' => $group->id, 'total_price' => $productPrice, 'p_id' => $group->p_id, 'user_id' => \Auth::user()->id, 'crm_id' => \Auth::user()->crm_id, 'created_at' => now()]
                     , ]);
 
                 $total_price = 0;
@@ -166,6 +131,7 @@ class CartController extends \App\Http\Controllers\Controller {
                 }
                 $cartUpdate = \Auth::user()->cart()->get()->first()->update([
                     'total_price' => $total_price,
+                    'updated_at' => now()
                 ]);
 
             });

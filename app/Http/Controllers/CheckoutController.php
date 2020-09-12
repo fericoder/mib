@@ -21,11 +21,11 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
-
         foreach ($request->except('_token') as $cartProductId => $quantity) {
             $cartProduct = CartProduct::find($cartProductId);
             $cartProductUpdate = \Auth::user()->cart()->get()->first()->cartProduct()->where('id', $cartProductId)->update([
                 'quantity' => $quantity,'total_price' => $cartProduct->product->price * $quantity,
+                'updated_at' => now()
             ]);
         }
             $cart = \Auth::user()->cart()->get()->first();
@@ -75,6 +75,12 @@ class CheckoutController extends Controller
       $purchase->total_price = $total_price;
       $purchase->save();
       DB::table('carts')->where('id', '=', \Auth::user()->cart()->get()->first()->id)->update(['status' => 1]);
+      foreach($cart->cartProduct as $cartProduct){
+        $cartProduct->update([
+            'status' => '1',
+            'updated_at' => now()
+        ]);
+      }
       Cart::where('id', \Auth::user()->cart()->get()->first()->id)->get()->first()->delete();
       alert()->success('خرید شما با موفقیت ثبت شد.', '');
        return redirect()->route('profile.orders');
