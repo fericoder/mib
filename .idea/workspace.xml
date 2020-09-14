@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a150e13-ad07-4c23-bdd7-239334d62b3c" name="Default Changelist" comment="front-end template is added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/shop/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/shop/cart.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="0a150e13-ad07-4c23-bdd7-239334d62b3c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,26 +64,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/dashboard/layouts/master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="304" column="21" lean-forward="true" selection-start-line="304" selection-end-line="305" />
+            <state relative-caret-position="201">
+              <caret line="218" column="58" lean-forward="true" selection-start-line="218" selection-end-line="219" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="337" lean-forward="true" selection-end-line="343" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/shop/cart.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="442">
+              <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
             </state>
           </provider>
         </entry>
@@ -114,7 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>id</find>
       <find>.slicknav_menu</find>
       <find>دسته بندی</find>
       <find>jquery</find>
@@ -144,6 +139,7 @@
       <find>no_specification_status</find>
       <find>swa</find>
       <find>removeProduct</find>
+      <find>swee</find>
     </findStrings>
     <replaceStrings>
       <replace>ایده برتر کیوان</replace>
@@ -224,7 +220,6 @@
         <option value="$PROJECT_DIR$/resources/views/shop/contact-us.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/shop/faq.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/shop/about-us.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php" />
         <option value="$PROJECT_DIR$/public/assets/js/script.js" />
         <option value="$PROJECT_DIR$/resources/views/shop/product.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ShopController.php" />
@@ -236,6 +231,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
         <option value="$PROJECT_DIR$/resources/views/shop/cart.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php" />
       </list>
     </option>
   </component>
@@ -536,7 +532,7 @@
       <workItem from="1599832878121" duration="6259000" />
       <workItem from="1599859983063" duration="946000" />
       <workItem from="1599878936732" duration="2187000" />
-      <workItem from="1600075690652" duration="242000" />
+      <workItem from="1600075690652" duration="531000" />
     </task>
     <task id="LOCAL-00001" summary="profile routes added">
       <created>1596201907714</created>
@@ -685,14 +681,21 @@
       <option name="project" value="LOCAL" />
       <updated>1599879308240</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="cart problem solved">
+      <created>1600076156858</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1600076156858</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179553000" />
+    <option name="totallyTimeSpent" value="179842000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="793" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="799" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21244635" />
@@ -710,7 +713,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32697946" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32944608" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.15474452" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.15474452" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -744,7 +747,8 @@
     <MESSAGE value="menu mobile &amp; login register header footer has been added" />
     <MESSAGE value="product video tab added" />
     <MESSAGE value="api changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="api changed" />
+    <MESSAGE value="cart problem solved" />
+    <option name="LAST_COMMIT_MESSAGE" value="cart problem solved" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/views/shop/index.blade.php">
@@ -1130,22 +1134,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/dashboard/layouts/master.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="304" column="21" lean-forward="true" selection-start-line="304" selection-end-line="305" />
+        <state relative-caret-position="201">
+          <caret line="218" column="58" lean-forward="true" selection-start-line="218" selection-end-line="219" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/shop/cart.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="442">
+          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/shop/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="337" lean-forward="true" selection-end-line="343" />
         </state>
       </provider>
     </entry>
