@@ -87,19 +87,30 @@ class CartController extends \App\Http\Controllers\Controller {
     public function addToCart($userID, CartRequest $request) {
 
         $product = Product::where('id', $request->product_id)->get()->first();
+        $newGroup = NULL;
         if($product->no_specification_status == 'disable' and $product->groups->count() != 0){
-            $group = SpecificationItemGroup::where('product_id', $product->id)->where('specification_items', json_encode($request->specification))->get()->first();
-            if($group == null){
+            if($request->specification){
+            $groups = SpecificationItemGroup::where('product_id', $product->id)->get();
+            foreach($groups as $group){
+                $reqSpec = $request->specification;
+                $gpSpec = $group->specification_items;
+                sort($reqSpec);
+                sort($gpSpec);
+                if($reqSpec == $gpSpec)
+                $newGroup = $group;
+            }
+        }
+            if($newGroup == null){
                 return redirect()->back()->withErrors(['محصولی با این خصوصیات وجود ندارد']);
             }
         }
         elseif($product->no_specification_status == 'enable'){
-            $group = $product->groups->first();
+            $newGroup = $product->groups->first();
         }
         else{
-            $group = new \stdClass();
-            $group->id = null;
-            $group->p_id = null;
+            $newGroup = new \stdClass();
+            $newGroup->id = null;
+            $newGroup->p_id = null;
         }
         if($product->type == 'product' && $product->amount != null and $product->amount < 0){
             return redirect()->back()->withErrors(['کالای مورد نظر موجود نمیباشد']);
@@ -112,7 +123,7 @@ class CartController extends \App\Http\Controllers\Controller {
             $cart->save();
         }
 
-        $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('group_id', '=', $group->id)->where('deleted_at', null)->first();
+        $cartProduct = DB::table('cart_product')->where('product_id', '=', $request->product_id)->where('cart_id', '=', \Auth::user()->cart()->get()->first()->id)->where('group_id', '=', $newGroup->id)->where('deleted_at', null)->first();
         $userCartShopID = \Auth::user()->cart()->get()->first()->shop_id;
             $productPrice = $product->price;
         if($request->quantity == null){
@@ -120,9 +131,9 @@ class CartController extends \App\Http\Controllers\Controller {
         }
 
         if (is_null($cartProduct)) {
-            DB::transaction(function () use ($request, $productPrice, $group) {
+            DB::transaction(function () use ($request, $productPrice, $newGroup) {
                 DB::table('cart_product')->insert([
-                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'group_id' => $group->id, 'total_price' => $productPrice, 'p_id' => $group->p_id, 'user_id' => \Auth::user()->id, 'crm_id' => \Auth::user()->crm_id, 'created_at' => now()]
+                    ['product_id' => $request->product_id,'quantity' => $request->quantity, 'cart_id' => \Auth::user()->cart()->get()->first()->id, 'group_id' => $newGroup->id, 'total_price' => $productPrice, 'p_id' => $newGroup->p_id, 'user_id' => \Auth::user()->id, 'crm_id' => \Auth::user()->crm_id, 'created_at' => now()]
                     , ]);
 
                 $total_price = 0;
