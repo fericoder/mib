@@ -74,11 +74,11 @@ class UserController extends Controller
         $request->validate([
             'fName' => 'required',
             'lName' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|unique:users',
             'status' => 'required',
-            'email' => 'required',
-            'crm_id' => 'nullable',
-            'pezeshkiNo' => 'nullable',
+            'email' => 'required|unique:users',
+            'crm_id' => 'nullable|unique:users',
+            'pezeshkiNo' => 'nullable|unique:users',
             'moarref' => 'nullable',
             'job' => 'nullable',
             'meliPic' => 'nullable',
@@ -88,18 +88,18 @@ class UserController extends Controller
 
 
         if ($request->file('meliPic')){
-            $meliPic = $this->uploadFile($request->file('meliPic'), false, true);
+            $meliPic = $this->uploadFile($request->file('meliPic'), false, false);
         }else{
             $meliPic = '';
         }
         if ($request->file('nezamPic')){
-            $nezamPic = $this->uploadFile($request->file('nezamPic'), false, true);
+            $nezamPic = $this->uploadFile($request->file('nezamPic'), false, false);
         }else{
             $nezamPic = '';
         }
 
         if ($request->file('javazPic')){
-            $javazPic = $this->uploadFile($request->file('javazPic'), false, true);
+            $javazPic = $this->uploadFile($request->file('javazPic'), false, false);
         }else{
             $javazPic = '';
         }
@@ -116,9 +116,9 @@ class UserController extends Controller
             'moarref' => $this->fa_num_to_en($request->moarref),
             'job' => $request->job,
             'password' => \Hash::make($request->password),
-            'meliPic' => $meliPic['original'],
-            'nezamPic' => $nezamPic['original'],
-            'javazPic' => $javazPic['original'],
+            'meliPic' => $meliPic,
+            'nezamPic' => $nezamPic,
+            'javazPic' => $javazPic,
             'shop_id' => \Auth::user()->shop->id,
         ]);
 
