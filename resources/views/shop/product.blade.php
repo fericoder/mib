@@ -363,12 +363,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-    <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/simple-lightbox.min.js"></script>
 
     <script>
         $(document).ready(function() {
-
             $(".js-example-basic-single").val(null).trigger("change");
             $('.js-example-basic-single').select2({
                 placeholder: {

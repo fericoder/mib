@@ -4,7 +4,7 @@
     <section class="search container">
         <div style="margin-top: 46px;" class="o-page__aside">
             <div class="c-listing-sidebar">
-                <div class="c-box">
+                <div style="display: none" class="c-box">
                     <div class="c-box__header">جستجو :</div>
                     <div class="c-box__content">
                         <form id="searchForm" action="{{ route('shop.search') }}">
@@ -27,7 +27,7 @@
 
             </div>
         </div>
-        <div class="o-page__content">
+        <div style="flex: 0 0 99.8%;" class="o-page__content">
             <article>
                 <nav>
                     <ul class="c-breadcrumb">
@@ -40,7 +40,7 @@
                     <div class="c-listing__header">
                         <ul class="c-listing__sort" data-label="مرتب‌سازی بر اساس :">
                             <li><span>مرتب سازی بر اساس :</span></li>
-                            <li><a {{ \Request::get('sortBy') == 'created_at' ? "class=is-active" : ''  }} onclick="newest()" >جدیدترین</a></li>
+                            <li><a {{ \Request::get('sortBy') == 'created_at' ? "class=is-active" : ''  }} {{ \Request::get('sortBy') == null ? 'class=is-active' : '' }} onclick="newest()" >جدیدترین</a></li>
                             <li><a {{ \Request::get('sortBy') == 'viewCount' ? "class=is-active" : ''  }} onclick="highestView()" >پربازدیدترین</a></li>
                             <li><a {{ \Request::get('sortBy') == 'buyCount' ? "class=is-active" : ''  }} onclick="highestSell()" >پرفروش ترین</a></li>
                             {{--<li><a onclick="cheapest()" >ارزان ترین</a></li>--}}
@@ -48,6 +48,11 @@
                         </ul>
                     </div>
                     <ul class="c-listing__items">
+
+                        @if ($productsPaginate->count() === 0)
+                            <p style="margin: auto; margin-top: 50px; margin-bottom: 50px">محصولی یافت نشد.</p>
+                        @endif
+
                         @foreach ($productsPaginate as $product)
                             <li>
                                 <div class="c-product-box c-promotion-box ">

@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(){
         $shop = \Auth::user()->shop()->first();
-        $users = $shop->users()->where('type', 'customer')->get();
+        $users = $shop->users()->get();
         return view('dashboard.users.index', compact('shop', 'users'));
 
     }
@@ -27,6 +27,7 @@ class UserController extends Controller
             'lName' => 'required',
             'mobile' => 'required',
             'status' => 'required',
+            'type' => 'required',
             'email' => 'required',
             'crm_id' => 'nullable',
             'pezeshkiNo' => 'nullable',
@@ -48,6 +49,7 @@ class UserController extends Controller
             'pezeshkiNo' => $request->pezeshkiNo,
             'moarref' => $request->moarref,
             'job' => $request->job,
+            'type' => $request->type,
 
         ]);
 
@@ -76,6 +78,7 @@ class UserController extends Controller
             'lName' => 'required',
             'mobile' => 'required|unique:users',
             'status' => 'required',
+            'type' => 'required',
             'email' => 'required|unique:users',
             'crm_id' => 'nullable|unique:users',
             'pezeshkiNo' => 'nullable|unique:users',
@@ -106,6 +109,7 @@ class UserController extends Controller
 
 
         User::create([
+            'type' => $request->type,
             'fName' => $request->fName,
             'lName' => $request->lName,
             'mobile' => $this->fa_num_to_en($request->mobile),

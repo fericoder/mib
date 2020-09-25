@@ -15,9 +15,6 @@
 @section('content')
 
 <section class="account-box">
-    <div class="register-logo">
-        <a href="/"><img src="/assets/images/logo.png" alt=""></a>
-    </div>
     <div class="register login">
         <div class="headline">ورود به فروشگاه</div>
         <div class="content">

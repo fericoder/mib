@@ -49,6 +49,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        foreach($data as $key => $value)
+        {
+            $data['mobile'] = $this->fa2en($data['mobile']);
+            $data['pezeshkiNo'] = $this->fa2en($data['pezeshkiNo']);
+            $data['moarref'] = $this->fa2en($data['moarref']);
+        }
+
+
         return Validator::make($data, [
             'mobile' => ['required', 'min:11', 'max:11', 'unique:users'],
             'fName' => ['required', 'string', 'max:255'],
@@ -69,12 +77,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'mobile' => $data['mobile'],
+            'mobile' => $this->fa2en($data['mobile']),
             'fName' => $data['fName'],
             'lName' => $data['lName'],
-            'pezeshkiNo' => $data['pezeshkiNo'],
+            'pezeshkiNo' => $this->fa2en($data['pezeshkiNo']),
             'email' => $data['email'],
-            'moarref' => $data['moarref'],
+            'moarref' => $this->fa2en($data['moarref']),
             'shop_id' => 1,
             'password' => Hash::make($data['password']),
         ]);

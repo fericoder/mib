@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class InformationRequest extends FormRequest
 {
@@ -21,13 +22,22 @@ class InformationRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            'job' => 'required',
-            'meliPic' => 'required|mimes:jpeg,png,jpg,gif,PNG,JPEG',
-            'nezamPic' => 'required|mimes:jpeg,png,jpg,gif,PNG,JPEG',
-            'javazPic' => 'nullable|mimes:jpeg,png,jpg,gif,PNG,JPEG'
-        ];
+
+        if ($request->job == 'دندان پزشک') {
+            return [
+                'job' => 'required',
+                'meliPic' => 'required|mimes:jpeg,png,jpg,gif,PNG,JPEG',
+                'nezamPic' => 'required|mimes:jpeg,png,jpg,gif,PNG,JPEG',
+            ];
+        } else if ($request->job == 'مرکز درمانی') {
+            return [
+                'job' => 'required',
+                'javazPic' => 'required|mimes:jpeg,png,jpg,gif,PNG,JPEG'
+
+            ];
+        }
+
     }
 }

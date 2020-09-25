@@ -54,7 +54,8 @@
                         <div class="c-checkout-contact__content">
                             <ul class="c-checkout-contact__items">
                                 <li class="c-checkout-contact__item c-checkout-contact__item--username"> <span>گیرنده : {{ $address->fullName }}</span>
-                                    <a id="myBtn{{ $address->id }}" style="margin: 5px;cursor: pointer;" title="ویرایش" ><i class="fa fa-edit text-info mr-1 button font-15"></i></a>
+                                    <a id="myBtn{{ $address->id }}" class="c-checkout__to-shipping-link" style="margin: 5px;cursor: pointer;padding: 2px 9px;    font-size: 13px;" title="ویرایش" ><i class="fa fa-edit text-info ml-1 button font-15"></i> ویرایش آدرس </a>
+
                                 </li>
                                 <li class="c-checkout-contact__item c-checkout-contact__item--location">
                                     <div class="c-checkout-contact__item c-checkout-contact__item--mobile"> <span>شماره تماس : {{ $address->tel }}</span></div>
@@ -156,7 +157,7 @@
             </form>
             </div>
             <div class="c-checkout__actions">
-                <button class="btn-link-spoiler">« بازگشت به سبد خرید </button>
+                <a href="/user-cart"><button class="btn-link-spoiler">« بازگشت به سبد خرید </button></a>
             </div>
         </div>
         <aside class="o-page__aside">

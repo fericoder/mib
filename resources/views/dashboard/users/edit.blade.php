@@ -124,6 +124,14 @@
                                                     </div>
 
                                                     <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نوع :</span></div>
+                                                        <select class="form-control" name="type" id="">
+                                                            <option {{ $user->type == 'customer' ? 'selected' : '' }} value="customer">مشتری</option>
+                                                            <option {{ $user->type == 'admin' ? 'selected' : '' }} value="admin">مدیر سیستم</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">ایمیل :</span></div>
                                                         <input type="text" class="form-control inputfield" name="email" value="{{ old('email', $user->email) }}">
                                                     </div>

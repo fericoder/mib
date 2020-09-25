@@ -208,7 +208,7 @@
                     @foreach (\App\Category::all()->where('parent_id', null) as $category)
                         <li>
                             <a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
-                            <ul class="megamenu">
+                            <ul style="    height: 300px;" class="megamenu">
                                 @foreach (\App\Category::all()->where('parent_id', $category->id) as $subCategory)
                                     <li style="margin-right: 20px">
                                         <a style="width: 150px" href="{{ route('shop.category', $subCategory->id) }}">{{ $subCategory->name }}</a>
@@ -279,7 +279,27 @@
             </div>
         </div>
         <div class="footer-contact">
-            <div class="contact"> <span>هفت روز هفته, ۲۴ ساعت شبانه روز پاسخگوی شما هستیم,</span> <span>شماره تماس : 02127679</span> <span>آدرس ایمیل : info@mibdental.com</span></div>
+            <div class="contact"> <span>هفت روز هفته, ۲۴ ساعت شبانه روز پاسخگوی شما هستیم,</span> <span>شماره تماس : 02127679</span> <span>آدرس ایمیل : info@mibdental.com</span>
+
+                <span>شبکه های اجتماعی: </span>
+                @if (\App\Shop::first()->instagram)
+                    <a target="_blank" href="https://instagram.com/{{ \App\Shop::first()->instagram }}"><i style="font-size: 25px; margin: 10px" class="fa fa-instagram"></i></a>
+                @endif
+
+                @if (\App\Shop::first()->telegram)
+                    <a target="_blank" href="https://t.me/{{ \App\Shop::first()->telegram }}"><i style="font-size: 25px; margin: 10px" class="fa fa-telegram"></i></a>
+                @endif
+
+                @if (\App\Shop::first()->twitter)
+                    <a target="_blank" href="https://twitter.com/{{ \App\Shop::first()->twitter }}"><i style="font-size: 25px; margin: 10px" class="fa fa-twitter"></i></a>
+                @endif
+
+                @if (\App\Shop::first()->youtube)
+                    <a target="_blank" href="https://youtube.com/{{ \App\Shop::first()->youtube }}"><i style="font-size: 25px; margin: 10px" class="fa fa-youtube"></i></a>
+                @endif
+
+
+            </div>
         </div>
         <div class="copyright">
             <p>استفاده از مطالب فروشگاه اینترنتی  فقط برای مقاصد غیرتجاری و با ذکر منبع بلامانع است. کلیه حقوق این سایت متعلق به شرکت ایده برتر کیوان می‌باشد.</p>
@@ -288,9 +308,12 @@
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <a href="whatsapp://send?phone=989127259562" class="float" target="_blank">
-        <i class="fa fa-whatsapp my-float"></i>
-    </a>
+    @if (\App\Shop::first()->whatsapp)
+        <a href="whatsapp://send?phone={{ \App\Shop::first()->whatsapp }}" class="float" target="_blank">
+            <i class="fa fa-whatsapp my-float"></i>
+        </a>
+    @endif
+
 
 
 </footer>
@@ -334,6 +357,8 @@
     }
 
 </script>
+
+
 
 @yield('footerScripts')
 

@@ -60,7 +60,7 @@ class Controller extends BaseController
         );
 
         if($this->folder_exist(public_path() . '_html')){
-            $folder = public_path() . '_html';
+            $folder = public_path();
         }else{
             $folder = public_path();
         }
@@ -97,7 +97,7 @@ class Controller extends BaseController
         );
 
         if($this->folder_exist(public_path() . '_html')){
-            $folder = public_path() . '_html';
+            $folder = public_path();
         }else{
             $folder = public_path();
         }
@@ -114,13 +114,13 @@ class Controller extends BaseController
 
 
 
-    protected function fa_num_to_en($string)
+    protected function fa2en($string)
     {
-
         $persian1 = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
         $persian2 = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
         $num = range(0, 9);
         $string = str_replace($persian1, $num, $string);
+        $string = str_replace(',', '', $string);
         return str_replace($persian2, $num, $string);
     }
 

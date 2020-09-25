@@ -257,6 +257,10 @@ return array(
         'on' => 'فعال',
         'color_amount' => 'موجودی رنگ',
         'shortDescription' => 'خلاصه توضیحات',
+        'meliPic' => 'تصویر کارت ملی',
+        'nezamPic' => 'تصویر نظام پزشکی',
+        'javazPic' => 'تصویر جواز',
+        'job' => 'شغل',
 
           ),
 );

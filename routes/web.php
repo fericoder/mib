@@ -99,6 +99,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('specifications/delete', 'SpecificationController@destroy');
     Route::post('SpecificationItems/delete', 'SpecificationItemController@destroy');
 
+
+    Route::resource('blog', 'BlogController');
+    Route::any('blog/delete', 'BlogController@destroy');
+
+    Route::resource('banner', 'BannerController');
+    Route::any('banner/delete', 'BannerController@destroy');
+
 });
 
 

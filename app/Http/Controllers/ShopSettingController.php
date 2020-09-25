@@ -92,6 +92,11 @@ class ShopSettingController extends Controller
             'address' => $request->address,
             'about_header' => $request->about_header,
             'about_main' => $request->about_main,
+            'telegram' => $request->telegram,
+            'instagram' => $request->instagram,
+            'twitter' => $request->twitter,
+            'youtube' => $request->youtube,
+            'whatsapp' => $request->whatsapp,
         ]);
 
         alert()->success('اطلاعات فروشگاه بروز شد.', 'بروز شد');

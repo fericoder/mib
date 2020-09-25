@@ -27,7 +27,7 @@ class GalleryController extends \App\Http\Controllers\Controller
     {
 
         if($_SERVER['REMOTE_ADDR'] != '127.0.0.1'){
-            $folder = public_path() . '_html';
+            $folder = public_path();
         }else{
             $folder = public_path();
         }

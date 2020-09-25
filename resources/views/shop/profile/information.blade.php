@@ -54,15 +54,6 @@
         </div>
         <div class="o-page__content">
 
-            @if ($errors->any())
-                <div style="background-color: #e47474" class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li style="color: black;font-size: 13px;padding: 10px">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
 
             <div class="profile-navbar">
@@ -89,16 +80,27 @@
                             <input name="province" disabled type="text" value="{{ $user->email }}">
 
                             <label style="margin-top: 10px" for="pwd">شغل<span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="job" required type="text" value="{{ $user->job }}" placeholder="مثال: دندانپزشک/ مراکز درمانی ">
 
-                            <label style="margin-top: 10px" for="pwd">تصویر کارت ملی<span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="meliPic" type="file" >
+                            <select required style="padding: 10px;font-size: 13px;" name="job" id="job">
+                                <option disabled selected value> -- کلیک کنید -- </option>
+                                <option {{ $user->job == 'دندان پزشک' ? 'selected' : '' }} value="دندان پزشک">دندان پزشک</option>
+                                <option {{ $user->job == 'مرکز درمانی' ? 'selected' : '' }} value="مرکز درمانی">مرکز درمانی</option>
+                            </select>
 
-                            <label style="margin-top: 10px" for="pwd">کارت نظام پزشکی <span style="color: red;    font-size: 15px;">*</span></label>
-                            <input name="nezamPic" type="file" >
+                            <div class="" style="display: none;" id="dandanpezesht">
+                                <br>
+                                <label style="margin-top: 10px;color: #656565; margin: 5px 0; letter-spacing: -.6px; font-size: 1.071rem;line-height: 1.467;font-weight: 400;" for="pwd">تصویر کارت ملی<span style="color: red;    font-size: 15px;">*</span></label>
+                                <input style="margin: 15px;margin-bottom: 30px;" name="meliPic" type="file" >
+                                <br><br>
+                                <label style="margin-top: 10px;color: #656565; margin: 5px 0; letter-spacing: -.6px; font-size: 1.071rem;line-height: 1.467;font-weight: 400;" for="pwd">کارت نظام پزشکی <span style="color: red;    font-size: 15px;">*</span></label>
+                                <input style="margin: 15px;margin-bottom: 30px;" name="nezamPic" type="file" >
+                            </div>
 
-                            <label style="margin-top: 10px" for="pwd">عکس جواز کسب  </label>
-                            <input name="javazPic" type="file" >
+                            <div class="" style="display: none" id="markazdarmani">
+                                <br>
+                                <label style="margin-top: 10px;color: #656565; margin: 5px 0; letter-spacing: -.6px; font-size: 1.071rem;line-height: 1.467;font-weight: 400;" for="pwd">عکس جواز کسب  <span style="color: red;    font-size: 15px;">*</span></label>
+                                <input style="margin: 15px;margin-bottom: 30px;" name="javazPic" type="file" >
+                            </div>
 
 
                             <button style="margin-top: 30px; margin-bottom: 20px" type="submit"><i class="fa fa-lock-open"></i>بروزرسانی اطلاعات</button>
@@ -113,5 +115,26 @@
     </section>
 
 
+
+@stop
+
+@section('footerScripts')
+    <script>
+        $('#job').change(function() {
+            if ($(this).val() === 'دندان پزشک') {
+                $('#dandanpezesht').show();
+            }
+            if ($(this).val() != 'دندان پزشک') {
+                $('#dandanpezesht').hide();
+            }
+
+            if ($(this).val() === 'مرکز درمانی') {
+                $('#markazdarmani').show();
+            }
+            if ($(this).val() != 'مرکز درمانی') {
+                $('#markazdarmani').hide();
+            }
+        });
+    </script>
 
 @stop

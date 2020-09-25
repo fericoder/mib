@@ -38,9 +38,6 @@
 @section('content')
 
 <section class="account-box">
-    <div class="register-logo">
-        <a href="/"><img src="/assets/images/logo.png" alt=""></a>
-    </div>
     <div class="register login">
         <div class="headline">عصویت در فروشگاه</div>
         <div class="content">
@@ -49,7 +46,7 @@
 
 
 
-                <label for="mobtel">نام</label>
+                <label for="mobtel">نام <span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
                 <input id="fName" type="text" class="form-control @error('fName') is-invalid @enderror" name="fName" placeholder="نام خودرا وارد نمایید" value="{{ old('fName') }}" required autocomplete="fName">
                 @error('fName')
                 <span class="invalid-feedback" role="alert">
@@ -58,7 +55,7 @@
                 @enderror
 
 
-                <label for="mobtel">نام خانوادگی</label>
+                <label for="mobtel">نام خانوادگی<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
                 <input id="lName" type="text" class="form-control @error('lName') is-invalid @enderror" name="lName" placeholder="نام خانوادگی خودرا وارد نمایید" value="{{ old('lName') }}" required autocomplete="lName">
                 @error('lName')
                 <span class="invalid-feedback" role="alert">
@@ -67,8 +64,8 @@
                 @enderror
 
 
-                <label for="mobtel">شماره موبایل</label>
-                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" placeholder="شماره موبایل خودرا وارد نمایید" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
+                <label for="mobtel">شماره موبایل<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
+                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" placeholder="مثال: 09121010111" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
                 @error('mobile')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -77,8 +74,8 @@
 
 
 
-                <label for="mobtel">آدرس ایمیل</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="آدرس ایمیل خودرا وارد نمایید" value="{{ old('email') }}" required autocomplete="email">
+                <label for="mobtel">آدرس ایمیل<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="مثال: info@mibmed.com" value="{{ old('email') }}" required autocomplete="email">
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -86,7 +83,7 @@
                 @enderror
 
 
-                <label for="mobtel">شماره نظام پزشکی</label>
+                <label for="mobtel">شماره نظام پزشکی<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
                 <input id="pezeshkiNo" type="text" class="form-control @error('pezeshkiNo') is-invalid @enderror" name="pezeshkiNo" placeholder="شماره نظام پزشکی خودرا وارد نمایید" value="{{ old('pezeshkiNo') }}" required autocomplete="pezeshkiNo">
                 @error('pezeshkiNo')
                 <span class="invalid-feedback" role="alert">
@@ -95,14 +92,14 @@
                 @enderror
 
                 <label for="mobtel">کد معرف (درصورت وجود)</label>
-                <input id="moarref" type="text" class="form-control @error('moarref') is-invalid @enderror" name="moarref" placeholder="کد معرف خودرا درصورت وجود وارد نمایید" value="{{ old('moarref') }}" autocomplete="moarref">
+                <input id="moarref" type="text" class="form-control @error('moarref') is-invalid @enderror" name="moarref" placeholder="مثال: ۱۲۲۱" value="{{ old('moarref') }}" autocomplete="moarref">
                 @error('moarred')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
 
-                <label for="pwd">کلمه عبور</label>
+                <label for="pwd">کلمه عبور<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
                 <input id="password" type="password" placeholder="رمز عبور خودرا وارد نمایید" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                 @error('password')
@@ -111,7 +108,7 @@
                  </span>
                 @enderror
 
-                <label for="pwd">تکرار کلمه عبور</label>
+                <label for="pwd">تکرار کلمه عبور<span style="font-size: 13px; color: red; margin-right: 4px">*</span></label>
                 <input id="password" type="password" placeholder="رمز عبور خودرا وارد نمایید" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
 
 

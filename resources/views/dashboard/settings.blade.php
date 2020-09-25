@@ -208,6 +208,55 @@
                                     </div>
                                     <!--end card-->
                                 </div>
+
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mt-0 header-title">شبکه های اجتماعی</h3>
+                                            <div class="row ">
+                                                <div class="col-lg-12 ">
+                                                    <div class="form-group mt-5 row">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تلگرام :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="telegram" value="{{ old('telegram', $shop->telegram) }}">
+
+                                                        </div>
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">اینستاگرام :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="instagram" value="{{ old('instagram', $shop->instagram) }}">
+                                                        </div>
+
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">توییتر :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="twitter" value="{{ old('twitter', $shop->twitter) }}">
+                                                        </div>
+
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">یوتیوب :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="youtube" value="{{ old('youtube', $shop->youtube) }}">
+                                                        </div>
+
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">واتساپ :</span></div>
+                                                            <input type="text" class="form-control inputfield" name="whatsapp" value="{{ old('whatsapp', $shop->whatsapp) }}">
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+
+
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body">
@@ -221,7 +270,8 @@
                                                            </div>
                                                            <div class="input-group mt-3">
                                                             <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>متن اصلی :</span></div>
-                                                               <textarea class="form-control" rows="10" name="about_main">{{ old('about_main', $shop->about_main) }}</textarea>
+                                                               <textarea style="direction: rtl; width: 90%!important;"   id="body" name="about_main" rows="18">{{ old('about_main', $shop->about_main) }}</textarea>
+
                                                            </div>
 
 
@@ -275,4 +325,15 @@
     </div>
     </div>
 
+@stop
+@section('footerScripts')
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <!--end::Page Scripts -->
+    <script type="text/javascript">
+        CKEDITOR.replace('body', {
+            language: 'fa',
+            uiColor: '#F3F6F7',
+        });
+
+    </script>
 @stop

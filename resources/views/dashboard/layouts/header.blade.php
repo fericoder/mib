@@ -151,12 +151,6 @@
                             <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
                                 <ul class="kt-menu__nav ">
 
-                                    <li style="" class="kt-menu__item "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="/" class="kt-menu__link">
-                                            <span class="kt-menu__link-text">فروشگاه</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    </li>
 
                                     <li style="" class="kt-menu__item {{ request()->is('dashboard/index') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
@@ -215,16 +209,25 @@
                                     <li class="kt-menu__item {{ request()->is('*users*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
                                         <a href="{{ route('users.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text"> مشتریان</span>
+                                            <span class="kt-menu__link-text"> کاربران</span>
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*faqs*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                    <li class="kt-menu__item {{ request()->is('*blog*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('faqs.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text">سوالات متداول</span>
+                                        <a href="{{ route('blog.index') }}" class="kt-menu__link">
+                                            <span class="kt-menu__link-text"> مدیریت محتوی</span>
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
+
+                                    <li class="kt-menu__item {{ request()->is('*banner*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                        <a href="{{ route('banner.index') }}" class="kt-menu__link">
+                                            <span class="kt-menu__link-text"> بنر ها</span>
+                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    </li>
+
+
 
 
                                     <li class="kt-menu__item {{ request()->is('*settings*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "

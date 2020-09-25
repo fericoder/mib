@@ -72,6 +72,14 @@
                             </div>
 
                             <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نوع :</span></div>
+                                <select class="form-control" name="type" id="">
+                                    <option value="customer">مشتری</option>
+                                    <option value="admin">مدیر سیستم</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">ایمیل :</span></div>
                                 <input type="text" class="form-control inputfield" name="email" value="{{ old('email') }}">
                             </div>
@@ -243,6 +251,7 @@
                                 <th title="Field #2" data-field="2">نام خانوادگی</th>
                                 <th title="Field #5" data-field="5">شماره موبایل</th>
                                 <th title="Field #5" data-field="5">وضعیت</th>
+                                <th title="Field #5" data-field="5">نوع</th>
                                 <th title="Field #5" data-field="5"> تاریخ عضویت</th>
                                 <th title="Field #6" data-field="6">ویرایش|سفارشات</th>
                             </tr>
@@ -257,6 +266,7 @@
                                     <td style="font-family: BYekan" >{{ $user->lName }}</td>
                                     <td style="font-family: BYekan" >{{ $user->mobile }}</td>
                                     <td style="font-family: BYekan" >{{ $user->status == 'enable' ? 'تایید شده' : 'تایید نشده' }}</td>
+                                    <td style="font-family: BYekan" >{{ $user->type == 'customer' ? 'مشتری' : 'مدیر' }}</td>
                                     <td style="font-family: BYekan!important; direction: ltr" >{{ jdate($user->created_at) }}</td>
                                     <td>
                                         <a style="margin: 5px;" href="{{ route('users.edit', $user->id ) }}"  title="ویرایش" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>

@@ -65,6 +65,11 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        $request->merge([
+            'mobile' => $this->fa2en($request->mobile),
+        ]);
+
+        
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',

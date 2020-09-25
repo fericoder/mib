@@ -19,15 +19,23 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'cf97c57bfe0f23854afd2f3818abb7a0' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/create_uploaded_file.php',
+        '9bf37a3d0dad93e29cb4e1b1bfab04e9' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_headers_from_sapi.php',
+        'ce70dccb4bcc2efc6e94d2ee526e6972' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_method_from_sapi.php',
+        'f86420df471f14d568bfcb71e271b523' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_protocol_version_from_sapi.php',
+        'b87481e008a3700344428ae089e7f9e5' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_uri_from_sapi.php',
+        '0b0974a5566a1077e4f2e111341112c1' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_server.php',
+        '1ca3bc274755662169f9629d5412a1da' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_uploaded_files.php',
+        '40360c0b9b437e69bcbb7f1349ce029e' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/parse_cookie_header.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
@@ -47,6 +55,10 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'Z' => 
+        array (
+            'Zend\\Diactoros\\' => 15,
         ),
         'X' => 
         array (
@@ -94,6 +106,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
         ),
         'R' => 
         array (
@@ -134,6 +147,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         ),
         'I' => 
         array (
+            'Ipecompany\\Smsirlaravel\\' => 24,
             'Intervention\\Image\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\' => 11,
@@ -194,6 +208,10 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Zend\\Diactoros\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -323,6 +341,10 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Symfony\\Bridge\\PsrHttpMessage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/psr-http-message-bridge',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -398,6 +420,10 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'Ipecompany\\Smsirlaravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -529,6 +555,8 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
     public static $classMap = array (
         'AddressSeeder' => __DIR__ . '/../..' . '/database/seeds/AddressSeeder.php',
         'App\\Address' => __DIR__ . '/../..' . '/app/Address.php',
+        'App\\Banner' => __DIR__ . '/../..' . '/app/Banner.php',
+        'App\\Blog' => __DIR__ . '/../..' . '/app/Blog.php',
         'App\\Brand' => __DIR__ . '/../..' . '/app/Brand.php',
         'App\\Cart' => __DIR__ . '/../..' . '/app/Cart.php',
         'App\\CartProduct' => __DIR__ . '/../..' . '/app/CartProduct.php',
@@ -551,6 +579,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Http/Controllers/BlogController.php',
         'App\\Http\\Controllers\\BrandController' => __DIR__ . '/../..' . '/app/Http/Controllers/BrandController.php',
         'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\CartProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartProductController.php',
@@ -624,6 +653,8 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Assert\\LazyAssertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertion.php',
         'Assert\\LazyAssertionException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertionException.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
+        'BannerSeeder' => __DIR__ . '/../..' . '/database/seeds/BannerSeeder.php',
+        'BlogSeeder' => __DIR__ . '/../..' . '/database/seeds/BlogSeeder.php',
         'BrandSeeder' => __DIR__ . '/../..' . '/database/seeds/BrandSeeder.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -1124,6 +1155,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\cs_CZ\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/cs_CZ/Payment.php',
         'Faker\\Provider\\cs_CZ\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/cs_CZ/Person.php',
         'Faker\\Provider\\cs_CZ\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/cs_CZ/PhoneNumber.php',
+        'Faker\\Provider\\cs_CZ\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/cs_CZ/Text.php',
         'Faker\\Provider\\da_DK\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/da_DK/Address.php',
         'Faker\\Provider\\da_DK\\Company' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/da_DK/Company.php',
         'Faker\\Provider\\da_DK\\Internet' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/da_DK/Internet.php',
@@ -1162,6 +1194,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\el_GR\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/el_GR/Payment.php',
         'Faker\\Provider\\el_GR\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/el_GR/Person.php',
         'Faker\\Provider\\el_GR\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/el_GR/PhoneNumber.php',
+        'Faker\\Provider\\el_GR\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/el_GR/Text.php',
         'Faker\\Provider\\en_AU\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/en_AU/Address.php',
         'Faker\\Provider\\en_AU\\Internet' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/en_AU/Internet.php',
         'Faker\\Provider\\en_AU\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/en_AU/PhoneNumber.php',
@@ -1262,6 +1295,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\fr_FR\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/fr_FR/Payment.php',
         'Faker\\Provider\\fr_FR\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/fr_FR/Person.php',
         'Faker\\Provider\\fr_FR\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/fr_FR/PhoneNumber.php',
+        'Faker\\Provider\\fr_FR\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/fr_FR/Text.php',
         'Faker\\Provider\\he_IL\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/he_IL/Address.php',
         'Faker\\Provider\\he_IL\\Company' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/he_IL/Company.php',
         'Faker\\Provider\\he_IL\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/he_IL/Payment.php',
@@ -1277,6 +1311,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\hu_HU\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hu_HU/Payment.php',
         'Faker\\Provider\\hu_HU\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hu_HU/Person.php',
         'Faker\\Provider\\hu_HU\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hu_HU/PhoneNumber.php',
+        'Faker\\Provider\\hu_HU\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hu_HU/Text.php',
         'Faker\\Provider\\hy_AM\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hy_AM/Address.php',
         'Faker\\Provider\\hy_AM\\Color' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hy_AM/Color.php',
         'Faker\\Provider\\hy_AM\\Company' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/hy_AM/Company.php',
@@ -1323,6 +1358,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\ka_GE\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ka_GE/Payment.php',
         'Faker\\Provider\\ka_GE\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ka_GE/Person.php',
         'Faker\\Provider\\ka_GE\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ka_GE/PhoneNumber.php',
+        'Faker\\Provider\\ka_GE\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ka_GE/Text.php',
         'Faker\\Provider\\kk_KZ\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/kk_KZ/Address.php',
         'Faker\\Provider\\kk_KZ\\Color' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/kk_KZ/Color.php',
         'Faker\\Provider\\kk_KZ\\Company' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/kk_KZ/Company.php',
@@ -1421,6 +1457,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\ru_RU\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ru_RU/Payment.php',
         'Faker\\Provider\\ru_RU\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ru_RU/Person.php',
         'Faker\\Provider\\ru_RU\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ru_RU/PhoneNumber.php',
+        'Faker\\Provider\\ru_RU\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/ru_RU/Text.php',
         'Faker\\Provider\\sk_SK\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/sk_SK/Address.php',
         'Faker\\Provider\\sk_SK\\Company' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/sk_SK/Company.php',
         'Faker\\Provider\\sk_SK\\Internet' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/sk_SK/Internet.php',
@@ -1469,6 +1506,7 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Faker\\Provider\\uk_UA\\Payment' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/uk_UA/Payment.php',
         'Faker\\Provider\\uk_UA\\Person' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/uk_UA/Person.php',
         'Faker\\Provider\\uk_UA\\PhoneNumber' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/uk_UA/PhoneNumber.php',
+        'Faker\\Provider\\uk_UA\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/uk_UA/Text.php',
         'Faker\\Provider\\vi_VN\\Address' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/vi_VN/Address.php',
         'Faker\\Provider\\vi_VN\\Color' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/vi_VN/Color.php',
         'Faker\\Provider\\vi_VN\\Internet' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/vi_VN/Internet.php',
@@ -2652,6 +2690,11 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'Ipecompany\\Smsirlaravel\\Controllers\\SmsirlaravelController' => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src/Controllers/SmsirlaravelController.php',
+        'Ipecompany\\Smsirlaravel\\Smsirlaravel' => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src/Smsirlaravel.php',
+        'Ipecompany\\Smsirlaravel\\SmsirlaravelFacade' => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src/SmsirlaravelFacade.php',
+        'Ipecompany\\Smsirlaravel\\SmsirlaravelLogs' => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src/models/SmsirlaravelLogs.php',
+        'Ipecompany\\Smsirlaravel\\SmsirlaravelServiceProvider' => __DIR__ . '/..' . '/ipecompany/smsirlaravel/src/SmsirlaravelServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
@@ -4362,6 +4405,12 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'SpecificationItemSpecificationItemSeeder' => __DIR__ . '/../..' . '/database/seeds/SpecificationItemSpecificationItemSeeder.php',
         'SpecificationSeeder' => __DIR__ . '/../..' . '/database/seeds/SpecificationSeeder.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\DiactorosFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/DiactorosFactory.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\HttpFoundationFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/HttpFoundationFactory.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\PsrHttpFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/PsrHttpFactory.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\Factory\\UploadedFile' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/UploadedFile.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\HttpFoundationFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpFoundationFactoryInterface.php',
+        'Symfony\\Bridge\\PsrHttpMessage\\HttpMessageFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpMessageFactoryInterface.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -5121,6 +5170,38 @@ class ComposerStaticInit5d78f6c26c996206163d7d145f1ed01e
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'Zend\\Diactoros\\AbstractSerializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/AbstractSerializer.php',
+        'Zend\\Diactoros\\CallbackStream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/CallbackStream.php',
+        'Zend\\Diactoros\\Exception\\DeprecatedMethodException' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Exception/DeprecatedMethodException.php',
+        'Zend\\Diactoros\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Exception/ExceptionInterface.php',
+        'Zend\\Diactoros\\HeaderSecurity' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/HeaderSecurity.php',
+        'Zend\\Diactoros\\MessageTrait' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/MessageTrait.php',
+        'Zend\\Diactoros\\PhpInputStream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/PhpInputStream.php',
+        'Zend\\Diactoros\\RelativeStream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/RelativeStream.php',
+        'Zend\\Diactoros\\Request' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Request.php',
+        'Zend\\Diactoros\\RequestTrait' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/RequestTrait.php',
+        'Zend\\Diactoros\\Request\\ArraySerializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Request/ArraySerializer.php',
+        'Zend\\Diactoros\\Request\\Serializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Request/Serializer.php',
+        'Zend\\Diactoros\\Response' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response.php',
+        'Zend\\Diactoros\\Response\\ArraySerializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/ArraySerializer.php',
+        'Zend\\Diactoros\\Response\\EmitterInterface' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/EmitterInterface.php',
+        'Zend\\Diactoros\\Response\\EmptyResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/EmptyResponse.php',
+        'Zend\\Diactoros\\Response\\HtmlResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/HtmlResponse.php',
+        'Zend\\Diactoros\\Response\\InjectContentTypeTrait' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/InjectContentTypeTrait.php',
+        'Zend\\Diactoros\\Response\\JsonResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/JsonResponse.php',
+        'Zend\\Diactoros\\Response\\RedirectResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/RedirectResponse.php',
+        'Zend\\Diactoros\\Response\\SapiEmitter' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/SapiEmitter.php',
+        'Zend\\Diactoros\\Response\\SapiEmitterTrait' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/SapiEmitterTrait.php',
+        'Zend\\Diactoros\\Response\\SapiStreamEmitter' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/SapiStreamEmitter.php',
+        'Zend\\Diactoros\\Response\\Serializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/Serializer.php',
+        'Zend\\Diactoros\\Response\\TextResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/TextResponse.php',
+        'Zend\\Diactoros\\Response\\XmlResponse' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Response/XmlResponse.php',
+        'Zend\\Diactoros\\Server' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Server.php',
+        'Zend\\Diactoros\\ServerRequest' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/ServerRequest.php',
+        'Zend\\Diactoros\\ServerRequestFactory' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/ServerRequestFactory.php',
+        'Zend\\Diactoros\\Stream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Stream.php',
+        'Zend\\Diactoros\\UploadedFile' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/UploadedFile.php',
+        'Zend\\Diactoros\\Uri' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Uri.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
