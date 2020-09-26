@@ -66,17 +66,6 @@
 @stop
 @section('footerScripts')
 
-<footer style="">
-    <section class="footer account-footer container">
-        <div class="copyright"><p>استفاده از مطالب فروشگاه فقط برای مقاصد غیرتجاری و با ذکر منبع
-                بلامانع است. کلیه حقوق این سایت متعلق به شرکت ایده برتر کیوان می‌باشد.</p></div>
-
-        <div class="copyright-en">
-            <p>Copyright © 2020</p>
-        </div>
-    </section>
-</footer>
-
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>

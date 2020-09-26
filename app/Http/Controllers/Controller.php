@@ -114,7 +114,7 @@ class Controller extends BaseController
 
 
 
-    protected function fa2en($string)
+    public function fa2en($string)
     {
         $persian1 = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
         $persian2 = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');

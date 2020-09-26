@@ -50,8 +50,9 @@
                             <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>نوع محتوی :</span>
                             </div>
                             <select class="form-control inputfield" name="type" id="">
-                                <option style="font-family: iranyekan!important;" value="article">مقاله</option>
-                                <option style="font-family: iranyekan!important;" value="news">خبر</option>
+                                <option {{ old('type') == 'article' ? 'selected' : '' }} style="font-family: iranyekan!important;" value="article">مقاله</option>
+                                <option {{ old('type') == 'news' ? 'selected' : '' }} style="font-family: iranyekan!important;" value="news">خبر</option>
+                                <option {{ old('type') == 'page' ? 'selected' : '' }} style="font-family: iranyekan!important;" value="page">صفحه</option>
                             </select>
                         </div>
 
@@ -80,7 +81,7 @@
                             </div>
 
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> تصویر :</span></div>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> تصویر :</span></div>
                                 <div class="col-lg-6">
                                     <input  type="file" name="image" class="custom-file-input" id="image">
                                     <label class="custom-file-label" for="customFile">انتخاب فایل</label>

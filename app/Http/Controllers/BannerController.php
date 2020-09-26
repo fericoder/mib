@@ -37,16 +37,15 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
+            'location' => 'nullable',
             'title' => 'required',
-            'description' => 'required',
-            'body' => 'required',
             'sourceName' => 'nullable',
             'image' => 'required',
+            'url' => 'nullable',
         ]);
 
         $image = $this->uploadFile($request->file('image'));
-        $banner = Banner::create(['type' => $request->type, 'image' => $image, 'title' => $request->title, 'description' => $request->description, 'body' => $request->body, 'sourceName' => $request->sourceName]);
+        $banner = Banner::create(['location' => $request->location, 'url' => $request->url, 'slide_path' => $image, 'title' => $request->title]);
 
         alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
         return redirect()->route('banner.index');
@@ -86,12 +85,16 @@ class BannerController extends Controller
     public function update(Request $request, Banner $banner)
     {
 
-        if ($request->file('image') == null){
-            $banner->update(['title' => $request->title, 'url' => $request->url]);
-        }else{
+        $request->validate([
+            'title' => 'required',
+            'location' => 'nullable',
+            'image' => 'required',
+            'url' => 'nullable',
+        ]);
+
+
             $icon = $this->uploadFile($request->file('image'));
-            $banner->update(['title' => $request->title, 'url' => $request->url, 'slide_path', $request->image ]);
-        }
+            $banner->update(['title' => $request->title, 'url' => $request->url, 'slide_path' => $request->image, 'location' => $request->location ]);
 
         alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
         return redirect()->route('banner.index');

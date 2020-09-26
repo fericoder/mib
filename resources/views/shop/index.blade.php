@@ -7,16 +7,17 @@
         </div>-->
         <div style="max-height: 42em!important;" id="mainslider" class="main-slider swiper-container">
             <div class="swiper-wrapper">
-                <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide6.jpg)"> </a>
-                <a href="#" target="_blank" class="slide-item swiper-slide" style="background-image: url(assets/images/slider/slide7.jpg)"> </a>
+                @foreach (\App\Banner::where('location', 'slider')->get() as $banner)
+                    <a href="{{ $banner->url }}" target="_blank" class="slide-item swiper-slide" style="background-image: url( &quot; {{ asset($banner->slide_path) }} &quot; )"> </a>
+                @endforeach
             </div>
             <div id="mslider-nbtn" class="swiper-button-next"></div>
             <div id="mslider-pbtn" class="swiper-button-prev"></div>
             <div class="swiper-pagination mainslider-btn"></div>
         </div>
         <aside class="c-adplacement">
-            <a href="#"><img src="assets/images/slider/slide8.jpg" alt=""></a>
-            <a href="#" ><img src="assets/images/slider/slide9.jpg" alt=""></a>
+            <a href="{{ \App\Banner::where('id', 4)->first()->url }}"><img src="{{ \App\Banner::where('id', 4)->first()->slide_path }}" alt=""></a>
+            <a href="{{ \App\Banner::where('id', 5)->first()->url }}"><img src="{{ \App\Banner::where('id', 5)->first()->slide_path }}" alt=""></a>
         </aside>
     </article>
     <div class="clear"></div>

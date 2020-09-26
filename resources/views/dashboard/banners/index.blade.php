@@ -37,7 +37,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">افزودن بنر ها جدید </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">افزودن بنر جدید </h5>
                     <button type="button" class="close rounded" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,38 +46,31 @@
                     <form action="{{ route('banner.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="input-group mt-3">
-                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light inputfield min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>نوع بنر ها :</span>
-                            </div>
-                            <select class="form-control inputfield" name="type" id="">
-                                <option style="font-family: iranyekan!important;" value="article">مقاله</option>
-                                <option style="font-family: iranyekan!important;" value="news">خبر</option>
-                            </select>
-                        </div>
 
                         <div class="form-group mb-0">
 
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>عنوان :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('title') }}" name="title" >
+                                <input type="text" class="form-control inputfield" value="{{ old('title' ) }}" name="title" >
                             </div>
 
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>توضیحات کوتاه:</span></div>
-                                <textarea class="form-control inputfield" name="description" id="" cols="30" rows="5">{{ old('description') }}</textarea>
-                            </div>
-
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>توضیحات کامل:</span></div>
-                                <textarea style="direction: rtl; width: 90%!important;"   id="body" name="body" rows="18">{{ old('body') }}</textarea>
-
-                            </div>
 
 
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> منبع :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('sourceName') }}" name="sourceName" >
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> لینک :</span></div>
+                                <input type="text" class="form-control inputfield" value="{{ old('url' ) }}" name="url" >
                             </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> مکان :</span></div>
+                                <select class="form-control inputfield" name="location" id="">
+                                    <option style="font-family: iranyekan!important;" value="slider">اسلایدر</option>
+                                    <option style="font-family: iranyekan!important;" value="other">کنار اسلایدر</option>
+                                </select>
+                            </div>
+
+
+
 
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i> تصویر :</span></div>
@@ -86,6 +79,7 @@
                                     <label class="custom-file-label" for="customFile">انتخاب فایل</label>
                                 </div>
                             </div>
+
 
 
 
@@ -151,7 +145,7 @@
                             <h3 class="kt-portlet__head-title">
                                 لیست بنر ها
                             </h3>
-                            {{--<button data-toggle="modal" data-target="#AddBrandModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن بنر ها جدید</button>--}}
+                            <button data-toggle="modal" data-target="#AddBrandModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن بنر ها جدید</button>
                         </div>
 
                         <div style="" class="kt-portlet__head-toolbar">
@@ -218,11 +212,11 @@
                             @foreach($banners as $banner)
                                 <tr role="row" class="odd icon-hover hover-color">
                                     <td>{{ $banner->id }}</td>
-                                    <td style="font-family: BYekan" ><img src="{{ asset($banner->image ? $banner->image : '/images/no-image.png') }}" class="img-fluid" alt="Responsive image"></td>
+                                    <td style="font-family: BYekan" ><img style="max-width: 300px" src="{{ asset($banner->slide_path ? $banner->slide_path : '/images/no-image.png') }}" class="img-fluid" alt="Responsive image"></td>
                                     <td>{{ $banner->title }}</td>
                                     <td>
                                         <a href="{{ route('banner.edit', $banner->id) }}" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
-                                        {{--<a href="" id="removeBlog" title="حذف" data-name="{{ $blog->title }}" data-id="{{ $blog->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>--}}
+                                        <a href="" id="removeBanner" title="حذف" data-name="{{ $banner->title }}" data-id="{{ $banner->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -304,7 +298,7 @@
 
 
 
-        $(document).on('click', '#removeBlog', function (e) {
+        $(document).on('click', '#removeBanner', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
             swal({
@@ -318,10 +312,10 @@
                 function () {
                     $.ajax({
                         type: "POST",
-                        url: "{{url('/dashboard/blog/delete')}}",
+                        url: "{{url('/dashboard/banner/delete')}}",
                         data: {id: id},
                         success: function (data) {
-                            var url = document.location.origin + "/dashboard/blog";
+                            var url = document.location.origin + "/dashboard/banner";
                             location.href = url;
                         }
                     });

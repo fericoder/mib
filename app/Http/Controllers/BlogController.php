@@ -42,11 +42,17 @@ class BlogController extends Controller
             'description' => 'required',
             'body' => 'required',
             'sourceName' => 'nullable',
-            'image' => 'required',
+            'image' => 'nullable',
         ]);
 
-        $image = $this->uploadFile($request->file('image'));
-        $blog = Blog::create(['type' => $request->type, 'image' => $image, 'title' => $request->title, 'description' => $request->description, 'body' => $request->body, 'sourceName' => $request->sourceName]);
+        if ($request->file('image') == null){
+            $blog = Blog::create(['type' => $request->type, 'title' => $request->title, 'description' => $request->description, 'body' => $request->body, 'sourceName' => $request->sourceName]);
+        }else{
+            $image = $this->uploadFile($request->file('image'));
+            $blog = Blog::create(['type' => $request->type, 'image' => $image, 'title' => $request->title, 'description' => $request->description, 'body' => $request->body, 'sourceName' => $request->sourceName]);
+        }
+
+
 
         alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
         return redirect()->route('blog.index');
@@ -85,6 +91,16 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+
+        $request->validate([
+            'type' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'body' => 'required',
+            'sourceName' => 'nullable',
+            'image' => 'nullable',
+        ]);
+
 
         if ($request->file('image') == null){
             $blog->update(['type' => $request->type, 'title' => $request->title, 'description' => $request->description, 'body' => $request->body, 'sourceName' => $request->sourceName]);
