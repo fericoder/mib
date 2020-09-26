@@ -78,8 +78,20 @@
                 @endforelse
 
 
-
-
+                <div class="c-checkout-price-options">
+                    <div class="c-checkout-price-options__form">
+                        <section class="c-checkout-price-options__container">
+                            <div class="c-checkout-price-options__header"> <span>استفاده از کد تخفیف </span></div>
+                            <div class="c-checkout-price-options__content">
+                                <p>با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ کل محصولات” کسر می‌شود.</p>
+                                <div class="c-checkout-price-options__row">
+                                    <input type="text">
+                                    <button type="button" class="btn-primary">ثبت کد تخفیف</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
 
                 <div class="o-headline o-headline--checkout"><span>انتخاب روش پرداخت</span></div>
                 <div id="address-section">

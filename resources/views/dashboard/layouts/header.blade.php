@@ -227,6 +227,13 @@
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
+                                    <li class="kt-menu__item {{ request()->is('*voucher*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                        <a href="{{ route('vouchers.index') }}" class="kt-menu__link">
+                                            <span class="kt-menu__link-text">کدهای تخفیف</span>
+                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                    </li>
+
 
 
 
@@ -240,9 +247,9 @@
 
                                 </ul>
                             </div>
-                            <div class="kt-header-toolbar">
+                            {{-- <div class="kt-header-toolbar">
                                 <div class="kt-quick-search kt-quick-search--inline kt-quick-search--result-compact"
-                                     {{--id="kt_quick_search_inline">--}}
+                                     id="kt_quick_search_inline">
                                      id="">
                                     <form method="get" class="kt-quick-search__form">
                                         <div class="input-group">
@@ -264,7 +271,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- end: Header Menu -->
                     </div>

@@ -42,6 +42,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('SpecificationItems', 'SpecificationItemController');
     Route::resource('users', 'UserController');
     Route::resource('faqs', 'FAQController');
+    Route::resource('vouchers', 'VoucherController');
+
 
     //Shop-Setting
     Route::resource('settings', 'ShopSettingController');
@@ -98,6 +100,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('faqs/delete', 'FAQController@destroy');
     Route::post('specifications/delete', 'SpecificationController@destroy');
     Route::post('SpecificationItems/delete', 'SpecificationItemController@destroy');
+    Route::post('voucher/delete', 'VoucherController@destroy')->name('vouchers.delete');
 
 
     Route::resource('blog', 'BlogController');

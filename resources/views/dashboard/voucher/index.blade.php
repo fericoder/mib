@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master', ['title' => 'سوالات متداول'])
+@extends('dashboard.layouts.master', ['title' => 'کدهای تخفیف'])
 
 @section('headerScripts')
     <link href="/assets/plugins/custom/datatables/datatables.bundle.rtl.css" rel="stylesheet" type="text/css"/>
@@ -33,47 +33,101 @@
 
 
 
-    <div class="modal fade bd-example-modal-xl " id="AddFaqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">افزودن سوال جدید </h5>
-                    <button type="button" class="close rounded" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body modal-scroll" style="background-color:#fbfcfd">
-                    <form action="{{ route('faqs.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group mb-0">
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140"  id="basic-addon7"> <i
-                                                class="fas fa-star required-star mr-1"></i>عنوان سوال :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('title') }}" name="title" placeholder="مثال: خرید">
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140"  id="basic-addon7"> <i
-                                                class="fas fa-star required-star mr-1"></i> سوال :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('question') }}" name="question" placeholder="مثال: چگونه خرید کنیم">
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140"  id="basic-addon7"> <i
-                                                class="fas fa-star required-star mr-1"></i> پاسخ :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('answer') }}" name="answer" placeholder="مثال: از روش های موجود در سایت میتوانید از روش آنلاین استفاده کنید">
-                            </div>
-                        </div>
-                        <!--end form-group-->
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger rounded" data-dismiss="modal">انصراف</button>
-                    <div class="group">
-                        <button type="submit" class="btn btn-primary rounded">ثبت درخواست</button>
-                    </div>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  <div class="modal fade bd-example-modal-xl" id="AddVoucherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{ __('dashboard-shop-voucher.addModalTitle') }}</h5>
+                  <button type="button" class="close rounded" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body modal-scroll">
+                  <form action="{{ route('vouchers.store') }}" method="post" class="form-horizontal">
+                      @csrf
+                      <div class="form-group mb-0">
+                          <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
+                                        class="fas fa-star required-star mr-1"></i>{{ __('dashboard-shop-voucher.addModalItem1') }}:</span></div>
+                              <input type="text" class="form-control inputfield" value="{{ old('name') }}" name="name" placeholder="{{ __('dashboard-shop-voucher.addModalItem1ex') }}">
+                          </div>
+
+                          {{-- <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">{{ __('dashboard-shop-voucher.addModalItem2') }} :</span></div>
+                              <input type="text" class="form-control inputfield" name="description" value="{{ old('description') }}" placeholder="{{ __('dashboard-shop-voucher.addModalItem2ex') }}">
+                          </div> --}}
+
+                          {{-- <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>تعداد قابل استفاده :</span></div>
+                              <input type="number" class="form-control inputfield" name="uses" value="{{ old('uses') }}" placeholder="{{ __('dashboard-shop-voucher.addModalItem3ex') }}">
+                          </div> --}}
+                          <div class="input-group mt-3" id="beforeLimit">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i
+                                        class="fas fa-star required-star mr-1"></i>{{ __('dashboard-shop-voucher.addModalItem4') }}:</span></div>
+                              <input type="text" class="form-control inputfield" id="placeToggle" value="{{ old('discount_amount') }}" name="discount_amount" placeholder="مثال : 10 ( نیازی به علامت % نیست)">
+                          </div>
+                          <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">تخفیف عددی:</span></div>
+                              <label style="margin: 10px;" class="kt-checkbox"><input id="togBtn" name="type" type="checkbox"> <span></span></label>
+                          </div>
+
+
+                          {{-- <div class="input-group mt-3" id="limit">
+                                 <div class="input-group-prepend min-width-180">
+                                 <span class="input-group-text bg-light min-width-140" id="basic-addon7">سقف تخفیف :
+                                 </span>
+                                 </div>
+                                <input type="text" class="form-control inputfield" id="placeToggle" name="discount_limit" placeholder="مثال : 20000">
+                             </div> --}}
+
+                          {{-- <div class="input-group mt-3 d-none users-voucher">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">{{ __('dashboard-shop-voucher.addModalItem5') }}:</span></div>
+                              <select multiple="multiple" class="selectpicker form-control" id="exampleFormControlSelect2" name="users[]" multiple data-live-search="true" title="موردی انتخاب نشده است">
+                                  @foreach($usersFullName as $userFullName)
+                                  <option>{{ $userFullName }}</option>
+                                  @endforeach
+                              </select>
+                          </div> --}}
+
+
+                          {{-- <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">{{ __('dashboard-shop-voucher.addModalItem6') }}:</span></div>
+                              <input type="hidden" class="start-alt-field col h-50px border-0" name="starts_at" />
+                              <input class="start-field-example col h-50px border-0" name="" />
+
+                          </div>
+                          <div class="input-group mt-3">
+                              <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">{{ __('dashboard-shop-voucher.addModalItem7') }}:</span></div>
+                              <input type="hidden" class="expire-alt-field col h-50px border-0" name="expires_at" />
+                              <input class="expire-field-example col h-50px border-0" name="" />
+                          </div> --}}
+{{--
+                          <div class="input-group-append mt-3"><a href="#" class="voucher"><span class="h-50px input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"><i
+                                        class="fa fa-plus mr-2"></i>{{ __('dashboard-shop-voucher.addModalItem5') }}
+                                  </span></a>
+                          </div> --}}
+                      </div>
+                      {{-- <div class="custom-control custom-switch switch-blue input-group-append mt-3 m-3">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchBlue" name="first_purchase">
+                          <label class="custom-control-label font-15 text-dark" for="customSwitchBlue">{{ __('dashboard-shop-voucher.addModalItem8') }}</label>
+                      </div>
+                      <div class="custom-control custom-switch switch-blue input-group-append mt-3 m-3">
+                          <input type="checkbox" class="custom-control-input" id="customSwitchDisposable" name="disposable">
+                          <label class="custom-control-label font-15 text-dark" for="customSwitchDisposable">کد یکبار مصرف باشد</label>
+                          <p class="text-muted mt-1" style="font-size: 13px;">اگر این گزینه فعال باشد کاربر فقط یکبار میتواند از این کد تخفیف استفاده کند.</p>
+                      </div> --}}
+                      <!--end form-group-->
+              </div>
+              <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger rounded" data-dismiss="modal">{{ __('dashboard-shop-voucher.addModalItem9') }}</button>
+                  <button type="submit" class="btn btn-primary rounded">{{ __('dashboard-shop-voucher.addModalItem10') }}</button>
+              </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
 
 
 
@@ -89,7 +143,7 @@
 
                 <span class="kt-subheader__separator kt-subheader__separator--v"></span>
 
-                <span class="kt-subheader__desc iranyekan">لیست سوالات </span>
+                <span class="kt-subheader__desc iranyekan">لیست کد ها</span>
             </div>
 
         </div>
@@ -113,110 +167,7 @@
                 @endif
 
 
-                <div class="kt-portlet">
-                    <div class="kt-portlet__body  kt-portlet__body--fit">
-                        <div class="row row-no-padding row-col-separator-lg">
 
-                            <div class="col-md-12 col-lg-6 col-xl-3">
-                                <!--begin::Total Profit-->
-                                <div class="kt-widget24">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <h4 class="kt-widget24__title">
-                                                تعداد برند ها
-                                            </h4>
-
-                                        </div>
-
-                                        <span class="kt-widget24__stats kt-font-brand">
-                                            {{ \App\Brand::all()->count() }}
-
-                                        </span>
-                                    </div>
-
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <!--end::Total Profit-->
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 col-xl-3">
-                                <!--begin::New Feedbacks-->
-                                <div class="kt-widget24">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <h4 class="kt-widget24__title">
-                                                کل موجودی انبار
-                                            </h4>
-
-                                        </div>
-
-                                        <span class="kt-widget24__stats kt-font-warning">
-                                            0
-					                      </span>
-                                    </div>
-
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-
-                                </div>
-                                <!--end::New Feedbacks-->
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 col-xl-3">
-                                <!--begin::New Orders-->
-                                <div class="kt-widget24">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <h4 class="kt-widget24__title">
-                                                کالاهای ناموجود
-                                            </h4>
-
-                                        </div>
-
-                                        <span style="font-size: 15px!important; direction: ltr" class="kt-widget24__stats kt-font-danger">
-                                            0
-					                    </span>
-                                    </div>
-
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                </div>
-                                <!--end::New Orders-->
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 col-xl-3">
-                                <!--begin::New Users-->
-                                <div class="kt-widget24">
-                                    <div class="kt-widget24__details">
-                                        <div class="kt-widget24__info">
-                                            <h4 class="kt-widget24__title">
-                                                کالاهای درحال ارسال
-                                            </h4>
-
-                                        </div>
-
-                                        <span style="font-size: 15px!important;direction: ltr" class="kt-widget24__stats kt-font-success">
-                                            0
-                                        </span>
-                                    </div>
-
-                                    <div class="progress progress--sm">
-                                        <div class="progress-bar kt-bg-success" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                </div>
-                                <!--end::New Users-->
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -224,10 +175,10 @@
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                لیست برند ها
+                               لیست کدهای تخفیف
                             </h3>
 
-                            <button data-toggle="modal" data-target="#AddFaqModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن سوال جدید</button>
+                            <button data-toggle="modal" data-target="#AddVoucherModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن کد جدید</button>
                         </div>
 
                         <div style="" class="kt-portlet__head-toolbar">
@@ -284,22 +235,24 @@
                             <thead style="font-family: BYekan">
                             <tr>
                                 <th title="Field #1" data-field="1">شناسه</th>
-                                <th title="Field #2" data-field="2">عنوان</th>
-                                <th title="Field #5" data-field="5">سوال</th>
-                                <th title="Field #5" data-field="5">پاسخ</th>
+                                <th title="Field #2" data-field="2">نام کد</th>
+                                <th title="Field #5" data-field="5">کد تخفیف</th>
+                                <th title="Field #5" data-field="5">میزان تخفیف</th>
+                                <th title="Field #5" data-field="5">نوع کد</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @foreach($faqs as $faq)
+                            @foreach($vouchers as $voucher)
                                 <tr role="row" class="odd icon-hover hover-color">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $faq->title }}</td>
-                                    <td>{{ $faq->question }}</td>
-                                    <td>{!! Str::limit($faq->answer, 100, ' ...') !!}</td>
+                                    <td>{{ $voucher->name }}</td>
+                                    <td>{{ $voucher->code }}</td>
+                                    <td>{{ $voucher->discount_amount }}</td>
+                                    <td>{{ $voucher->type == 'number' ? 'عددی' : 'درصدی' }}</td>
                                     <td>
-                                        <a href="{{ route('faqs.edit', $faq->id) }}" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
-                                            <a href="" id="remove" title="حذف" data-name="{{ $faq->title }}" data-id="{{ $faq->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
+                                        <a href="{{ route('vouchers.edit', $voucher->id) }}" ><i class="far fa-edit text-info mr-1 button font-15"></i></a>
+                                            <a href="" id="remove" title="حذف" data-name="{{ $voucher->name }}" data-id="{{ $voucher->id }}"><i class="far fa-trash-alt text-danger font-15"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -337,10 +290,10 @@
                 function () {
                     $.ajax({
                         type: "POST",
-                        url: "{{url('/dashboard/faqs/delete')}}",
+                        url: "{{url('/dashboard/voucher/delete')}}",
                         data: {id: id},
                         success: function (data) {
-                            var url = document.location.origin + "/dashboard/faqs";
+                            var url = document.location.origin + "/dashboard/vouchers";
                             location.href = url;
                         }
                     });
@@ -543,6 +496,17 @@
             }
         } );
 
+    </script>
+    <script type="text/javascript">
+    $('#togBtn').on('change', function() {
+  if($('#placeToggle').attr("placeholder") != "مثال  10000"){
+    $('#placeToggle').attr("placeholder", "مثال  10000");
+    $('#limit').remove();
+  }
+  else{
+    $('#placeToggle').attr("placeholder", "مثال  10 ( نیازی به علامت % نیست)");
+  }
+});
 
     </script>
     <!--end::Page Scripts -->
