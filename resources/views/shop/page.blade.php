@@ -1,4 +1,4 @@
-@extends('shop.layouts.master', ['title' => 'درباره ما' ])
+@extends('shop.layouts.master', ['title' => $blog->title ])
 @section('headerScripts')
 
 <style>
@@ -28,18 +28,17 @@
             <div id="desc" class="c-content-expert is-active">
 
                 <article>
-                    <h2 class="c-params__headline"> {{ $shop->about_header }}<span>  </span></h2>
+                    <h2 class="c-params__headline"> {{ $blog->title }}<span>  </span></h2>
                     <section class="c-content-expert__summary">
                         <div class="c-mask">
                             <div class="c-mask__text c-mask__text--product-summary" style="height: unset;">
                                 <p>
-                                  {!! \App\Blog::where('id', 6)->first()->body !!}
+                                  {!! $blog->body !!}
                                 </p>
                                 </div>
                             </div>
                         </div>
                     </section>
-
                 </article>
             </div>
 
