@@ -183,7 +183,7 @@
                         <!--incredible-->
                         <li class="c-checkout-summary__discount">
                             <span> تخفیف کالاها </span>
-                            <span class="discount-price">0 تومان</span>
+                            <span class="discount-price">{{ $cart->total_off_price ?? 0 }} تومان</span>
                         </li>
                         <!--incredible-->
                         <li class="has-devider">

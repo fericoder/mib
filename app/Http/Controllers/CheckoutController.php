@@ -149,16 +149,19 @@ class CheckoutController extends Controller
         $voucher = Voucher::where('code', $request->code)->get()->first();
         if($voucher != null and $cart->voucher_status == 'unused'){
           $discountPrice = $voucher->discount_amount;
-          if($voucher->type == 'number')
-          $discountedPrice = $cart->total_price - $discountPrice;
-          else
-          $discountedPrice = $total_price - (($cart->total_price * $discountPrice) / 100);
-
+          if($voucher->type == 'number'){
+            $discountedPrice = $cart->total_price - $discountPrice;
+            $total_off_price = $discountPrice;
+          }
+          else{
+            $discountedPrice = $total_price - (($cart->total_price * $discountPrice) / 100);
+            $total_off_price = $total_price - $discountedPrice;
+          }
           if($discountedPrice < 0)
           $discountedPrice = 0;
             $cartUpdate = $cart->update([
               'total_price' => $discountedPrice,
-              'total_off_price' => $discountPrice,
+              'total_off_price' => $total_off_price,
               'voucher_status' => 'used',
               'voucher_id' => $voucher->id,
               ]);
