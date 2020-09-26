@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Category;
 use App\Product;
 use App\Brand;
@@ -295,5 +296,32 @@ class ShopController extends Controller
         return $allItems;
     }
 
+
+    public function pages(Request $request)
+    {
+        $blog = Blog::where('id', $request->id)->first();
+        $categories = Category::all();
+        $shop = Shop::where('english_name', 'keyvan')->first();
+
+        return view('shop.page', compact('blog', 'categories', 'shop'));
+    }
+
+    public function blogs(Request $request)
+    {
+        $blogs = Blog::where('type', 'article')->paginate(15);
+        $categories = Category::all();
+        $shop = Shop::where('english_name', 'keyvan')->first();
+
+        return view('shop.blogs', compact('blogs', 'categories', 'shop'));
+    }
+
+    public function blog(Request $request)
+    {
+        $blog = Blog::where('id', $request->id)->first();
+        $categories = Category::all();
+        $shop = Shop::where('english_name', 'keyvan')->first();
+
+        return view('shop.blog', compact('blog', 'categories', 'shop'));
+    }
 
 }

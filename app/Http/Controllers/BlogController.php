@@ -39,7 +39,7 @@ class BlogController extends Controller
         $request->validate([
             'type' => 'required',
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'body' => 'required',
             'sourceName' => 'nullable',
             'image' => 'nullable',
@@ -95,7 +95,7 @@ class BlogController extends Controller
         $request->validate([
             'type' => 'required',
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'body' => 'required',
             'sourceName' => 'nullable',
             'image' => 'nullable',

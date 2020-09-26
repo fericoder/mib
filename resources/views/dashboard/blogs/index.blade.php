@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="input-group mt-3">
-                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>توضیحات کوتاه:</span></div>
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> توضیحات کوتاه:</span></div>
                                 <textarea class="form-control inputfield" name="description" id="" cols="30" rows="5">{{ old('description') }}</textarea>
                             </div>
 

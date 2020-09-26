@@ -9,10 +9,16 @@ Route::post('/product/get-items', 'ShopController@getRelatedItems')->name('produ
 Route::get('/product/{id}', 'ShopController@product')->name('shop.product');
 Route::get('/brand/{id}', 'ShopController@brand')->name('shop.brand');
 Route::get('/search/{category?}/{keyword?}/', 'ShopController@search')->name('shop.search');
+
+
+
 Route::get('/about-us', 'ShopController@aboutUs')->name('shop.aboutUs');
 Route::get('/contact-us', 'ShopController@contactUs')->name('shop.contactUs');
 Route::get('/faq', 'ShopController@faq')->name('shop.faq');
 
+Route::get('/pages/{id}', 'ShopController@pages')->name('shop.pages');
+Route::get('/blogs/', 'ShopController@blogs')->name('shop.blogs');
+Route::get('/blog/{id}', 'ShopController@blog')->name('shop.blog');
 
 
 

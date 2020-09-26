@@ -228,7 +228,8 @@
             </li>
 
             <li><a href="{{ route('shop.faq') }}">سوالات متداول </a></li>
-            <li><a href="#">راهنمای خرید </a></li>
+            <li><a href="{{ route('shop.pages', 3) }}">راهنمای خرید </a></li>
+            <li><a href="{{ route('shop.blogs') }}">مقالات </a></li>
 
 
         </ul>
@@ -259,7 +260,7 @@
             <div class="shop-help">
                 <h3 class="head">لینک های کاربردی</h3>
                 <ul>
-                    <li><a href="#">شرایط و قوانین</a></li>
+                    <li><a href="{{ route('shop.pages', 4) }}">شرایط و قوانین</a></li>
                     <li><a href="{{ route('shop.aboutUs') }}">درباره ما</a></li>
                     <li><a href="{{ route('shop.contactUs') }}">تماس باما</a></li>
                 </ul>
@@ -268,8 +269,8 @@
                 <h3 class="head">خدمات مشتریان</h3>
                 <ul>
                     <li><a href="{{ route('shop.faq') }}">پاسخ به پرسش های متداول</a></li>
-                    <li><a href="#">رویه های بازگرداندن کالا</a></li>
-                    <li><a href="#">حریم خصوصی</a></li>
+                    <li><a href="{{ route('shop.pages', 8) }}">رویه های بازگرداندن کالا</a></li>
+                    <li><a href="{{ route('shop.pages', 7) }}">حریم خصوصی</a></li>
                 </ul>
             </div>
 
