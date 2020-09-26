@@ -30,6 +30,7 @@ Route::post('/user-cart/remove', 'CartController@removeFromCart')->name('user-ca
 
 Route::match(['GET','POST'],'checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('checkout/store', 'CheckoutController@store')->name('checkout.store');
+Route::post('checkout/use-voucher', 'CheckoutController@voucher')->name('use-voucher');
 
 
 

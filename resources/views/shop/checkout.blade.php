@@ -85,8 +85,8 @@
                             <div class="c-checkout-price-options__content">
                                 <p>با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ کل محصولات” کسر می‌شود.</p>
                                 <div class="c-checkout-price-options__row">
-                                    <input type="text">
-                                    <button type="button" class="btn-primary">ثبت کد تخفیف</button>
+                                    <input type="text" name="code" form="voucher">
+                                    <button form="voucher" type="submit" class="btn-primary">ثبت کد تخفیف</button>
                                 </div>
                             </div>
                         </section>
@@ -126,10 +126,6 @@
                 </div>
 
 
-
-
-
-
                     <div>
                         <div class="o-headline o-headline--checkout"> <span>مرسوله </span></div>
                         <div class="c-checkout-pack">
@@ -167,6 +163,10 @@
                     </div>
                 </div>
             </form>
+
+                            <form action="{{ route('use-voucher') }}" method="post" id="voucher">
+                                  @csrf
+                                </form>
             </div>
             <div class="c-checkout__actions">
                 <a href="/user-cart"><button class="btn-link-spoiler">« بازگشت به سبد خرید </button></a>

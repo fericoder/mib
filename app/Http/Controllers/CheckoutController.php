@@ -9,8 +9,11 @@ use App\Http\Requests\CheckOutRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Cart;
+use App\Voucher;
 use App\CartProduct;
 use App\UserPurchase;
+use Session;
+
 
 class CheckoutController extends Controller
 {
@@ -21,6 +24,7 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
+      if(!Session::has('voucher') and app('router')->getRoutes()->match(app('request')->create(\URL::previous()))->getName() != 'checkout.index'){
         foreach ($request->except('_token') as $cartProductId => $quantity) {
             $cartProduct = CartProduct::find($cartProductId);
             $cartProductUpdate = \Auth::user()->cart()->get()->first()->cartProduct()->where('id', $cartProductId)->update([
@@ -35,7 +39,12 @@ class CheckoutController extends Controller
             }
             $cartUpdate = $cart->update([
                 'total_price' => $total_price,
+                'total_off_price' => null,
+                'voucher_status' => 'unused',
+                'voucher_id' => null,
                 ]);
+              }
+
 
         $categories = Category::all();
         $cart = \Auth::user()->cart()->get()->first();
@@ -130,5 +139,40 @@ class CheckoutController extends Controller
     public function destroy(Checkout $checkout)
     {
         //
+    }
+
+    public function voucher(Request $request){
+
+      $cart = \Auth::user()->cart()->get()->first();
+      $total_price = $cart->total_price;
+      if($request->code != null){
+        $voucher = Voucher::where('code', $request->code)->get()->first();
+        if($voucher != null and $cart->voucher_status == 'unused'){
+          $discountPrice = $voucher->discount_amount;
+          if($voucher->type == 'number')
+          $discountedPrice = $cart->total_price - $discountPrice;
+          else
+          $discountedPrice = $total_price - (($cart->total_price * $discountPrice) / 100);
+
+          if($discountedPrice < 0)
+          $discountedPrice = 0;
+            $cartUpdate = $cart->update([
+              'total_price' => $discountedPrice,
+              'total_off_price' => $discountPrice,
+              'voucher_status' => 'used',
+              'voucher_id' => $voucher->id,
+              ]);
+             alert()->success('کد تخفیف شما باموفقیت اعمال شد.', 'ثبت شد');
+             return redirect()->back()->with(["voucher"=>"Success!"]);
+        }
+        else {
+          alert()->error('کد تخفیف شما معتبر نیست.', 'خطا');
+          return redirect()->back();
+        }
+      }
+      else{
+        alert()->error('کد تخفیف شما معتبر نیست.', 'خطا');
+        return redirect()->back();
+      }
     }
 }
