@@ -112,7 +112,7 @@ class CartController extends \App\Http\Controllers\Controller {
             $newGroup->id = null;
             $newGroup->p_id = null;
         }
-        if($product->type == 'product' && $product->amount != null and $product->amount < 0){
+        if($newGroup->amount <= 0){
             return redirect()->back()->withErrors(['کالای مورد نظر موجود نمیباشد']);
         }
 
