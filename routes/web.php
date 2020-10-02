@@ -39,6 +39,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::get('index', 'DashboardController@index')->name('dashboard.index');
     Route::resource('products', 'ProductController');
+    Route::get('products/{product_id}/group/{group_id}', 'ProductController@groupEdit')->name('products.group.edit');
+    Route::put('products/{product_id}/group/{group_id}', 'ProductController@groupUpdate')->name('products.group.update');
     Route::resource('categories', 'CategoryController');
     Route::resource('features', 'CategoryController');
     Route::resource('brands', 'BrandController');
@@ -102,6 +104,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Deletes
     Route::post('products/delete', 'ProductController@destroy');
+    Route::post('products/group/delete', 'ProductController@groupDestroy');
     Route::post('categories/delete', 'CategoryController@destroy');
     Route::post('brands/delete', 'BrandController@destroy');
     Route::post('faqs/delete', 'FAQController@destroy');

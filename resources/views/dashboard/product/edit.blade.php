@@ -428,65 +428,52 @@
                                                         {{--<h6 class="text-danger my-1">با اختصاص موجودی به رنگ ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
 
                                                     {{--</div>--}}
-                                                    @if($product->color_amount_status == "enable")
-                                                        @foreach ($product->colors as $color)
-                                                            <div class="input-group mt-3">
-                                                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موجودی رنگ {{ $color->name }} :</span></div>
-                                                                <input type="text" class="form-control inputfield" name="color_amount_number[{{ $color->id }}]"  value="{{ $color->pivot->amount }}">
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
+
                                                     <div class="section p-3">
                                                         @foreach($product->groups as $groupItem)
 
                                                         <div class="items">
-                                                          @if(!$loop->first)
-                                                            <a class="mr-2 item-delete font-15" style="font-size: 20px"  title="حذف خصوصیت" data-name="" data-id=""><i class="p-2 far fa-trash-alt text-danger font-18 pl-2" style="font-size: 20px"></i></a>
-                                                          @endif
+                                                            <a class="mr-2 font-15" href="{{ route('products.group.edit', ['product_id' => $product->id, 'group_id' => $groupItem->id]) }}" style="font-size: 20px"  title="ویرایش خصوصیت" data-name="" data-id=""><i class="p-2 far fa-edit text-warning font-18 pl-2" style="font-size: 20px"></i></a>
                                                             <h4 class="text-center">شماره {{ $loop->index + 1 }}
                                                             </h4>
                                                         <div class="input-group mt-3 specification-dot">
                                                             <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
-                                                        <select class="selectpicker1 selectpicker-specification" multiple data-live-search="true" name="group[{{ $groupItem->id }}][items][]" title="موردی انتخاب نشده">
+                                                            @php
+                                                                $itemsArray = [];
+                                                            @endphp
                                                             @foreach($specifications as $specification)
-                                                            <optgroup label="{{ $specification->name }}">
                                                                 @foreach($specification->items as $item)
-                                                                <option @if($product->groups->count() != 0)
                                                                     @foreach ($groupItem->specification_items as $selectedItem)
-                                                                     {{ $item->id == $selectedItem ? 'selected' : ''}}
-                                                                    @endforeach
-                                                                     value="{{ $item->id }}">{{ $item->name }}</option>
-
+                                                                    @if($item->id == $selectedItem)
+                                                                    @php
+                                                                        array_push($itemsArray, $item->name);
+                                                                        @endphp
                                                                     @endif
-
+                                                                    @endforeach
                                                                 @endforeach
-                                                        </optgroup>
                                                         @endforeach
-
-                                                        </select>
-
-
+                                                        <input type="text" value="{{ implode(', ' ,$itemsArray) }}" disabled class="form-control inputfield min-width-140">
                                                     </div>
 
                                                     <div class="mt-3 specification-dot input-group">
                                                         <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                             شناسه محصول:</span>
                                                          </div>
-                                                          <input value="{{ $groupItem->p_id }}" type="text" class="form-control inputfield min-width-140" name="group[{{ $groupItem->id }}][p_id]" placeholder="مثال : 30">
+                                                          <input value="{{ $groupItem->p_id }}" disabled type="text" class="form-control inputfield min-width-140" name="group[{{ $groupItem->id }}][p_id]" placeholder="مثال : 30">
 
                                                     </div>
                                                     <div class="mt-3 specification-dot input-group  ">
                                                         <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                           موجودی:</span>
                                                          </div>
-                                                          <input value="{{ $groupItem->amount }}" type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
+                                                          <input value="{{ $groupItem->amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
 
                                                     </div>
                                                     <div class="mt-3 specification-dot input-group">
                                                         <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                           حداقل موجودی:</span>
                                                          </div>
-                                                          <input value="{{ $groupItem->min_amount }}" type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][min_amount]" placeholder="مثال : 1000">
+                                                          <input value="{{ $groupItem->min_amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][min_amount]" placeholder="مثال : 1000">
 
                                                     </div>
 

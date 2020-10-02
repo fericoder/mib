@@ -285,18 +285,6 @@ class ProductController extends Controller
                 }
             }
 
-            foreach($product->groups as $gp){
-                $gp_product[] = $gp->id;
-            }
-
-            if ((count(array_diff($gp_product, $gp_request))) != 0) {
-                foreach(array_diff($gp_product,$gp_request) as $gp_id){
-                    $specificationGroup = SpecificationItemGroup::find($gp_id);
-                    CartProduct::where('group_id', $gp_id)->delete();
-                    $specificationGroup->delete();
-            }
-            }
-
             foreach($request->group as $groupId => $group)
             {
                 if(strpos($groupId, 'new') !== false){
@@ -308,26 +296,15 @@ class ProductController extends Controller
                     $groupItem->p_id = $this->fa_num_to_en($group['p_id']);
                     $groupItem->save();
                 }
-                else{
-                    SpecificationItemGroup::updateOrCreate(['id' => $groupId],
-                    ['specification_items' => $group['items'], 'product_id' => $product->id, 'amount' => $this->fa_num_to_en($group['amount']), 'min_amount' => $this->fa_num_to_en($group['min_amount']), 'p_id' => $this->fa_num_to_en($group['p_id'])]);
-                }
             }
 
-        }
-        else{
-            foreach($product->groups as $singleGp){
-                CartProduct::where('group_id', $singleGp->id)->delete();
-            }
-            $product->groups()->delete();
         }
 
         if($updatedProduct)
         {
             $tagIds = [];
             $sepecificationIds = [];
-
-
+            
             //get all tags of product
             $tagNames = explode(',',$request->get('tags'));
             foreach($tagNames as $tagName)
@@ -351,10 +328,7 @@ class ProductController extends Controller
                 $product->specifications()->sync($sepecificationIds);
             }
 
-
-
             $product->tags()->sync($tagIds);
-            // $product->colors()->sync($colorIds);
             $product->specifications()->sync($sepecificationIds);
         }
         alert()->success('محصول شما باموفقیت ویرایش شد.', 'ثبت شد');
@@ -395,5 +369,32 @@ class ProductController extends Controller
 
         return response()->json($items);
     }
+
+    public function groupEdit($product_id, $group_id){
+        $product = Product::find($product_id);
+        $group = SpecificationItemGroup::find($group_id);
+        $specificationItems = SpecificationItem::whereIn('id', $group->specification_items)->get();
+        $specifications = Specification::whereHas('items')->orderBy('order', 'DESC')->get();
+        return view('dashboard.product.edit-group', compact('group', 'product', 'specificationItems', 'specifications'));
+
+    }
+
+
+    public function groupUpdate($product_id, $group_id, Request $request){
+        $group = SpecificationItemGroup::find($group_id);
+        $group->update(['specification_items' => $request->group['items'], 'amount' => $this->fa_num_to_en($request->group['amount']), 'min_amount' => $this->fa_num_to_en($request->group['min_amount']), 'p_id' => $this->fa_num_to_en($request->group['p_id'])]);
+
+        alert()->success('محصول شما باموفقیت ویرایش شد.', 'ثبت شد');
+        return redirect()->back();
+    }
+
+
+    public function groupDestroy(Request $request)
+    {
+         CartProduct::where('group_id', $request->id)->delete();
+        $group = SpecificationItemGroup::where('id' , $request->id)->first()->delete();
+    }
+
+
 
 }
