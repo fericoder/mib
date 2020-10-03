@@ -19,6 +19,8 @@ Route::get('/faq', 'ShopController@faq')->name('shop.faq');
 Route::get('/pages/{id}', 'ShopController@pages')->name('shop.pages');
 Route::get('/blogs/', 'ShopController@blogs')->name('shop.blogs');
 Route::get('/blog/{id}', 'ShopController@blog')->name('shop.blog');
+Route::get('/news/', 'ShopController@news')->name('shop.news');
+Route::get('/new/{id}', 'ShopController@new')->name('shop.new');
 
 
 

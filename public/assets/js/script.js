@@ -226,6 +226,53 @@ $(document).ready(function() {
                 }
             }
         }
+
+    var blogslider= {
+        slidesPerView:5, spaceBetween:10, autoplay: {
+            delay: 2500, disableOnInteraction: !1,
+        }
+        , navigation: {
+            nextEl: '#blogslider-nbtn', prevEl: '#blogslider-pbtn',
+        }
+        , breakpoints: {
+            1024: {
+                slidesPerView: 4, spaceBetween: 10,
+            }
+            , 768: {
+                slidesPerView: 3, spaceBetween: 10,
+            }
+            , 640: {
+                slidesPerView: 2, spaceBetween: 10,
+            }
+            , 320: {
+                slidesPerView: 1, spaceBetween: 10,
+            }
+        }
+    }
+
+    var newslider= {
+        slidesPerView:5, spaceBetween:10, autoplay: {
+            delay: 2500, disableOnInteraction: !1,
+        }
+        , navigation: {
+            nextEl: '#newslider-nbtn', prevEl: '#newslider-pbtn',
+        }
+        , breakpoints: {
+            1024: {
+                slidesPerView: 4, spaceBetween: 10,
+            }
+            , 768: {
+                slidesPerView: 3, spaceBetween: 10,
+            }
+            , 640: {
+                slidesPerView: 2, spaceBetween: 10,
+            }
+            , 320: {
+                slidesPerView: 1, spaceBetween: 10,
+            }
+        }
+    }
+
         var swiper=new Swiper('#mainslider', mslider);
         var swiper=new Swiper('#inc-slider', incslider);
         var swiper=new Swiper('#sp-slider', spslider);
@@ -235,6 +282,8 @@ $(document).ready(function() {
         var swiper=new Swiper('#newpslider', newpslider);
         var swiper=new Swiper('#mostpslider', mostpslider);
         var swiper=new Swiper('#brandslider', brandslider);
+        var swiper=new Swiper('#blogslider', blogslider);
+        var swiper=new Swiper('#newslider', newslider);
         var swiper=new Swiper('#mvpslider', mvpslider);
         $(window).load(function() {
                 $('.c-gallery__items img').click(function() {

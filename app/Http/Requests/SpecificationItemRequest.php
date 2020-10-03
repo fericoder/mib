@@ -26,7 +26,7 @@ class SpecificationItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:150|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+            'name' => 'required|max:150',
             'price' => ['required','max:9999999999',
                 'regex:/^([0-9]+$)|^([۰-۹]+$)/'
             ]

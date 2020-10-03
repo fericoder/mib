@@ -106,7 +106,8 @@
                                         {{ $product->price }} تومان
                                     @endif
                                 @endauth
-                            </span>                        </div>
+                            </span>
+                        </div>
                     @endforeach
                 </div>
                 <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
@@ -163,6 +164,51 @@
             </div>
         </section>
     @endif
+
+
+        <section class="product-wrapper container">
+            <div class="headline">
+                <a href="{{ route('shop.blogs') }}"> <h3>آخرین مقالات</h3></a>
+            </div>
+            <div id="blogslider" class="swiper-container">
+                <div class="product-box swiper-wrapper">
+
+                    @foreach (\App\Blog::where('type', 'article')->take(10)->get() as $blog)
+                        <div class="product-item swiper-slide">
+                            <a href="{{ route('shop.blog', $blog->id) }}"><img src="{{ asset($blog->image) }}" alt=""></a>
+                            <a class="title" href="{{ route('shop.blog', $blog->id) }}"> {{ $blog->title }} </a>
+                        </div>
+
+                    @endforeach
+
+
+                </div>
+                <div id="blogslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+                <div id="blogslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
+            </div>
+        </section>
+
+    <section class="product-wrapper container">
+        <div class="headline">
+            <a href="{{ route('shop.news') }}"> <h3>آخرین اخبار</h3></a>
+        </div>
+        <div id="newslider" class="swiper-container">
+            <div class="product-box swiper-wrapper">
+
+                @foreach (\App\Blog::where('type', 'news')->take(10)->get() as $blog)
+                    <div class="product-item swiper-slide">
+                        <a href="{{ route('shop.news', $blog->id) }}"><img src="{{ asset($blog->image) }}" alt=""></a>
+                        <a class="title" href="{{ route('shop.news', $blog->id) }}"> {{ $blog->title }} </a>
+                    </div>
+
+                @endforeach
+
+
+            </div>
+            <div id="newslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+            <div id="newslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
+        </div>
+    </section>
 
 
 

@@ -230,6 +230,7 @@
             <li><a href="{{ route('shop.faq') }}">سوالات متداول </a></li>
             <li><a href="{{ route('shop.pages', 3) }}">راهنمای خرید </a></li>
             <li><a href="{{ route('shop.blogs') }}">مقالات </a></li>
+            <li><a href="{{ route('shop.news') }}">اخبار </a></li>
 
 
         </ul>

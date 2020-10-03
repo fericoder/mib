@@ -312,7 +312,7 @@ class ShopController extends Controller
         $categories = Category::all();
         $shop = Shop::where('english_name', 'keyvan')->first();
 
-        return view('shop.blogs', compact('blogs', 'categories', 'shop'));
+        return view('shop.blog.index', compact('blogs', 'categories', 'shop'));
     }
 
     public function blog(Request $request)
@@ -321,7 +321,27 @@ class ShopController extends Controller
         $categories = Category::all();
         $shop = Shop::where('english_name', 'keyvan')->first();
 
-        return view('shop.blog', compact('blog', 'categories', 'shop'));
+        return view('shop.blog.show', compact('blog', 'categories', 'shop'));
     }
+
+    public function news(Request $request)
+    {
+        $blogs = Blog::where('type', 'news')->paginate(15);
+        $categories = Category::all();
+        $shop = Shop::where('english_name', 'keyvan')->first();
+
+        return view('shop.news.index', compact('blogs', 'categories', 'shop'));
+    }
+
+    public function new(Request $request)
+    {
+        $blog = Blog::where('id', $request->id)->first();
+        $categories = Category::all();
+        $shop = Shop::where('english_name', 'keyvan')->first();
+
+        return view('shop.news.show', compact('blog', 'categories', 'shop'));
+    }
+
+
 
 }
