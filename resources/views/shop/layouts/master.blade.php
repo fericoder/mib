@@ -18,6 +18,7 @@
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
 
+
     <style>
         .sweet-alert{
             font-family: IRANSans!important;
