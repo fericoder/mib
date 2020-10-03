@@ -2,39 +2,8 @@
 
 @section('headerScripts')
     <link href='/assets/css/simplelightbox.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('/assets/css/pages/product.css') }}">
 
-
-    <style>
-        .select2-container{
-            width: 300px!important;
-            direction: rtl;
-            text-align: right;
-        }
-        .select2-selection__rendered{
-            font-size: 14px;
-        }
-        .select2-results__option{
-            font-size: 14px;
-        }
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .sl-next{
-            direction: ltr!important;
-        }
-        .sl-prev{
-            direction: ltr!important;
-        }
-    </style>
 
 @stop
 @section('content')

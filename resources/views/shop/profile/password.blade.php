@@ -2,13 +2,6 @@
 
 @section('content')
 
-    <style>
-
-
-
-    </style>
-
-
 
 
     <section class="account-box">

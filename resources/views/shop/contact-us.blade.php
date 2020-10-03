@@ -1,58 +1,8 @@
 @extends('shop.layouts.master', ['title' => 'درباره ما' ])
 @section('headerScripts')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('/assets/css/pages/contact.css') }}">
 
-<style>
-    .p-tabs {
-        margin-top: 85px;
-        position: relative;
-        padding-top: 115px;
-        line-height: 20px;
-    }
-    .c-content-expert__summary:after {
-        width: 0px;
-    }
-    .p-tabs{
-        width: 100%;
-    }
-    .flex{
-           display: flex;
-          width: 100%;
-         justify-content: space-between;
-    }
-    .c-content-expert{
-        display: flex;
-    width: 100%;
-    justify-content: space-around;
-    padding: 80px;
-    flex-wrap: wrap;
-    }
-    .border-bottom {
-        border-bottom: 1px solid #dee2e6!important;
-        padding: 25px 0;
-    }
-    .flex-rev{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .font-20{
-        font-size: 15px;
-    }
-    .p-tabs {
-        {{--  margin-top: 85px;  --}}
-        position: relative;
-        padding-top: 115px;
-        line-height: 20px;
-    }
-    .p-tabs {
-        margin-top: 0px;
-        width: 100%;
-    }
-    .c-box-tabs {
-        border: 0;
-    }
-</style>
 @stop
 
 @section('content')

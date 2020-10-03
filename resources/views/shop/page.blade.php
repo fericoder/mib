@@ -1,21 +1,6 @@
 @extends('shop.layouts.master', ['title' => $blog->title ])
 @section('headerScripts')
 
-<style>
-    .p-tabs {
-        {{--  margin-top: 85px;  --}}
-        position: relative;
-        padding-top: 115px;
-        line-height: 20px;
-    }
-    .p-tabs {
-        margin-top: 0px;
-        width: 100%;
-    }
-    .c-box-tabs {
-        border: 0;
-    }
-</style>
 @stop
 
 @section('content')

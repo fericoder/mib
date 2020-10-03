@@ -1,21 +1,7 @@
 @extends('shop.layouts.master', ['title' => $blog->title ])
 @section('headerScripts')
 
-<style>
-    .p-tabs {
-        {{--  margin-top: 85px;  --}}
-        position: relative;
-        padding-top: 115px;
-        line-height: 20px;
-    }
-    .p-tabs {
-        margin-top: 0px;
-        width: 100%;
-    }
-    .c-box-tabs {
-        border: 0;
-    }
-</style>
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/blog.css') }}">
 @stop
 
 @section('content')
@@ -26,7 +12,6 @@
         </ul>
         <div class="c-box--tabs p-tabs__content">
             <div id="desc" class="c-content-expert is-active">
-
                 <article>
                     <h2 class="c-params__headline"> {{ $blog->title }}<span>  </span></h2>
                     <section class="c-content-expert__summary">
@@ -39,8 +24,7 @@
                             </div>
                             <img style="margin: 100px" src="{{ $blog->image }}" alt="">
                         </div>
-
-                                </div>
+            </div>
 
                        </section>
                   </article>

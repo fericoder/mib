@@ -1,16 +1,13 @@
 @extends('shop.layouts.master', ['title' => 'سبد خرید' ])
 
-<link rel="stylesheet" href="{{ asset('css/style-quantity.css') }}">
+@section('headerScripts')
+    <link rel="stylesheet" href="{{ asset('css/style-quantity.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/pages/cart.css') }}">
+
+@stop
+
 
 @section('content')
-<style>
-    .flex-1{
-        flex: 1!important;
-    }
-    .main-cart .o-page__content {
-        flex: 0 0 100%!important;
-    }
-</style>
 
     <section class="main-cart container">
         <div class="o-page__content {{ $cart == null ? 'flex-1' : '' }}">
