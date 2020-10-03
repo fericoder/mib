@@ -6652,10 +6652,10 @@ span.full-address {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
 
-
-.account-box + footer{
-    top: 600px!important;
+.account-box + footer {
+    top: 600px !important;
 }
 
 .alert {
@@ -6679,39 +6679,38 @@ span.full-address {
 .alert-danger .alert-link {
     color: #843534;
 }
-#ex4 .p1[data-count]:after{
-    position:absolute;
-    top:5%;
+
+#ex4 .p1[data-count]:after {
+    position: absolute;
+    top: 5%;
     content: attr(data-count);
-    padding:.3em;
+    padding: .3em;
     font-size: 13px;
-    border-radius:50%;
-    line-height:1em;
+    border-radius: 50%;
+    line-height: 1em;
     color: white;
-    background:#ef394eed;
-    text-align:center;
+    background: #ef394eed;
+    text-align: center;
     min-width: 1em;
     font-family: byekan;
 }
+
 .cart i {
     position: absolute;
     top: -9px;
-    font-size: .8em!important;
+    font-size: .8em !important;
     left: 10px;
 }
-.p-tabs {
-{{--  margin-top: 85px;  --}}
-position: relative;
-padding-top: 115px;
-line-height: 20px;
-}
+
 .p-tabs {
     margin-top: 0px;
     width: 100%;
 }
+
 .c-box-tabs {
     border: 0;
 }
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -6733,6 +6732,73 @@ line-height: 20px;
 .alert-danger .alert-link {
     color: #843534;
 }
-.user-main>div{
-    flex: 1 0 50%!important;
+
+.user-main > div {
+    flex: 1 0 50% !important;
+}
+
+.megam300{
+    height: 300px
+}
+.limar{
+    margin-right: 20px
+}
+.amar{
+    width: 150px;
+}
+.limarri{
+    margin-right: 20px
+}
+
+.amegma{
+    width: 150px
+}
+
+.footers{
+    position: inherit!important;
+}
+
+.socialsize{
+    font-size: 25px; margin: 10px
+}
+
+
+.bip0{
+    padding-top: 0px!important;
+}
+.bicbox{
+    display: block!important;  text-align: center!important;  font-size: 15px!important;
+}
+.unsetst{
+    height: unset!important;
+}
+.blogidesc{
+    font-size: 16px!important; margin-bottom: 30px!important;
+}
+.mar100{
+    margin: 100px!important;
+}
+
+.asidemt{
+    margin-top: 46px!important;
+}
+.dispnone{
+    display: none!important;
+}
+.page__contentflex{
+    flex: 0 0 99.8%!important;
+}
+.brandName{
+    font-size: 16px!important;
+}
+
+.notFound{
+    margin: auto!important; margin-top: 50px!important; margin-bottom: 50px!important;
+}
+
+.dnoneprod{
+    display: none!important;
+}
+.mainsliderrr{
+    max-height: 42em!important;
 }

@@ -2,11 +2,10 @@
 @section('headerScripts')
     <link rel="stylesheet" href="{{ asset('assets/css/pages/blog.css') }}">
 @stop
-
 @section('content')
     <div class="c-product">
-        <section style="padding-top: 0px;" class="p-tabs">
-            <ul class="c-box-tabs" style="display: block;  text-align: center;  font-size: 15px;">
+        <section  class="p-tabs bip0">
+            <ul class="c-box-tabs bicbox" >
                 <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span></span></a>
                 </li>
             </ul>
@@ -16,14 +15,14 @@
                         <h2 class="c-params__headline"> مقالات<span>  </span></h2>
                         <section class="">
                             <div class="c-mask">
-                                <div class="c-mask__text c-mask__text--product-summary" style="height: unset;">
+                                <div class="c-mask__text c-mask__text--product-summary unsetst" >
                                     <div class="container">
                                         <div class="cards">
                                             @foreach ($blogs as $blog)
                                                 <a class="card" href="{{ route('shop.blog',$blog->id ) }}">
                                                     <span class="card-header" style="background-image: url( &quot; {{ $blog->image }} &quot; );"></span>
                                                     <span class="card-summary">{{ $blog->title }}</span>
-                                                    <span style="font-size: 16px; margin-bottom: 30px" class="card-summary">{{ $blog->description }}</span>
+                                                    <span class="card-summary">{{ $blog->description }}</span>
                                                     <span  class="card-meta">مشاهده ادامه</span>
                                                 </a>
                                             @endforeach

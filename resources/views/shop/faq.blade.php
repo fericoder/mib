@@ -6,14 +6,14 @@
 @stop
 
 @section('content')
-    <div class="c-product">
-    <section style="padding-top: 30px;" class="p-tabs">
-        <h2 class="c-params__headline" style="margin-right: 40px">سوالات متداول</h2>
+    <div class="c-product ">
+    <section  class="p-tabs pt30">
+        <h2 class="c-params__headline mr40" >سوالات متداول</h2>
         @foreach($faqs as $faq)
             <div id="desc" class="c-content-expert is-active">
-                <button class="collapsible card" style="text-align: right">{{ $faq->question }}</button>
+                <button class="collapsible card tar" >{{ $faq->question }}</button>
                 <div class="content">
-                  <p style="padding: 15px">{{ $faq->answer }}</p>
+                  <p class="pp15" >{{ $faq->answer }}</p>
                 </div>
              </div>
              @endforeach

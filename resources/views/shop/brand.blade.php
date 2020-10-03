@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="search container">
-        <div style="margin-top: 46px;" class="o-page__aside">
+        <div  class="o-page__aside asidemt">
             <div class="c-listing-sidebar">
                 {{--<div class="c-box">--}}
                     {{--<div class="c-box__header">جستجو :</div>--}}
@@ -28,11 +28,11 @@
 
             </div>
         </div>
-        <div style="flex: 0 0 99.8%;" class="o-page__content">
+        <div  class="o-page__content page__contentflex">
             <article>
                 <nav>
                     <ul class="c-breadcrumb">
-                        <li><span style="font-size: 16px">
+                        <li><span class="brandName" >
                                  {{ $brand ? "نام برند: $brand->name" : '' }}
                             </span></li>
                     </ul>
@@ -49,7 +49,7 @@
                     <ul class="c-listing__items">
 
                         @if ($productsPaginate->count() === 0)
-                            <p style="margin: auto; margin-top: 50px; margin-bottom: 50px">محصولی یافت نشد.</p>
+                            <p class="notFound">محصولی یافت نشد.</p>
                         @endif
 
 
@@ -71,7 +71,7 @@
 
                                         </span>
                                     </div>
-                                    <div style="display: none" class="c-product-box__tags">
+                                    <div  class="c-product-box__tags dnoneprod">
                                         <span class="c-tag c-tag--rate">۳.۹</span>
                                     </div>
                                 </div>

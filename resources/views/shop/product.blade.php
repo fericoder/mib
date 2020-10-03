@@ -10,9 +10,9 @@
 
 
 
-    <div id="myModal" class="modal" style="z-index: 1000000;">
+    <div id="myModal" class="modal zi1000" >
         <!-- Modal content -->
-        <div style="margin-top: 100px" class="modal-content register login account-box">
+        <div  class="modal-content register login account-box mart10">
             <span class="close">&times;</span>
             <div class="content">
                 <form style="width: 30%!important;" method="POST" action="/comment">
@@ -47,12 +47,12 @@
                                 @if($product->category->parent != null)
                                     @if ($product->category->parent->parent)
                                         <a href="{{ route('shop.category', $product->category->parent->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->parent->name }}</a>
-                                        <span style="font-size: 14px;">></span>
+                                        <span class="font14" >></span>
                                     @endif
 
                                     @if ($product->category->parent)
                                         <a href="{{ route('shop.category', $product->category->parent->id) }}" class="btn-link-spoiler">{{ $product->category->parent->name }}</a>
-                                        <span style="font-size: 14px;">></span>
+                                        <span class="font14">></span>
                                     @endif
                                     <a href="{{ route('shop.category', $product->category->id) }}" class="btn-link-spoiler">{{ $product->category->name }}</a>
                             </li>
@@ -63,7 +63,7 @@
                             @endif
 
                             @if ($product->country_id)
-                                <li style="margin-top: 10px"> <span>کشور سازنده : </span> <a href="" class="btn-link-spoiler">{{ $product->country->nicename }}</a></li>
+                                <li class="mt10" > <span>کشور سازنده : </span> <a href="" class="btn-link-spoiler">{{ $product->country->nicename }}</a></li>
                             @endif
 
 
@@ -73,8 +73,8 @@
 
                     <div class="c-product__params">
                         <ul data-title="توضیحات محصول">
-                            <div style="margin-top: 20px;" class="quantity mt-3">
-                                <p style="max-width: 450px;"> {{ $product->shortDescription }}</p>
+                            <div  class="quantity mt-3 descprod">
+                                <p class="pshortdesc" > {{ $product->shortDescription }}</p>
 
                                 @if ($product->catalog)
                                     <a target="_blank" href="{{ asset($product->catalog) }}"><img style="width: 200px; margin: 30px" src="/assets/images/catalog.png" alt=""></a>
@@ -130,9 +130,9 @@
                                 @if ($product->userPrice === 'on')
                                     @auth()
                                         @if (\Auth::user()->status === 'enable')
-                                            <div style="text-align: center;margin-top: 30px;font-size: 20px" class="c-price original">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
+                                            <div  class="c-price original c-pricee">{{ $product->status == 'enable' ? number_format($product->price) . ' تومان ' : 'ناموجود' }}</div>
                                         @else
-                                            <div style="text-align: center;margin-top: 30px;font-size: 15px; margin-bottom: 30px;" class="c-price original">حساب کاربری شما تایید نشده است</div>
+                                            <div  class="c-price original c-priceOrig">حساب کاربری شما تایید نشده است</div>
                                         @endif
                                     @endauth
                                 @else
@@ -154,7 +154,7 @@
                         @endguest
                 </div>
             </div>
-            <aside style="" class="c-product__feature">
+            <aside  class="c-product__feature">
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i1.svg') }}" alt=""> <span>امکان تحویل اکسپرس</span> </a>
                 <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i2.svg') }}" alt=""> <span>پشتیبانی ۲۴ ساعته</span> </a>
                 {{-- <a class="i-item" href="#"> <img src="{{ asset('assets/images/icon/i3.svg') }}" alt=""> <span>امکان پرداخت در محل</span> </a> --}}
@@ -171,22 +171,7 @@
             </div>
         </div>
 
-        {{--<section class="c-product__gallery">--}}
-        {{--<div class="c-product__special-deal hidden">--}}
-        {{--<div class="c-counter--special-deal"></div>--}}
-        {{--</div>--}}
-        {{--<div class="c-product__status-bar c-product__status-bar--out-of-stock hidden">ناموجود</div>--}}
-        {{--<div class="c-gallery">--}}
-        {{--<div class="c-gallery__item">--}}
-        {{--<div class="c-gallery__img"> <img src="{{ asset($product->image['original']) }}"  alt=""></div>--}}
-        {{--</div>--}}
-        {{--<ul style="" class="c-gallery__items">--}}
-        {{--@foreach ($galleries as $gallery)--}}
-        {{--<li><img src="{{ asset( $gallery->filename) }}" alt=""></li>--}}
-        {{--@endforeach--}}
-        {{--</ul>--}}
-        {{--</div>--}}
-        {{--</section>--}}
+
     </div>
 
 
@@ -196,9 +181,9 @@
         <div class="headline">
             <h3>محصولات مرتبط</h3></div>
         <div id="pslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
-            <div class="product-box swiper-wrapper" style="transform: translate3d(277.6px, 0px, 0px); transition-duration: 0ms;height: 50vh;">
+            <div class="product-box swiper-wrapper swiperr" >
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
-                    <div class="product-item swiper-slide swiper-slide-prev" style="height: 380px;width: 267.6px; margin-left: 10px;">
+                    <div class="product-item swiper-slide swiper-slide-prev prodItem" >
                         <a href="{{ route('shop.product', $Relatedproduct->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
                         <a class="title" href="{{ route('shop.product', $Relatedproduct->id) }}">{{ $Relatedproduct->title }}</a>
                         <span class="price">
@@ -238,12 +223,12 @@
                     <h2 class="c-params__headline"> نقد و بررسی اجمالی <span> {{ $product->title }} </span></h2>
                     <section class="c-content-expert__summary">
                         <div class="c-mask">
-                            <div class="c-mask__text c-mask__text--product-summary" style="max-height: 250px;height: unset;">
+                            <div class="c-mask__text c-mask__text--product-summary proddesc" >
                                 <p>
                                     {{ $product->description }}
                                 </p>
 
-                                <div style="margin-top: 100px; margin-right: 250px">
+                                <div class="mtmr">
                                     @if ($product->aparat)
                                         <a target="_blank" href="{{ $product->aparat  }}"><button class="button">مشاهده ویدیو</button></a>
                                     @endif
@@ -262,7 +247,7 @@
                 <div class="c-comments__summary">
                     <div class="c-comments__summary-note"> <span>شما هم می‌توانید در مورد این کالا نظر بدهید.</span>
                         @auth()
-                            <a id="myBtn" style="margin: 30px; top: 30px"  class="btn-add-comment is-disabled">
+                            <a id="myBtn"   class="btn-add-comment is-disabled mt10mt">
                                 <span>افزودن نظر جدید</span>
                             </a>
                         @endauth
@@ -279,7 +264,7 @@
                                 <section>
                                     <div class="article">
                                         <div class="header">
-                                            <span style="    font-size: 17px; font-family: BYekan; direction: ltr">توسط
+                                            <span class="cmtavasot" >توسط
                                                 {{ $comment->user->fName . ' ' . $comment->user->lName }}
                                                 در تاریخ
                                                 {{ jdate($comment->created_at)->format('Y/m/d h:i:s') }}
@@ -305,7 +290,7 @@
             @if(isset($product->aparat))
                 <div id="video">
                     <div class="c-comments__summary">
-                        <div style=" margin: auto" class="c-comments__summary-note">
+                        <div style= class="c-comments__summary-note mauto">
                             {!! $product->aparat !!}
                         </div>
                     </div>

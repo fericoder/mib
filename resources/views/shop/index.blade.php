@@ -5,7 +5,7 @@
         <!--<div class="main-slider">
             <a class="slide-item" href="#" target="_blank" style="background-image: url(assets/images/slider/slide9.jpg)"> </a>
         </div>-->
-        <div style="max-height: 42em!important;" id="mainslider" class="main-slider swiper-container">
+        <div id="mainslider" class="main-slider swiper-container mainsliderrr">
             <div class="swiper-wrapper">
                 @foreach (\App\Banner::where('location', 'slider')->get() as $banner)
                     <a href="{{ $banner->url }}" target="_blank" class="slide-item swiper-slide" style="background-image: url( &quot; {{ asset($banner->slide_path) }} &quot; )"> </a>
@@ -25,12 +25,7 @@
 
 
 
-    <section style="display: none" class="image-row container">
-        <a href="#"><img src="assets/images/slider/slide11.jpg" alt=""></a>
-        <a href="#"><img src="assets/images/slider/slide22.jpg" alt=""></a>
-        <a href="#"><img src="assets/images/slider/slide33.jpg" alt=""></a>
-        <a href="#"><img src="assets/images/slider/slide44.jpg" alt=""></a>
-    </section>
+
 
 
     @if ($shop->shegeft)

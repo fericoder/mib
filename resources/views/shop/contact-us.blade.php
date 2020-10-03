@@ -7,25 +7,25 @@
 
 @section('content')
     <div class="c-product">
-    <section style="padding-top: 30px;" class="p-tabs">
-        <h2 class="c-params__headline" style="margin-right: 40px">راه های ارتباطی با شرکت ایده برتر کیوان</h2>
+    <section  class="p-tabs pt10">
+        <h2 class="c-params__headline marr40" >راه های ارتباطی با شرکت ایده برتر کیوان</h2>
 
             <div id="desc" class="c-content-expert is-active">
                 <div class="flex-rev">
-                    <div class="border-bottom"><i class="fa fa-phone" style="font-size:48px;color:#f05562"></i></div>
-                    <div class="d-flex justify-content-center p-4 font-20" style="padding: 20px 0;">
+                    <div class="border-bottom"><i class="fa fa-phone bbb" ></i></div>
+                    <div class="d-flex justify-content-center p-4 font-20" >
                         {{ $shop->phone }}
                       </div>
                 </div>
                 <div class="flex-rev">
-                    <div class="border-bottom"><i class="fa fa-address-card" style="font-size:48px; color:#03bfd6"></i></div>
-                    <div class="d-flex justify-content-center p-4 font-20" style="padding: 20px 0;">
+                    <div class="border-bottom"><i class="fa fa-address-card addresscard" ></i></div>
+                    <div class="d-flex justify-content-center p-4 font-20 divphone" >
                         {{ $shop->address }}
                       </div>
                 </div>
                 <div class="flex-rev">
-                    <div class="border-bottom"><i class="fa fa-envelope" style="font-size:48px;color:#f05562"></i></div>
-                    <div class="d-flex justify-content-center p-4 font-20" style="padding: 20px 0;">
+                    <div class="border-bottom"><i class="fa fa-envelope emailI" ></i></div>
+                    <div class="d-flex justify-content-center p-4 font-20 divphone" >
                         {{ $shop->email }}
                       </div>
                 </div>

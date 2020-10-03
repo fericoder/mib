@@ -1,0 +1,21 @@
+.flex-1{
+  flex: 1!important;
+}
+.main-cart .o-page__content {
+  flex: 0 0 100%!important;
+}
+
+.itemP{
+  margin-top:5px;color:gray;
+}
+
+.boarder0{
+  border:0
+}
+.notProduct{
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  color: #EF394E;
+}

@@ -29,7 +29,7 @@
                                     <a href="{{ route('shop.product', $cartProduct->product->id ) }}">{{ $cartProduct->product->title }}</a>
                                     @if($cartProduct->group)
                                     @foreach(App\Http\Controllers\ShopController::getItemsGroup($cartProduct->group->specification_items) as $item)
-                                    <p style="margin-top:5px;color:gray">{{ $item }}</p>
+                                    <p class="itemP">{{ $item }}</p>
 
                                     @endforeach
                                     @endif
@@ -42,7 +42,7 @@
                                                         @csrf
                                                     <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="{{ $cartProduct->group_id != null ? $cartProduct->group->amount : '' }}" name="{{ $cartProduct->id }}" value="{{ $cartProduct->quantity }}" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
                                                 </div>
-                                                <div class="c-quantity-selector" style="border:0">
+                                                <div class="c-quantity-selector boarder0" >
                                                     <button id="removeProduct" data-cart="{{ \Auth::user()->cart()->get()->first()->id }}" data-id="{{ $cartProduct->product->id }}" data-cartp="{{ $cartProduct->id }}" type="button" class="c-quantity-selector__remove"><i class="fa fa-trash"></i></button>
                                                 </div>
                                             </div>
@@ -56,11 +56,7 @@
                             </div>
                         @endforeach
                         @else
-                        <div class="c-checkout__row" style="font-size: 30px;
-                        display: flex;
-                        justify-content: center;
-                        padding: 100px;
-                        color: #EF394E;">
+                        <div class="c-checkout__row notProduct" >
                             محصولی در سبد خرید شما وجود ندارد
 
                             <div class="c-checkout__col--desc">

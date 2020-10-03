@@ -97,14 +97,14 @@
                     @foreach (\App\Category::all()->where('parent_id', null) as $category)
                         <li>
                             <a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
-                            <ul style="    height: 300px;" class="megamenu">
+                            <ul  class="megamenu megam300">
                                 @foreach (\App\Category::all()->where('parent_id', $category->id) as $subCategory)
-                                    <li style="margin-right: 20px">
-                                        <a style="width: 150px" href="{{ route('shop.category', $subCategory->id) }}">{{ $subCategory->name }}</a>
+                                    <li >
+                                        <a class="amar" href="{{ route('shop.category', $subCategory->id) }}">{{ $subCategory->name }}</a>
                                     @foreach (\App\Category::all()->where('parent_id', $subCategory->id) as $subSubCategory)
                                             <ul >
-                                                <li style="margin-right: 20px">
-                                                    <a style="width: 150px" href="{{ route('shop.category', $subSubCategory->id) }}">{{ $subSubCategory->name }}</a>
+                                                <li class="limarri" >
+                                                    <a class="amegma" href="{{ route('shop.category', $subSubCategory->id) }}">{{ $subSubCategory->name }}</a>
                                                 </li>
                                             </ul>
                                         @endforeach
@@ -130,7 +130,7 @@
 @include('dashboard.layouts.errors')
 
 @yield('content')
-<footer style="    position: inherit!important;">
+<footer class="footers">
     <section class="footer container">
         <div class="icon">
             <div class="icon-item">
@@ -174,19 +174,19 @@
 
                 <span>شبکه های اجتماعی: </span>
                 @if (\App\Shop::first()->instagram)
-                    <a target="_blank" href="https://instagram.com/{{ \App\Shop::first()->instagram }}"><i style="font-size: 25px; margin: 10px" class="fa fa-instagram"></i></a>
+                    <a target="_blank" href="https://instagram.com/{{ \App\Shop::first()->instagram }}"><i  class="fa fa-instagram socialsize"></i></a>
                 @endif
 
                 @if (\App\Shop::first()->telegram)
-                    <a target="_blank" href="https://t.me/{{ \App\Shop::first()->telegram }}"><i style="font-size: 25px; margin: 10px" class="fa fa-telegram"></i></a>
+                    <a target="_blank" href="https://t.me/{{ \App\Shop::first()->telegram }}"><i  class="fa fa-telegram socialsize"></i></a>
                 @endif
 
                 @if (\App\Shop::first()->twitter)
-                    <a target="_blank" href="https://twitter.com/{{ \App\Shop::first()->twitter }}"><i style="font-size: 25px; margin: 10px" class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="https://twitter.com/{{ \App\Shop::first()->twitter }}"><i  class="fa fa-twitter socialsize"></i></a>
                 @endif
 
                 @if (\App\Shop::first()->youtube)
-                    <a target="_blank" href="https://youtube.com/{{ \App\Shop::first()->youtube }}"><i style="font-size: 25px; margin: 10px" class="fa fa-youtube"></i></a>
+                    <a target="_blank" href="https://youtube.com/{{ \App\Shop::first()->youtube }}"><i  class="fa fa-youtube socialsize"></i></a>
                 @endif
 
 
