@@ -89,9 +89,9 @@ class ProductController extends Controller
             $request->enable = 1;
 
         if ($request->no_specification_status != "on")
-              $request->merge(['no_specification_status' => 'disable']);
+            $request->merge(['no_specification_status' => 'disable']);
         else
-        $request->merge(['no_specification_status' => 'enable']);
+            $request->merge(['no_specification_status' => 'enable']);
 
         if($request->measure != null){
             $request->measure = $this->fa_num_to_en($request->measure);
@@ -101,74 +101,74 @@ class ProductController extends Controller
             $request->weight = $this->fa_num_to_en($request->weight);
         }
 
-                $product = Product::create([
-                    'title' => $request->title,
-                    'type' => 'product',
-                    'category_id' => $request->productCat_id,
-                    'brand_id' => $request->brand_id,
-                    'measure' => $request->measure,
-                    'weight' => $request->weight,
-                    'price' => $this->fa_num_to_en($request->price),
-                    'shortDescription' => $request->shortDescription,
-                    'country_id' => $request->country_id,
-                    'description' => $request->description,
-                    'aparat' => $request->aparat,
-                    'shegeftangiz' => $request->shegeftangiz,
-                    'userPrice' => $request->userPrice,
-                    'no_specification_status' => $request->no_specification_status,
-                    'image' => $image,
-                    'catalog' => $catalog,
-                    'shop_id' => \Auth::user()->shop_id,
-                    'description' => $request->description,
-                ]);
+        $product = Product::create([
+            'title' => $request->title,
+            'type' => 'product',
+            'category_id' => $request->productCat_id,
+            'brand_id' => $request->brand_id,
+            'measure' => $request->measure,
+            'weight' => $request->weight,
+            'price' => $this->fa_num_to_en($request->price),
+            'shortDescription' => $request->shortDescription,
+            'country_id' => $request->country_id,
+            'description' => $request->description,
+            'aparat' => $request->aparat,
+            'shegeftangiz' => $request->shegeftangiz,
+            'userPrice' => $request->userPrice,
+            'no_specification_status' => $request->no_specification_status,
+            'image' => $image,
+            'catalog' => $catalog,
+            'shop_id' => \Auth::user()->shop_id,
+            'description' => $request->description,
+        ]);
 
-                if($request->no_specification_status == 'disable'){
-                if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group[1]['items'])) {
-                    if (isset($request->group)) {
-                        foreach ($request->group as $group) {
-                            $groupItem = new SpecificationItemGroup;
-                            $groupItem->specification_items = $group['items'];
-                            $groupItem->product_id = $product->id;
-                            $groupItem->amount = $this->fa_num_to_en($group['amount']);
-                            $groupItem->min_amount = $this->fa_num_to_en($group['min_amount']);
-                            $groupItem->p_id = $this->fa_num_to_en($group['p_id']);
-                            $groupItem->save();
-                        }
+        if($request->no_specification_status == 'disable'){
+            if ($request->group[1]['p_id'] != null and $request->group[1]['amount'] != null and isset($request->group[1]['items'])) {
+                if (isset($request->group)) {
+                    foreach ($request->group as $group) {
+                        $groupItem = new SpecificationItemGroup;
+                        $groupItem->specification_items = $group['items'];
+                        $groupItem->product_id = $product->id;
+                        $groupItem->amount = $this->fa_num_to_en($group['amount']);
+                        $groupItem->min_amount = $this->fa_num_to_en($group['min_amount']);
+                        $groupItem->p_id = $this->fa_num_to_en($group['p_id']);
+                        $groupItem->save();
                     }
                 }
-              }
-              else{
-                $groupItem = new SpecificationItemGroup;
-                $groupItem->specification_items = $request->group[1]['items'];
-                $groupItem->product_id = $product->id;
-                $groupItem->amount = $this->fa_num_to_en($request->group[1]['amount']);
-                $groupItem->min_amount = $this->fa_num_to_en($request->group[1]['min_amount']);
-                $groupItem->p_id = $this->fa_num_to_en($request->group[1]['p_id']);
-                $groupItem->save();
-              }
+            }
+        }
+        else{
+            $groupItem = new SpecificationItemGroup;
+            $groupItem->specification_items = $request->group[1]['items'];
+            $groupItem->product_id = $product->id;
+            $groupItem->amount = $this->fa_num_to_en($request->group[1]['amount']);
+            $groupItem->min_amount = $this->fa_num_to_en($request->group[1]['min_amount']);
+            $groupItem->p_id = $this->fa_num_to_en($request->group[1]['p_id']);
+            $groupItem->save();
+        }
 
         if($product)
-                {
-                    DB::transaction(function () use ($request, $product) {
-                        $tagIds = [];
-                        $sepecificationIds = [];
+        {
+            DB::transaction(function () use ($request, $product) {
+                $tagIds = [];
+                $sepecificationIds = [];
 
-                        //get all tags of product
-                        $tagNames = explode(',',$request->get('tags'));
-                        foreach($tagNames as $tagName)
-                        {
-                            $tag = Tag::firstOrCreate(['name'=>$tagName]);
-                            // $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
-                            if($tag)
-                            {
-                                $tagIds[] = $tag->id;
-                            }
-                        }
-                        $product->tags()->sync($tagIds);
-                    });
+                //get all tags of product
+                $tagNames = explode(',',$request->get('tags'));
+                foreach($tagNames as $tagName)
+                {
+                    $tag = Tag::firstOrCreate(['name'=>$tagName]);
+                    // $tag = Tag::firstOrCreate(['name'=>$tagName, 'shop_id' =>Auth::user()->shop()->first()->id]);
+                    if($tag)
+                    {
+                        $tagIds[] = $tag->id;
+                    }
                 }
-                alert()->success('محصول جدید شما باموفقیت اضافه شد.', 'ثبت شد');
-                return redirect()->back();
+                $product->tags()->sync($tagIds);
+            });
+        }
+        alert()->success('محصول جدید شما باموفقیت اضافه شد.', 'ثبت شد');
+        return redirect()->back();
 
     }
 
@@ -196,12 +196,13 @@ class ProductController extends Controller
         foreach($product->tags as $tag){
             $tags[] = $tag->name;
         }
-        $specifications = Specification::whereHas('items')->orderBy('order', 'DESC')->get();
+        $specifications = Specification::whereHas('items')->with('items')->orderBy('order', 'DESC')->get();
+        $items = SpecificationItem::all();
         $tags = implode(',', $tags);
         $categories = \Auth::user()->shop()->first()->categories()->doesntHave('children')->get();
         $brands = \Auth::user()->shop()->first()->brands()->get();
         $lastGroupId = SpecificationItemGroup::latest('id')->first()->id;
-        return view('dashboard.product.edit', compact('product','categories','brands','tags', 'shop', 'specifications','lastGroupId'));
+        return view('dashboard.product.edit', compact('product','categories','brands','tags', 'shop', 'specifications','lastGroupId', 'items'));
 
     }
 
@@ -214,11 +215,11 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-      if ($product->no_specification_status == 'disable') {
-        $request->merge(['p_id' => null]);
-        $request->merge(['amount' => null]);
-        $request->merge(['min_amount' => null]);
-      }
+        if ($product->no_specification_status == 'disable') {
+            $request->merge(['p_id' => null]);
+            $request->merge(['amount' => null]);
+            $request->merge(['min_amount' => null]);
+        }
 
         if($request->file('image') == null){
             $image = $product->image;
@@ -249,9 +250,9 @@ class ProductController extends Controller
         }
 
         if ($request->no_specification_status != "on")
-        $request->merge(['no_specification_status' => 'disable']);
+            $request->merge(['no_specification_status' => 'disable']);
         else
-        $request->merge(['no_specification_status' => 'enable']);
+            $request->merge(['no_specification_status' => 'enable']);
 
         $updatedProduct = $product->update([
             'title' => $request->title,
@@ -304,7 +305,7 @@ class ProductController extends Controller
         {
             $tagIds = [];
             $sepecificationIds = [];
-            
+
             //get all tags of product
             $tagNames = explode(',',$request->get('tags'));
             foreach($tagNames as $tagName)
@@ -345,12 +346,12 @@ class ProductController extends Controller
     {
         $carts = Cart::all();
         foreach($carts as $cart){
-          foreach($cart->cartProduct as $cartProduct){
-            $deletedProduct = $cartProduct->product()->where('id', $request->id)->get()->first();
-            if($deletedProduct){
-              $cartProduct->where('product_id', $deletedProduct->id)->delete();
+            foreach($cart->cartProduct as $cartProduct){
+                $deletedProduct = $cartProduct->product()->where('id', $request->id)->get()->first();
+                if($deletedProduct){
+                    $cartProduct->where('product_id', $deletedProduct->id)->delete();
+                }
             }
-          }
         }
         $product = Product::where('id' , $request->id)->first()->delete();
         alert()->success('درخواست شما با موفقیت انجام شد.', 'انجام شد');
@@ -391,7 +392,7 @@ class ProductController extends Controller
 
     public function groupDestroy(Request $request)
     {
-         CartProduct::where('group_id', $request->id)->delete();
+        CartProduct::where('group_id', $request->id)->delete();
         $group = SpecificationItemGroup::where('id' , $request->id)->first()->delete();
     }
 

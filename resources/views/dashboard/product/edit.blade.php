@@ -412,98 +412,92 @@
 
 
                                                     {{--<div class="input-group color-dot mt-3">--}}
-                                                        {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ محصول :</span></div>--}}
+                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">رنگ محصول :</span></div>--}}
 
-                                                        {{--<select class="selectpicker selectpicker-color" multiple data-live-search="true" name="color[]" title="موردی انتخاب نشده است">--}}
-                                                            {{--@foreach($colors as $color)--}}
-                                                                {{--<option style="background:linear-gradient(#{{ $color->code }} , #{{ $color->code }})bottom right/ 15% 2px;background-repeat:no-repeat;"  @if($product->colors->count() != 0) @foreach($product->colors as $selectedColor) {{ $color->id == $selectedColor->id ? 'selected' : ''}}--}}
-                                                                {{--@endforeach--}}
-                                                                {{--@endif value="{{ $color->id }}">{{ $color->name }}</option>--}}
-                                                            {{--@endforeach--}}
-                                                        {{--</select>--}}
+                                                    {{--<select class="selectpicker selectpicker-color" multiple data-live-search="true" name="color[]" title="موردی انتخاب نشده است">--}}
+                                                    {{--@foreach($colors as $color)--}}
+                                                    {{--<option style="background:linear-gradient(#{{ $color->code }} , #{{ $color->code }})bottom right/ 15% 2px;background-repeat:no-repeat;"  @if($product->colors->count() != 0) @foreach($product->colors as $selectedColor) {{ $color->id == $selectedColor->id ? 'selected' : ''}}--}}
+                                                    {{--@endforeach--}}
+                                                    {{--@endif value="{{ $color->id }}">{{ $color->name }}</option>--}}
+                                                    {{--@endforeach--}}
+                                                    {{--</select>--}}
                                                     {{--</div>--}}
                                                     {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                        {{--<input type="checkbox" class="custom-control-input" id="color_amount" name="color_amount" {{ $product->color_amount_status == "enable" ? 'checked' : '' }}>--}}
-                                                        {{--<label class="custom-control-label iranyekan font-15" for="color_amount">اختصاص موجودی به رنگ ها</label>--}}
-                                                        {{--<h6 class="text-danger my-1">با اختصاص موجودی به رنگ ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="color_amount" name="color_amount" {{ $product->color_amount_status == "enable" ? 'checked' : '' }}>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="color_amount">اختصاص موجودی به رنگ ها</label>--}}
+                                                    {{--<h6 class="text-danger my-1">با اختصاص موجودی به رنگ ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
 
                                                     {{--</div>--}}
 
                                                     <div class="section p-3">
                                                         @foreach($product->groups as $groupItem)
 
-                                                        <div class="items">
-                                                            <a class="mr-2 font-15" href="{{ route('products.group.edit', ['product_id' => $product->id, 'group_id' => $groupItem->id]) }}" style="font-size: 20px"  title="ویرایش خصوصیت" data-name="" data-id=""><i class="p-2 far fa-edit text-warning font-18 pl-2" style="font-size: 20px"></i></a>
-                                                            <h4 class="text-center">شماره {{ $loop->index + 1 }}
-                                                            </h4>
-                                                        <div class="input-group mt-3 specification-dot">
-                                                            <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
-                                                            @php
-                                                                $itemsArray = [];
-                                                            @endphp
-                                                            @foreach($specifications as $specification)
-                                                                @foreach($specification->items as $item)
-                                                                    @foreach ($groupItem->specification_items as $selectedItem)
-                                                                    @if($item->id == $selectedItem)
+                                                            <div class="items">
+                                                                <a class="mr-2 font-15" href="{{ route('products.group.edit', ['product_id' => $product->id, 'group_id' => $groupItem->id]) }}" style="font-size: 20px"  title="ویرایش خصوصیت" data-name="" data-id=""><i class="p-2 far fa-edit text-warning font-18 pl-2" style="font-size: 20px"></i></a>
+                                                                <h4 class="text-center">شماره {{ $loop->index + 1 }}
+                                                                </h4>
+                                                                <div class="input-group mt-3 specification-dot">
+                                                                    <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">خصوصیات انتخابی :</span></div>
                                                                     @php
-                                                                        array_push($itemsArray, $item->name);
+                                                                        $itemsArray = [];
+                                                                    @endphp
+                                                                    @foreach ($items->whereIn('id', $groupItem->specification_items) as $selectedItem)
+                                                                        @php
+                                                                            $itemsArray[] = $selectedItem->name;
                                                                         @endphp
-                                                                    @endif
                                                                     @endforeach
-                                                                @endforeach
-                                                        @endforeach
-                                                        <input type="text" value="{{ implode(', ' ,$itemsArray) }}" disabled class="form-control inputfield min-width-140">
-                                                    </div>
+                                                                    <input type="text" value="{{ implode(', ' ,$itemsArray) }}" disabled class="form-control inputfield min-width-140">
+                                                                </div>
 
-                                                    <div class="mt-3 specification-dot input-group">
-                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                                <div class="mt-3 specification-dot input-group">
+                                                                    <div class="input-group-prepend w-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                             شناسه محصول:</span>
-                                                         </div>
-                                                          <input value="{{ $groupItem->p_id }}" disabled type="text" class="form-control inputfield min-width-140" name="group[{{ $groupItem->id }}][p_id]" placeholder="مثال : 30">
+                                                                    </div>
+                                                                    <input value="{{ $groupItem->p_id }}" disabled type="text" class="form-control inputfield min-width-140" name="group[{{ $groupItem->id }}][p_id]" placeholder="مثال : 30">
 
-                                                    </div>
-                                                    <div class="mt-3 specification-dot input-group  ">
-                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                                </div>
+                                                                <div class="mt-3 specification-dot input-group  ">
+                                                                    <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                           موجودی:</span>
-                                                         </div>
-                                                          <input value="{{ $groupItem->amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
+                                                                    </div>
+                                                                    <input value="{{ $groupItem->amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][amount]" placeholder="مثال : 1000">
 
-                                                    </div>
-                                                    <div class="mt-3 specification-dot input-group">
-                                                        <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
+                                                                </div>
+                                                                <div class="mt-3 specification-dot input-group">
+                                                                    <div class="input-group-prepend w-180"><span class="input-group-text bg-light" id="basic-addon7"><i class="fas fa-star required-star mr-1"></i>
                                                           حداقل موجودی:</span>
-                                                         </div>
-                                                          <input value="{{ $groupItem->min_amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][min_amount]" placeholder="مثال : 1000">
+                                                                    </div>
+                                                                    <input value="{{ $groupItem->min_amount }}" disabled type="text" class="form-control inputfield" name="group[{{ $groupItem->id }}][min_amount]" placeholder="مثال : 1000">
+
+                                                                </div>
+
+                                                            </div>
+                                                        @endforeach
+
 
                                                     </div>
-
-                                            </div>
-                                            @endforeach
-
-
-                                        </div>
-                                        @if($product->no_specification_status == 'disable')
-                                        <div class="input-group-append mt-3 ">
-                                            <button type="button" class="addSection border-0 bg-white"><span class="h-50px input-group-text bg-light text-danger font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
+                                                    @if($product->no_specification_status == 'disable')
+                                                        <div class="input-group-append mt-3 ">
+                                                            <button type="button" class="addSection border-0 bg-white"><span class="h-50px input-group-text bg-light text-danger font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i>
                                                     افزودن مورد جدید
                                                 </span></button>
-                                        </div>
-                                      @endif
+                                                        </div>
+                                                    @endif
                                                     {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                        {{--<input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount" {{ $product->specification_amount_status == "enable" ? 'checked' : '' }}>--}}
-                                                        {{--<label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>--}}
-                                                        {{--<h6 class="text-danger my-1">با اختصاص موجودی به خصوصیت ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="specification_amount" name="specification_amount" {{ $product->specification_amount_status == "enable" ? 'checked' : '' }}>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="specification_amount">اختصاص موجودی به خصوصیت ها</label>--}}
+                                                    {{--<h6 class="text-danger my-1">با اختصاص موجودی به خصوصیت ها موجودی اصلی کالا محاسبه نخواهد شد. </h6>--}}
                                                     {{--</div>--}}
 
                                                     {{--@if($product->specification_amount_status == "enable")--}}
-                                                        {{--@foreach ($product->specifications as $selectedSpecification)--}}
-                                                            {{--@foreach ($selectedSpecification->items as $item)--}}
-                                                                {{--<div class="input-group mt-3">--}}
-                                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موجودی خصوصیت {{ $item->name }} :</span></div>--}}
-                                                                    {{--<input type="text" class="form-control inputfield"  name="specification_amount_number[{{ $item->id }}]"  value="{{ $item->productSpecificationItems->where('product_id', $product->id)->first()->amount}}">--}}
-                                                                {{--</div>--}}
-                                                            {{--@endforeach--}}
-                                                        {{--@endforeach--}}
+                                                    {{--@foreach ($product->specifications as $selectedSpecification)--}}
+                                                    {{--@foreach ($selectedSpecification->items as $item)--}}
+                                                    {{--<div class="input-group mt-3">--}}
+                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">موجودی خصوصیت {{ $item->name }} :</span></div>--}}
+                                                    {{--<input type="text" class="form-control inputfield"  name="specification_amount_number[{{ $item->id }}]"  value="{{ $item->productSpecificationItems->where('product_id', $product->id)->first()->amount}}">--}}
+                                                    {{--</div>--}}
+                                                    {{--@endforeach--}}
+                                                    {{--@endforeach--}}
                                                     {{--@endif--}}
 
                                                     <div class="input-group mt-3">
@@ -514,49 +508,49 @@
 
 
                                                     {{--@forelse( $product->facilities as $facility)--}}
-                                                        {{--<div  class="input-group mt-3">--}}
-                                                            {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات محصول :</span></div>--}}
-                                                            {{--<input type="text" class="form-control inputfield" name="facility[{{ $facility->id }}]" value="{{ $facility->name }}">--}}
-                                                        {{--</div>--}}
+                                                    {{--<div  class="input-group mt-3">--}}
+                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات محصول :</span></div>--}}
+                                                    {{--<input type="text" class="form-control inputfield" name="facility[{{ $facility->id }}]" value="{{ $facility->name }}">--}}
+                                                    {{--</div>--}}
                                                     {{--@empty--}}
                                                     {{--@endforelse--}}
                                                     {{--<div class="facility">--}}
-                                                        {{--<div class="input-group mt-3">--}}
-                                                            {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات محصول :</span></div>--}}
-                                                            {{--<input type="text" class="form-control inputfield" name="facility[]" value="">--}}
-                                                            {{--<div class="input-group-append"><a class="addFacility icon-hover"><span class="h-50px input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i> افزودن--}}
+                                                    {{--<div class="input-group mt-3">--}}
+                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> امکانات محصول :</span></div>--}}
+                                                    {{--<input type="text" class="form-control inputfield" name="facility[]" value="">--}}
+                                                    {{--<div class="input-group-append"><a class="addFacility icon-hover"><span class="h-50px input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8"><i class="fa fa-plus mr-2"></i> افزودن--}}
                                                     {{--امکانات--}}
-                                                {{--</span></a></div>--}}
-                                                        {{--</div>--}}
+                                                    {{--</span></a></div>--}}
+                                                    {{--</div>--}}
                                                     {{--</div>--}}
 
 
                                                     {{--<div class="input-group mt-3 bg-white">--}}
-                                                        {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">امکانات ویژه محصول :</span></div>--}}
-                                                        {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                            {{--<input type="checkbox" class="custom-control-input" id="supportProductUpdate{{ $product->id }}" name="support" @if($product->support == 'on') checked @endif>--}}
-                                                            {{--<label class="custom-control-label iranyekan font-15" for="supportProductUpdate{{ $product->id }}">پشتیبانی</label>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                            {{--<input type="checkbox" class="custom-control-input" id="money_backProductUpdate{{ $product->id }}" name="money_back" @if($product->money_back == 'on') checked @endif>--}}
-                                                            {{--<label class="custom-control-label iranyekan font-15" for="money_backProductUpdate{{ $product->id }}">بازگشت وجه--}}
-                                                            {{--</label>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                            {{--<input type="checkbox" class="custom-control-input" id="fast_sendingProductUpdate{{ $product->id }}" name="fast_sending" @if($product->fast_sending == 'on') checked @endif>--}}
-                                                            {{--<label class="custom-control-label iranyekan font-15" for="fast_sendingProductUpdate{{ $product->id }}">ارسال سریع--}}
-                                                            {{--</label>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                            {{--<input type="checkbox" class="custom-control-input" id="secure_paymentProductUpdate{{ $product->id }}" name="secure_payment" @if($product->secure_payment == 'on') checked @endif>--}}
-                                                            {{--<label class="custom-control-label iranyekan font-15" for="secure_paymentProductUpdate{{ $product->id }}">پرداخت امن--}}
-                                                            {{--</label>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
-                                                            {{--<input type="checkbox" class="custom-control-input" id="discount_statusProductUpdate{{ $product->id }}" name="discount_status" @if($product->discount_status == 'enable') checked @endif>--}}
-                                                            {{--<label class="custom-control-label iranyekan font-15" for="discount_statusProductUpdate{{ $product->id }}">قابلیت اعمال شدن کد تخفیف--}}
-                                                            {{--</label>--}}
-                                                        {{--</div>--}}
+                                                    {{--<div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">امکانات ویژه محصول :</span></div>--}}
+                                                    {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="supportProductUpdate{{ $product->id }}" name="support" @if($product->support == 'on') checked @endif>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="supportProductUpdate{{ $product->id }}">پشتیبانی</label>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="money_backProductUpdate{{ $product->id }}" name="money_back" @if($product->money_back == 'on') checked @endif>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="money_backProductUpdate{{ $product->id }}">بازگشت وجه--}}
+                                                    {{--</label>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="fast_sendingProductUpdate{{ $product->id }}" name="fast_sending" @if($product->fast_sending == 'on') checked @endif>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="fast_sendingProductUpdate{{ $product->id }}">ارسال سریع--}}
+                                                    {{--</label>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="secure_paymentProductUpdate{{ $product->id }}" name="secure_payment" @if($product->secure_payment == 'on') checked @endif>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="secure_paymentProductUpdate{{ $product->id }}">پرداخت امن--}}
+                                                    {{--</label>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="custom-control custom-switch switch-blue mr-5 py-3">--}}
+                                                    {{--<input type="checkbox" class="custom-control-input" id="discount_statusProductUpdate{{ $product->id }}" name="discount_status" @if($product->discount_status == 'enable') checked @endif>--}}
+                                                    {{--<label class="custom-control-label iranyekan font-15" for="discount_statusProductUpdate{{ $product->id }}">قابلیت اعمال شدن کد تخفیف--}}
+                                                    {{--</label>--}}
+                                                    {{--</div>--}}
 
                                                     {{--</div>--}}
 
@@ -593,12 +587,12 @@
                         <button data-toggle="modal" data-target="#AddWalletModal" type="submit" class="btn btn-success px-5 py-2  iranyekan rounded ">ثبت تغییرات</button><br>
                     </div>
                     </form>
-                    </div>
                 </div>
-
-
             </div>
+
+
         </div>
+    </div>
     </div>
     <!-- end:: Content -->
 
@@ -609,23 +603,23 @@
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
     <script src="{{ asset('/js/jquery.tagsinput.min.js') }}"></script>
 
-        <script>
-            $(document).ready(function() {
-                     $('#input-tags').tagsInput();
-                    $('#input-tags_tag').val("");
-                    $(".dropify-clear").remove();
-                    $("#tagsinput").tagsInput();
-                });
+    <script>
+        $(document).ready(function() {
+            $('#input-tags').tagsInput();
+            $('#input-tags_tag').val("");
+            $(".dropify-clear").remove();
+            $("#tagsinput").tagsInput();
+        });
 
-        </script>
-        <script>
-            $(window).ready(function(){
-                setInterval(function(){
-                  $('.tagsinput').addClass("tags-modify")
-                }, 1000);
+    </script>
+    <script>
+        $(window).ready(function(){
+            setInterval(function(){
+                $('.tagsinput').addClass("tags-modify")
+            }, 1000);
 
-              });
-        </script>
+        });
+    </script>
 
     <!--begin::Page Scripts -->
     <script>
@@ -740,12 +734,12 @@
                 });
                 $(".item-delete").on('click', '.far', function() {
                     $(this).closest('.items').remove();
-                  });
+                });
             });
         });
         $(".item-delete").on('click', '.far', function() {
             $(this).closest('.items').remove();
-          });
+        });
     </script>
     <!--end::Page Scripts -->
     <script src="/assets/js/pages/crud/forms/widgets/select2.js" type="text/javascript"></script>

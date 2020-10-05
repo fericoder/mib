@@ -1,7 +1,7 @@
 @extends('shop.layouts.master', ['title' => 'صفحه اصلی فروشگاه' ])
 
 @section('content')
-    <article class="main-article">
+    <article class="main-article container">
         <!--<div class="main-slider">
             <a class="slide-item" href="#" target="_blank" style="background-image: url(assets/images/slider/slide9.jpg)"> </a>
         </div>-->
@@ -24,7 +24,12 @@
 
 
 
-
+    <section style="/*! display: none; */" class="image-row container">
+        <a href="#"><img src="https://mibdental.com/wp-content/uploads/2020/01/shortcut.png" alt=""></a>
+        <a href="#"><img src="https://mibdental.com/wp-content/uploads/2020/01/shortcut.png" alt=""></a>
+        <a href="#"><img src="https://mibdental.com/wp-content/uploads/2020/01/shortcut.png" alt=""></a>
+        <a href="#"><img src="https://mibdental.com/wp-content/uploads/2020/01/shortcut.png" alt=""></a>
+    </section>
 
 
 

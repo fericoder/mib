@@ -33,7 +33,7 @@
     </div>
 
 
-    <div class="c-product">
+    <div class="c-product container">
         <section class="c-product__info">
             <div class="c-product__headline">
                 <h1 class="c-product__title"> <span class="fa-title"> {{ $product->title }} </span> </h1>
