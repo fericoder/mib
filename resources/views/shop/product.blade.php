@@ -333,15 +333,16 @@
     </script>
 
     <script>
+    var previous = [];
+
         $(document).ready(function() {
             var $gallery = $('.gallery a').simpleLightbox();
         });
 
         $(document).ready(function() {
-
-            var previous = [];
             $(document).on("select2:select", 'select', function(e) {
                 previous.push(this.value);
+                console.log(previous);
                 e.preventDefault();
                 var item_id = e.params.data.id;
                 var select = $("select");
@@ -399,10 +400,8 @@
     </script>
     <script>
         $(document).ready(function() {
-
-
             $(document).on("select2:unselecting", 'select', function(e) {
-
+              previous = [];
                 e.preventDefault();
                 var product_id = {{ $product->id }};
                 $.ajax({
