@@ -4,6 +4,7 @@
     <link href="/assets/plugins/custom/datatables/datatables.bundle.rtl.css" rel="stylesheet" type="text/css"/>
 
     <style>
+
         a, span {
             font-family: byekan !important;
         }
