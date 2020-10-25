@@ -65,7 +65,8 @@
     @if ($shop->porbazdid)
         <section class="product-wrapper container">
             <div class="headline">
-                <h3>محصولات پربازدید </h3></div>
+                <h3>محصولات پربازدید </h3>
+            </div>
             <div id="viewCount" class="swiper-container">
                 <div class="product-box swiper-wrapper">
 
@@ -79,7 +80,8 @@
                                         {{ $product->price }} تومان
                                     @endif
                                 @endauth
-                            </span>                        </div>
+                            </span>
+                        </div>
                     @endforeach
 
                 </div>
