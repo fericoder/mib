@@ -6380,7 +6380,7 @@ span.full-address {
 }
 
 .c-box__content:before {
-    content: "\f002";
+    /*content: "\f002";*/
     font-family: fontawesome;
     position: absolute;
     right: 25px;
@@ -6871,9 +6871,9 @@ __items .c-product-box:hover {
 .dispnone{
     display: none!important;
 }
-.page__contentflex{
-    flex: 0 0 99.8%!important;
-}
+/*.page__contentflex{*/
+    /*flex: 0 0 99.8%!important;*/
+/*}*/
 .brandName{
     font-size: 16px!important;
 }

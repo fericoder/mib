@@ -22,6 +22,9 @@ Route::get('/blog/{id}', 'ShopController@blog')->name('shop.blog');
 Route::get('/news/', 'ShopController@news')->name('shop.news');
 Route::get('/new/{id}', 'ShopController@new')->name('shop.new');
 
+Route::get('/employment/show', 'ShopController@employmentShow')->name('shop.employment.show');
+Route::post('/employment/store', 'ShopController@employmentStore')->name('shop.employment.store');
+
 
 
 
@@ -43,6 +46,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('products', 'ProductController');
     Route::get('products/{product_id}/group/{group_id}', 'ProductController@groupEdit')->name('products.group.edit');
     Route::put('products/{product_id}/group/{group_id}', 'ProductController@groupUpdate')->name('products.group.update');
+    Route::get('warehouse', 'DashboardController@warehouse')->name('warehouse.index');
     Route::resource('categories', 'CategoryController');
     Route::resource('features', 'CategoryController');
     Route::resource('brands', 'BrandController');

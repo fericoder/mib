@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master', ['title' => 'صفحه اصلی'])
+@extends('dashboard.layouts.master', ['title' => 'موجودی انبار'])
 @section('headerScripts')
     <style>
         .kt-timeline-v2__item-time {
@@ -28,7 +28,7 @@
 
                 <span class="kt-subheader__separator kt-subheader__separator--v"></span>
 
-                <span class="kt-subheader__desc iranyekan">صفحه اصلی</span>
+                <span class="kt-subheader__desc iranyekan">موجودی انبار</span>
             </div>
 
         </div>
@@ -39,115 +39,54 @@
 
 
 
-        <div class="kt-portlet">
-            <div class="kt-portlet__body  kt-portlet__body--fit">
-                <div class="row row-no-padding row-col-separator-lg">
-
-                    <div class="col-md-12 col-lg-6 col-xl-3">
-                        <!--begin::Total Profit-->
-                        <div class="kt-widget24">
-                            <div class="kt-widget24__details">
-                                <div class="kt-widget24__info">
-                                    <h4 class="kt-widget24__title">
-                                        تعداد کالاهای موجود
-                                    </h4>
-                                </div>
-
-                                <span class="kt-widget24__stats kt-font-brand">
-                                            {{ \App\Product::all()->count() }} محصول
-                                        </span>
-                            </div>
-
-                            <div class="progress progress--sm">
-                                <div class="progress-bar kt-bg-brand" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <!--end::Total Profit-->
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 col-xl-3">
-                        <!--begin::New Feedbacks-->
-                        <div class="kt-widget24">
-                            <div class="kt-widget24__details">
-                                <div class="kt-widget24__info">
-                                    <h4 class="kt-widget24__title">
-                                        سفارشات امروز
-                                    </h4>
-                                </div>
-
-                                <span class="kt-widget24__stats kt-font-warning">
-                                        ۰ سفارش
-					                      </span>
-                            </div>
-
-                            <div class="progress progress--sm">
-                                <div class="progress-bar kt-bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-
-                        </div>
-                        <!--end::New Feedbacks-->
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 col-xl-3">
-                        <!--begin::New Orders-->
-                        <div class="kt-widget24">
-                            <div class="kt-widget24__details">
-                                <div class="kt-widget24__info">
-                                    <h4 class="kt-widget24__title">
-                                        سفارشات این ماه
-                                    </h4>
-
-                                </div>
-
-                                <span  class="kt-widget24__stats kt-font-danger">
-۰ سفارش
-                                </span>
-                            </div>
-
-                            <div class="progress progress--sm">
-                                <div class="progress-bar kt-bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-                        </div>
-                        <!--end::New Orders-->
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 col-xl-3">
-                        <!--begin::New Users-->
-                        <div class="kt-widget24">
-                            <div class="kt-widget24__details">
-                                <div class="kt-widget24__info">
-                                    <h4 class="kt-widget24__title">
-                                        حجم مالی فروش سال
-                                    </h4>
-                                </div>
-
-                                <span  class="kt-widget24__stats kt-font-success">
-۰ تومان
-                                        </span>
-                            </div>
-
-                            <div class="progress progress--sm">
-                                <div class="progress-bar kt-bg-success" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-                        </div>
-                        <!--end::New Users-->
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
 
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        گزارش موجودی محصولات رو به اتمام
+                        گزارش موجودی انبار
                     </h3>
+                </div>
+                <div style="" class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-toolbar-wrapper">
+                        <div class="dropdown dropdown-inline">
+                            <button style="" type="button" class="btn btn-brand btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="la la-plus"></i> ابزار ها و خروجی ها
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__section kt-nav__section--first">
+                                        <span class="kt-nav__section-text">انواع خروجی ها</span>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" id="export_print">
+                                            <i class="kt-nav__link-icon la la-print"></i>
+                                            <span class="kt-nav__link-text">چاپ</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" id="export_copy">
+                                            <i class="kt-nav__link-icon la la-copy"></i>
+                                            <span class="kt-nav__link-text">کپی</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" id="export_excel">
+                                            <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                            <span class="kt-nav__link-text">اکسل</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link" id="export_csv">
+                                            <i class="kt-nav__link-icon la la-file-text-o"></i>
+                                            <span class="kt-nav__link-text">CSV</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -170,6 +109,9 @@
                     @foreach ($items as $item)
                         @php
                             $product = \App\Product::where('id', $item->product_id)->first();
+                            if($product == null){
+                            continue;
+                            }
                         @endphp
                         <tr>
                             <td style="font-family: BYekan" >{{ $product->id }}</td>

@@ -482,6 +482,7 @@
                             </h3>
 
                             <button data-toggle="modal" data-target="#AddProductModal" style="margin-right: 20px;" type="button" class="btn btn-sm btn-outline-success">افزودن محصول جدید</button>
+                            <a href="{{ route('warehouse.index') }}"><button style="margin-right: 20px;" type="button" class="btn btn-sm btn-primary">مشاهده موجودی انبار</button></a>
                         </div>
 
                         <div style="" class="kt-portlet__head-toolbar">
@@ -519,12 +520,7 @@
                                                     <span class="kt-nav__link-text">CSV</span>
                                                 </a>
                                             </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link" id="export_pdf">
-                                                    <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                                    <span class="kt-nav__link-text">PDF</span>
-                                                </a>
-                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>

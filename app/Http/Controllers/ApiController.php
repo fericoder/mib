@@ -13,19 +13,15 @@ class ApiController extends Controller
 
     public function generate(Request $request)
     {
-        if (\DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->first()){
-            abort(403, 'Token already exists.');
-        }else{
             $token = md5(uniqid(rand(), true));
             \DB::table('tokens')->insert(['token' => $token, 'created_at' => now()]);
             return response()->json(['Token:' => "$token"]);
-        }
     }
 
 
     public function inventory(Request $request)
     {
-        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+        if (! \DB::table('tokens')->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         if (!is_numeric($this->fa_num_to_en($request->amount))){
@@ -42,7 +38,7 @@ class ApiController extends Controller
 
     public function userPurchases(Request $request)
     {
-        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+        if (! \DB::table('tokens')->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         if (!is_numeric($request->user_id)){
@@ -59,7 +55,7 @@ class ApiController extends Controller
 
     public function purchases(Request $request)
     {
-        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+        if (! \DB::table('tokens')->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         if (!is_numeric($request->from)){
@@ -84,7 +80,7 @@ class ApiController extends Controller
 
     public function amountReport(Request $request)
     {
-        if (! \DB::table('tokens')->where('created_at', '>=', \Carbon\Carbon::today()->toDateString())->where('token', $request->token)->first()){
+        if (! \DB::table('tokens')->where('token', $request->token)->first()){
             abort(403, 'Unauthorized Action');
         }
         $amount = SpecificationItemGroup::with('product')->get();

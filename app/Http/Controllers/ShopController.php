@@ -343,5 +343,15 @@ class ShopController extends Controller
     }
 
 
+    public function employmentShow()
+    {
+        return view('shop.employment');
+    }
+
+    public function employmentStore(Request $request)
+    {
+
+    }
+
 
 }

@@ -54,21 +54,25 @@
 
             @guest()
 
+               <a href="{{ route('login') }}">
                 <div class="login-box">
-                    <div class="log-reg" id="logreg">
-                        <i class="fa fa-user"></i>
-                        <a href="{{ route('login') }}">ورود</a>
+                    <div style="color: white;padding: 11px;" class="log-reg" id="logreg">
+                            <i class="fa fa-sign-in"></i>ورود
                     </div>
                 </div>
+               </a>
                 <div class="devider"></div>
 
 
-                    <div class="login-box">
-                        <div class="log-reg" id="logreg">
+                    <a href="{{ route('register') }}">
+                      <div  class="login-box">
+                        <div style="color: white;padding: 11px;" class="log-reg" id="logreg">
                             <i class="fa fa-user"></i>
-                            <a href="{{ route('register') }}">عضویت</a>
+                            عضویت
                         </div>
                     </div>
+                    </a>
+
                     <div class="devider"></div>
 
 
@@ -120,6 +124,7 @@
             <li><a href="{{ route('shop.pages', 3) }}">راهنمای خرید </a></li>
             <li><a href="{{ route('shop.blogs') }}">مقالات </a></li>
             <li><a href="{{ route('shop.news') }}">اخبار </a></li>
+            <li><a href="{{ route('shop.employment.show') }}">فرصت های شعلی </a></li>
 
 
         </ul>
@@ -246,6 +251,7 @@
             modal.style.display = "none";
         }
     }
+
 
 </script>
 

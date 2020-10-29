@@ -1,5 +1,9 @@
 @extends('shop.layouts.master', ['title' => isset($brand->name) ? $brand->name : 'جستجو کالا' ])
-
+<style>
+    .page__contentflex{
+    flex: 0 0 99.8%!important;
+    }
+</style>
 @section('content')
     <section class="search container">
         <div  class="o-page__aside asidemt">

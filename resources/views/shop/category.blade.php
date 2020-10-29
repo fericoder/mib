@@ -1,32 +1,34 @@
 @extends('shop.layouts.master', ['title' => isset($category->name) ? $category->name : 'جستجو کالا' ])
-
+    @if(isset($keyword))
+        <style>
+         .page__contentflex{
+              flex: 0 0 99.8%!important;
+         }
+        </style>
+@endif
 @section('content')
     <section class="search container">
-        <div  class="o-page__aside asidemt">
-            <div class="c-listing-sidebar">
-                <div class="c-box dispnone">
-                    <div class="c-box__header">جستجو :</div>
-                    <div class="c-box__content">
-                        <form id="searchForm" action="{{ route('shop.search') }}">
-                            <input type="text" name="keyword" value="{{ isset($keyword) ? $keyword : '' }}" placeholder="نام محصول مورد نظر را بنویسید…">
-                            <input type="hidden" name="category"  value="{{ isset($category) ? $category->id : '' }}">
-                            <input type="hidden" name="sortBy" id="sortBy" value="created_at">
-                        </form>
+        @if (!isset($keyword))
+            <div class="o-page__aside">
+                <div class="c-listing-sidebar">
+                    <div style="margin-top: 45px" class="c-box">
+                        <div class="c-box__header">زیر دسته ها:</div>
+                        <div class="c-box__content">
+                            <ul style="font-size: 13px">
+                                @foreach (\App\Category::all()->where('parent_id', $category->id) as $subSubCategory)
+                                    <ul>
+                                        <li style="margin-top: 15px" class="limarri" >
+                                            <a class="amegma" href="{{ route('shop.category', $subSubCategory->id) }}">- {{ $subSubCategory->name }}</a>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                {{--<div class="c-box">--}}
-                    {{--<div class="c-filter c-filter--switcher">--}}
-                        {{--<span>فقط کالاهای موجود</span>--}}
-                        {{--<div class="scroll">--}}
-                            {{--<span id="circle">--}}
-                                {{--<input id="circle_input" type="checkbox">--}}
-                            {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
             </div>
-        </div>
+        @endif
+
         <div class="o-page__content page__contentflex">
             <article>
                 <nav>
