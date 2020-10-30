@@ -159,35 +159,58 @@
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*products*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('products.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text"> محصولات</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+
+                                    <li class="kt-menu__item {{ request()->is('*reports*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }}  kt-menu__item--submenu kt-menu__item--rel"
+                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:"
+                                                                                                   class="kt-menu__link kt-menu__toggle"><span
+                                                    class="kt-menu__link-text">مدیریت محصولات</span><i
+                                                    class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                            <ul class="kt-menu__subnav">
+
+
+                                                <li class="kt-menu__item {{ request()->is('*products*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a
+                                                            href="{{ route('products.index') }}"
+                                                            class="kt-menu__link "><span
+                                                                class="kt-menu__link-text">محصولات</span></a>
+                                                </li>
+
+
+
+                                                <li class="kt-menu__item {{ request()->is('*categories*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+                                                    <a
+                                                            href="{{ route('categories.index') }}"
+                                                            class="kt-menu__link "></i><span
+                                                                class="kt-menu__link-text">دسته بندی ها</span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="kt-menu__item {{ request()->is('*specification*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+                                                    <a
+                                                            href="{{ route('specifications.index') }}"
+                                                            class="kt-menu__link "><span
+                                                                class="kt-menu__link-text">خصوصیات</span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="kt-menu__item {{ request()->is('*brands*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+                                                    <a
+                                                            href="{{ route('brands.index') }}"
+                                                            class="kt-menu__link "><span
+                                                                class="kt-menu__link-text">برند ها</span>
+                                                    </a>
+                                                </li>
+
+
+
+
+
+                                            </ul>
+                                        </div>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*categories*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('categories.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text">  دسته بندی ها</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    </li>
-
-                                    <li class="kt-menu__item {{ request()->is('*specification*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('specifications.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text">  خصوصیات</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    </li>
 
 
-
-                                    <li class="kt-menu__item {{ request()->is('*brands*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('brands.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text"> برند ها</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    </li>
 
 
 
@@ -213,19 +236,51 @@
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*blog*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('blog.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text"> مدیریت محتوی</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+
+
+                                    <li class="kt-menu__item {{ request()->is('*reports*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }}  kt-menu__item--submenu kt-menu__item--rel"
+                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:"
+                                                                                                   class="kt-menu__link kt-menu__toggle"><span
+                                                    class="kt-menu__link-text">مدیریت محتوی</span><i
+                                                    class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                        <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                            <ul class="kt-menu__subnav">
+
+
+                                                <li class="kt-menu__item {{ request()->is('*blog*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a
+                                                            href="{{ route('blog.index') }}"
+                                                            class="kt-menu__link "><span
+                                                                class="kt-menu__link-text">ارسالها</span></a>
+                                                </li>
+
+
+
+                                                <li class="kt-menu__item {{ request()->is('*banner') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+                                                    <a
+                                                            href="{{ route('banner.index') }}"
+                                                            class="kt-menu__link "></i><span
+                                                                class="kt-menu__link-text">بنر ها</span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="kt-menu__item {{ request()->is('*faq') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+                                                    <a
+                                                            href="{{ route('faqs.index') }}"
+                                                            class="kt-menu__link "><span
+                                                                class="kt-menu__link-text">سوالات متداول</span>
+                                                    </a>
+                                                </li>
+
+
+
+
+
+                                            </ul>
+                                        </div>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*banner*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
-                                        data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('banner.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text"> بنر ها</span>
-                                            <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                    </li>
+
+
 
                                     <li class="kt-menu__item {{ request()->is('*voucher*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
@@ -234,13 +289,12 @@
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
 
-                                    <li class="kt-menu__item {{ request()->is('*voucher*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
+                                    <li class="kt-menu__item {{ request()->is('*employment*') ? 'kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here' : '' }} "
                                         data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                        <a href="{{ route('faqs.index') }}" class="kt-menu__link">
-                                            <span class="kt-menu__link-text">سوالات متداول</span>
+                                        <a href="{{ route('employment.index') }}" class="kt-menu__link">
+                                            <span class="kt-menu__link-text">فرصتهای شغلی</span>
                                             <i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                                     </li>
-
 
 
 

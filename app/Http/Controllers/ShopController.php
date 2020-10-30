@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\Category;
+use App\Employment;
 use App\Product;
 use App\Brand;
 use App\FAQ;
@@ -350,7 +351,34 @@ class ShopController extends Controller
 
     public function employmentStore(Request $request)
     {
+        $rezume = $this->uploadFile($request->file('rezume'), false, false);
 
+        Employment::create([
+            'fName' => $request->fName,
+            'lName' => $request->lName,
+            'fatherName' => $request->fatherName,
+            'shshenasname' => $request->shshenasname,
+            'shmeli' => $request->shmeli,
+            'issue' => $request->issue,
+            'birthCity' => $request->birthCity,
+            'birthdate' => $request->birthdate,
+            'tahol' => $request->tahol,
+            'takallof' => $request->takallof,
+            'address' => $request->address,
+            'mobile' => $request->mobile,
+            'phone' => $request->phone,
+            'phonezaroori' => $request->phonezaroori,
+            'email' => $request->email,
+            'language' => $request->language,
+            'ashnaei' => $request->ashnaei,
+            'azmayeshi' => $request->azmayeshi,
+            'azmayeshiMonths' => $request->azmayeshiMonths,
+            'hoghoogh' => $request->hoghoogh,
+            'rezume' => $rezume,
+        ]);
+
+        alert('رزومه با موفقیت ثبت شد', 'ثبت شد');
+        return redirect()->back();
     }
 
 

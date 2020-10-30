@@ -124,7 +124,10 @@
             <li><a href="{{ route('shop.pages', 3) }}">راهنمای خرید </a></li>
             <li><a href="{{ route('shop.blogs') }}">مقالات </a></li>
             <li><a href="{{ route('shop.news') }}">اخبار </a></li>
-            <li><a href="{{ route('shop.employment.show') }}">فرصت های شعلی </a></li>
+            @if (\App\Shop::first()->employments === 'on')
+                <li><a href="{{ route('shop.employment.show') }}">فرصت های شعلی </a></li>
+
+            @endif
 
 
         </ul>

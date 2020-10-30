@@ -116,6 +116,7 @@
                                 </div>
 
 
+
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body">
@@ -258,6 +259,44 @@
 
 
 
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mt-0 header-title">تنظیمات فرصتهای شغلی</h3>
+                                            <div class="row ">
+                                                <div class="col-lg-12 ">
+
+                                                    <div class="form-group mt-5 row">
+                                                        <div class="col-9">
+                                                            <div class="kt-checkbox-inline">
+                                                                <label class="kt-checkbox"><input {{ $shop->employments == 'on' ? 'checked' : '' }} name="employments" type="checkbox"> فعال<span></span></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mt-5 row">
+                                                        <div class="col-12">
+                                                            <div class="input-group mt-3">
+                                                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7"> <i class="fas fa-star required-star mr-1"></i>توضیحات کامل:</span></div>
+                                                                <textarea style="direction: rtl; width: 90%!important;"   id="employmentsBody" name="employmentsBody" rows="18">{{ old('employmentsBody', $shop->employmentsBody ) }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+
 
 
                             </div>
@@ -287,7 +326,7 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <!--end::Page Scripts -->
     <script type="text/javascript">
-        CKEDITOR.replace('body', {
+        CKEDITOR.replace('employmentsBody', {
             language: 'fa',
             uiColor: '#F3F6F7',
         });

@@ -58,6 +58,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('users', 'UserController');
     Route::resource('faqs', 'FAQController');
     Route::resource('vouchers', 'VoucherController');
+    Route::resource('employment', 'EmploymentController');
 
 
     //Shop-Setting

@@ -700,8 +700,19 @@
     }
 
         });
+
+
     </script>
     <!--end::Page Scripts -->
     <script src="/assets/js/pages/crud/forms/widgets/select2.js" type="text/javascript"></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<!--end::Page Scripts -->
+<script type="text/javascript">
+    CKEDITOR.replace('description', {
+        language: 'fa',
+        uiColor: '#F3F6F7',
+    });
+
+</script>
 
 @stop

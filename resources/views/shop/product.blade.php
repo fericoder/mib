@@ -224,9 +224,7 @@
                     <section class="c-content-expert__summary">
                         <div class="c-mask">
                             <div class="c-mask__text c-mask__text--product-summary proddesc" >
-                                <p>
-                                    {{ $product->description }}
-                                </p>
+                                    {!! $product->description !!}
 
                                 <div class="mtmr">
                                     @if ($product->aparat)

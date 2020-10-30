@@ -97,6 +97,8 @@ class ShopSettingController extends Controller
             'twitter' => $request->twitter,
             'youtube' => $request->youtube,
             'whatsapp' => $request->whatsapp,
+            'employments' => $request->employments,
+            'employmentsBody' => $request->employmentsBody,
         ]);
 
         alert()->success('اطلاعات فروشگاه بروز شد.', 'بروز شد');
