@@ -37,6 +37,7 @@
                                  {{ $category ? "نام دسته بندی: $category->name" : '' }}
                             </span></li>
                     </ul>
+
                 </nav>
                 <div class="c-listing">
                     <div class="c-listing__header">
