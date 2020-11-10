@@ -256,27 +256,27 @@ class ShopController extends Controller
     public function getAllCategoriesProducts($cat_id) {
         $allProducts = collect();
         foreach (Category::find($cat_id)->products()->get() as $product) {
-            $allProducts[] = $product;
+            $allProducts[$product->id] = $product;
         }
         foreach (Category::find($cat_id)->children()->get() as $subCategory) {
             foreach ($subCategory->products()->get() as $product) {
-                $allProducts[] = $product;
+                $allProducts[$product->id] = $product;
             }
             if ($subCategory->children()->exists()) {
                 foreach ($subCategory->children()->get() as $subSubCategory) {
                     foreach ($subSubCategory->products()->get() as $product) {
-                        $allProducts[] = $product;
+                        $allProducts[$product->id] = $product;
                     }
                 }
                 if ($subSubCategory->children()->exists()) {
                     foreach ($subSubCategory->children()->get() as $subSubSubCategory) {
                         foreach ($subSubSubCategory->products()->get() as $product) {
-                            $allProducts[] = $product;
+                            $allProducts[$product->id] = $product;
                         }
                         if ($subSubSubCategory->children()->exists()) {
                             foreach ($subSubSubCategory->children()->get() as $subSubSubSubCategory) {
                                 foreach ($subSubSubSubCategory->products()->get() as $product) {
-                                    $allProducts[] = $product;
+                                    $allProducts[$product->id] = $product;
                                 }
                             }
                         }
@@ -284,7 +284,7 @@ class ShopController extends Controller
                 }
             }
         }
-        return $allProducts;
+        return $allProducts->sortKeysDesc();
     }
 
 
