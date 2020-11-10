@@ -1954,7 +1954,7 @@ c-product__variants li {
     color: #404040;
     font-size: 1.143rem;
     line-height: 2.25;
-    padding: 25px 322px 27px 50px;
+    padding: 25px 27px 27px 50px;
     min-height: 256px;
     position: relative;
     margin-right: -24px;
@@ -1962,13 +1962,6 @@ c-product__variants li {
 }
 
 .c-content-expert__summary:after {
-    width: 165px;
-    height: 165px;
-    position: absolute;
-    top: 30px;
-    right: 81px;
-    background: url(../images/pen.svg) 50% 50% no-repeat;
-    background-size: 100%
 }
 
 .c-mask {

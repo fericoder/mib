@@ -180,7 +180,7 @@
     <section class="product-wrapper container">
         <div class="headline">
             <h3>محصولات مرتبط</h3></div>
-        <div id="pslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
+        <div id="newpslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
             <div class="product-box swiper-wrapper swiperr" >
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev prodItem" >
@@ -196,8 +196,8 @@
                     </div>
                 @endforeach
             </div>
-            <div id="pslider-nbtn" class="slider-nbtn swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
-            <div id="pslider-pbtn" class="slider-pbtn swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
+            <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+            <div id="newpslider-pbtn" class="slider-pbtn swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
     </section>
 
@@ -208,7 +208,7 @@
 
 
 
-    <section class="p-tabs">
+    <section style="width: 1380px; max-width: 100%; margin: 0 auto; padding-bottom: 10px;"  class="p-tabs ">
         <ul class="c-box-tabs">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span>توضیحات محصول</span></a></li>
             <li class="c-box-tabs__tab"><a id="comments" href="#"> <span>نظرات کاربران</span></a></li>

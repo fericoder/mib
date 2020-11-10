@@ -1,4 +1,4 @@
-@extends('shop.layouts.master', ['title' => isset($category->name) ? $category->name : 'جستجو کالا' ])
+@extends('shop.layouts.master', ['title' => isset($category->name) ? $category->name : 'نتایج جستجو' ])
     @if(isset($keyword))
         <style>
          .page__contentflex{
@@ -48,6 +48,7 @@
                             {{--<li><a onclick="cheapest()" >ارزان ترین</a></li>--}}
                             {{--<li><a onclick="expensive()" >گران ترین</a></li>--}}
                         </ul>
+                        <p style="margin-left: 20px">تعداد نتایج: {{ $productsPaginate->count() }}</p>
                     </div>
                     <ul class="c-listing__items">
 

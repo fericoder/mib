@@ -125,7 +125,7 @@
             <li><a href="{{ route('shop.blogs') }}">مقالات </a></li>
             <li><a href="{{ route('shop.news') }}">اخبار </a></li>
             @if (\App\Shop::first()->employments === 'on')
-                <li><a href="{{ route('shop.employment.show') }}">فرصت های شعلی </a></li>
+                <li><a href="{{ route('shop.employment.show') }}">فرصت های شغلی </a></li>
 
             @endif
 
@@ -139,7 +139,7 @@
 
 @yield('content')
 <footer class="footers">
-    <section class="footer container">
+    <section style="padding: 24px;" class="footer container">
         <div class="icon">
             <div class="icon-item">
                 <a href="#"> <img src="{{ asset('assets/images/icon/1.svg') }}" alt=""> <span>7 روز ضمانت بازگشت</span> </a>

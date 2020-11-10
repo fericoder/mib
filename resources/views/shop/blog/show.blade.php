@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="c-product">
+    <div class="container">
     <section class="p-tabs bip0">
         <ul class="c-box-tabs bicbox">
             <li class="c-box-tabs__tab is-active"><a id="desc" href="#"><i class="fa fa-glasses"></i> <span></span></a></li>

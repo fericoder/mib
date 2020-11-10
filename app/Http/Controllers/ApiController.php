@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CartProduct;
+use App\Purchase;
 use App\SpecificationItemGroup;
 use App\User;
 use App\UserPurchase;
@@ -72,8 +73,9 @@ class ApiController extends Controller
         $timestampTo = substr($request->to, 0, 10);
         $dateTo = date('Y-m-d H:i:s', (int) $timestampTo);
 
-        $purchases = CartProduct::whereBetween('created_at', [$dateFrom, $dateTo])->select('id', 'p_id', 'quantity', 'total_price')->get();
-        return response()->json($purchases);
+
+        $purchases = UserPurchase::with('user:id,crm_id', 'address:id,fullName,province,city,address,tel,zip_code', 'cart.cartProduct')->whereBetween('created_at', [$dateFrom, $dateTo])->get();
+        return $purchases;
 
     }
 
