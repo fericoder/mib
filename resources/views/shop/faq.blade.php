@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-    <div class=" container">
+    <div class="c-product container">
     <section  class="p-tabs pt30">
         <h2 class="c-params__headline mr40" >سوالات متداول</h2>
         @foreach($faqs as $faq)

@@ -222,7 +222,7 @@
 <script src="{{ asset('assets/vendor/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/persianumber.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/elevatezoom.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
+{{--<script src="{{ asset('assets/js/script.js') }}"></script>--}}
 <script src="/assets/plugins/global/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 @include('sweet::alert')
 
@@ -259,7 +259,17 @@
 </script>
 
 
-
+<script>
+    $(window).scroll(function () {
+        if($(window).scrollTop() > 110) {
+            $("header").not(".shipping").addClass('sticky','nav-shadow');
+            // $(".top-nav").slideUp(500);
+        } else {
+            $("header").not(".shipping").removeClass('sticky','nav-shadow');
+            $(".top-nav").slideDown(500);
+        }
+    });
+</script>
 @yield('footerScripts')
 
 </body>

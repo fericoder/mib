@@ -217,3 +217,7 @@
 
     <div class="jump-to-up"> <i class="fa fa-chevron-up"></i> <span> بازگشت به بالا </span></div>
 @stop
+@section('footerScripts')
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+
+@stop

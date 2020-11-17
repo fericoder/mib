@@ -95,7 +95,7 @@ class ShopController extends Controller
     {
         $categories = Category::all();
         $brand = Brand::where('id', $request->id)->first();
-        $products = $brand->products->where('status', 'enable');
+        $products = $brand->products->where('status', 'enable')->sortByDesc('id');
         $total = $products->count();
         $perPage = 16; // How many items do you want to display.
         $currentPage = request()->page; // The index page.

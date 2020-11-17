@@ -430,15 +430,15 @@ $(document).ready(function() {
         $(this).addClass('c-table-suppliers-hidden'); $('.c-table-suppliers-more').removeClass('c-table-suppliers-hidden');
     });
 
-    $(window).scroll(function () {
-        if($(window).scrollTop() > 110) {
-            $("header").not(".shipping").addClass('sticky','nav-shadow');
-            $(".top-nav").slideUp(500);
-        } else {
-            $("header").not(".shipping").removeClass('sticky','nav-shadow');
-            $(".top-nav").slideDown(500);
-        }
-    });
+    // $(window).scroll(function () {
+    //     if($(window).scrollTop() > 110) {
+    //         $("header").not(".shipping").addClass('sticky','nav-shadow');
+    //         // $(".top-nav").slideUp(500);
+    //     } else {
+    //         $("header").not(".shipping").removeClass('sticky','nav-shadow');
+    //         $(".top-nav").slideDown(500);
+    //     }
+    // });
 
     } // document-ready
 

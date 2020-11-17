@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-    <div class="container">
+    <div class="c-product container">
     <section  class="p-tabs pt10">
         <h2 class="c-params__headline marr40" >راه های ارتباطی با شرکت ایده برتر کیوان</h2>
 

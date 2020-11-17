@@ -86,7 +86,7 @@
                                 </select>
 
 
-                                <label style="margin-top: 10px" for="pwd">تعداد افراد تحت تکلف  <span style="color: red;    font-size: 15px;">*</span></label>
+                                <label style="margin-top: 10px" for="pwd">تعداد افراد تحت تکفل  <span style="color: red;    font-size: 15px;">*</span></label>
                                 <input name="takallof" required type="text" >
 
 

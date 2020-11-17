@@ -12,6 +12,14 @@
             <div class="o-page__aside">
                 <div class="c-listing-sidebar">
                     <div style="margin-top: 45px" class="c-box">
+
+                        <form style="display: none" id="searchForm" action="{{ route('shop.search') }}">
+                            <input type="text" name="keyword" value="{{ isset($keyword) ? $keyword : '' }}" placeholder="نام محصول مورد نظر را بنویسید…">
+                            <input type="hidden" name="category"  value="{{ isset($category) ? $category->id : '' }}">
+                            <input type="hidden" name="sortBy" id="sortBy" value="created_at">
+                        </form>
+
+
                         <div class="c-box__header">زیر دسته ها:</div>
                         <div class="c-box__content">
                             <ul style="font-size: 13px">
@@ -49,7 +57,7 @@
                             {{--<li><a onclick="cheapest()" >ارزان ترین</a></li>--}}
                             {{--<li><a onclick="expensive()" >گران ترین</a></li>--}}
                         </ul>
-                        <p style="margin-left: 20px">تعداد نتایج: {{ $productsPaginate->count() }}</p>
+                        <p style="margin-left: 20px">تعداد نتایج: {{ $products->count() }}</p>
                     </div>
                     <ul class="c-listing__items">
 

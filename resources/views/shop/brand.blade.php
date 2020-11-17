@@ -19,6 +19,7 @@
                 {{--</div>--}}
 
 
+
                 {{--<div class="c-box">--}}
                     {{--<div class="c-filter c-filter--switcher">--}}
                         {{--<span>فقط کالاهای موجود</span>--}}
@@ -31,6 +32,13 @@
                 {{--</div>--}}
 
             </div>
+
+            <form style="display: none" id="searchForm" action="{{ route('shop.search') }}">
+                <input type="text" name="keyword" value="{{ isset($keyword) ? $keyword : '' }}" placeholder="نام محصول مورد نظر را بنویسید…">
+                <input type="hidden" name="category"  value="{{ isset($category) ? $category->id : '' }}">
+                <input type="hidden" name="sortBy" id="sortBy" value="created_at">
+            </form>
+
         </div>
         <div  class="o-page__content page__contentflex">
             <article>

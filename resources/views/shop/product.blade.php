@@ -175,13 +175,11 @@
     </div>
 
 
-
-
     <section class="product-wrapper container">
         <div class="headline">
             <h3>محصولات مرتبط</h3></div>
-        <div id="newpslider" class="swiper-container swiper-container-horizontal swiper-container-rtl">
-            <div class="product-box swiper-wrapper swiperr" >
+        <div id="mostpslider" class="swiper-container">
+            <div class="product-box swiper-wrapper">
                 @foreach ($categories->where('id', $product->category->id)->first()->products->take(10) as $Relatedproduct)
                     <div class="product-item swiper-slide swiper-slide-prev prodItem" >
                         <a href="{{ route('shop.product', $Relatedproduct->id) }}"><img src="{{ asset($Relatedproduct->image['original']) }}" alt=""></a>
@@ -195,12 +193,12 @@
                         </span>
                     </div>
                 @endforeach
-            </div>
-            <div id="newpslider-nbtn" class="slider-nbtn swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
-            <div id="newpslider-pbtn" class="slider-pbtn swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="false"></div>
-            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-    </section>
 
+            </div>
+            <div id="mostpslider-nbtn" class="slider-nbtn swiper-button-next"></div>
+            <div id="mostpslider-pbtn" class="slider-pbtn swiper-button-prev"></div>
+        </div>
+    </section>
 
 
 
@@ -312,7 +310,7 @@
 
 @section('footerScripts')
 
-
+    <script src="{{ asset('assets/js/script.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
