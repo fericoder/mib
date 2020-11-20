@@ -271,6 +271,11 @@
                                                         <input type="text" class="form-control inputfield" name="description" value="{{ old('description', $category->description) }}">
                                                     </div>
 
+                                                    <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">اولویت دسته بندی :</span></div>
+                                                        <input type="text" class="form-control inputfield" name="priority" value="{{ old('priority', $category->priority) }}">
+                                                    </div>
+
                                                     <div class="card mt-3 border">
                                                         <div class="card-body">
                                                             <h4 class="mt-0 header-title">تصویر دسته بندی</h4>

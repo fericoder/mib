@@ -284,7 +284,10 @@ class ShopController extends Controller
                 }
             }
         }
-        return $allProducts->sortKeysDesc();
+
+        return $allProducts->sortByDesc(function($product) {
+            return [$product->priority, $product->id];
+            });
     }
 
 

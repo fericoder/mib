@@ -72,7 +72,11 @@
                             </div>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">توضیحات دسته بندی :</span></div>
-                                <input type="text" class="form-control inputfield" value="{{ old('title') }}" name="description" placeholder="مثال: توضیحات مختصری درمورد دسته بندی">
+                                <input type="text" class="form-control inputfield" value="{{ old('description') }}" name="description" placeholder="مثال: توضیحات مختصری درمورد دسته بندی">
+                            </div>
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">اولویت دسته بندی :</span></div>
+                                <input type="text" class="form-control inputfield" value="{{ old('priority') }}" name="priority" placeholder="مثال :200 ">
                             </div>
                             <div class="card mt-3">
                                 <div class="card-body">

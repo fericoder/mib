@@ -192,6 +192,12 @@
                             </div>
 
                             <div class="input-group mt-3">
+                                <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">اولویت نمایش :</span></div>
+                                <input value="{{ old('priority') }}" type="text" class="form-control inputfield" name="priority" placeholder="مثال: 100">
+                                <div class="input-group-append"><span class="input-group-text bg-light text-dark font-weight-bold iranyekan" id="basic-addon8">عدد</span></div>
+                            </div>
+
+                            <div class="input-group mt-3">
                                 <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">لینک آپارات:</span></div>
                                 <input value="{{ old('aparat') }}" type="text" class="form-control inputfield" name="aparat" >
                             </div>

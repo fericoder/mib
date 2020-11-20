@@ -120,6 +120,7 @@ class ProductController extends Controller
             'catalog' => $catalog,
             'shop_id' => \Auth::user()->shop_id,
             'description' => $request->description,
+            'priority' => $request->priority,
         ]);
 
         if($request->no_specification_status == 'disable'){
@@ -272,6 +273,7 @@ class ProductController extends Controller
             'shortDescription' => $request->shortDescription,
             'country_id' => $request->country_id,
             'description' => $request->description,
+            'priority' => $request->priority,
             'image' => $image,
             'catalog' => $catalog,
         ]);

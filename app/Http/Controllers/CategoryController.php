@@ -42,6 +42,7 @@ class CategoryController extends Controller
         else
             $category->parent_id = $request->parent_id;
         $category->description = $request->description;
+        $category->priority = $request->priority;
         $category->icon = $image;
         $category->shop_id = \Auth::user()->shop_id;
         $category->save();
@@ -94,6 +95,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'description' => $request->description,
+            'priority' => $request->priority,
             'icon' => $image
         ]);
 

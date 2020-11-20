@@ -29,6 +29,7 @@ class ProductRequest extends FormRequest
             'description' => 'required|max:4000',
             // 'value.*' => 'nullable|max:4000|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
             'productCat_id' => 'bail|required|min:1|max:10000000000|regex:/^[0-9]+$/u',
+            'priority' => 'nullable|min:1|max:10000000000|regex:/^[0-9]+$/u',
             'brand_id' => 'nullable|max:100000000|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
             // 'color_amount' => 'sometimes',
             // 'color_amount_number.*' => 'required_with:color_amount,on',
