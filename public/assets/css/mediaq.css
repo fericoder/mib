@@ -241,7 +241,8 @@
                             
                             @media only screen and (max-width:688px) {
                                 .top-head .logo {
-                                    padding-right: 0
+                                    padding-right: 0;
+                                    margin-top: 35px;
                                 }
                                 .top-head form input {
                                     width: 290px
@@ -252,6 +253,7 @@
                                 .c-checkout__col--desc p {
                                     display: none
                                 }
+
                             }
                             
                             @media only screen and (max-width:635px) {
@@ -291,6 +293,7 @@
                                     display: block;
                                     position: fixed;
                                     z-index: 999999;
+                                    width: 100%;
                                 }
                                 .megamenu>li>a:before {
                                     content: ""

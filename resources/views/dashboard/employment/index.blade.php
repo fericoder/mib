@@ -130,6 +130,7 @@
                             <thead style="font-family: BYekan">
                             <tr>
                                 <th title="Field #1" data-field="1">شناسه</th>
+                                <th title="Field #1" data-field="1">کد شغل</th>
                                 <th title="Field #1" data-field="1">نام</th>
                                 <th title="Field #1" data-field="1">کد ملی</th>
                                 <th title="Field #2" data-field="2">وضعیت تاهل</th>
@@ -143,6 +144,7 @@
                             @foreach ($employments as $employment)
                                 <tr>
                                     <td style="font-family: BYekan" >{{ $employment->id }}</td>
+                                    <td style="font-family: BYekan" >{{ $employment->code }}</td>
                                     <td style="font-family: BYekan" >{{ $employment->fName . ' ' . $employment->lName }}</td>
                                     <td style="font-family: BYekan" >{{ $employment->shmeli }}</td>
                                     <td style="font-family: BYekan" >{{ $employment->tahol }}</td>

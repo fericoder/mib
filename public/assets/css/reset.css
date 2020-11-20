@@ -1,3 +1,13 @@
+@font-face {
+    font-family: BYekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/BYekan.eot');
+    src: url('../fonts/BYekan.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/BYekan.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/BYekan.ttf') format('truetype');
+}
+
 *, :after, :before {
     box-sizing: border-box;
     margin:0;
@@ -7,7 +17,7 @@
 body {
     direction: rtl;
     font-size: 62.5%;
-    font-family: IRANSans;
+    font-family: byekan;
     font-weight: 300;
     color: #515151;
 }

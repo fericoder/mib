@@ -57,7 +57,7 @@
                             {{--<li><a onclick="cheapest()" >ارزان ترین</a></li>--}}
                             {{--<li><a onclick="expensive()" >گران ترین</a></li>--}}
                         </ul>
-                        <p style="margin-left: 20px">تعداد نتایج: {{ $products->count() }}</p>
+                        <p style="margin-left: 20px">تعداد نتایج: {{ $total }}</p>
                     </div>
                     <ul class="c-listing__items">
 

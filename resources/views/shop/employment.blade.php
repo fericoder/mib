@@ -55,9 +55,12 @@
                                   <input class="field" name="lName" required type="text" >
 
 
+                                <label class="labelForm" for="pwd">کد شغل  <span style="color: red;    font-size: 15px;">*</span></label>
+                                <input class="field" name="code" required type="text" >
 
                                 <label style="margin-top: 10px" for="pwd">  نام پدر <span style="color: red;    font-size: 15px;">*</span> </label>
                                 <input name="fatherName"  type="text" required value="">
+
 
                                 <label style="margin-top: 10px" for="pwd">شماره شناسنامه <span style="color: red;    font-size: 15px;">*</span></label>
                                 <input name="shshenasname"  required type="text" >
@@ -79,15 +82,15 @@
                                 <input name="birthdate" required type="text" >
 
                                 <label style="margin-top: 10px" for="pwd">وضعیت تاهل <span style="color: red;    font-size: 15px;">*</span></label>
-                                <select required style="padding: 10px;font-size: 13px;" name="tahol">
+                                <select id="tahol" required style="padding: 10px;font-size: 13px;" name="tahol">
                                     <option disabled="" selected="" value=""> -- کلیک کنید -- </option>
                                     <option value="مجرد ">مجرد </option>
                                     <option value="متاهل">متاهل</option>
                                 </select>
 
 
-                                <label style="margin-top: 10px" for="pwd">تعداد افراد تحت تکفل  <span style="color: red;    font-size: 15px;">*</span></label>
-                                <input name="takallof" required type="text" >
+                                <label style="margin-top: 10px; display: none" class="takaffolShow" for="pwd">تعداد افراد تحت تکفل  <span style="color: red;    font-size: 15px;">*</span></label>
+                                <input style="display: none" name="takallof" class="takaffolShow" type="text" >
 
 
                                 <label style="margin-top: 10px" for="pwd">نشانی محل سکونت  <span style="color: red;    font-size: 15px;">*</span></label>
@@ -185,6 +188,19 @@
                 }
             });
         }
+
+
+
+        $('#tahol').change(function() {
+            if ($(this).val() === 'متاهل') {
+                $('.takaffolShow').show();
+            }
+            if ($(this).val() != 'متاهل') {
+                $('.takaffolShow').hide();
+            }
+
+        });
     </script>
+
 
 @stop

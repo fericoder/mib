@@ -15,10 +15,7 @@
             <div id="mslider-pbtn" class="swiper-button-prev"></div>
             <div class="swiper-pagination mainslider-btn"></div>
         </div>
-        <aside class="c-adplacement">
-            <a href="{{ \App\Banner::where('id', 4)->first()->url }}"><img src="{{ \App\Banner::where('id', 4)->first()->slide_path }}" alt=""></a>
-            <a href="{{ \App\Banner::where('id', 5)->first()->url }}"><img src="{{ \App\Banner::where('id', 5)->first()->slide_path }}" alt=""></a>
-        </aside>
+
     </article>
     <div class="clear"></div>
 

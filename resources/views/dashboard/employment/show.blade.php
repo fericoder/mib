@@ -99,6 +99,11 @@
                                                 <div class="form-group mb-0 col-12">
 
                                                     <div class="input-group mt-3">
+                                                        <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">کد</span></div>
+                                                        <input type="text" class="form-control inputfield" name="fName" value="{{ old('code', $employment->code) }}">
+                                                    </div>
+
+                                                    <div class="input-group mt-3">
                                                         <div class="input-group-prepend min-width-180"><span class="input-group-text bg-light min-width-140" id="basic-addon7">نام :</span></div>
                                                         <input type="text" class="form-control inputfield" name="fName" value="{{ old('fName', $employment->fName) }}">
                                                     </div>

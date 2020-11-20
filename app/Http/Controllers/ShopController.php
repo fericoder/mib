@@ -88,7 +88,7 @@ class ShopController extends Controller
         $perPage = 16; // How many items do you want to display.
         $currentPage = request()->page; // The index page.
         $productsPaginate = new LengthAwarePaginator($products->forPage($currentPage, $perPage), $total, $perPage, $currentPage);
-        return view('shop.category', compact('category', 'categories', 'products', 'productsPaginate'));
+        return view('shop.category', compact('category', 'categories', 'products', 'productsPaginate', 'total'));
     }
 
     public function brand(Request $request)
@@ -124,7 +124,7 @@ class ShopController extends Controller
         $productsPaginate = new LengthAwarePaginator($products->forPage($currentPage, $perPage), $total, $perPage, $currentPage);
 
 
-        return view('shop.category', compact('category', 'categories', 'productsPaginate', 'keyword', 'perPage'));
+        return view('shop.category', compact('category', 'categories', 'productsPaginate', 'keyword', 'perPage', 'total'));
     }
 
 
@@ -356,6 +356,7 @@ class ShopController extends Controller
         Employment::create([
             'fName' => $request->fName,
             'lName' => $request->lName,
+            'code' => $request->code,
             'fatherName' => $request->fatherName,
             'shshenasname' => $request->shshenasname,
             'shmeli' => $request->shmeli,
