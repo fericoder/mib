@@ -97,15 +97,14 @@
         <ul class="dropdown" id="mynavmenu">
             <li class="main-category"><i class="fa fa-bars"></i><a href="#">دسته بندی کالاها</a>
                 <ul class="dropdown2">
-
-                    @foreach (\App\Category::all()->where('parent_id', null) as $category)
+                    @foreach (\App\Category::orderBy('priority', 'desc')->orderBy('id', 'desc')->where('parent_id', null)->get() as $category)
                         <li>
                             <a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
                             <ul  class="megamenu megam300">
-                                @foreach (\App\Category::all()->where('parent_id', $category->id) as $subCategory)
+                                @foreach (\App\Category::orderBy('priority', 'desc')->orderBy('id', 'desc')->where('parent_id', $category->id)->get() as $subCategory)
                                     <li >
                                         <a class="amar" href="{{ route('shop.category', $subCategory->id) }}">{{ $subCategory->name }}</a>
-                                    @foreach (\App\Category::all()->where('parent_id', $subCategory->id) as $subSubCategory)
+                                    @foreach (\App\Category::orderBy('priority', 'desc')->orderBy('id', 'desc')->where('parent_id', $subCategory->id)->get() as $subSubCategory)
                                             <ul >
                                                 <li class="limarri" >
                                                     <a class="amegma" href="{{ route('shop.category', $subSubCategory->id) }}">{{ $subSubCategory->name }}</a>

@@ -211,7 +211,7 @@ header .top-nav {
 
 .top-nav .dropdown>li {
     display: inline-block;
-    padding: 7px 12px 8px;
+    padding: 10px 12px 8px;
 }
 
 .top-nav .dropdown>li:hover>a {

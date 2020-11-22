@@ -18,7 +18,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('priority', 'desc')->orderBy('id', 'desc')->where('parent_id', null)->get();
         $shop = Shop::where('english_name', 'keyvan')->first();
         return view('shop.index', compact('categories', 'shop'));
     }
